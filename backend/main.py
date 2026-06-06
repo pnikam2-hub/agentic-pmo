@@ -1,11 +1,12 @@
 """Agentic PMO — main FastAPI app entry point."""
 import os
 from pathlib import Path
-from fastapi import FastAPI
+from fastapi import FastAPI, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from backend.database import init_db
-from backend.routers import projects, tasks, agents, dashboard
+from backend.routers import projects, tasks, agents, dashboard, auth
+from backend.auth import require_auth
 
 
 def _check_env():
@@ -34,11 +35,14 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# API routers
-app.include_router(projects.router)
-app.include_router(tasks.router)
-app.include_router(agents.router)
-app.include_router(dashboard.router)
+# API routers — public
+app.include_router(auth.router)
+
+# API routers — protected (require JWT)
+app.include_router(projects.router, dependencies=[Depends(require_auth)])
+app.include_router(tasks.router, dependencies=[Depends(require_auth)])
+app.include_router(agents.router, dependencies=[Depends(require_auth)])
+app.include_router(dashboard.router, dependencies=[Depends(require_auth)])
 
 # Health check
 @app.get("/api/health")

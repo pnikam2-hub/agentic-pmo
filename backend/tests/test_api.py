@@ -12,6 +12,15 @@ from sqlalchemy.pool import StaticPool
 
 from backend.database import Base, get_db
 from backend.main import app
+from backend.auth import require_auth
+
+# Auto-authenticate business-logic tests (TestAuth clears this for its own tests)
+@pytest.fixture(scope="session", autouse=True)
+def auto_auth():
+    app.dependency_overrides[require_auth] = lambda: "test-user"
+    yield
+    app.dependency_overrides.pop(require_auth, None)
+
 
 # ── In-memory test database ──────────────────────────────────────────────
 TEST_ENGINE = create_engine(
@@ -356,3 +365,97 @@ class TestResolveAction:
     def test_resolve_action_404(self):
         resp = client.patch("/api/projects/1/agents/actions/999/resolve")
         assert resp.status_code == 404
+
+
+# ══════════════════════════════════════════════════════════════════════════
+# 9. AUTHENTICATION
+# ══════════════════════════════════════════════════════════════════════════
+class TestAuth:
+    LOGIN_URL = "/api/auth/login"
+
+    @pytest.fixture(autouse=True)
+    def _real_auth(self):
+        """Remove the auto-auth override so we test the real auth flow."""
+        app.dependency_overrides.pop(require_auth, None)
+        yield
+        app.dependency_overrides[require_auth] = lambda: "test-user"
+
+    def test_login_success(self):
+        """Default credentials: admin / admin"""
+        resp = client.post(self.LOGIN_URL, json={
+            "username": "admin",
+            "password": "admin",
+        })
+        assert resp.status_code == 200
+        data = resp.json()
+        assert "token" in data
+        assert data["token_type"] == "bearer"
+        assert len(data["token"]) > 20
+
+    def test_login_wrong_password(self):
+        resp = client.post(self.LOGIN_URL, json={
+            "username": "admin",
+            "password": "wrong",
+        })
+        assert resp.status_code == 401
+
+    def test_login_wrong_username(self):
+        resp = client.post(self.LOGIN_URL, json={
+            "username": "nobody",
+            "password": "admin",
+        })
+        assert resp.status_code == 401
+
+    def test_unauthenticated_cannot_list_projects(self):
+        """No auth header → 401"""
+        resp = client.get("/api/projects")
+        assert resp.status_code == 401
+        assert "Authentication required" in resp.text
+
+    def test_unauthenticated_cannot_create_project(self):
+        resp = client.post("/api/projects", json={"name": "Hack"})
+        assert resp.status_code == 401
+
+    def test_unauthenticated_cannot_access_dashboard(self):
+        resp = client.get("/api/dashboard")
+        assert resp.status_code == 401
+
+    def test_unauthenticated_cannot_list_tasks(self):
+        resp = client.get("/api/projects/1/tasks")
+        assert resp.status_code == 401
+
+    def test_unauthenticated_cannot_run_agents(self):
+        resp = client.post("/api/projects/1/agents/monitor")
+        assert resp.status_code == 401
+
+    def test_authenticated_request_succeeds(self):
+        """Login → use token → access projects"""
+        token = client.post(self.LOGIN_URL, json={
+            "username": "admin", "password": "admin",
+        }).json()["token"]
+
+        headers = {"Authorization": f"Bearer {token}"}
+        resp = client.get("/api/projects", headers=headers)
+        assert resp.status_code == 200
+
+    def test_health_is_public(self):
+        """Health endpoint should not require auth"""
+        resp = client.get("/api/health")
+        assert resp.status_code == 200
+
+    def test_verify_token(self):
+        token = client.post(self.LOGIN_URL, json={
+            "username": "admin", "password": "admin",
+        }).json()["token"]
+
+        resp = client.get("/api/auth/verify", headers={
+            "Authorization": f"Bearer {token}"
+        })
+        assert resp.status_code == 200
+        assert resp.json()["user"] == "admin"
+
+    def test_verify_invalid_token(self):
+        resp = client.get("/api/auth/verify", headers={
+            "Authorization": "Bearer invalid-token-here"
+        })
+        assert resp.status_code == 401
