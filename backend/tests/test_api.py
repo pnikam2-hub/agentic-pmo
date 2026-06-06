@@ -459,3 +459,70 @@ class TestAuth:
             "Authorization": "Bearer invalid-token-here"
         })
         assert resp.status_code == 401
+
+
+# ══════════════════════════════════════════════════════════════════════════
+# 10. ALERT CHANNELS
+# ══════════════════════════════════════════════════════════════════════════
+class TestAlertChannels:
+    """Tests for alert channel status and test dispatch."""
+
+    def test_alert_status_returns_config(self):
+        resp = client.get("/api/alerts/status")
+        assert resp.status_code == 200
+        data = resp.json()
+        assert "email" in data
+        assert "webhook" in data
+
+    def test_test_alert_returns_results(self):
+        resp = client.post("/api/alerts/test", json={
+            "subject": "Test",
+            "body": "Test body",
+            "severity": "info",
+            "project_name": "Test",
+        })
+        assert resp.status_code == 200
+        data = resp.json()
+        assert "results" in data
+        assert isinstance(data["results"], list)
+
+    def test_register_and_list_webhooks(self):
+        resp = client.post("/api/alerts/webhooks", json={
+            "name": "Slack",
+            "url": "https://hooks.slack.com/services/xxx",
+            "events": ["alert"],
+        })
+        assert resp.status_code == 200
+        wid = resp.json()["id"]
+
+        resp = client.get("/api/alerts/webhooks")
+        assert resp.status_code == 200
+        hooks = resp.json()
+        assert any(h["id"] == wid for h in hooks)
+
+    def test_delete_webhook(self):
+        resp = client.post("/api/alerts/webhooks", json={
+            "name": "Temp",
+            "url": "https://example.com/hook",
+        })
+        wid = resp.json()["id"]
+
+        resp = client.delete(f"/api/alerts/webhooks/{wid}")
+        assert resp.status_code == 200
+
+        resp = client.delete(f"/api/alerts/webhooks/{wid}")
+        assert resp.status_code == 404
+
+
+# ══════════════════════════════════════════════════════════════════════════
+# 11. SCHEDULER CONFIG
+# ══════════════════════════════════════════════════════════════════════════
+class TestScheduler:
+    """Tests that the scheduler module loads and reports status correctly."""
+
+    def test_scheduler_imports(self):
+        """Verify scheduler module can be imported without errors."""
+        from backend.scheduler import start_scheduler, stop_scheduler, scheduler
+        assert scheduler is not None
+        assert callable(start_scheduler)
+        assert callable(stop_scheduler)

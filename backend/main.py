@@ -5,7 +5,7 @@ from fastapi import FastAPI, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from backend.database import init_db
-from backend.routers import projects, tasks, agents, dashboard, auth
+from backend.routers import projects, tasks, agents, dashboard, auth, alerts
 from backend.auth import require_auth
 
 
@@ -43,6 +43,7 @@ app.include_router(projects.router, dependencies=[Depends(require_auth)])
 app.include_router(tasks.router, dependencies=[Depends(require_auth)])
 app.include_router(agents.router, dependencies=[Depends(require_auth)])
 app.include_router(dashboard.router, dependencies=[Depends(require_auth)])
+app.include_router(alerts.router, dependencies=[Depends(require_auth)])
 
 # Health check
 @app.get("/api/health")
@@ -60,3 +61,5 @@ if os.path.isdir(FRONTEND_DIR):
 def on_startup():
     _check_env()
     init_db()
+    from backend.scheduler import start_scheduler
+    start_scheduler()
