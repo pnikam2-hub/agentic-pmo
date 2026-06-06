@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  agentic-pmo:
+    build: .
+    container_name: agentic-pmo
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    volumes:
+      - ./data:/app/data  # Persist SQLite database
+    restart: unless-stopped
