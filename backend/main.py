@@ -5,8 +5,8 @@ from fastapi import FastAPI, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from backend.database import init_db
-from backend.routers import projects, tasks, agents, dashboard, auth, alerts
-from backend.auth import require_auth
+from backend.routers import projects, tasks, agents, dashboard, auth, alerts, templates
+from backend.auth import require_auth, check_auth_config
 
 
 def _check_env():
@@ -19,6 +19,9 @@ def _check_env():
     if not os.getenv("LLM_API_KEY", ""):
         print("⚠️  LLM_API_KEY is not set. AI agents will use fallback templates.")
         print("   Set LLM_API_KEY in .env for full AI-powered planning & monitoring.")
+
+    for warn in check_auth_config():
+        print(f"⚠️  {warn}")
 
 app = FastAPI(
     title="Agentic PMO",
@@ -44,6 +47,7 @@ app.include_router(tasks.router, dependencies=[Depends(require_auth)])
 app.include_router(agents.router, dependencies=[Depends(require_auth)])
 app.include_router(dashboard.router, dependencies=[Depends(require_auth)])
 app.include_router(alerts.router, dependencies=[Depends(require_auth)])
+app.include_router(templates.router, dependencies=[Depends(require_auth)])
 
 # Health check
 @app.get("/api/health")

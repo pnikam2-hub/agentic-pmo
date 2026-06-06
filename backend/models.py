@@ -95,7 +95,16 @@ class Milestone(Base):
     project = relationship("Project", back_populates="milestones")
 
 
-# ── Resource ─────────────────────────────────────────────────────────────────
+# ── Webhook Subscription ─────────────────────────────────────────────────
+class WebhookSubscription(Base):
+    __tablename__ = "webhooks"
+    id = Column(Integer, primary_key=True, index=True)
+    name = Column(String(200), nullable=False)
+    url = Column(String(500), nullable=False)
+    events = Column(JSON, default=list)
+    created_at = Column(DateTime, default=datetime.datetime.utcnow)
+
+
 class Resource(Base):
     __tablename__ = "resources"
     id = Column(Integer, primary_key=True, index=True)

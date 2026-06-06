@@ -34,7 +34,10 @@
         <div class="sidebar-status" id="sidebar-status">
           <span class="status-dot"></span> API connected
         </div>
-        <div class="sidebar-hint">Powered by AI agents</div>
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div class="sidebar-hint">Powered by AI agents</div>
+          <button class="btn btn-ghost btn-sm" onclick="App.logout()" style="font-size:11px;color:var(--text-muted)">Logout</button>
+        </div>
       </div>
     </aside>
 

@@ -6,14 +6,31 @@ from typing import Optional
 from fastapi import Depends, HTTPException, status
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 
-# ── Config ──────────────────────────────────────────────────────────────
+# ── Config from environment ─────────────────────────────────────────────
 ADMIN_USERNAME = os.getenv("ADMIN_USERNAME", "admin")
 ADMIN_PASSWORD = os.getenv("ADMIN_PASSWORD", "admin")
 JWT_SECRET = os.getenv("JWT_SECRET", "change-me-in-production-agentic-pmo-2026")
 JWT_ALGORITHM = "HS256"
 JWT_EXPIRY_HOURS = 24
 
-# ── Password hashing (simple SHA-256 — bcrypt adds unnecessary weight for MVP) ─
+# ── Security validation ─────────────────────────────────────────────────
+def check_auth_config():
+    """Warn about insecure defaults. Returns list of warnings."""
+    warnings = []
+    if ADMIN_PASSWORD == "admin":
+        warnings.append(
+            "DEFAULT PASSWORD: ADMIN_PASSWORD is still 'admin'. "
+            "Set a strong password in .env before deploying to production."
+        )
+    if not JWT_SECRET:
+        warnings.append(
+            "WEAK JWT SECRET: JWT_SECRET is not set. "
+            "Generate a random string in .env for production."
+        )
+    return warnings
+
+
+# ── Password hashing (SHA-256 — bcrypt adds unnecessary weight for MVP) ─
 def hash_password(password: str) -> str:
     return hashlib.sha256(password.encode()).hexdigest()
 
@@ -32,12 +49,9 @@ security = HTTPBearer(auto_error=False)
 def create_token(username: str) -> str:
     """Create a JWT access token."""
     import jwt as pyjwt
-    expiry = datetime.datetime.now(datetime.UTC) + datetime.timedelta(hours=JWT_EXPIRY_HOURS)
-    payload = {
-        "sub": username,
-        "iat": datetime.datetime.now(datetime.UTC),
-        "exp": expiry,
-    }
+    now = datetime.datetime.now(datetime.UTC)
+    expiry = now + datetime.timedelta(hours=JWT_EXPIRY_HOURS)
+    payload = {"sub": username, "iat": now, "exp": expiry}
     return pyjwt.encode(payload, JWT_SECRET, algorithm=JWT_ALGORITHM)
 
 

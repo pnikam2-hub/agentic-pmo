@@ -499,6 +499,7 @@ class TestAlertChannels:
         assert resp.status_code == 200
         hooks = resp.json()
         assert any(h["id"] == wid for h in hooks)
+        assert any(h["name"] == "Slack" for h in hooks)
 
     def test_delete_webhook(self):
         resp = client.post("/api/alerts/webhooks", json={

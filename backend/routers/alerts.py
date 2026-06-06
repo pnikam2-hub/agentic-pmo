@@ -1,10 +1,11 @@
 """Alert endpoints — test alert channels and manage webhook subscriptions."""
 import json
 from fastapi import APIRouter, Depends, HTTPException
-from pydantic import BaseModel, HttpUrl
+from pydantic import BaseModel
 from sqlalchemy.orm import Session
 from backend.database import get_db
 from backend.auth import require_auth
+from backend.models import WebhookSubscription
 from backend.services.alert_channels import (
     dispatch_alert, email_configured, webhook_configured,
 )
@@ -40,30 +41,38 @@ async def test_alert(body: TestAlertRequest, auth_user: str = Depends(require_au
     return {"results": results}
 
 
-class WebhookSubscription(BaseModel):
+class WebhookCreate(BaseModel):
     name: str
     url: str
     events: list[str] = ["alert", "monitor"]
 
 
-_webhooks = {}  # Simple in-memory store for MVP
-
-
 @router.get("/webhooks")
-def list_webhooks(auth_user: str = Depends(require_auth)):
-    return [{"id": k, **v} for k, v in _webhooks.items()]
+def list_webhooks(db: Session = Depends(get_db), auth_user: str = Depends(require_auth)):
+    hooks = db.query(WebhookSubscription).all()
+    return [
+        {"id": h.id, "name": h.name, "url": h.url, "events": h.events,
+         "created_at": h.created_at.isoformat() if h.created_at else None}
+        for h in hooks
+    ]
 
 
 @router.post("/webhooks")
-def register_webhook(body: WebhookSubscription, auth_user: str = Depends(require_auth)):
-    idx = len(_webhooks) + 1
-    _webhooks[str(idx)] = body.model_dump()
-    return {"id": str(idx), **body.model_dump()}
+def register_webhook(body: WebhookCreate, db: Session = Depends(get_db),
+                      auth_user: str = Depends(require_auth)):
+    hook = WebhookSubscription(name=body.name, url=body.url, events=body.events)
+    db.add(hook)
+    db.commit()
+    db.refresh(hook)
+    return {"id": hook.id, "name": hook.name, "url": hook.url, "events": hook.events}
 
 
 @router.delete("/webhooks/{webhook_id}")
-def delete_webhook(webhook_id: str, auth_user: str = Depends(require_auth)):
-    if webhook_id not in _webhooks:
+def delete_webhook(webhook_id: int, db: Session = Depends(get_db),
+                   auth_user: str = Depends(require_auth)):
+    hook = db.query(WebhookSubscription).filter(WebhookSubscription.id == webhook_id).first()
+    if not hook:
         raise HTTPException(404, "Webhook not found")
-    del _webhooks[webhook_id]
+    db.delete(hook)
+    db.commit()
     return {"ok": True}
