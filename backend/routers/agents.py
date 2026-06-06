@@ -14,6 +14,10 @@ router = APIRouter(prefix="/api/projects/{project_id}/agents", tags=["agents"])
 @router.post("/plan")
 async def trigger_plan(project_id: int, body: PlanRequest, db: Session = Depends(get_db)):
     """Run the Plan Agent on a project."""
+    from backend.models import Project
+    project = db.query(Project).filter(Project.id == project_id).first()
+    if not project:
+        raise HTTPException(404, "Project not found")
     result = await run_plan_agent(project_id, db, body.additional_context)
     return result
 
@@ -21,6 +25,10 @@ async def trigger_plan(project_id: int, body: PlanRequest, db: Session = Depends
 @router.post("/monitor")
 async def trigger_monitor(project_id: int, db: Session = Depends(get_db)):
     """Run the Monitor Agent to assess project health."""
+    from backend.models import Project
+    project = db.query(Project).filter(Project.id == project_id).first()
+    if not project:
+        raise HTTPException(404, "Project not found")
     result = await run_monitor_agent(project_id, db)
     return result
 
@@ -28,6 +36,10 @@ async def trigger_monitor(project_id: int, db: Session = Depends(get_db)):
 @router.post("/alert")
 async def trigger_alert(project_id: int, anomaly: str = "", db: Session = Depends(get_db)):
     """Run the Alert Agent — pass an optional anomaly description."""
+    from backend.models import Project
+    project = db.query(Project).filter(Project.id == project_id).first()
+    if not project:
+        raise HTTPException(404, "Project not found")
     result = await run_alert_agent(project_id, db, anomaly_description=anomaly)
     return result
 

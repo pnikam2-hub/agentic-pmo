@@ -85,19 +85,83 @@ open http://localhost:8000
 
 ---
 
-## Configuration
+## Deployment Options
+
+### Option A: Docker Compose (recommended — persistence + restart)
+
+```bash
+# Build and run
+docker compose up -d
+
+# Check logs
+docker compose logs -f
+
+# Stop
+docker compose down
+```
+
+The SQLite database persists in `./data/agentic_pmo.db` on the host.
+No database server needed.
+
+### Option B: Docker (standalone)
+
+```bash
+docker build -t agentic-pmo .
+docker run -d \
+  --name agentic-pmo \
+  -p 8000:8000 \
+  -v $(pwd)/data:/app/data \
+  -e DATABASE_URL=sqlite:///./data/agentic_pmo.db \
+  -e LLM_API_KEY=sk-y...n \
+  agentic-pmo
+```
+
+### Option C: Bare metal (dev/test)
+
+```bash
+# Python 3.12+ required
+cd agentic-pmo
+pip install -r backend/requirements.txt
+cp .env.example .env
+# Edit .env — add LLM_API_KEY
+uvicorn backend.main:app --host 0.0.0.0 --port 8000 --reload
+```
+
+### Option D: Systemd service (Linux production)
+
+```ini
+[Unit]
+Description=Agentic PMO
+After=network.target
+
+[Service]
+WorkingDirectory=/opt/agentic-pmo
+ExecStart=/usr/bin/python3 -m uvicorn backend.main:app --host 0.0.0.0 --port 8000
+Restart=always
+User=agentic-pmo
+
+[Install]
+WantedBy=multi-user.target
+```
+
+---
+
+## Environment Variables
 
 See `.env.example` for all options. Key variables:
 
-| Variable | Default | Description |
-|----------|---------|-------------|
-| `LLM_PROVIDER` | `openai` | `openai`, `anthropic`, `openrouter` |
-| `LLM_API_KEY` | — | Your LLM API key |
-| `LLM_MODEL` | `gpt-4o` | Model name |
-| `LLM_BASE_URL` | — | Custom API endpoint |
-| `DATABASE_URL` | `sqlite:///./agentic_pmo.db` | Database connection |
+| Variable | Required | Default | Description |
+|----------|----------|---------|-------------|
+| `LLM_PROVIDER` | No | `openai` | `openai`, `anthropic`, `openrouter` |
+| `LLM_API_KEY` | **Yes for AI agents** | — | Your LLM API key |
+| `LLM_MODEL` | No | `gpt-4o` | Model name |
+| `LLM_BASE_URL` | No | — | Custom API endpoint |
+| `DATABASE_URL` | No | `sqlite:///./agentic_pmo.db` | Database connection |
+| `JWT_SECRET` | No | auto-generated | Secret for auth tokens (Phase 2) |
 
-**Without an LLM key**, the Plan Agent falls back to a template plan so you can still use the PMO as a task manager. Add a key when you want AI-powered features.
+**Without an LLM key**, the Plan Agent falls back to a template plan so
+you can still use the PMO as a task manager. Add a key when you want
+AI-powered features.
 
 ---
 

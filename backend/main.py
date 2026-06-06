@@ -1,10 +1,23 @@
 """Agentic PMO — main FastAPI app entry point."""
 import os
+from pathlib import Path
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from backend.database import init_db
 from backend.routers import projects, tasks, agents, dashboard
+
+
+def _check_env():
+    """Warn at startup if critical config is missing."""
+    env_path = Path(__file__).parent.parent / ".env"
+    if not env_path.exists():
+        print("⚠️  No .env file found. Copy .env.example to .env and configure LLM_API_KEY.")
+        print("   The app will work as a task manager without AI agents.")
+
+    if not os.getenv("LLM_API_KEY", ""):
+        print("⚠️  LLM_API_KEY is not set. AI agents will use fallback templates.")
+        print("   Set LLM_API_KEY in .env for full AI-powered planning & monitoring.")
 
 app = FastAPI(
     title="Agentic PMO",
@@ -41,4 +54,5 @@ if os.path.isdir(FRONTEND_DIR):
 
 @app.on_event("startup")
 def on_startup():
+    _check_env()
     init_db()

@@ -10,4 +10,6 @@ services:
       - .env
     volumes:
       - ./data:/app/data  # Persist SQLite database
+    environment:
+      - DATABASE_URL=sqlite:///./data/agentic_pmo.db
     restart: unless-stopped

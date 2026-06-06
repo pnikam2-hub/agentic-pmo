@@ -6,7 +6,7 @@ from pydantic import BaseModel, Field
 
 # ── Project ──────────────────────────────────────────────────────────────────
 class ProjectCreate(BaseModel):
-    name: str = Field(..., max_length=200)
+    name: str = Field(..., max_length=200, min_length=1)
     description: str = ""
     goal: str = ""
     priority: str = "medium"
