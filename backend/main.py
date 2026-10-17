@@ -6,7 +6,10 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from backend.database import init_db
 from backend.routers import projects, tasks, agents, dashboard, auth, alerts, templates
-from backend.auth import require_auth, check_auth_config
+from backend.auth import require_auth, check_auth_config, enforce_auth_config
+from backend.rate_limit import limiter
+from slowapi import _rate_limit_exceeded_handler
+from slowapi.errors import RateLimitExceeded
 
 
 def _check_env():
@@ -38,6 +41,10 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Rate limiting (slowapi) — handler + shared limiter instance
+app.state.limiter = limiter
+app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
+
 # API routers — public
 app.include_router(auth.router)
 
@@ -64,6 +71,7 @@ if os.path.isdir(FRONTEND_DIR):
 @app.on_event("startup")
 def on_startup():
     _check_env()
+    enforce_auth_config()  # fail closed on default admin password / JWT secret
     init_db()
     from backend.scheduler import start_scheduler
     start_scheduler()

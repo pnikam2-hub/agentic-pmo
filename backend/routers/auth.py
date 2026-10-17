@@ -1,7 +1,8 @@
 """Auth router — login endpoint."""
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Request
 from pydantic import BaseModel
 from backend.auth import login, require_auth
+from backend.rate_limit import limiter, LOGIN_RATE_LIMIT
 
 router = APIRouter(prefix="/api/auth", tags=["auth"])
 
@@ -17,7 +18,8 @@ class LoginResponse(BaseModel):
 
 
 @router.post("/login", response_model=LoginResponse)
-def login_endpoint(body: LoginRequest):
+@limiter.limit(LOGIN_RATE_LIMIT)
+def login_endpoint(request: Request, body: LoginRequest):
     token = login(body.username, body.password)
     if token is None:
         raise HTTPException(401, "Invalid username or password")
