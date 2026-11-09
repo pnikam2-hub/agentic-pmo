@@ -1,0 +1,1524 @@
+{
+  "template_name": "Industry 4.0 \u2014 Smart Manufacturing Implementation",
+  "pack": "industry_4_0",
+  "version": "1.1.0",
+  "total_tasks": 99,
+  "phases": [
+    {
+      "id": 0,
+      "name": "Strategic Framing",
+      "weeks": "1-4"
+    },
+    {
+      "id": 1,
+      "name": "Site Assessment & OT Discovery",
+      "weeks": "5-8"
+    },
+    {
+      "id": 2,
+      "name": "Solution Architecture",
+      "weeks": "9-14"
+    },
+    {
+      "id": 3,
+      "name": "Technology Procurement",
+      "weeks": "15-20"
+    },
+    {
+      "id": 4,
+      "name": "Network & IT/OT Infrastructure",
+      "weeks": "21-28"
+    },
+    {
+      "id": 5,
+      "name": "IIoT, Data Platform & Visibility",
+      "weeks": "29-40"
+    },
+    {
+      "id": 6,
+      "name": "Analytics, AI & Optimization",
+      "weeks": "41-56"
+    },
+    {
+      "id": 7,
+      "name": "Operations Handover & Continuous Improvement",
+      "weeks": "57-64"
+    }
+  ],
+  "tags": [
+    "industry-4.0",
+    "smart-manufacturing",
+    "IIoT",
+    "digital-transformation",
+    "domain-pack",
+    "domain-pack:industry_4_0"
+  ],
+  "tasks": [
+    {
+      "id": "T001",
+      "title": "Develop Project Charter & Scope Definition",
+      "description": "Author the formal project charter defining objectives, in/out-of-scope plants and lines, success criteria, budget envelope, executive sponsor, and the 64-week timeline across all 8 phases. Establish the single source of truth for scope decisions.",
+      "phase": 0,
+      "discipline": "PMO",
+      "estimated_hours": 40,
+      "priority": "critical",
+      "dependencies": [],
+      "deliverables": "Approved Project Charter | Scope statement | In/out-of-scope boundary map",
+      "acceptance_criteria": "Charter signed by executive sponsor and plant leadership | Scope boundaries explicitly enumerated | Success metrics quantified"
+    },
+    {
+      "id": "T002",
+      "title": "Conduct Stakeholder Mapping & RACI",
+      "description": "Identify all stakeholders across IT, OT, production, quality, engineering, finance, and vendor ecosystem. Build a RACI matrix covering OT/IT governance decisions, change authority, and escalation paths.",
+      "phase": 0,
+      "discipline": "PMO",
+      "estimated_hours": 32,
+      "priority": "high",
+      "dependencies": [
+        "T001"
+      ],
+      "deliverables": "Stakeholder register | Power/interest grid | RACI matrix",
+      "acceptance_criteria": "Every workstream has a single accountable owner | OT and IT decision rights are explicitly separated | Escalation path to steering committee documented"
+    },
+    {
+      "id": "T003",
+      "title": "Execute 10-Dimension Readiness Diagnostic",
+      "description": "Run the structured readiness diagnostic across strategy, governance, OT maturity, connectivity, data, analytics, cybersecurity, workforce, change capacity, and ROI. Score each dimension and benchmark against Industry 4.0 maturity.",
+      "phase": 0,
+      "discipline": "PMO",
+      "estimated_hours": 80,
+      "priority": "critical",
+      "dependencies": [
+        "T001"
+      ],
+      "deliverables": "Readiness diagnostic report | Maturity heatmap | Gap-to-target analysis",
+      "acceptance_criteria": "All 10 dimensions scored with evidence | Heatmap reviewed with sponsor | Top-5 gaps translated into initiative backlog"
+    },
+    {
+      "id": "T004",
+      "title": "Develop Business Case & ROI Model",
+      "description": "Quantify the financial case: yield uplift, OEE gain, downtime reduction, scrap reduction, energy savings, and labor efficiency. Build a phased ROI model with payback period, NPV, and scaling economics across the full plant footprint.",
+      "phase": 0,
+      "discipline": "Commercial",
+      "estimated_hours": 60,
+      "priority": "critical",
+      "dependencies": [
+        "T003"
+      ],
+      "deliverables": "Business case document | ROI model (spreadsheet) | Payback & NPV summary",
+      "acceptance_criteria": "Baseline metrics sourced from plant data | Benefit assumptions signed off by finance and plant leadership | Payback period within sponsor threshold"
+    },
+    {
+      "id": "T005",
+      "title": "Define Target Operating Model & Governance",
+      "description": "Define the future operating model for the converged IT/OT organization, including a data office, OT cybersecurity function, and a cross-functional change board. Clarify decision rights between corporate IT, plant OT, and the new digital team.",
+      "phase": 0,
+      "discipline": "PMO",
+      "estimated_hours": 48,
+      "priority": "high",
+      "dependencies": [
+        "T002",
+        "T003"
+      ],
+      "deliverables": "Target operating model | Governance charter | Decision-rights matrix",
+      "acceptance_criteria": "Operating model reviewed by CIO and plant leadership | Clear ownership for data, security, and platforms | No decision-rights overlaps remain"
+    },
+    {
+      "id": "T006",
+      "title": "Prepare Partner/Vendor RFP & Longlist",
+      "description": "Draft RFPs for edge gateways, IIoT sensors, OT security appliances, the historian/data platform, edge compute, vision systems, and the system integrator. Build a longlist of qualified vendors per category.",
+      "phase": 0,
+      "discipline": "Commercial",
+      "estimated_hours": 56,
+      "priority": "high",
+      "dependencies": [
+        "T004",
+        "T005"
+      ],
+      "deliverables": "RFP documents per category | Vendor longlist | Evaluation scorecard",
+      "acceptance_criteria": "RFPs reference architecture and IEC 62443 requirements | At least 3 vendors shortlisted per category | Evaluation criteria weighted and approved"
+    },
+    {
+      "id": "T007",
+      "title": "Establish PMO, Cadence & Reporting",
+      "description": "Stand up the engagement PMO: RAID log, status reporting, steering committee cadence, risk review, change control process, and the document/quality management system for deliverables.",
+      "phase": 0,
+      "discipline": "PMO",
+      "estimated_hours": 40,
+      "priority": "high",
+      "dependencies": [
+        "T002"
+      ],
+      "deliverables": "PMO handbook | Reporting templates | RAID log | Steering committee schedule",
+      "acceptance_criteria": "First steering committee held | RAID log populated | Reporting cadence live"
+    },
+    {
+      "id": "T008",
+      "title": "Align Maturity to AI-Native Roadmap & Quick Wins",
+      "description": "Map the diagnostic maturity to the AI-Native stages (Curious \u2192 Aware \u2192 Capable \u2192 Advanced \u2192 Native) and sequence quick wins, the 90-day pilot, and the multi-phase roadmap with ROI projections.",
+      "phase": 0,
+      "discipline": "PMO",
+      "estimated_hours": 40,
+      "priority": "high",
+      "dependencies": [
+        "T003",
+        "T004"
+      ],
+      "deliverables": "Phased roadmap | Quick-win backlog | AI-Native maturity trajectory",
+      "acceptance_criteria": "Roadmap maps phases to weeks | Pilot line selected with sponsor sign-off | Quick wins scoped to deliver value within 90 days"
+    },
+    {
+      "id": "T009",
+      "title": "Asset Inventory per Production Line",
+      "description": "Walk every production line and catalog each asset: machines, cells, PLCs, drives, HMIs, instruments, and existing sensors. Capture make/model, age, criticality, and connectivity status for each.",
+      "phase": 1,
+      "discipline": "OT Engineering",
+      "estimated_hours": 160,
+      "priority": "critical",
+      "dependencies": [
+        "T008"
+      ],
+      "deliverables": "Asset register per line | Criticality classification | Connectivity status per asset",
+      "acceptance_criteria": "100% of in-scope assets recorded | Each asset has criticality and connectivity fields populated | Register reconciled with plant maintenance system"
+    },
+    {
+      "id": "T010",
+      "title": "OT/IT Systems Audit",
+      "description": "Audit existing OT and IT systems: SCADA, MES, ERP, QMS, CMMS, historians, and standalone spreadsheets. Document versions, patch levels, integration points, and known gaps.",
+      "phase": 1,
+      "discipline": "Data Engineering",
+      "estimated_hours": 96,
+      "priority": "high",
+      "dependencies": [
+        "T009"
+      ],
+      "deliverables": "Systems inventory | Integration map | Version & patch-level register",
+      "acceptance_criteria": "All production-relevant systems captured | Integration points and data flows documented | End-of-life systems flagged"
+    },
+    {
+      "id": "T011",
+      "title": "Connectivity Survey (Wired/Wireless/Fiber)",
+      "description": "Survey existing connectivity across the plant: Ethernet drops, industrial switches, fiber runs, wireless coverage, and RF environment. Identify dark spots and capacity constraints for new IIoT traffic.",
+      "phase": 1,
+      "discipline": "Network Engineering",
+      "estimated_hours": 96,
+      "priority": "high",
+      "dependencies": [
+        "T009"
+      ],
+      "deliverables": "Connectivity survey report | Coverage heat map | Capacity gap list",
+      "acceptance_criteria": "All production areas surveyed | Coverage gaps mapped to assets | Capacity estimates validated against planned traffic"
+    },
+    {
+      "id": "T012",
+      "title": "Sensor & Instrumentation Gap Analysis",
+      "description": "Compare required measurements (vibration, temperature, current/energy, vision) against installed instrumentation per critical asset. Quantify the sensor gap and propose instrumentation per asset class.",
+      "phase": 1,
+      "discipline": "OT Engineering",
+      "estimated_hours": 80,
+      "priority": "high",
+      "dependencies": [
+        "T009",
+        "T011"
+      ],
+      "deliverables": "Sensor gap analysis | Instrumentation proposal per asset class | Estimated sensor count",
+      "acceptance_criteria": "Gap tied to analytics use cases | Sensor types specified per measurement | Estimates feed procurement plan"
+    },
+    {
+      "id": "T013",
+      "title": "SCADA/HMI/PLC Protocol Capture",
+      "description": "Capture the exact industrial protocols and data points in use: Modbus TCP/RTU, Profinet, EtherNet/IP, OPC DA, proprietary vendor protocols. Record register maps and tag lists for bridging.",
+      "phase": 1,
+      "discipline": "OT Engineering",
+      "estimated_hours": 96,
+      "priority": "critical",
+      "dependencies": [
+        "T009"
+      ],
+      "deliverables": "Protocol inventory | Register/tag map per PLC | Proprietary protocol notes",
+      "acceptance_criteria": "Every in-scope PLC protocol documented | Tag lists exported and version-controlled | Proprietary protocols flagged for vendor engagement"
+    },
+    {
+      "id": "T014",
+      "title": "ISA-95 Data Model & Object Definition",
+      "description": "Design the ISA-95 aligned data model defining enterprise/site/area/line/cell/equipment hierarchy and equipment capability objects. Establish the canonical naming for assets, lines, and products.",
+      "phase": 1,
+      "discipline": "Data Engineering",
+      "estimated_hours": 80,
+      "priority": "high",
+      "dependencies": [
+        "T009",
+        "T010"
+      ],
+      "deliverables": "ISA-95 hierarchy definition | Equipment object model | Canonical naming convention",
+      "acceptance_criteria": "Hierarchy covers all in-scope lines | Object model reviewed by OT and data teams | Naming convention approved"
+    },
+    {
+      "id": "T015",
+      "title": "OT Cybersecurity Baseline Assessment",
+      "description": "Assess current OT cybersecurity posture against IEC 62443: zone/conduit definitions, access controls, patching, remote access, and incident response readiness. Identify critical exposures.",
+      "phase": 1,
+      "discipline": "Cybersecurity",
+      "estimated_hours": 96,
+      "priority": "critical",
+      "dependencies": [
+        "T010",
+        "T013"
+      ],
+      "deliverables": "OT security baseline report | Exposure register | IEC 62443 gap analysis",
+      "acceptance_criteria": "All OT zones assessed | Critical exposures prioritized | Findings validated with plant OT team"
+    },
+    {
+      "id": "T016",
+      "title": "Network Topology Mapping & Documentation",
+      "description": "Produce current-state network topology for OT and IT networks: switches, routers, firewalls, VLANs, and interconnections. Document IP addressing and segmentation as-is.",
+      "phase": 1,
+      "discipline": "Network Engineering",
+      "estimated_hours": 72,
+      "priority": "high",
+      "dependencies": [
+        "T011"
+      ],
+      "deliverables": "As-is network topology diagrams | IP/VLAN inventory | Firewall rule inventory",
+      "acceptance_criteria": "OT and IT networks fully diagrammed | Interconnection points identified | Topology validated against live configuration"
+    },
+    {
+      "id": "T017",
+      "title": "Power & Environmental Survey for Edge Sites",
+      "description": "Survey candidate edge cabinet locations for power (UPS, redundancy), cooling, dust/vibration exposure, and physical security. Confirm suitability for industrial edge compute and gateways.",
+      "phase": 1,
+      "discipline": "OT Engineering",
+      "estimated_hours": 56,
+      "priority": "medium",
+      "dependencies": [
+        "T011"
+      ],
+      "deliverables": "Edge site survey report | Power/cooling readiness per site | Recommended cabinet locations",
+      "acceptance_criteria": "Each site meets UPS and cooling thresholds | Environmental ratings matched to conditions | Locations approved by plant facilities"
+    },
+    {
+      "id": "T018",
+      "title": "Production Process & Sequence-of-Operations Mapping",
+      "description": "Map the production process and sequence of operations for pilot lines end-to-end: stations, cycle times, buffers, manual steps, and quality checks. Identify where data and automation interventions fit.",
+      "phase": 1,
+      "discipline": "OT Engineering",
+      "estimated_hours": 96,
+      "priority": "high",
+      "dependencies": [
+        "T009"
+      ],
+      "deliverables": "Process flow diagrams | Sequence-of-operations documentation | Cycle-time baseline",
+      "acceptance_criteria": "Pilot line fully mapped | Bottlenecks identified | Mapping validated by line supervisors"
+    },
+    {
+      "id": "T019",
+      "title": "Data Source Catalog & Tag Naming Convention",
+      "description": "Compile a catalog of all data sources and define a consistent tag naming convention (ISA-95 aligned) for time-series data, events, and batch records across lines.",
+      "phase": 1,
+      "discipline": "Data Engineering",
+      "estimated_hours": 64,
+      "priority": "high",
+      "dependencies": [
+        "T013",
+        "T014"
+      ],
+      "deliverables": "Data source catalog | Tag naming convention | Tag dictionary template",
+      "acceptance_criteria": "Convention covers measurement, equipment, line, and unit | Catalog reconciled with PLC tag lists | Convention approved by data and OT leads"
+    },
+    {
+      "id": "T020",
+      "title": "Brownfield Constraints & Production Window Analysis",
+      "description": "Identify brownfield constraints affecting deployment: limited shutdown windows, hazardous areas, and cleanroom/ESD requirements. Define the safe production windows for OT changes per line.",
+      "phase": 1,
+      "discipline": "OT Engineering",
+      "estimated_hours": 56,
+      "priority": "high",
+      "dependencies": [
+        "T018"
+      ],
+      "deliverables": "Constraints register | Production window calendar | Deployment sequencing plan",
+      "acceptance_criteria": "Shutdown windows mapped per line | Hazardous-area constraints documented | Sequencing plan approved by production"
+    },
+    {
+      "id": "T021",
+      "title": "Define Edge/Cloud Reference Architecture",
+      "description": "Design the reference architecture balancing edge compute (low-latency control, vision inference) and cloud (data lake, ML training, enterprise analytics). Define compute placement tiers and data residency.",
+      "phase": 2,
+      "discipline": "Solution Architecture",
+      "estimated_hours": 96,
+      "priority": "critical",
+      "dependencies": [
+        "T014",
+        "T016"
+      ],
+      "deliverables": "Edge/cloud reference architecture | Compute tier definitions | Data residency policy",
+      "acceptance_criteria": "Architecture supports real-time and batch workloads | Latency budgets defined per tier | Architecture reviewed by steering committee"
+    },
+    {
+      "id": "T022",
+      "title": "Design IT/OT Converged Network Architecture",
+      "description": "Design the converged network architecture using IEC 62443 zones and conduits, deterministic industrial networking where needed, and segmentation between cell, line, site, and enterprise layers.",
+      "phase": 2,
+      "discipline": "Network Engineering",
+      "estimated_hours": 96,
+      "priority": "critical",
+      "dependencies": [
+        "T016",
+        "T021"
+      ],
+      "deliverables": "Converged network design | Zone/conduit diagram | Segmentation plan",
+      "acceptance_criteria": "Design isolates safety and control traffic | Bandwidth and latency requirements met | Design validated by OT and network teams"
+    },
+    {
+      "id": "T023",
+      "title": "Develop Security Blueprint (IEC 62443 Zones & Conduits)",
+      "description": "Produce the OT security blueprint defining zones, conduits, security levels, access control, key/PKI management, and secure remote access aligned to IEC 62443-3-3 target security levels.",
+      "phase": 2,
+      "discipline": "Cybersecurity",
+      "estimated_hours": 96,
+      "priority": "critical",
+      "dependencies": [
+        "T015",
+        "T022"
+      ],
+      "deliverables": "Security blueprint | Target security level definitions | Access & PKI design",
+      "acceptance_criteria": "Target security levels justified per zone | Blueprint addresses remote access and key management | CISO sign-off obtained"
+    },
+    {
+      "id": "T024",
+      "title": "Design Data Platform Architecture (Historian, Lake, Edge)",
+      "description": "Design the data platform: time-series historian, object storage data lake, edge buffering, cataloging, and access layers. Define retention tiers, compression, and ingestion patterns.",
+      "phase": 2,
+      "discipline": "Data Engineering",
+      "estimated_hours": 88,
+      "priority": "critical",
+      "dependencies": [
+        "T021"
+      ],
+      "deliverables": "Data platform architecture | Retention & tiering policy | Ingestion pattern reference",
+      "acceptance_criteria": "Architecture supports historian, lake, and edge tiers | Retention meets analytics and compliance needs | Scalability validated for full plant footprint"
+    },
+    {
+      "id": "T025",
+      "title": "Design MES Integration Architecture",
+      "description": "Define how the data platform integrates with MES: order dispatch, production status, equipment status, and batch records. Choose integration patterns (OPC UA, REST, message bus) and data ownership boundaries.",
+      "phase": 2,
+      "discipline": "Solution Architecture",
+      "estimated_hours": 64,
+      "priority": "high",
+      "dependencies": [
+        "T010",
+        "T024"
+      ],
+      "deliverables": "MES integration design | Interface control documents | Data ownership matrix",
+      "acceptance_criteria": "Integration patterns defined per interface | No data ownership conflicts with MES | Design reviewed with MES vendor/admin"
+    },
+    {
+      "id": "T026",
+      "title": "Design QMS Integration Architecture",
+      "description": "Define integration with the QMS for inspection results, defect codes, non-conformance, and CAPA. Ensure bidirectional flow for closed-loop quality and traceability.",
+      "phase": 2,
+      "discipline": "Solution Architecture",
+      "estimated_hours": 56,
+      "priority": "high",
+      "dependencies": [
+        "T010",
+        "T024"
+      ],
+      "deliverables": "QMS integration design | Defect data model | Closed-loop quality workflow",
+      "acceptance_criteria": "Defect data model aligned with QMS | Closed-loop quality workflow validated | Quality head review complete"
+    },
+    {
+      "id": "T027",
+      "title": "Technology Stack Selection & Vendor Shortlist",
+      "description": "Select the technology stack for historian, data lake, message bus, edge runtime, ML platform, and dashboards. Finalize the vendor shortlist aligned to the RFP evaluation.",
+      "phase": 2,
+      "discipline": "Solution Architecture",
+      "estimated_hours": 72,
+      "priority": "critical",
+      "dependencies": [
+        "T006",
+        "T024"
+      ],
+      "deliverables": "Technology stack decision | Vendor shortlist with rationale | Build-vs-buy assessment",
+      "acceptance_criteria": "Stack meets architecture and security requirements | Decisions traceable to evaluation scorecard | Licensing implications documented"
+    },
+    {
+      "id": "T028",
+      "title": "Define Data Governance & Master Data Model",
+      "description": "Establish data governance: data ownership, quality rules, master data for assets/products/materials, and lifecycle management. Define stewardship roles and metrics.",
+      "phase": 2,
+      "discipline": "Data Engineering",
+      "estimated_hours": 64,
+      "priority": "high",
+      "dependencies": [
+        "T014",
+        "T024"
+      ],
+      "deliverables": "Data governance framework | Master data model | Data stewardship matrix",
+      "acceptance_criteria": "Ownership defined per domain | Quality rules measurable | Master data reconciled with MES/ERP"
+    },
+    {
+      "id": "T029",
+      "title": "Define Identity, Access & PKI Architecture",
+      "description": "Define identity and access management across IT/OT: RBAC, device identities, certificate authority/PKI for OPC UA and mutual TLS, and secrets management for edge devices.",
+      "phase": 2,
+      "discipline": "Cybersecurity",
+      "estimated_hours": 64,
+      "priority": "high",
+      "dependencies": [
+        "T023"
+      ],
+      "deliverables": "IAM architecture | PKI/certificate design | Secrets management design",
+      "acceptance_criteria": "RBAC roles map to job functions | PKI covers OPC UA and edge devices | Key rotation policy defined"
+    },
+    {
+      "id": "T030",
+      "title": "Design High Availability, DR & Backup Strategy",
+      "description": "Define HA and disaster recovery for edge, historian, data lake, and integration services: redundancy, failover, RTO/RPO targets, and tested backup/restore procedures.",
+      "phase": 2,
+      "discipline": "Solution Architecture",
+      "estimated_hours": 56,
+      "priority": "high",
+      "dependencies": [
+        "T024",
+        "T029"
+      ],
+      "deliverables": "HA/DR design | RTO/RPO targets | Backup & restore runbook",
+      "acceptance_criteria": "RTO/RPO targets agreed with operations | No single point of failure on critical path | Backup restore procedure documented"
+    },
+    {
+      "id": "T031",
+      "title": "Define OPC UA/MQTT Information Model & Namespace",
+      "description": "Define the OPC UA information model and companion specs, MQTT topic structure, and payload schema (e.g., Sparkplug B) for normalized data exchange from edge to platform.",
+      "phase": 2,
+      "discipline": "Data Engineering",
+      "estimated_hours": 64,
+      "priority": "high",
+      "dependencies": [
+        "T019",
+        "T021"
+      ],
+      "deliverables": "OPC UA information model | MQTT topic taxonomy | Payload schema spec",
+      "acceptance_criteria": "Model covers all asset classes | Topic structure supports scalability | Schema reviewed by OT and data teams"
+    },
+    {
+      "id": "T032",
+      "title": "Architecture Review Board Sign-off & ADRs",
+      "description": "Convene the Architecture Review Board to validate the end-to-end design, capture architecture decision records (ADRs), and obtain formal sign-off before procurement and build.",
+      "phase": 2,
+      "discipline": "Solution Architecture",
+      "estimated_hours": 40,
+      "priority": "critical",
+      "dependencies": [
+        "T021",
+        "T022",
+        "T023",
+        "T024",
+        "T027",
+        "T030",
+        "T031"
+      ],
+      "deliverables": "Signed architecture package | ADR set | Open-items/action log",
+      "acceptance_criteria": "All ADRs documented | ARB sign-off recorded | Critical open items have owners and dates"
+    },
+    {
+      "id": "T033",
+      "title": "Issue RFP & Evaluate Edge Gateway Vendors",
+      "description": "Issue the edge gateway RFP, evaluate responses against protocol support, ruggedization, security, and vendor support, and recommend the selected gateway (e.g., Moxa, Advantech).",
+      "phase": 3,
+      "discipline": "Commercial",
+      "estimated_hours": 64,
+      "priority": "high",
+      "dependencies": [
+        "T027",
+        "T032"
+      ],
+      "deliverables": "RFP responses evaluated | Vendor recommendation memo | Edge gateway BoM",
+      "acceptance_criteria": "Recommendation traceable to scorecard | Protocol and ruggedization requirements met | BoM matches line counts"
+    },
+    {
+      "id": "T034",
+      "title": "Procure IIoT Sensors (Vibration, Thermal, Energy)",
+      "description": "Procure IIoT sensors for vibration, temperature, and energy/current measurement. Validate accuracy, range, connectivity, and environmental ratings against the gap analysis.",
+      "phase": 3,
+      "discipline": "Procurement",
+      "estimated_hours": 72,
+      "priority": "high",
+      "dependencies": [
+        "T012",
+        "T032"
+      ],
+      "deliverables": "Sensor purchase orders | Sensor BoM | Calibration certificates requested",
+      "acceptance_criteria": "Sensors meet accuracy and rating specs | Quantities match gap analysis | Lead times within phase window"
+    },
+    {
+      "id": "T035",
+      "title": "Procure OT Security Appliances (Firewall/DMZ)",
+      "description": "Procure OT-grade firewalls and DMZ appliances supporting protocol-aware inspection and IEC 62443 conformance. Confirm throughput and inspection depth.",
+      "phase": 3,
+      "discipline": "Procurement",
+      "estimated_hours": 56,
+      "priority": "high",
+      "dependencies": [
+        "T023",
+        "T032"
+      ],
+      "deliverables": "Security appliance purchase orders | Appliance BoM | Throughput validation",
+      "acceptance_criteria": "Appliances meet throughput and inspection specs | Vendor provides IEC 62443 conformance evidence | Quantities match zone design"
+    },
+    {
+      "id": "T036",
+      "title": "Procure Historian & Platform Licenses",
+      "description": "Procure the time-series historian, data lake/cloud, and platform licenses. Negotiate tag-based and core-based licensing to avoid cost escalation at scale.",
+      "phase": 3,
+      "discipline": "Commercial",
+      "estimated_hours": 64,
+      "priority": "critical",
+      "dependencies": [
+        "T027",
+        "T032"
+      ],
+      "deliverables": "Historian & platform contracts | License schedule | Commercial terms summary",
+      "acceptance_criteria": "License model supports full-plant scale | Growth pricing capped | Contract executed"
+    },
+    {
+      "id": "T037",
+      "title": "Procure Edge Compute & GPU Hardware",
+      "description": "Procure industrial edge servers with GPU acceleration for vision inference and edge analytics. Confirm cooling, ruggedization, and compute specifications.",
+      "phase": 3,
+      "discipline": "Procurement",
+      "estimated_hours": 56,
+      "priority": "high",
+      "dependencies": [
+        "T017",
+        "T027",
+        "T032"
+      ],
+      "deliverables": "Edge compute purchase orders | GPU edge BoM | Environmental spec confirmation",
+      "acceptance_criteria": "Compute meets inference latency targets | Cooling/ruggedization fit confirmed | Quantities match edge site plan"
+    },
+    {
+      "id": "T038",
+      "title": "Procure Vision Systems & Cameras",
+      "description": "Procure industrial cameras, lighting, and optics for vision QA (e.g., electroluminescence imaging for solar cells/modules). Confirm resolution, frame rate, and lighting compatibility.",
+      "phase": 3,
+      "discipline": "Procurement",
+      "estimated_hours": 56,
+      "priority": "high",
+      "dependencies": [
+        "T012",
+        "T032"
+      ],
+      "deliverables": "Vision system purchase orders | Camera/lighting BoM | Optical spec confirmation",
+      "acceptance_criteria": "Cameras meet resolution/frame-rate specs | Lighting validated for defect types | Quantities match inspection stations"
+    },
+    {
+      "id": "T039",
+      "title": "Select System Integrator (SI) & Contract",
+      "description": "Select the system integrator with proven Industry 4.0 and OT credentials, define the SOW, and execute the contract. Validate references and OT-specific certifications.",
+      "phase": 3,
+      "discipline": "Commercial",
+      "estimated_hours": 80,
+      "priority": "critical",
+      "dependencies": [
+        "T006",
+        "T032"
+      ],
+      "deliverables": "SI selection memo | Executed SOW/contract | Reference checks complete",
+      "acceptance_criteria": "SI references verified | SOW covers scope with minimal gaps | Contract executed with milestone payments"
+    },
+    {
+      "id": "T040",
+      "title": "Negotiate Software & Cloud Subscriptions",
+      "description": "Negotiate enterprise software and cloud subscriptions: commit levels, scaling flexibility, and renewal protection to control multi-year cost escalation.",
+      "phase": 3,
+      "discipline": "Commercial",
+      "estimated_hours": 48,
+      "priority": "medium",
+      "dependencies": [
+        "T036"
+      ],
+      "deliverables": "Negotiated subscription terms | Cost model | Renewal & exit clauses",
+      "acceptance_criteria": "Commit levels match roadmap demand | Renewal caps documented | Exit/portability clauses included"
+    },
+    {
+      "id": "T041",
+      "title": "Logistics, Customs & Warehousing Plan",
+      "description": "Plan inbound logistics for industrial hardware: lead times, customs clearance for imported goods, warehousing, and staging sequence aligned to deployment windows.",
+      "phase": 3,
+      "discipline": "Procurement",
+      "estimated_hours": 40,
+      "priority": "medium",
+      "dependencies": [
+        "T033",
+        "T034",
+        "T037",
+        "T038"
+      ],
+      "deliverables": "Logistics & customs plan | Warehousing/staging plan | Delivery schedule",
+      "acceptance_criteria": "Lead times mapped to phase windows | Customs requirements addressed | Staging sequence matches deployment plan"
+    },
+    {
+      "id": "T042",
+      "title": "Procurement Acceptance & Asset Register",
+      "description": "Receive, inspect, and accept all procured hardware against POs. Record serial numbers, warranty, and firmware baseline in the asset register before deployment.",
+      "phase": 3,
+      "discipline": "Procurement",
+      "estimated_hours": 56,
+      "priority": "high",
+      "dependencies": [
+        "T041"
+      ],
+      "deliverables": "Goods-receipt acceptance records | Updated asset register | Warranty & firmware baseline",
+      "acceptance_criteria": "All POs reconciled with receipts | Each device recorded with serial and firmware | Defective units flagged and replaced"
+    },
+    {
+      "id": "T043",
+      "title": "Install & Terminate Physical Network (OFC/Copper)",
+      "description": "Install and terminate fiber and copper cabling per the converged network design, including cable certification and labeling for all OT and IT runs.",
+      "phase": 4,
+      "discipline": "Network Engineering",
+      "estimated_hours": 160,
+      "priority": "critical",
+      "dependencies": [
+        "T022",
+        "T042"
+      ],
+      "deliverables": "Installed & terminated cabling | Cable certification records | As-built labeling",
+      "acceptance_criteria": "All runs certified to spec | Labeling matches documentation | No faulty terminations"
+    },
+    {
+      "id": "T044",
+      "title": "Configure VLANs & OT/IT Segmentation",
+      "description": "Configure VLANs and segmentation across switches per the zone/conduit design, isolating control, safety, IIoT, and enterprise traffic.",
+      "phase": 4,
+      "discipline": "Network Engineering",
+      "estimated_hours": 80,
+      "priority": "critical",
+      "dependencies": [
+        "T022",
+        "T043"
+      ],
+      "deliverables": "VLAN configuration | Segmentation test results | Switch configuration backup",
+      "acceptance_criteria": "Traffic isolation verified per zone | No unintended lateral movement | Configurations backed up"
+    },
+    {
+      "id": "T045",
+      "title": "Deploy OT/IT DMZ & Firewalls",
+      "description": "Deploy the OT/IT DMZ and configure OT-grade firewalls with protocol-aware rules aligned to IEC 62443. Enforce deny-by-default between zones.",
+      "phase": 4,
+      "discipline": "Cybersecurity",
+      "estimated_hours": 80,
+      "priority": "critical",
+      "dependencies": [
+        "T023",
+        "T044"
+      ],
+      "deliverables": "Deployed DMZ | Firewall rule set | Rule justification log",
+      "acceptance_criteria": "Deny-by-default enforced | Every rule has a documented owner and justification | DMZ passes validation"
+    },
+    {
+      "id": "T046",
+      "title": "Commission Industrial Edge Gateways",
+      "description": "Commission edge gateways: firmware baseline, secure configuration, certificate enrollment, and connection to southbound devices and northbound platform.",
+      "phase": 4,
+      "discipline": "OT Engineering",
+      "estimated_hours": 96,
+      "priority": "critical",
+      "dependencies": [
+        "T033",
+        "T044"
+      ],
+      "deliverables": "Commissioned gateways | Secure configuration baseline | Gateway health checks",
+      "acceptance_criteria": "All gateways online with hardened config | Certificates enrolled | Southbound connectivity validated"
+    },
+    {
+      "id": "T047",
+      "title": "Implement Protocol Bridging (Modbus/Profinet to OPC UA/MQTT)",
+      "description": "Configure protocol bridging on edge gateways to translate legacy protocols (Modbus, Profinet, EtherNet/IP) to normalized OPC UA/MQTT payloads per the information model.",
+      "phase": 4,
+      "discipline": "OT Engineering",
+      "estimated_hours": 120,
+      "priority": "critical",
+      "dependencies": [
+        "T031",
+        "T046"
+      ],
+      "deliverables": "Protocol bridge configurations | Normalized tag mappings | Validation captures",
+      "acceptance_criteria": "Bridged values match source registers | All mapped tags flowing northbound | Bridge latency within budget"
+    },
+    {
+      "id": "T048",
+      "title": "Install IIoT Sensors on Production Lines",
+      "description": "Install IIoT sensors (vibration, thermal, energy) on critical assets per the instrumentation plan, during approved production windows, with calibration verification.",
+      "phase": 4,
+      "discipline": "OT Engineering",
+      "estimated_hours": 160,
+      "priority": "high",
+      "dependencies": [
+        "T020",
+        "T034",
+        "T046"
+      ],
+      "deliverables": "Installed sensors | Mounting & routing records | Calibration verification",
+      "acceptance_criteria": "All planned sensors installed | Calibration verified against reference | No production disruption during install"
+    },
+    {
+      "id": "T049",
+      "title": "Commission Edge Compute & GPU Servers",
+      "description": "Commission industrial edge compute and GPU servers: OS hardening, container runtime, GPU drivers, and connection to platform and vision workloads.",
+      "phase": 4,
+      "discipline": "OT Engineering",
+      "estimated_hours": 72,
+      "priority": "high",
+      "dependencies": [
+        "T037",
+        "T044"
+      ],
+      "deliverables": "Commissioned edge servers | Hardened OS & runtime | GPU validation",
+      "acceptance_criteria": "Servers online and hardened | GPU inference validated | Compute reachable from platform"
+    },
+    {
+      "id": "T050",
+      "title": "Configure Time Sync (PTP Grandmaster/NTP)",
+      "description": "Deploy PTP grandmaster and NTP hierarchy to synchronize time across PLCs, gateways, edge compute, and platform for accurate event correlation and traceability.",
+      "phase": 4,
+      "discipline": "Network Engineering",
+      "estimated_hours": 48,
+      "priority": "high",
+      "dependencies": [
+        "T046",
+        "T049"
+      ],
+      "deliverables": "PTP/NTP configuration | Time-sync verification report | Stratum/accuracy log",
+      "acceptance_criteria": "All devices synchronized within accuracy target | Drift within tolerance | Failover grandmaster validated"
+    },
+    {
+      "id": "T051",
+      "title": "Wireless & Sensor Network Commissioning",
+      "description": "Commission wireless and sensor networks (industrial Wi-Fi, wireless sensor gateways), validate coverage, roaming, and reliability across the plant floor.",
+      "phase": 4,
+      "discipline": "Network Engineering",
+      "estimated_hours": 64,
+      "priority": "medium",
+      "dependencies": [
+        "T011",
+        "T044"
+      ],
+      "deliverables": "Commissioned wireless network | Coverage test results | Roaming validation",
+      "acceptance_criteria": "Coverage meets sensor density needs | Roaming seamless for mobile assets | Reliability within target"
+    },
+    {
+      "id": "T052",
+      "title": "Network Segmentation Validation & Internal Pen Test",
+      "description": "Validate segmentation end-to-end and run an internal penetration test to confirm no unintended paths between OT zones, DMZ, and enterprise.",
+      "phase": 4,
+      "discipline": "Cybersecurity",
+      "estimated_hours": 72,
+      "priority": "high",
+      "dependencies": [
+        "T045",
+        "T047"
+      ],
+      "deliverables": "Segmentation validation report | Internal pen test report | Remediation log",
+      "acceptance_criteria": "No critical segmentation bypass | Findings remediated or risk-accepted | Report signed by security lead"
+    },
+    {
+      "id": "T053",
+      "title": "Establish Secure Remote Access (Jump Host/VPN)",
+      "description": "Stand up secure remote access for vendors and support: hardened jump hosts, MFA, session recording, and time-bound access aligned to IEC 62443.",
+      "phase": 4,
+      "discipline": "Cybersecurity",
+      "estimated_hours": 56,
+      "priority": "high",
+      "dependencies": [
+        "T023",
+        "T045"
+      ],
+      "deliverables": "Remote access solution | Access policy & runbook | Session recording configured",
+      "acceptance_criteria": "MFA enforced on all remote sessions | Sessions recorded and auditable | Access is time-bound and approved"
+    },
+    {
+      "id": "T054",
+      "title": "Validate Edge-to-Cloud Connectivity",
+      "description": "Validate resilient edge-to-cloud connectivity, including failover behavior and store-and-forward buffering during link interruption.",
+      "phase": 4,
+      "discipline": "Network Engineering",
+      "estimated_hours": 48,
+      "priority": "high",
+      "dependencies": [
+        "T047",
+        "T049"
+      ],
+      "deliverables": "Connectivity validation report | Failover test results | Buffering verification",
+      "acceptance_criteria": "Failover within target | No data loss during simulated outage | Store-and-forward recovers gracefully"
+    },
+    {
+      "id": "T055",
+      "title": "Network Performance & Latency Baseline",
+      "description": "Baseline network performance and latency for critical IIoT and control traffic, and confirm measurements against architecture latency budgets.",
+      "phase": 4,
+      "discipline": "Network Engineering",
+      "estimated_hours": 40,
+      "priority": "medium",
+      "dependencies": [
+        "T054"
+      ],
+      "deliverables": "Performance baseline report | Latency budget reconciliation | Optimization recommendations",
+      "acceptance_criteria": "Latency within architecture budget | Throughput meets projected load | Baseline documented for future comparison"
+    },
+    {
+      "id": "T056",
+      "title": "Spare Parts & Field Tooling Staging",
+      "description": "Stage spare gateways, sensors, optics, and field tooling for rapid swap-out. Define min/max stock and RMA process with vendors.",
+      "phase": 4,
+      "discipline": "OT Engineering",
+      "estimated_hours": 32,
+      "priority": "low",
+      "dependencies": [
+        "T042",
+        "T048"
+      ],
+      "deliverables": "Spare parts inventory | Min/max stock levels | RMA process",
+      "acceptance_criteria": "Spares cover critical single points | Stock levels set | RMA process documented"
+    },
+    {
+      "id": "T057",
+      "title": "Infrastructure Commissioning Sign-off",
+      "description": "Consolidate infrastructure commissioning evidence and obtain operations and security sign-off that the network, edge, and IoT layers are production-ready.",
+      "phase": 4,
+      "discipline": "Network Engineering",
+      "estimated_hours": 32,
+      "priority": "critical",
+      "dependencies": [
+        "T052",
+        "T054",
+        "T055"
+      ],
+      "deliverables": "Commissioning evidence pack | Sign-off record | Open-issues log",
+      "acceptance_criteria": "All commissioning checks passed | Operations and security sign-off recorded | Open issues have remediation owners"
+    },
+    {
+      "id": "T058",
+      "title": "Deploy Time-Series Historian",
+      "description": "Deploy and configure the time-series historian with high availability, tag load from the data source catalog, compression, and retention per the data platform design.",
+      "phase": 5,
+      "discipline": "Data Engineering",
+      "estimated_hours": 96,
+      "priority": "critical",
+      "dependencies": [
+        "T024",
+        "T057"
+      ],
+      "deliverables": "Deployed historian | Tag configuration | Retention & compression policy",
+      "acceptance_criteria": "Historian ingesting all pilot tags | HA validated | Retention policy enforced"
+    },
+    {
+      "id": "T059",
+      "title": "Provision Data Lake & Storage Tiers",
+      "description": "Provision the data lake with hot/warm/cold storage tiers, partitioning, and lifecycle policies. Establish cataloging and access controls.",
+      "phase": 5,
+      "discipline": "Data Engineering",
+      "estimated_hours": 72,
+      "priority": "high",
+      "dependencies": [
+        "T024",
+        "T057"
+      ],
+      "deliverables": "Provisioned data lake | Storage tier policies | Catalog & access controls",
+      "acceptance_criteria": "Tiers and lifecycle policies active | Access controls enforced | Catalog populated"
+    },
+    {
+      "id": "T060",
+      "title": "Develop Data Pipelines (Machine to Historian to Lake)",
+      "description": "Develop and operationalize data pipelines from machine/gateway to historian to data lake, including transformation, contextualization, and orchestration with monitoring.",
+      "phase": 5,
+      "discipline": "Data Engineering",
+      "estimated_hours": 144,
+      "priority": "critical",
+      "dependencies": [
+        "T058",
+        "T059"
+      ],
+      "deliverables": "Operational pipelines | Contextualization logic | Pipeline monitoring",
+      "acceptance_criteria": "Pipelines running with SLAs | Data contextualized with line/shift/product | Failures alerted and recoverable"
+    },
+    {
+      "id": "T061",
+      "title": "Build Real-Time Control Tower Dashboard (OEE, Yield, Downtime)",
+      "description": " Build the real-time control tower dashboard showing OEE, throughput, yield, and downtime by line/shift, with drill-down to asset and reason codes.",
+      "phase": 5,
+      "discipline": "Software Engineering",
+      "estimated_hours": 160,
+      "priority": "critical",
+      "dependencies": [
+        "T060"
+      ],
+      "deliverables": "Control tower dashboard | OEE/yield/downtime calculations | Drill-down views",
+      "acceptance_criteria": "Dashboard refreshes near real-time | OEE methodology validated | Usable by plant leadership"
+    },
+    {
+      "id": "T062",
+      "title": "Implement MES Integration (Orders, Dispatch, Status)",
+      "description": "Implement MES integration for production orders, dispatch, equipment status, and batch records using the agreed integration patterns.",
+      "phase": 5,
+      "discipline": "Software Engineering",
+      "estimated_hours": 120,
+      "priority": "high",
+      "dependencies": [
+        "T025",
+        "T060"
+      ],
+      "deliverables": "MES integration interfaces | Interface tests | Reconciliation reports",
+      "acceptance_criteria": "Order/status sync validated end-to-end | No data ownership conflicts | Error handling and retries in place"
+    },
+    {
+      "id": "T063",
+      "title": "Implement QMS Integration (Defects, Inspections)",
+      "description": "Implement QMS integration to receive inspection results and defect codes and feed closed-loop quality actions back to the line.",
+      "phase": 5,
+      "discipline": "Software Engineering",
+      "estimated_hours": 96,
+      "priority": "high",
+      "dependencies": [
+        "T026",
+        "T060"
+      ],
+      "deliverables": "QMS integration interfaces | Defect data flow | Closed-loop tests",
+      "acceptance_criteria": "Defects flow bidirectionally | Closed-loop actions traceable | Quality head review complete"
+    },
+    {
+      "id": "T064",
+      "title": "Enable End-to-End Traceability (Module Genealogy)",
+      "description": "Enable end-to-end traceability capturing module/component genealogy from material through each process step, supporting recall and quality analysis.",
+      "phase": 5,
+      "discipline": "Software Engineering",
+      "estimated_hours": 120,
+      "priority": "high",
+      "dependencies": [
+        "T062",
+        "T063"
+      ],
+      "deliverables": "Traceability data model | Genealogy records | Trace query capability",
+      "acceptance_criteria": "Genealogy reconstructable per module | Trace queries return within target | Recall scenario validated"
+    },
+    {
+      "id": "T065",
+      "title": "Integrate Warehouse/WMS & Material Flow",
+      "description": "Integrate WMS to surface material availability and consumption, linking material lots to production for complete traceability and inventory accuracy.",
+      "phase": 5,
+      "discipline": "Data Engineering",
+      "estimated_hours": 80,
+      "priority": "medium",
+      "dependencies": [
+        "T062"
+      ],
+      "deliverables": "WMS integration interfaces | Material linkage | Inventory accuracy report",
+      "acceptance_criteria": "Material lots linked to production | Inventory accuracy improved | No orphan material records"
+    },
+    {
+      "id": "T066",
+      "title": "Implement Shift/Line/Asset Data Context Layer",
+      "description": "Build the context layer that enriches raw telemetry with shift, line, asset, product, and order context to power analytics and dashboards.",
+      "phase": 5,
+      "discipline": "Data Engineering",
+      "estimated_hours": 80,
+      "priority": "high",
+      "dependencies": [
+        "T060"
+      ],
+      "deliverables": "Context layer | Enrichment rules | Context quality checks",
+      "acceptance_criteria": "All telemetry contextualized | Context accurate against MES/shift data | Quality checks pass"
+    },
+    {
+      "id": "T067",
+      "title": "Configure Data Quality Rules & Exception Handling",
+      "description": "Configure data quality rules for completeness, accuracy, timeliness, and plausibility, with exception handling and steward workflows for bad data.",
+      "phase": 5,
+      "discipline": "Data Engineering",
+      "estimated_hours": 64,
+      "priority": "high",
+      "dependencies": [
+        "T060"
+      ],
+      "deliverables": "Data quality rule set | Exception handling workflow | DQ scorecards",
+      "acceptance_criteria": "DQ rules active on key tags | Exceptions routed to stewards | DQ scorecards published"
+    },
+    {
+      "id": "T068",
+      "title": "Develop Alarm & Event Management",
+      "description": "Develop alarm and event management with rationalized alarm priorities, escalation, and an audit trail to avoid alarm flooding on the floor.",
+      "phase": 5,
+      "discipline": "Software Engineering",
+      "estimated_hours": 72,
+      "priority": "high",
+      "dependencies": [
+        "T061"
+      ],
+      "deliverables": "Alarm management system | Alarm rationalization | Escalation matrix",
+      "acceptance_criteria": "Alarms prioritized and deduplicated | No alarm flooding in tests | Full audit trail captured"
+    },
+    {
+      "id": "T069",
+      "title": "Build Mobile/Operator HMI Dashboards",
+      "description": "Build mobile and operator-facing HMI dashboards giving line operators real-time status, alerts, and guidance at the workstation.",
+      "phase": 5,
+      "discipline": "Software Engineering",
+      "estimated_hours": 96,
+      "priority": "medium",
+      "dependencies": [
+        "T061",
+        "T066"
+      ],
+      "deliverables": "Operator dashboards | Mobile app/views | Usability test results",
+      "acceptance_criteria": "Dashboards usable on the floor | Latency acceptable to operators | Positive operator feedback"
+    },
+    {
+      "id": "T070",
+      "title": "Establish APIs for Downstream (ERP/Analytics) Consumers",
+      "description": "Publish governed APIs for ERP, finance, and analytics consumers to access production data with authentication, rate limiting, and versioning.",
+      "phase": 5,
+      "discipline": "Software Engineering",
+      "estimated_hours": 72,
+      "priority": "medium",
+      "dependencies": [
+        "T060",
+        "T066"
+      ],
+      "deliverables": "Published APIs | API documentation | Access governance",
+      "acceptance_criteria": "APIs authenticated and rate-limited | Documentation complete | Downstream consumers onboarded"
+    },
+    {
+      "id": "T071",
+      "title": "Data Platform Performance Tuning & Scalability Test",
+      "description": "Tune the data platform for performance and run scalability tests simulating full-plant tag volumes and analytics loads.",
+      "phase": 5,
+      "discipline": "Data Engineering",
+      "estimated_hours": 64,
+      "priority": "high",
+      "dependencies": [
+        "T060",
+        "T070"
+      ],
+      "deliverables": "Tuning report | Scalability test results | Capacity recommendations",
+      "acceptance_criteria": "Performance meets SLA at projected load | No bottlenecks at full-plant scale | Capacity plan documented"
+    },
+    {
+      "id": "T072",
+      "title": "Platform UAT with Operations",
+      "description": "Run user acceptance testing with plant operations, quality, and maintenance users to validate dashboards, traceability, and integrations against real scenarios.",
+      "phase": 5,
+      "discipline": "PMO",
+      "estimated_hours": 80,
+      "priority": "critical",
+      "dependencies": [
+        "T061",
+        "T064",
+        "T071"
+      ],
+      "deliverables": "UAT plan & scripts | UAT results log | Defect/remediation list",
+      "acceptance_criteria": "All critical UAT scenarios pass | Defects resolved or risk-accepted | Operations sign-off recorded"
+    },
+    {
+      "id": "T073",
+      "title": "Develop Computer Vision Defect Detection (EL Micro-Cracks, Solder)",
+      "description": "Develop computer vision models to detect defects from electroluminescence and visual imaging \u2014 e.g., solar cell micro-cracks and solder defects \u2014 with edge inference.",
+      "phase": 6,
+      "discipline": "Data Science",
+      "estimated_hours": 240,
+      "priority": "high",
+      "dependencies": [
+        "T038",
+        "T060",
+        "T072"
+      ],
+      "deliverables": "Trained vision models | Labeled dataset | Edge inference pipeline",
+      "acceptance_criteria": "Precision/recall meet target on holdout | Inference latency within budget | False-negative rate on critical defects below threshold"
+    },
+    {
+      "id": "T074",
+      "title": "Build Predictive Maintenance Models (Vibration/Thermal)",
+      "description": "Build predictive maintenance models from vibration and thermal data to forecast bearing and equipment degradation, with lead time for planned intervention.",
+      "phase": 6,
+      "discipline": "Data Science",
+      "estimated_hours": 200,
+      "priority": "high",
+      "dependencies": [
+        "T048",
+        "T060",
+        "T072"
+      ],
+      "deliverables": "PdM models | Feature engineering pipeline | Validation report",
+      "acceptance_criteria": "Models predict failures with usable lead time | Validation on historical events | Performance documented"
+    },
+    {
+      "id": "T075",
+      "title": "Develop Yield Analytics & Root-Cause Diagnostics",
+      "description": "Develop yield analytics and root-cause diagnostics that correlate process parameters, material lots, and environmental factors to yield loss drivers.",
+      "phase": 6,
+      "discipline": "Data Science",
+      "estimated_hours": 160,
+      "priority": "high",
+      "dependencies": [
+        "T064",
+        "T072"
+      ],
+      "deliverables": "Yield analytics models | Root-cause diagnostic dashboards | Driver attribution",
+      "acceptance_criteria": "Top yield-loss drivers identified | Attribution validated with process engineers | Insights actionable on the floor"
+    },
+    {
+      "id": "T076",
+      "title": "Build Digital Twin of Pilot Line",
+      "description": "Build a digital twin of the pilot line mirroring asset state, process flows, and performance, enabling simulation and what-if analysis.",
+      "phase": 6,
+      "discipline": "ML Engineering",
+      "estimated_hours": 200,
+      "priority": "medium",
+      "dependencies": [
+        "T066",
+        "T072"
+      ],
+      "deliverables": "Digital twin model | Simulation scenarios | Validation report",
+      "acceptance_criteria": "Twin reflects live line state | What-if scenarios produce realistic outputs | Twin validated against measured behavior"
+    },
+    {
+      "id": "T077",
+      "title": "Implement Closed-Loop Control (AI Adjusts Process Setpoints)",
+      "description": "Implement closed-loop control where AI recommends or adjusts process setpoints within safe bounds, with operator override and safe-state fallback.",
+      "phase": 6,
+      "discipline": "OT Engineering",
+      "estimated_hours": 160,
+      "priority": "high",
+      "dependencies": [
+        "T075",
+        "T076"
+      ],
+      "deliverables": "Closed-loop control logic | Safe-state fallback | Override & audit mechanisms",
+      "acceptance_criteria": "Control actions within validated safe bounds | Operator override functional | Every action auditable"
+    },
+    {
+      "id": "T078",
+      "title": "Establish MLOps Platform (Training, Registry, Deployment)",
+      "description": "Stand up the MLOps platform for reproducible training, model registry, versioned deployment, and rollback across edge and cloud.",
+      "phase": 6,
+      "discipline": "ML Engineering",
+      "estimated_hours": 120,
+      "priority": "high",
+      "dependencies": [
+        "T027",
+        "T072"
+      ],
+      "deliverables": "MLOps platform | Model registry | Deployment pipelines",
+      "acceptance_criteria": "Models versioned and registered | Automated deployment with rollback | Reproducible training pipelines"
+    },
+    {
+      "id": "T079",
+      "title": "Develop Energy & Throughput Optimization Models",
+      "description": "Develop optimization models that reduce energy consumption per unit and improve throughput by tuning scheduling, line balancing, and setpoints within constraints.",
+      "phase": 6,
+      "discipline": "Data Science",
+      "estimated_hours": 120,
+      "priority": "medium",
+      "dependencies": [
+        "T075"
+      ],
+      "deliverables": "Optimization models | Recommendation engine | Pilot results",
+      "acceptance_criteria": "Models produce feasible recommendations | Energy/throughput gains demonstrated in pilot | Constraints respected"
+    },
+    {
+      "id": "T080",
+      "title": "Model Validation, Bias & Accuracy Testing",
+      "description": "Independently validate all models for accuracy, bias across product/material groups, robustness, and behavior under edge cases before production use.",
+      "phase": 6,
+      "discipline": "Data Science",
+      "estimated_hours": 96,
+      "priority": "high",
+      "dependencies": [
+        "T073",
+        "T074",
+        "T075"
+      ],
+      "deliverables": "Validation report | Bias analysis | Edge-case test results",
+      "acceptance_criteria": "Accuracy targets met per model | No material bias across groups | Edge cases handled safely"
+    },
+    {
+      "id": "T081",
+      "title": "Operationalize Models with Fallback/Safe State",
+      "description": "Operationalize models in production with monitoring, graceful degradation to safe-state or rule-based fallback when confidence is low, and clear ownership.",
+      "phase": 6,
+      "discipline": "ML Engineering",
+      "estimated_hours": 96,
+      "priority": "high",
+      "dependencies": [
+        "T078",
+        "T080"
+      ],
+      "deliverables": "Production deployment | Fallback logic | Ownership & runbook",
+      "acceptance_criteria": "Fallback engages when confidence drops | No unsafe control actions | Ownership and runbook documented"
+    },
+    {
+      "id": "T082",
+      "title": "Continuous Model Monitoring & Retraining",
+      "description": "Establish continuous monitoring of model performance and drift, with automated retraining triggers and human-in-the-loop review for production models.",
+      "phase": 6,
+      "discipline": "ML Engineering",
+      "estimated_hours": 80,
+      "priority": "high",
+      "dependencies": [
+        "T081"
+      ],
+      "deliverables": "Monitoring dashboards | Drift detection | Retraining pipeline",
+      "acceptance_criteria": "Drift detected and alerted | Retraining pipeline tested | Human review gate enforced"
+    },
+    {
+      "id": "T083",
+      "title": "AI Governance & Model Risk Documentation",
+      "description": "Document AI governance and model risk: model cards, intended use, limitations, risk classification, and approval workflow for production models.",
+      "phase": 6,
+      "discipline": "PMO",
+      "estimated_hours": 56,
+      "priority": "high",
+      "dependencies": [
+        "T080"
+      ],
+      "deliverables": "Model cards | Model risk register | Approval workflow",
+      "acceptance_criteria": "Each production model has a model card | Risk classification applied | Approval workflow enforced"
+    },
+    {
+      "id": "T084",
+      "title": "Pilot Line Results & ROI Validation",
+      "description": "Measure pilot line results against baseline for yield, OEE, downtime, and scrap, and validate projected ROI to justify scaling.",
+      "phase": 6,
+      "discipline": "PMO",
+      "estimated_hours": 64,
+      "priority": "critical",
+      "dependencies": [
+        "T077",
+        "T081",
+        "T082"
+      ],
+      "deliverables": "Pilot results report | ROI validation | Scale recommendation",
+      "acceptance_criteria": "Baseline-to-pilot delta measured | ROI validated against business case | Steering committee endorses scaling"
+    },
+    {
+      "id": "T085",
+      "title": "Develop & Deliver Operator Training Program",
+      "description": "Develop and deliver a role-based operator and supervisor training program covering dashboards, alerts, traceability, and new control workflows.",
+      "phase": 7,
+      "discipline": "Change Management",
+      "estimated_hours": 120,
+      "priority": "critical",
+      "dependencies": [
+        "T084"
+      ],
+      "deliverables": "Training curriculum | Training materials | Completion & assessment records",
+      "acceptance_criteria": "All in-scope operators trained and assessed | Proficiency threshold met | Materials handed to L&D"
+    },
+    {
+      "id": "T086",
+      "title": "Hand Over SOPs & Maintenance Procedures",
+      "description": "Hand over updated standard operating procedures and maintenance procedures covering new equipment, software, and model-supported workflows.",
+      "phase": 7,
+      "discipline": "Change Management",
+      "estimated_hours": 72,
+      "priority": "high",
+      "dependencies": [
+        "T085"
+      ],
+      "deliverables": "Updated SOP library | Maintenance procedures | Document control records",
+      "acceptance_criteria": "SOPs reflect new workflows | Document control applied | Procedures validated by supervisors"
+    },
+    {
+      "id": "T087",
+      "title": "Establish Continuous Improvement (Kaizen) Framework",
+      "description": "Establish a continuous improvement framework with structured kaizen events, idea-to-value pipeline, and metrics tracking improvement velocity.",
+      "phase": 7,
+      "discipline": "Change Management",
+      "estimated_hours": 56,
+      "priority": "medium",
+      "dependencies": [
+        "T086"
+      ],
+      "deliverables": "CI framework | Idea backlog | Improvement metrics",
+      "acceptance_criteria": "CI cadence established | Backlog prioritized to value | Metrics tracked"
+    },
+    {
+      "id": "T088",
+      "title": "Set Quarterly ROI Review Cadence & Reporting",
+      "description": "Institutionalize quarterly ROI reviews comparing realized benefits to the business case, with corrective actions for shortfalls.",
+      "phase": 7,
+      "discipline": "PMO",
+      "estimated_hours": 40,
+      "priority": "high",
+      "dependencies": [
+        "T084"
+      ],
+      "deliverables": "ROI review process | Benefit tracking dashboard | Reporting cadence",
+      "acceptance_criteria": "Quarterly reviews scheduled | Benefit tracking live | Shortfall actions assigned"
+    },
+    {
+      "id": "T089",
+      "title": "Pursue OT Cybersecurity Maturity Certification (IEC 62443)",
+      "description": "Advance OT cybersecurity maturity toward IEC 62443 certification for the certified scope, closing gaps and preparing for assessment.",
+      "phase": 7,
+      "discipline": "Cybersecurity",
+      "estimated_hours": 120,
+      "priority": "medium",
+      "dependencies": [
+        "T052",
+        "T053"
+      ],
+      "deliverables": "Certification readiness assessment | Gap remediation plan | Assessment evidence",
+      "acceptance_criteria": "Target security levels achieved for certified scope | Gaps remediated | Assessment evidence compiled"
+    },
+    {
+      "id": "T090",
+      "title": "Build Workforce Upskilling & Reskilling Roadmap",
+      "description": "Build a workforce upskilling and reskilling roadmap to grow OT-data, analytics, and cybersecurity skills internally, reducing long-term dependence on external partners.",
+      "phase": 7,
+      "discipline": "Change Management",
+      "estimated_hours": 56,
+      "priority": "medium",
+      "dependencies": [
+        "T085"
+      ],
+      "deliverables": "Skills framework | Reskilling roadmap | Hiring & training plan",
+      "acceptance_criteria": "Critical skills gaps mapped | Roadmap phased over 12-24 months | HR and leadership endorsement"
+    },
+    {
+      "id": "T091",
+      "title": "Establish Governance (Model Risk, Change Control, CAB)",
+      "description": "Establish steady-state governance: model risk reviews, IT/OT change advisory board, incident management, and policy refresh cadence.",
+      "phase": 7,
+      "discipline": "PMO",
+      "estimated_hours": 48,
+      "priority": "high",
+      "dependencies": [
+        "T083",
+        "T088"
+      ],
+      "deliverables": "Governance manual | CAB charter | Model risk review process",
+      "acceptance_criteria": "CAB operating with cadence | Model risk reviews scheduled | Policies published and versioned"
+    },
+    {
+      "id": "T092",
+      "title": "Scale-Out Plan & Multi-Line Rollout Roadmap",
+      "description": "Produce the scale-out plan to replicate the pilot across remaining lines and sites, with sequencing, economics, resource plan, and lessons-learned incorporated.",
+      "phase": 7,
+      "discipline": "PMO",
+      "estimated_hours": 64,
+      "priority": "critical",
+      "dependencies": [
+        "T084",
+        "T088"
+      ],
+      "deliverables": "Scale-out roadmap | Wave plan & economics | Resource plan",
+      "acceptance_criteria": "Roadmap prioritized by value and complexity | Economics validated against business case | Steering committee approval"
+    },
+    {
+      "id": "T93",
+      "title": "Baseline OT Maturity Assessment (Phase 0)",
+      "description": "Conduct structured OT maturity assessment across 8 dimensions: asset inventory completeness, connectivity coverage, protocol standardization, data quality, OT cybersecurity (IEC 62443), change management maturity, skills/capacity, and IT/OT governance clarity. Score 1-5 per dimension with evidence",
+      "phase": 0,
+      "discipline": "OT Engineering",
+      "estimated_hours": 80,
+      "priority": "high",
+      "dependencies": [
+        "T001"
+      ],
+      "deliverables": "Phase 0 OT maturity assessment report with scored dimensions and gap-to-target heatmap",
+      "acceptance_criteria": "All 8 dimensions scored with evidence; heatmap reviewed with plant and OT leadership; gaps prioritized into workstreams"
+    },
+    {
+      "id": "T94",
+      "title": "Mid-Engagement OT Maturity Re-Assessment (Phase 4 Gateway)",
+      "description": "Re-assess OT maturity at the end of infrastructure deployment (Phase 4 gate) to measure improvement, validate architectural assumptions, and identify areas that need course correction before data platform and analytics phases",
+      "phase": 4,
+      "discipline": "OT Engineering",
+      "estimated_hours": 60,
+      "priority": "medium",
+      "dependencies": [
+        "T057"
+      ],
+      "deliverables": "Phase 4 OT maturity delta report showing improvement vs baseline; updated gap-to-target heatmap",
+      "acceptance_criteria": "All 8 dimensions re-scored; improvement calculated vs Phase 0 baseline; remaining gaps prioritized for Phases 5-6"
+    },
+    {
+      "id": "T95",
+      "title": "Final OT Maturity Assessment & Capability Handover (Phase 7)",
+      "description": "Final OT maturity assessment at engagement close-out documenting achieved maturity levels, remaining gaps, recommendations for continuous improvement, and a capability roadmap for the client's OT team to sustain and build on the gains",
+      "phase": 7,
+      "discipline": "OT Engineering",
+      "estimated_hours": 80,
+      "priority": "medium",
+      "dependencies": [
+        "T085",
+        "T086",
+        "T087"
+      ],
+      "deliverables": "Final OT maturity assessment report; capability handover guide; 12-month continuous improvement roadmap",
+      "acceptance_criteria": "Final report reviewed with plant leadership; maturity delta from Phase 0 documented; improvement roadmap accepted by client OT team"
+    },
+    {
+      "id": "T96",
+      "title": "Develop Change Management Strategy & Stakeholder Engagement Plan",
+      "description": "Create a structured change management strategy for the Industry 4.0 engagement covering stakeholder analysis (power/interest grid), communication channels per persona, resistance management approach, and role-specific engagement activities for operators, supervisors, plant management, and IT/OT teams",
+      "phase": 0,
+      "discipline": "Change Management",
+      "estimated_hours": 60,
+      "priority": "high",
+      "dependencies": [
+        "T002"
+      ],
+      "deliverables": "Change management strategy document; stakeholder engagement plan; communication matrix",
+      "acceptance_criteria": "All stakeholder personas mapped with engagement approach; communication cadence and channels defined; plan reviewed with sponsor"
+    },
+    {
+      "id": "T97",
+      "title": "Conduct Operator & Supervisor Co-Design Sessions for Dashboard and Workflow Design",
+      "description": "Facilitate co-design workshops with operators and shift supervisors to gather requirements for control tower dashboards, alert configurations, and mobile workflows \u2014 ensuring the tools serve actual floor-level needs rather than being imposed top-down",
+      "phase": 5,
+      "discipline": "Change Management",
+      "estimated_hours": 80,
+      "priority": "high",
+      "dependencies": [
+        "T058",
+        "T088"
+      ],
+      "deliverables": "Co-design session summaries; prioritized user requirements; dashboard mockups validated by operators",
+      "acceptance_criteria": "At least 50% of operators on pilot line participated; requirements prioritized; mockups signed off by operator representatives"
+    },
+    {
+      "id": "T98",
+      "title": "Deliver Role-Based Training & Operational Readiness Programme",
+      "description": "Design and deliver role-specific training covering dashboard use, alert response workflows, maintenance PdM interface navigation, and basic data literacy for operators, supervisors, maintenance technicians, and plant management. Deliver in cohorts before and during commissioning",
+      "phase": 6,
+      "discipline": "Change Management",
+      "estimated_hours": 160,
+      "priority": "critical",
+      "dependencies": [
+        "T97",
+        "T085"
+      ],
+      "deliverables": "Training curriculum per role; training completion records; post-training competency assessment results",
+      "acceptance_criteria": "95% of targeted staff trained per role; competency assessment pass rate > 80%; training satisfaction score > 3.5/5"
+    },
+    {
+      "id": "T99",
+      "title": "Measure Change Adoption & Sustainment Post-Go-Live",
+      "description": "Conduct 30-60-90 day post-go-live surveys and usage analytics to measure adoption rates of new dashboards, alert workflows, and PdM tools; identify adoption barriers; implement corrective coaching or workflow adjustments; report adoption KPIs to steering committee",
+      "phase": 7,
+      "discipline": "Change Management",
+      "estimated_hours": 80,
+      "priority": "medium",
+      "dependencies": [
+        "T98",
+        "T085",
+        "T086"
+      ],
+      "deliverables": "30-60-90 day adoption reports; user feedback analysis; adoption improvement action log",
+      "acceptance_criteria": "Dashboard usage rate > 80% among target users at 90-day mark; alert response time within target; PdM workflow adoption > 60%"
+    }
+  ]
+}

@@ -130,3 +130,17 @@ class AgentAction(Base):
     resolved_at = Column(DateTime, nullable=True)
 
     project = relationship("Project", back_populates="agent_actions")
+
+
+# ── Project ↔ Domain Pack (one pack per project) ─────────────────────────────
+class ProjectPack(Base):
+    __tablename__ = "project_packs"
+    id = Column(Integer, primary_key=True, index=True)
+    project_id = Column(Integer, ForeignKey("projects.id"), nullable=False, unique=True)
+    pack_id = Column(String(80), nullable=False)
+    pack_name = Column(String(200), default="")
+    applied_at = Column(DateTime, default=datetime.datetime.utcnow)
+    # snapshot of what was applied, so the project keeps its domain context even
+    # if the pack definition changes later
+    snapshot = Column(JSON, default=dict)
+

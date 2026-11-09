@@ -1,0 +1,484 @@
+{
+  "pack": "epc_project",
+  "version": "1.0.0",
+  "total_permits": 28,
+  "permits": [
+    {
+      "permit_name": "Environmental Clearance (EC)",
+      "why_needed": "Statutory requirement under EIA Notification for any industrial project exceeding specified thresholds",
+      "responsible_role": "Regulatory Affairs / DCEO",
+      "required_inputs": [
+        "EIA report",
+        "site selection report",
+        "water consumption assessment",
+        "waste management plan"
+      ],
+      "phase": 1,
+      "dependencies": [
+        "EIA baseline study completed",
+        "site finalised"
+      ],
+      "estimated_lead_time_months": 12,
+      "evidence_required": "Environmental clearance letter from MoEFCC / SEIAA"
+    },
+    {
+      "permit_name": "Consent to Establish (CTE)",
+      "why_needed": "Approval from Pollution Control Board before starting construction",
+      "responsible_role": "Regulatory Affairs",
+      "required_inputs": [
+        "EC letter",
+        "site plan",
+        "process description",
+        "water & air pollution control plan",
+        "green belt plan"
+      ],
+      "phase": 2,
+      "dependencies": [
+        "EC received"
+      ],
+      "estimated_lead_time_months": 3,
+      "evidence_required": "CTE certificate"
+    },
+    {
+      "permit_name": "Consent to Operate (CTO)",
+      "why_needed": "Required before commissioning/operation \u2014 validates pollution control systems are installed",
+      "responsible_role": "Regulatory Affairs / HSE",
+      "required_inputs": [
+        "As-built ECP drawings",
+        "air/water pollution control system commissioning reports",
+        "stack monitoring data"
+      ],
+      "phase": 7,
+      "dependencies": [
+        "CTE received",
+        "commissioning complete"
+      ],
+      "estimated_lead_time_months": 2,
+      "evidence_required": "CTO certificate"
+    },
+    {
+      "permit_name": "Factory License / Plan Approval",
+      "why_needed": "Approval from Chief Inspector of Factories under the Factories Act before start of construction",
+      "responsible_role": "Regulatory Affairs",
+      "required_inputs": [
+        "Site plan with building dimensions",
+        "process flow",
+        "manning schedule",
+        "safety provisions"
+      ],
+      "phase": 2,
+      "dependencies": [
+        "Layout plan frozen"
+      ],
+      "estimated_lead_time_months": 4,
+      "evidence_required": "Factory plan approval letter"
+    },
+    {
+      "permit_name": "Boiler Registration",
+      "why_needed": "Registration under Boiler Act \u2014 each boiler vessel must be registered before commissioning",
+      "responsible_role": "Mechanical Engineer / Boiler Inspector",
+      "required_inputs": [
+        "Boiler design drawings",
+        "hydrostatic test certificate",
+        "material certificates",
+        "third-party inspection report"
+      ],
+      "phase": 6,
+      "dependencies": [
+        "Boiler fabricated",
+        "hydraulic test passed"
+      ],
+      "estimated_lead_time_months": 2,
+      "evidence_required": "Boiler registration certificate"
+    },
+    {
+      "permit_name": "Fire Department NOC",
+      "why_needed": "No Objection Certificate from fire department for building/industrial fire safety compliance",
+      "responsible_role": "HSE / Fire Safety Engineer",
+      "required_inputs": [
+        "Fire protection system design",
+        "water storage capacity",
+        "hydrant layout",
+        "means of escape plan"
+      ],
+      "phase": 2,
+      "dependencies": [
+        "Building plan approved",
+        "Fire water tank sized"
+      ],
+      "estimated_lead_time_months": 3,
+      "evidence_required": "Fire NOC"
+    },
+    {
+      "permit_name": "Electrical Inspectorate Approval",
+      "why_needed": "Statutory inspection and approval of HV/LV electrical installations before energisation",
+      "responsible_role": "Electrical Engineer",
+      "required_inputs": [
+        "Single-line diagrams",
+        "cable schedule",
+        "protection coordination study",
+        "earthing design report"
+      ],
+      "phase": 6,
+      "dependencies": [
+        "Switchgear installed",
+        "cables terminated",
+        "earthing system tested"
+      ],
+      "estimated_lead_time_months": 1,
+      "evidence_required": "Electrical safety certificate"
+    },
+    {
+      "permit_name": "Lifting Equipment / Crane Certification",
+      "why_needed": "All lifting equipment (cranes, hoists, chain blocks) must be certified by a competent authority",
+      "responsible_role": "Construction Manager / HSE",
+      "required_inputs": [
+        "Load test certificate",
+        "annual inspection report",
+        "OEM compliance letter"
+      ],
+      "phase": 4,
+      "dependencies": [
+        "Equipment on site"
+      ],
+      "estimated_lead_time_months": 1,
+      "evidence_required": "Lifting equipment certificate"
+    },
+    {
+      "permit_name": "Major Accident Hazard (MAH) Approval",
+      "why_needed": "Required for facilities storing/processing hazardous chemicals above threshold quantities under Chemical Accidents Rules",
+      "responsible_role": "HSE Manager / Process Safety Engineer",
+      "required_inputs": [
+        "Safety report",
+        "off-site emergency plan",
+        "hazard analysis (HAZOP/LOPA)",
+        "consequence modelling report"
+      ],
+      "phase": 3,
+      "dependencies": [
+        "HAZOP completed",
+        "chemical inventory defined"
+      ],
+      "estimated_lead_time_months": 8,
+      "evidence_required": "MAH notification acknowledgement"
+    },
+    {
+      "permit_name": "Hazardous Waste Authorisation",
+      "why_needed": "Authorisation for generation, storage, and disposal of hazardous waste under Hazardous Waste Rules",
+      "responsible_role": "HSE / Environment Engineer",
+      "required_inputs": [
+        "Hazardous waste inventory",
+        "storage area design",
+        "disposal/treatment agreement with authorised recycler"
+      ],
+      "phase": 3,
+      "dependencies": [
+        "Process waste streams defined"
+      ],
+      "estimated_lead_time_months": 3,
+      "evidence_required": "Hazardous waste authorisation certificate"
+    },
+    {
+      "permit_name": "Groundwater Abstraction Approval",
+      "why_needed": "Approval from groundwater authority for industrial water extraction borewells",
+      "responsible_role": "Civil Engineer / Regulatory Affairs",
+      "required_inputs": [
+        "Hydrogeological survey",
+        "water balance study",
+        "rainwater harvesting plan"
+      ],
+      "phase": 1,
+      "dependencies": [
+        "Water requirement definition"
+      ],
+      "estimated_lead_time_months": 6,
+      "evidence_required": "Groundwater abstraction permit"
+    },
+    {
+      "permit_name": "Building / Construction Permit (Local Authority)",
+      "why_needed": "Municipal building permit for all permanent structures on site",
+      "responsible_role": "Civil Engineer / Regulatory Affairs",
+      "required_inputs": [
+        "Architectural drawings",
+        "structural design basis",
+        "geotechnical report",
+        "site plan"
+      ],
+      "phase": 2,
+      "dependencies": [
+        "Plot plan approved",
+        "geotechnical investigation completed"
+      ],
+      "estimated_lead_time_months": 3,
+      "evidence_required": "Building permit / construction approval"
+    },
+    {
+      "permit_name": "Explosives License (if applicable)",
+      "why_needed": "License for storage and use of explosives (blasting during construction, or storage of process chemicals)",
+      "responsible_role": "HSE / Construction Manager",
+      "required_inputs": [
+        "Storage magazine design",
+        "distance zonation drawing",
+        "security plan",
+        "competency certificates"
+      ],
+      "phase": 3,
+      "dependencies": [
+        "Site security established"
+      ],
+      "estimated_lead_time_months": 4,
+      "evidence_required": "Explosives license"
+    },
+    {
+      "permit_name": "Forest Clearance (if forest land involved)",
+      "why_needed": "Under Forest Conservation Act if any part of the project site is forest land or diversion required",
+      "responsible_role": "Regulatory Affairs",
+      "required_inputs": [
+        "Forest land survey",
+        "compensatory afforestation plan",
+        "wildlife conservation plan"
+      ],
+      "phase": 1,
+      "dependencies": [
+        "Site survey completed",
+        "EC applied"
+      ],
+      "estimated_lead_time_months": 18,
+      "evidence_required": "Forest clearance letter"
+    },
+    {
+      "permit_name": "Coastal Regulation Zone (CRZ) Clearance",
+      "why_needed": "Required for projects within the Coastal Regulation Zone as per CRZ notification",
+      "responsible_role": "Regulatory Affairs",
+      "required_inputs": [
+        "CRZ map",
+        "shoreline study",
+        "environmental management plan",
+        "EC compliance report"
+      ],
+      "phase": 1,
+      "dependencies": [
+        "Site identified",
+        "CRZ category determined"
+      ],
+      "estimated_lead_time_months": 12,
+      "evidence_required": "CRZ clearance letter"
+    },
+    {
+      "permit_name": "NOC from Airport Authority (Height Clearance)",
+      "why_needed": "Required if structures exceed specified height near an airport to ensure aviation safety",
+      "responsible_role": "Civil Engineer / Regulatory Affairs",
+      "required_inputs": [
+        "Building elevation drawings",
+        "GPS coordinates",
+        "height AGL/AMSL calculations"
+      ],
+      "phase": 2,
+      "dependencies": [
+        "Structure heights finalised"
+      ],
+      "estimated_lead_time_months": 2,
+      "evidence_required": "AAI NOC"
+    },
+    {
+      "permit_name": "PESO / Explosives Storage License (Process Chemicals)",
+      "why_needed": "Petroleum and Explosives Safety Organisation license for storage of flammable/toxic process chemicals above threshold",
+      "responsible_role": "Process Safety Engineer / HSE",
+      "required_inputs": [
+        "Chemical inventory and MSDS",
+        "storage tank/drum layout",
+        "fire protection design",
+        "distance table compliance report"
+      ],
+      "phase": 3,
+      "dependencies": [
+        "MAH report submitted",
+        "fire protection designed"
+      ],
+      "estimated_lead_time_months": 5,
+      "evidence_required": "PESO storage license"
+    },
+    {
+      "permit_name": "Water Cess / Water Supply Connection",
+      "why_needed": "Approval from water resources department for industrial water supply connection and water cess payment",
+      "responsible_role": "Civil Engineer",
+      "required_inputs": [
+        "Water demand calculation",
+        "water balance diagram",
+        "rainwater harvesting design"
+      ],
+      "phase": 3,
+      "dependencies": [
+        "Water requirement finalised"
+      ],
+      "estimated_lead_time_months": 3,
+      "evidence_required": "Water connection approval"
+    },
+    {
+      "permit_name": "Trade Effluent Discharge Consent",
+      "why_needed": "Consent for discharge of treated effluent into municipal sewer / water body",
+      "responsible_role": "Environment Engineer",
+      "required_inputs": [
+        "Effluent treatment plant design",
+        "treated water quality analysis",
+        "receiving water body study"
+      ],
+      "phase": 3,
+      "dependencies": [
+        "ETP design completed"
+      ],
+      "estimated_lead_time_months": 3,
+      "evidence_required": "Trade effluent discharge consent"
+    },
+    {
+      "permit_name": "Hazardous Chemical Pipeline Easement / Wayleave",
+      "why_needed": "Statutory wayleave registration for inter-plant chemical pipelines crossing third-party or public land",
+      "responsible_role": "Regulatory Affairs / Legal",
+      "required_inputs": [
+        "Pipeline route survey",
+        "land owner agreements",
+        "hazard analysis of pipeline corridor"
+      ],
+      "phase": 2,
+      "dependencies": [
+        "Pipeline route finalised"
+      ],
+      "estimated_lead_time_months": 6,
+      "evidence_required": "Wayleave agreements"
+    },
+    {
+      "permit_name": "Fire Hydrant System Approval",
+      "why_needed": "Approval from fire department of the hydrant/spray/sprinkler system design before installation",
+      "responsible_role": "HSE / Fire Engineer",
+      "required_inputs": [
+        "Fire water demand calculation",
+        "hydraulic calculation report",
+        "pump schedule",
+        "layout drawing"
+      ],
+      "phase": 2,
+      "dependencies": [
+        "Fire water tank capacity confirmed"
+      ],
+      "estimated_lead_time_months": 2,
+      "evidence_required": "Fire system design approval letter"
+    },
+    {
+      "permit_name": "Pressure Vessel / Third-Party Inspection Certificate",
+      "why_needed": "Each pressure vessel requires an independent third-party inspection and certification before site installation",
+      "responsible_role": "Quality / Mechanical Engineer",
+      "required_inputs": [
+        "Design calculations",
+        "material test certificates",
+        "welding certificates",
+        "NDT reports",
+        "hydrotest record"
+      ],
+      "phase": 4,
+      "dependencies": [
+        "Vessel fabricated",
+        "NDT passed"
+      ],
+      "estimated_lead_time_months": 1,
+      "evidence_required": "Third-party inspection certificate"
+    },
+    {
+      "permit_name": "Weighbridge Calibration Certificate",
+      "why_needed": "Legal metrology certification for weighbridges used for commercial transactions (incoming materials / outgoing products)",
+      "responsible_role": "Procurement / Logistics",
+      "required_inputs": [
+        "Weighbridge installation report",
+        "OEM calibration certificate"
+      ],
+      "phase": 7,
+      "dependencies": [
+        "Weighbridge installed and tested"
+      ],
+      "estimated_lead_time_months": 1,
+      "evidence_required": "Weights & measures certification"
+    },
+    {
+      "permit_name": "Radioactive Source License (if NDT with radiography)",
+      "why_needed": "License for possession, use, and storage of radioactive sources used in field radiography (RT) during construction",
+      "responsible_role": "NDT Manager / HSE",
+      "required_inputs": [
+        "Source inventory",
+        "storage/transport plan",
+        "operator competency certificates",
+        "radiation safety plan"
+      ],
+      "phase": 4,
+      "dependencies": [
+        "NDT contractor mobilised"
+      ],
+      "estimated_lead_time_months": 2,
+      "evidence_required": "Atomic Energy Regulatory Board (AERB) license"
+    },
+    {
+      "permit_name": "Sewage Connection / STP Approval",
+      "why_needed": "Approval for domestic sewage treatment plant and connection to municipal sewage (if applicable)",
+      "responsible_role": "Civil Engineer / Environment",
+      "required_inputs": [
+        "STP design basis",
+        "treated water quality specs",
+        "sludge management plan"
+      ],
+      "phase": 3,
+      "dependencies": [
+        "Man camp / site facility design finalised"
+      ],
+      "estimated_lead_time_months": 2,
+      "evidence_required": "STP / sewage connection approval"
+    },
+    {
+      "permit_name": "Temporary Construction Power / HT Connection",
+      "why_needed": "Approval from electricity board for temporary HT connection during construction phase",
+      "responsible_role": "Electrical Engineer",
+      "required_inputs": [
+        "Load list for construction",
+        "single-line of temporary supply",
+        "site safety certificate"
+      ],
+      "phase": 4,
+      "dependencies": [
+        "Earthing for temporary supply installed"
+      ],
+      "estimated_lead_time_months": 2,
+      "evidence_required": "HT connection approval letter"
+    },
+    {
+      "permit_name": "Contract Labour License",
+      "why_needed": "License under Contract Labour Act for engaging contract / temporary workers on site",
+      "responsible_role": "HR / Admin",
+      "required_inputs": [
+        "Labour strength estimate",
+        "contractor details",
+        "welfare facility plan (canteen, rest rooms, first aid)"
+      ],
+      "phase": 3,
+      "dependencies": [
+        "Contractors shortlisted"
+      ],
+      "estimated_lead_time_months": 2,
+      "evidence_required": "Contract labour registration / license"
+    },
+    {
+      "permit_name": "Permanent Power Connection / Commissioning Supply",
+      "why_needed": "Approval and metering of permanent power supply required for commissioning and plant operation",
+      "responsible_role": "Electrical Engineer",
+      "required_inputs": [
+        "Load flow study",
+        "single-line diagram (IFC)",
+        "power factor correction design",
+        "metering scheme"
+      ],
+      "phase": 6,
+      "dependencies": [
+        "HT switchgear installed",
+        "power cable tested"
+      ],
+      "estimated_lead_time_months": 3,
+      "evidence_required": "Power supply / commissioning connection order"
+    }
+  ]
+}

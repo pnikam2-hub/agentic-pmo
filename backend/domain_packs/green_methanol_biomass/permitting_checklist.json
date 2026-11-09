@@ -1,0 +1,239 @@
+{
+  "pack": "green_methanol_biomass",
+  "permits": [
+    {
+      "permit_name": "Environmental Clearance (EC)",
+      "why_needed": "Required for all large industrial projects under EIA Notification; basis for construction and operation",
+      "responsible_role": "DCEO/Regulatory Affairs Manager",
+      "required_inputs": "EIA report, site selection report, public hearing minutes, NOC from state pollution board",
+      "phase": 3,
+      "dependencies": [
+        "EIA report completed",
+        "Public hearing conducted",
+        "Site acquisition done"
+      ],
+      "evidence_required": "Environmental clearance letter from MoEFCC/SEIAA"
+    },
+    {
+      "permit_name": "Consent to Establish (CTE)",
+      "why_needed": "Required before construction under Water and Air Acts from State Pollution Control Board",
+      "responsible_role": "HSE Manager",
+      "required_inputs": "Environmental clearance, site plan, process description, emission inventory, wastewater details",
+      "phase": 3,
+      "dependencies": [
+        "Environmental clearance obtained"
+      ],
+      "evidence_required": "CTE certificate from State PCB"
+    },
+    {
+      "permit_name": "Consent to Operate (CTO)",
+      "why_needed": "Required before commercial operation under Water and Air Acts",
+      "responsible_role": "HSE Manager",
+      "required_inputs": "CTE, commissioning report, emission test results, wastewater analysis",
+      "phase": 6,
+      "dependencies": [
+        "CTE obtained",
+        "Commissioning completed",
+        "Emissions testing done"
+      ],
+      "evidence_required": "CTO certificate from State PCB"
+    },
+    {
+      "permit_name": "Air Emissions Consent / Authorisation",
+      "why_needed": "Covers stack emissions from gasifier, reformer, flare, thermal oxidiser, boiler, and DG sets",
+      "responsible_role": "HSE Manager",
+      "required_inputs": "Stack emission monitoring report, dispersion modelling study, pollution control equipment details",
+      "phase": 3,
+      "dependencies": [
+        "EIA emission inventory",
+        "Pollution control equipment selected"
+      ],
+      "evidence_required": "Authorisation letter specifying emission limits"
+    },
+    {
+      "permit_name": "Hazardous Waste Authorisation",
+      "why_needed": "Required for generation, storage, and disposal of hazardous wastes (spent catalyst, used oil, filter media, chemical waste)",
+      "responsible_role": "HSE Manager",
+      "required_inputs": "Hazardous waste inventory, storage facility details, disposal agreement with TSDF",
+      "phase": 3,
+      "dependencies": [
+        "Waste characterisation done",
+        "TSDF identified"
+      ],
+      "evidence_required": "HW authorisation from State PCB"
+    },
+    {
+      "permit_name": "Methanol Storage Licence (Petroleum & Explosives)",
+      "why_needed": "Methanol is classified as a hazardous chemical under the Manufacture, Storage and Import of Hazardous Chemicals Rules",
+      "responsible_role": "Permitting Manager",
+      "required_inputs": "Storage tank design drawings, layout, safety study (QRA, HAZOP), fire protection system details",
+      "phase": 3,
+      "dependencies": [
+        "QRA completed",
+        "HAZOP completed",
+        "Tank design approved"
+      ],
+      "evidence_required": "Hazardous chemicals storage licence"
+    },
+    {
+      "permit_name": "Fire Department NOC",
+      "why_needed": "Fire safety approval for methanol storage, process area, and buildings covered under fire prevention and life safety regulations",
+      "responsible_role": "HSE Manager",
+      "required_inputs": "Fire protection philosophy, fire water demand calculation, layout, hydrant/spray system design",
+      "phase": 3,
+      "dependencies": [
+        "Layout finalised",
+        "Fire protection design completed"
+      ],
+      "evidence_required": "Fire NOC from state fire department"
+    },
+    {
+      "permit_name": "Factory Licence",
+      "why_needed": "Registration under Factories Act for manufacturing facility",
+      "responsible_role": "Plant Manager / HR",
+      "required_inputs": "Factory plan, process description, manpower details, safety equipment list",
+      "phase": 3,
+      "dependencies": [
+        "Layout finalised",
+        "Construction completed"
+      ],
+      "evidence_required": "Factory licence certificate"
+    },
+    {
+      "permit_name": "Boiler and Pressure Vessel Registration",
+      "why_needed": "Registration under Boiler Act and Indian Boiler Regulations (or equivalent) for steam boilers and pressure vessels",
+      "responsible_role": "QA/QC Manager",
+      "required_inputs": "Vessel design calculation, IBR drawings, material test certificates, NDT reports",
+      "phase": 4,
+      "dependencies": [
+        "Vessels fabricated",
+        "Hydrotest completed"
+      ],
+      "evidence_required": "Boiler registration certificate"
+    },
+    {
+      "permit_name": "Electrical Safety Approval (CEIG)",
+      "why_needed": "Approval from Chief Electrical Inspector for high-voltage installation (above 33kV or as per state rules)",
+      "responsible_role": "Electrical Engineer",
+      "required_inputs": "Single-line diagram, load list, protection coordination study, earthing layout, cable schedule",
+      "phase": 5,
+      "dependencies": [
+        "Electrical installation complete",
+        "Testing completed"
+      ],
+      "evidence_required": "CEIG approval certificate"
+    },
+    {
+      "permit_name": "Biomass Transport and Storage Permit",
+      "why_needed": "May require local authority permits for biomass storage (fire risk, odour, pest control) and truck movements",
+      "responsible_role": "Feedstock Manager",
+      "required_inputs": "Storage site plan, fire prevention measures, dust control plan, traffic management plan",
+      "phase": 3,
+      "dependencies": [
+        "Site layout finalised"
+      ],
+      "evidence_required": "Local authority approval for storage yard"
+    },
+    {
+      "permit_name": "Ash/Char Disposal Authorisation",
+      "why_needed": "Disposal of gasifier ash/char may require authorisation if classified as hazardous or non-hazardous waste",
+      "responsible_role": "HSE Manager",
+      "required_inputs": "Ash characterisation report, disposal site agreement, transportation plan",
+      "phase": 3,
+      "dependencies": [
+        "Ash characterisation done",
+        "Disposal site identified"
+      ],
+      "evidence_required": "Disposal authorisation / TSDF acceptance"
+    },
+    {
+      "permit_name": "Water Abstraction Licence",
+      "why_needed": "Required for groundwater abstraction or surface water withdrawal above prescribed limits",
+      "responsible_role": "Permitting Manager",
+      "required_inputs": "Hydrogeological study, water balance, abstraction point details, NOC from water authority",
+      "phase": 3,
+      "dependencies": [
+        "Water demand quantified"
+      ],
+      "evidence_required": "Water abstraction licence"
+    },
+    {
+      "permit_name": "Groundwater Clearance",
+      "why_needed": "CGWA clearance or equivalent for groundwater extraction for industrial use",
+      "responsible_role": "Permitting Manager",
+      "required_inputs": "Groundwater impact assessment, recharge plan, water balance",
+      "phase": 3,
+      "dependencies": [
+        "Water abstraction licence"
+      ],
+      "evidence_required": "Groundwater clearance certificate"
+    },
+    {
+      "permit_name": "Building Plan Approval",
+      "why_needed": "Approval of building/structural plans from local municipal or development authority",
+      "responsible_role": "Construction Manager",
+      "required_inputs": "Building plans, structural design, fire compliance, parking, green area compliance",
+      "phase": 3,
+      "dependencies": [
+        "Layout approved"
+      ],
+      "evidence_required": "Building plan sanction"
+    },
+    {
+      "permit_name": "Explosives Licence (if applicable)",
+      "why_needed": "Oxygen cylinders, hydrogen cylinders, or other compressed gas storage may require explosives licence",
+      "responsible_role": "Permitting Manager",
+      "required_inputs": "Storage details, PESO application, site safety plan",
+      "phase": 3,
+      "dependencies": [
+        "Storage requirement defined"
+      ],
+      "evidence_required": "PESO explosives licence"
+    },
+    {
+      "permit_name": "Noise Pollution Clearance",
+      "why_needed": "Compliance with noise limits for industrial areas; may require specific permit for high-noise operations",
+      "responsible_role": "HSE Manager",
+      "required_inputs": "Noise modelling study, noise control measures, compliance with ambient noise standards",
+      "phase": 3,
+      "dependencies": [
+        "EIA noise baseline done"
+      ],
+      "evidence_required": "Noise compliance certificate"
+    },
+    {
+      "permit_name": "Customs and Import Clearances",
+      "why_needed": "Import of pressure vessels, catalysts, and specialised equipment requires customs clearance and may need certification",
+      "responsible_role": "Procurement Manager",
+      "required_inputs": "Bill of lading, packing list, invoice, certificate of origin (for green/gHG certification)",
+      "phase": 4,
+      "dependencies": [
+        "Equipment shipped"
+      ],
+      "evidence_required": "Customs clearance certificate"
+    },
+    {
+      "permit_name": "Biomass Sustainability Certification",
+      "why_needed": "For green methanol certification under ISCC, RSB, or equivalent scheme; biomass must demonstrate sustainable sourcing",
+      "responsible_role": "Commercial Manager",
+      "required_inputs": "Feedstock supplier sustainability declaration, mass balance calculation, chain of custody documentation",
+      "phase": 3,
+      "dependencies": [
+        "Feedstock contracts signed"
+      ],
+      "evidence_required": "ISCC/RSB sustainability certificate"
+    },
+    {
+      "permit_name": "Fire Fighting System Approval",
+      "why_needed": "Approval of fixed fire fighting systems (hydrants, sprinklers, foam, deluge) by fire authority",
+      "responsible_role": "HSE Manager",
+      "required_inputs": "Fire water system design, pump capacity calculations, hydrant coverage drawings, foam system details",
+      "phase": 4,
+      "dependencies": [
+        "Fire NOC obtained",
+        "Water supply secured"
+      ],
+      "evidence_required": "Fire fighting system approval certificate"
+    }
+  ]
+}

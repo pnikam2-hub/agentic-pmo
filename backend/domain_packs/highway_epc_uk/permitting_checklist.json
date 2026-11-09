@@ -1,0 +1,187 @@
+{
+  "pack": "highway_epc_uk",
+  "version": "1.0.0",
+  "total_permits": 18,
+  "permits": [
+    {
+      "permit_name": "Development Consent Order (DCO) / Transport and Works Act Order (TWAO)",
+      "why_needed": "Statutory authorisation required for construction of a major highway/road improvement scheme on the Strategic Road Network (SRN) in England. Grants powers of compulsory purchase, street works and changes to traffic regulation.",
+      "responsible_role": "Consents Manager / DCO Lead",
+      "required_inputs": ["Environmental Statement (EIA)", "Statement of Reasons", "Draft Order + Plans and Sections", "Consultation report (Reg 9/10/11)", "Funders' statement", "Design principles / LDAT compliance"],
+      "phase": 3,
+      "dependencies": ["EIA Scoping Opinion received", "Statutory consultation completed", "Design freeze stage 3 approved"],
+      "estimated_lead_time_months": 24,
+      "evidence_required": "DCO/TWAO making and confirmation, Order powers certifying possession of land "
+    },
+    {
+      "permit_name": "Environmental Impact Assessment (EIA) / Environmental Statement acceptance",
+      "why_needed": "Required for larger highway projects; Information for the DCO/TWAO application. Schedules, co-ordinates with Habitats Regulations Assessment (HRA).",
+      "responsible_role": "Environmental Lead",
+      "required_inputs": ["EIA Scoping Opinion (DMRB LA 102 / EIA Directive)", "Baseline environmental surveys", "Assessment chapters (air, noise, water, ecology, heritage)", "Mitigation and enhancement report"],
+      "phase": 3,
+      "dependencies": ["Scoping Opinion received", "Baseline surveys complete"],
+      "estimated_lead_time_months": 9,
+      "evidence_required": "Accepted Environmental Statement with Examining Authority confirmation"
+    },
+    {
+      "permit_name": "Habitats Regulations Assessment (HRA) / Appropriate Assessment",
+      "why_needed": "Determines whether the scheme would adversely affect a European/British site (SAC/SPA/SSSI). Required before consent can be granted.",
+      "responsible_role": "Ecology Lead",
+      "required_inputs": ["Screening matrix (DMRB LA 115)", "Candidate site evidence", "Appropriate Assessment (where required)"],
+      "phase": 3,
+      "dependencies": ["Baseline ecology surveys complete", "Site designations confirmed"],
+      "estimated_lead_time_months": 6,
+      "evidence_required": "HRA screening / Appropriate Assessment sign-off letter from Competent Authority"
+    },
+    {
+      "permit_name": "European Protected Species (EPS) Licence (bats, great crested newts, otters)",
+      "why_needed": "Undertaking works that may disturb/protect EPS requires a licence from Natural England; precondition for ecology mitigation construction.",
+      "responsible_role": "Ecology Lead / Ecological Clerk of Works",
+      "required_inputs": ["EPS survey data (DMRB LA 108)", "Method statement", "Mitigation and compensation design", "Licensed consultant (NE Class licence)"],
+      "phase": 4,
+      "dependencies": ["Ecology surveys complete", "Mitigation design approved"],
+      "estimated_lead_time_months": 3,
+      "evidence_required": "Natural England EPS licence issued (A10 / CL23)"
+    },
+    {
+      "permit_name": "Protected Species surveys: badger, dormice, water voles, reptiles, breeding birds",
+      "why_needed": "Identify and mitigate impacts on protected species; informs TM / construction phasing and ecology enhancement obligations.",
+      "responsible_role": "Ecology Lead",
+      "required_inputs": ["Badger setts survey", "Dormouse/nesting bird surveys", "Reptile/water vole surveys", "Location-specific method statements"],
+      "phase": 2,
+      "dependencies": ["Seasonal survey windows identified", "Design corridor confirmed"],
+      "estimated_lead_time_months": 6,
+      "evidence_required": "Survey report and mitigation prescriptions accepted by Planning Inspectorate / NE"
+    },
+    {
+      "permit_name": "Tree Preservation Order (TPO) and Section 211 Notice",
+      "why_needed": "Removal/works to TPO-protected trees requires consent from the local planning authority.",
+      "responsible_role": "Environment / Arboriculture Lead",
+      "required_inputs": ["Arboricultural Impact Assessment (DMRB LA 121)", "TPO tree removals schedule", "Replacement planting scheme"],
+      "phase": 3,
+      "dependencies": ["Arboricultural survey complete", "Design confirmed"],
+      "estimated_lead_time_months": 3,
+      "evidence_required": "Consent to fell / work TPO trees granted"
+    },
+    {
+      "permit_name": "Highways Act 1980 — Section 278 / Street Works and Section 184",
+      "why_needed": "Agreement for highway works within the public highway and connection to the trunk road network; requires National Highways / local highway authority approval.",
+      "responsible_role": "Highways / Network Management Lead",
+      "required_inputs": ["S278 application and agreement", "Traffic Regulation Order (TRO) proposals", "Street works permits (NRSWA)", "Maintenance bond"],
+      "phase": 4,
+      "dependencies": ["Detailed design complete", "Consents strategy agreed"],
+      "estimated_lead_time_months": 12,
+      "evidence_required": "Signed Section 278 / 184 agreement and approved drawings"
+    },
+    {
+      "permit_name": "Compulsory Purchase Order (CPO) / General Vesting Declaration (GVD)",
+      "why_needed": "Acquiring land required for the scheme (whole or part interests) where not secured by agreement; ancillary to DCO/TWAO powers.",
+      "responsible_role": "Land / Acquisitions Manager",
+      "required_inputs": ["CPO maps and statement of reasons", "Valuations (Red Book)", "Notices to owners and occupiers", "Objections handling / public inquiries"],
+      "phase": 4,
+      "dependencies": ["DCO/TWAO powers in hand", "Land referencing complete"],
+      "estimated_lead_time_months": 18,
+      "evidence_required": "CPO confirmation and service of Notices to Treat / GVD vesting"
+    },
+    {
+      "permit_name": "Traffic Management Act 2004 — Traffic Regulation Order (TRO) / Temporary Traffic Orders",
+      "why_needed": "Permitted temporary and permanent changes to traffic regulation (speed limits, lane/closure regimes, restrictions) during the works and in the operated scheme.",
+      "responsible_role": "Network Management / TM Lead",
+      "required_inputs": ["TRO/STO draft orders", "Traffic management (TM) design and staging", "Public notices and consultation", "Works on SRN network management plan"],
+      "phase": 4,
+      "dependencies": ["TM strategy approved", "Night closure plan agreed"],
+      "estimated_lead_time_months": 6,
+      "evidence_required": "Made/unmade TRO orders and confirmed TM authorisation from National Highways"
+    },
+    {
+      "permit_name": "CDM 2015 — Notifiable Project / Appointment of Principal Designer & Principal Contractor",
+      "why_needed": "Legal duty under the Construction (Design and Management) Regulations 2015 to notify HSE and manage health & safety throughout design and construction.",
+      "responsible_role": "HSE / Project Director",
+      "required_inputs": ["F10 Notification to HSE", "Principal Designer / Principal Contractor appointments", "Construction Phase Plan (CPP)", "Pre-construction information pack"],
+      "phase": 2,
+      "dependencies": ["Duty-holder appointments confirmed", "Design programme set"],
+      "estimated_lead_time_months": 1,
+      "evidence_required": "F10 Notice acknowledgement and approved CPP"
+    },
+    {
+      "permit_name": "Dangerous Substances / Hazardous Works — Explosives, abnormal loads and non-standard route works",
+      "why_needed": "Controls for blasting, handling of hazardous substances and movement of abnormal loads on the network during construction.",
+      "responsible_role": "HSE / Logistics Lead",
+      "required_inputs": ["Explosives storage licence (where used)", "Abnormal Load (STGO) notifications", "Route clearance and escort requirements"],
+      "phase": 4,
+      "dependencies": ["Construction methods approved", "Duty holder appointments made"],
+      "estimated_lead_time_months": 2,
+      "evidence_required": "Permission/notification in force for hazardous activity"
+    },
+    {
+      "permit_name": "Environmental Permit / Waste Management Licence (waters, discharges, noise)",
+      "why_needed": "Controlled waters discharges, site drainage outfalls, waste handling and construction noise beyond threshold may draw Environmental Permitting (England) regulations.",
+      "responsible_role": "Environmental / Water Lead",
+      "required_inputs": ["Drainage / outfall risk assessment", "Silent / low-noise methods", "Waste classification and duty of care", "Spillage response plan"],
+      "phase": 4,
+      "dependencies": ["Drainage design complete", "Waste contractor appointed"],
+      "estimated_lead_time_months": 4,
+      "evidence_required": "Environmental Permit / exemption registered with EA"
+    },
+    {
+      "permit_name": "Watercourse / Flood Risk — Land Drainage Act consent and Flood Risk Activity Permit",
+      "why_needed": "Works in or near main rivers / ordinary watercourses and floodplain require EA / Lead Local Flood Authority consent.",
+      "responsible_role": "Environmental Lead / Flood Risk Engineer",
+      "required_inputs": ["Flood Risk Assessment (DMRB LA 113 / NPPF)", "Drainage strategy", "Crossing and culvert details", "SFRES approval for highway runoff"],
+      "phase": 3,
+      "dependencies": ["Drainage design progressed", "Flood risk modelling complete"],
+      "estimated_lead_time_months": 6,
+      "evidence_required": "Land Drainage consent / Flood Risk Activity Permit granted"
+    },
+    {
+      "permit_name": "Statutory Utility Diversion Consents (gas, water, telecoms, high-voltage)",
+      "why_needed": "Diversion or protection of existing utility apparatus within the corridor is critical to construction programme; requires consent and sometimes prior notice periods.",
+      "responsible_role": "Utility / DfI Lead",
+      "required_inputs": ["Utility search / PUSWA records (DMRB LA 131)", "Diversion design and agreement", "New connection consents", "Public network access agreements"],
+      "phase": 4,
+      "dependencies": ["Utility survey complete", "Diversion budget agreed"],
+      "estimated_lead_time_months": 9,
+      "evidence_required": "Signed diversion agreements and consents from each utility undertaker"
+    },
+    {
+      "permit_name": "Archaeological Consent / Scheduled Monument Consent",
+      "why_needed": "Works affecting archaeological remains or scheduled monuments require consent under the Ancient Monuments and Archaeological Areas Act 1979.",
+      "responsible_role": "Archaeology / Heritage Lead",
+      "required_inputs": ["Desk-based assessment and geophysics", "Evaluation trenching / watching brief", "Design-led mitigation", "Scheduled Monument Consent application"],
+      "phase": 3,
+      "dependencies": ["Heritage baseline complete", "Design confirmed"],
+      "estimated_lead_time_months": 4,
+      "evidence_required": "Consent / approval letter from Historic England / LPA"
+    },
+    {
+      "permit_name": "Public Notice and Works Consents — street works licence, hoarding and section works",
+      "why_needed": "Permits for temporary occupation of the street, hoarding, scaffold and other street works under NRSWA and the Highways Act.",
+      "responsible_role": "Network Management Lead",
+      "required_inputs": ["Street works permit applications", "Hoarding/fencing drawings", "Section 50/171 street works licences"],
+      "phase": 4,
+      "dependencies": ["TM design agreed", "Works programme confirmed"],
+      "estimated_lead_time_months": 3,
+      "evidence_required": "Street works licences / permits granted"
+    },
+    {
+      "permit_name": "Landfill / Disposal Authority consent for construction waste",
+      "why_needed": "Disposal of surplus material (e.g. excavated spoil, contaminated arisings) to an authorised facility with duty of care compliant documentation.",
+      "responsible_role": "Waste / Environment Lead",
+      "required_inputs": ["Materials management plan (DMRB LA 102)", "Classification (WAC) and duty of care", "Approved disposal facility", "Unexpected contamination protocol"],
+      "phase": 4,
+      "dependencies": ["Materials sampling complete", "Waste contractor in place"],
+      "estimated_lead_time_months": 2,
+      "evidence_required": "Registered disposal consents and waste transfer notes"
+    },
+    {
+      "permit_name": "Temporary Works / Design and permanent schemes consent by National Highways (Road Investment Strategy)",
+      "why_needed": "The scheme must be accepted into the Road Investment Strategy (RIS) pipeline and comply with National Highways' Sector Deal / Route Strategies; overarching approval for delivery.",
+      "responsible_role": "PMO / Scheme Sponsor",
+      "required_inputs": ["Strategic Outline Case (SOC)", "Outline/Full Business Case (OBC/FBC)", "RIS funding confirmation", "Route strategy alignment"],
+      "phase": 0,
+      "dependencies": ["Strategic need confirmed", "Funding envelope secured"],
+      "estimated_lead_time_months": 12,
+      "evidence_required": "RIS entry and approvals to gate release funding"
+    }
+  ]
+}

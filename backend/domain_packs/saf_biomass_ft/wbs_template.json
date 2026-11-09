@@ -1,0 +1,1930 @@
+{
+  "template_name": "SAF - Biomass Gasification Fischer-Tropsch Pathway",
+  "pack": "saf_biomass_ft",
+  "tags": [
+    "saf",
+    "biomass",
+    "fischer-tropsch",
+    "aviation-fuel",
+    "domain-pack",
+    "domain-pack:saf_biomass_ft"
+  ],
+  "total_tasks": 131,
+  "tasks": [
+    {
+      "id": "T001",
+      "title": "Project Charter Development",
+      "description": "Develop and approve the project charter defining scope, objectives, key stakeholders, high-level budget, and success criteria for the SAF biomass FT facility.",
+      "phase": 0,
+      "discipline": "PMO",
+      "estimated_hours": 80,
+      "priority": "critical",
+      "dependencies": [],
+      "deliverables": "Project charter document",
+      "acceptance_criteria": "Charter approved by steering committee with defined scope, budget \u00b130%, and target SAF production capacity"
+    },
+    {
+      "id": "T002",
+      "title": "SAF Market Study",
+      "description": "Conduct comprehensive market study covering global SAF demand projections, offtake price curves, airline offtake agreements, competitor landscape, and regional demand centres.",
+      "phase": 0,
+      "discipline": "Commercial",
+      "estimated_hours": 120,
+      "priority": "high",
+      "dependencies": [],
+      "deliverables": "SAF market study report",
+      "acceptance_criteria": "Report covering 10-year demand forecast, price projections, competitor analysis, and top-10 potential offtakers identified"
+    },
+    {
+      "id": "T003",
+      "title": "Investment Thesis & Financial Modelling",
+      "description": "Develop investment thesis including project IRR, NPV, payback period, capital cost estimate (\u00b130%), operating cost model, and sensitivity analysis on feedstock cost, SAF price, and carbon credits.",
+      "phase": 0,
+      "discipline": "PMO",
+      "estimated_hours": 160,
+      "priority": "critical",
+      "dependencies": [
+        "T002"
+      ],
+      "deliverables": "Financial model and investment memorandum",
+      "acceptance_criteria": "Financial model reviewed by finance committee with base-case IRR > hurdle rate and sensitivities documented"
+    },
+    {
+      "id": "T004",
+      "title": "Regulatory Landscape Assessment - CORSIA & ReFuelEU",
+      "description": "Analyse applicable regulatory frameworks including ICAO CORSIA, EU ReFuelEU Aviation mandate, UK SAF mandate, and US EPA RFS/Blenders Tax Credit. Identify compliance pathways and eligibility requirements.",
+      "phase": 0,
+      "discipline": "Permitting",
+      "estimated_hours": 80,
+      "priority": "high",
+      "dependencies": [],
+      "deliverables": "Regulatory landscape matrix",
+      "acceptance_criteria": "Matrix covering CORSIA, ReFuelEU, UK SAF, US RFS with specific sustainability criteria, GHG thresholds, and timeline requirements"
+    },
+    {
+      "id": "T005",
+      "title": "Technology Screening Assessment",
+      "description": "High-level screening of gasification and Fischer-Tropsch technologies, including fluidised bed vs entrained flow gasifiers, cobalt vs iron catalysts, and slurry vs fixed bed FT reactors.",
+      "phase": 0,
+      "discipline": "Process Engineering",
+      "estimated_hours": 80,
+      "priority": "high",
+      "dependencies": [],
+      "deliverables": "Technology screening matrix",
+      "acceptance_criteria": "Matrix evaluating 4+ gasifier types, 2+ FT catalyst options, and 3+ reactor configurations with TRL, CAPEX, OPEX, and feedstock flexibility scores"
+    },
+    {
+      "id": "T006",
+      "title": "Project Execution Strategy",
+      "description": "Define project delivery approach including EPC contracting strategy, project controls framework, risk management plan, quality management plan, and stakeholder engagement plan.",
+      "phase": 0,
+      "discipline": "PMO",
+      "estimated_hours": 80,
+      "priority": "high",
+      "dependencies": [
+        "T001"
+      ],
+      "deliverables": "Project execution plan (PEP)",
+      "acceptance_criteria": "PEP approved with defined contracting strategy, risk register, quality plan, and schedule baseline"
+    },
+    {
+      "id": "T007",
+      "title": "SAF Carbon Intensity Baseline Study",
+      "description": "Establish preliminary carbon intensity baseline using LCA methodology, identifying key emission sources and potential reduction pathways for biomass FT SAF.",
+      "phase": 0,
+      "discipline": "Sustainability",
+      "estimated_hours": 60,
+      "priority": "medium",
+      "dependencies": [
+        "T004"
+      ],
+      "deliverables": "Carbon intensity baseline report",
+      "acceptance_criteria": "CI baseline calculated per CORSIA methodology with well-to-wake boundary and major contributors identified"
+    },
+    {
+      "id": "T008",
+      "title": "Initial Stakeholder Mapping & Engagement",
+      "description": "Identify and map all key stakeholders including government agencies, local communities, aviation industry partners, feedstock suppliers, and technology licensors.",
+      "phase": 0,
+      "discipline": "PMO",
+      "estimated_hours": 40,
+      "priority": "medium",
+      "dependencies": [
+        "T001"
+      ],
+      "deliverables": "Stakeholder register and engagement plan",
+      "acceptance_criteria": "Stakeholder register with >20 entries covering influence, interest, and engagement strategy"
+    },
+    {
+      "id": "T009",
+      "title": "Risk Register - Strategic Phase",
+      "description": "Develop initial project risk register covering strategic, technical, regulatory, commercial, and financial risks with mitigation strategies and risk owners.",
+      "phase": 0,
+      "discipline": "PMO",
+      "estimated_hours": 40,
+      "priority": "high",
+      "dependencies": [
+        "T001"
+      ],
+      "deliverables": "Risk register (strategic phase)",
+      "acceptance_criteria": "Risk register with >30 identified risks, scored by probability and impact, with assigned owners"
+    },
+    {
+      "id": "T010",
+      "title": "Project Organisation & Governance Setup",
+      "description": "Establish project governance structure including steering committee, project management office, technical authorities, and decision-making framework.",
+      "phase": 0,
+      "discipline": "PMO",
+      "estimated_hours": 40,
+      "priority": "critical",
+      "dependencies": [
+        "T001"
+      ],
+      "deliverables": "Governance framework document",
+      "acceptance_criteria": "Governance framework approved with org chart, role descriptions, and delegated authorities defined"
+    },
+    {
+      "id": "T011",
+      "title": "Feedstock Availability Assessment - Forestry Residues",
+      "description": "Assess regional availability of forestry residues including logging slash, mill residues, and forest thinning material. Quantify annual sustainable yield, seasonal variation, and competing uses.",
+      "phase": 1,
+      "discipline": "Feedstock",
+      "estimated_hours": 120,
+      "priority": "high",
+      "dependencies": [],
+      "deliverables": "Forestry feedstock assessment report",
+      "acceptance_criteria": "Quantified annual sustainable volume within 150 km radius, seasonal profiles, and competitor demand analysis"
+    },
+    {
+      "id": "T012",
+      "title": "Feedstock Availability Assessment - Agricultural Residues",
+      "description": "Assess regional availability of agricultural residues including corn stover, wheat straw, rice husks, and sugarcane bagasse. Quantify annual yield, collection logistics, and nutrient replacement costs.",
+      "phase": 1,
+      "discipline": "Feedstock",
+      "estimated_hours": 100,
+      "priority": "high",
+      "dependencies": [],
+      "deliverables": "Agricultural feedstock assessment report",
+      "acceptance_criteria": "Quantified annual sustainable volume for 3+ residue types within regional radius with collection cost estimates"
+    },
+    {
+      "id": "T013",
+      "title": "Feedstock Sampling & Characterisation Campaign",
+      "description": "Design and execute sampling campaign for candidate feedstocks. Characterise moisture, ash, volatiles, fixed carbon, elemental composition (C, H, N, S, O), heating value, and ash fusion temperature.",
+      "phase": 1,
+      "discipline": "Feedstock",
+      "estimated_hours": 120,
+      "priority": "high",
+      "dependencies": [
+        "T011",
+        "T012"
+      ],
+      "deliverables": "Feedstock characterisation database",
+      "acceptance_criteria": "Complete proximate, ultimate, and ash analysis for 5+ feedstock types with replicated sampling and QA/QC"
+    },
+    {
+      "id": "T014",
+      "title": "Feedstock Supply Chain Design & Logistics",
+      "description": "Design end-to-end supply chain including harvest/collection, in-field storage, chipping/grinding, transportation, onsite storage, and inventory management. Model landed cost scenarios.",
+      "phase": 1,
+      "discipline": "Feedstock",
+      "estimated_hours": 120,
+      "priority": "high",
+      "dependencies": [
+        "T011",
+        "T012"
+      ],
+      "deliverables": "Supply chain logistics plan and cost model",
+      "acceptance_criteria": "Supply chain model with landed cost \u00b115%, covering collection, transport, storage, and moisture management for each feedstock"
+    },
+    {
+      "id": "T015",
+      "title": "Moisture & Ash Management Strategy",
+      "description": "Develop strategies for managing feedstock moisture content (drying, blending, covered storage) and ash content (ash removal, slagging/fouling mitigation) to meet gasifier feed specifications.",
+      "phase": 1,
+      "discipline": "Feedstock",
+      "estimated_hours": 60,
+      "priority": "medium",
+      "dependencies": [
+        "T013"
+      ],
+      "deliverables": "Moisture and ash management plan",
+      "acceptance_criteria": "Plan detailing moisture targets, drying technology options, ash handling, and blended feedstock specifications"
+    },
+    {
+      "id": "T016",
+      "title": "Site Selection Study - Multi-Criteria Analysis",
+      "description": "Conduct multi-criteria site selection analysing logistics access (road, rail, port), utilities availability (power, water, gas), land area, zoning, buffer requirements, and proximity to SAF offtake hubs.",
+      "phase": 1,
+      "discipline": "PMO",
+      "estimated_hours": 100,
+      "priority": "critical",
+      "dependencies": [
+        "T002",
+        "T011"
+      ],
+      "deliverables": "Site selection study report with ranking matrix",
+      "acceptance_criteria": "3+ shortlisted sites evaluated across 10+ criteria with weighted scoring and recommendation"
+    },
+    {
+      "id": "T017",
+      "title": "Geotechnical & Topographic Survey",
+      "description": "Conduct geotechnical investigation including boreholes, soil bearing capacity, groundwater assessment, and seismic risk. Perform detailed topographic survey of shortlisted sites.",
+      "phase": 1,
+      "discipline": "EPC",
+      "estimated_hours": 120,
+      "priority": "high",
+      "dependencies": [
+        "T016"
+      ],
+      "deliverables": "Geotechnical survey report and topographic maps",
+      "acceptance_criteria": "Boreholes to 30m depth, soil bearing capacity recommendations, groundwater depth, and 1m contour topographic survey"
+    },
+    {
+      "id": "T018",
+      "title": "Environmental Baseline Study",
+      "description": "Establish environmental baseline covering air quality, water resources, biodiversity, noise, traffic, and socio-economic conditions in the project area.",
+      "phase": 1,
+      "discipline": "HSE",
+      "estimated_hours": 120,
+      "priority": "high",
+      "dependencies": [
+        "T016"
+      ],
+      "deliverables": "Environmental baseline report",
+      "acceptance_criteria": "Baseline data covering 4 seasons, air quality monitoring stations, water sampling points, flora/fauna survey, and noise measurements"
+    },
+    {
+      "id": "T019",
+      "title": "SAF Market Demand Analysis - Offtake Viability",
+      "description": "Detailed demand analysis for SAF off-take at target airports/hubs, including airline fuel procurement cycles, blending infrastructure availability, and price premium willingness.",
+      "phase": 1,
+      "discipline": "Commercial",
+      "estimated_hours": 80,
+      "priority": "high",
+      "dependencies": [
+        "T002"
+      ],
+      "deliverables": "Offtake viability assessment report",
+      "acceptance_criteria": "Identified 5+ potential offtakers, estimated demand volume per airport hub, and logistics pathways to blending points"
+    },
+    {
+      "id": "T020",
+      "title": "Preliminary Carbon Intensity Calculation",
+      "description": "Calculate preliminary well-to-wake carbon intensity of the proposed pathway using LCA tool. Identify key contributors and compare against CORSIA/ReFuelEU reduction thresholds.",
+      "phase": 1,
+      "discipline": "Sustainability",
+      "estimated_hours": 80,
+      "priority": "high",
+      "dependencies": [
+        "T013",
+        "T007"
+      ],
+      "deliverables": "Preliminary LCA report",
+      "acceptance_criteria": "CI value calculated with \u00b120% uncertainty, benchmarked against CORSIA 65% reduction threshold, and major contributors identified"
+    },
+    {
+      "id": "T021",
+      "title": "Water Resource Availability & Permitting Assessment",
+      "description": "Assess water availability including surface water rights, groundwater permits, municipal supply options, and process water treatment/recycle potential for the shortlisted sites.",
+      "phase": 1,
+      "discipline": "Process Engineering",
+      "estimated_hours": 60,
+      "priority": "medium",
+      "dependencies": [
+        "T016"
+      ],
+      "deliverables": "Water resource assessment report",
+      "acceptance_criteria": "Water balance estimate with supply sources, permit requirements, treatment needs, and preliminary cost estimates"
+    },
+    {
+      "id": "T022",
+      "title": "Syngas Conditioning System Design - H2/CO Ratio Adjustment",
+      "description": "Design water-gas shift and/or membrane system to adjust H2/CO ratio to target range (1.8-2.2 for cobalt FT or 0.6-1.5 for iron FT)",
+      "phase": 1,
+      "discipline": "Utilities",
+      "estimated_hours": 60,
+      "priority": "medium",
+      "dependencies": [
+        "T016"
+      ],
+      "deliverables": "Utilities availability report",
+      "acceptance_criteria": "Grid capacity assessment, interconnection timeline estimate, and utility supply options with cost estimates for each site"
+    },
+    {
+      "id": "T023",
+      "title": "Community & Social Impact Baseline",
+      "description": "Establish socio-economic baseline including local employment, land use patterns, indigenous community considerations, and potential social impacts of the proposed project.",
+      "phase": 1,
+      "discipline": "HSE",
+      "estimated_hours": 80,
+      "priority": "medium",
+      "dependencies": [
+        "T016"
+      ],
+      "deliverables": "Social impact baseline report",
+      "acceptance_criteria": "Baseline covering demographics, land ownership, local economy, cultural heritage, and community stakeholder mapping"
+    },
+    {
+      "id": "T024",
+      "title": "Feedstock Storage & Handling Concept Design",
+      "description": "Develop concept design for feedstock receiving, storage, blending, and feeding system including covered storage sizing, reclaim systems, metal/stone removal, and size reduction equipment.",
+      "phase": 1,
+      "discipline": "Process Engineering",
+      "estimated_hours": 80,
+      "priority": "medium",
+      "dependencies": [
+        "T014",
+        "T013"
+      ],
+      "deliverables": "Feedstock handling concept design package",
+      "acceptance_criteria": "Concept PFD, major equipment list, storage capacity for 30-day buffer, and CAPEX \u00b130% estimate"
+    },
+    {
+      "id": "T025",
+      "title": "Renewable Hydrogen Supply Assessment",
+      "description": "Assess options for renewable hydrogen supply including electrolysis (grid/Power-to-X), steam methane reforming with CCS, biomass gasification derived H2, and merchant H2 supply.",
+      "phase": 1,
+      "discipline": "Process Engineering",
+      "estimated_hours": 80,
+      "priority": "medium",
+      "dependencies": [
+        "T005"
+      ],
+      "deliverables": "Hydrogen supply options assessment",
+      "acceptance_criteria": "Evaluation of 3+ H2 supply pathways with cost, carbon intensity, and technology maturity comparison"
+    },
+    {
+      "id": "T026",
+      "title": "Gasification Technology Evaluation - Fluidised Bed",
+      "description": "Detailed evaluation of fluidised bed gasification technologies (bubbling, circulating, dual) for biomass application. Assess TRL, scale-up track record, syngas quality, carbon conversion efficiency, and feedstock tolerance.",
+      "phase": 2,
+      "discipline": "Gasification",
+      "estimated_hours": 120,
+      "priority": "high",
+      "dependencies": [
+        "T005"
+      ],
+      "deliverables": "Fluidised bed gasifier technology evaluation report",
+      "acceptance_criteria": "Evaluation of 3+ licensors with technical, commercial, and operational comparison matrix"
+    },
+    {
+      "id": "T027",
+      "title": "Gasification Technology Evaluation - Entrained Flow",
+      "description": "Detailed evaluation of entrained flow gasification technologies applicable to biomass. Assess slagging operation, ash management, oxygen requirements, carbon conversion, and commercial references.",
+      "phase": 2,
+      "discipline": "Gasification",
+      "estimated_hours": 100,
+      "priority": "high",
+      "dependencies": [
+        "T005"
+      ],
+      "deliverables": "Entrained flow gasifier technology evaluation report",
+      "acceptance_criteria": "Evaluation of 2+ licensors with comparison of feed preparation requirements, operating conditions, and syngas quality"
+    },
+    {
+      "id": "T028",
+      "title": "Gasification Oxidant Selection Study",
+      "description": "Evaluate oxidant options (air-blown, oxygen-blown, enriched air) considering syngas quality, N2 dilution, ASU capital cost, and impact on downstream FT synthesis efficiency.",
+      "phase": 2,
+      "discipline": "Gasification",
+      "estimated_hours": 60,
+      "priority": "medium",
+      "dependencies": [
+        "T026",
+        "T027"
+      ],
+      "deliverables": "Oxidant selection study report",
+      "acceptance_criteria": "Technical-economic comparison of air vs oxygen vs enriched air with recommendation based on CAPEX, OPEX, and FT performance"
+    },
+    {
+      "id": "T029",
+      "title": "Syngas Cleanup Train Selection - Particulate & Tar Removal",
+      "description": "Evaluate particulate removal technologies (cyclones, ceramic filters, wet scrubbing) and tar reforming/cracking options (thermal, catalytic, plasma) for raw syngas cleaning to meet FT catalyst inlet specifications.",
+      "phase": 2,
+      "discipline": "Syngas Cleanup",
+      "estimated_hours": 100,
+      "priority": "high",
+      "dependencies": [
+        "T026",
+        "T027"
+      ],
+      "deliverables": "Particulate & tar removal technology selection report",
+      "acceptance_criteria": "Selected technology train achieving <1 mg/Nm3 particulates and <5 ppmv tar at FT reactor inlet with licensor guarantees"
+    },
+    {
+      "id": "T030",
+      "title": "Syngas Cleanup Train Selection - Acid Gas Removal",
+      "description": "Evaluate acid gas removal technologies (amines, Selexol, Rectisol, pressure swing adsorption) for H2S, CO2, and COS removal to meet FT catalyst poisoning limits.",
+      "phase": 2,
+      "discipline": "Syngas Cleanup",
+      "estimated_hours": 80,
+      "priority": "high",
+      "dependencies": [
+        "T029"
+      ],
+      "deliverables": "Acid gas removal technology selection report",
+      "acceptance_criteria": "Selected AGR technology achieving <0.1 ppmv H2S and <500 ppmv CO2 at FT inlet with solvent selection and regeneration efficiency"
+    },
+    {
+      "id": "T031",
+      "title": "Guard Bed Selection & Catalyst Protection Strategy",
+      "description": "Design guard bed strategy for trace contaminant removal including chlorine, sulphur polishing, metal carbonyls, and ammonia to protect FT catalyst. Specify guard bed materials and operating conditions.",
+      "phase": 2,
+      "discipline": "Syngas Cleanup",
+      "estimated_hours": 60,
+      "priority": "medium",
+      "dependencies": [
+        "T030"
+      ],
+      "deliverables": "Guard bed design basis specification",
+      "acceptance_criteria": "Guard bed design achieving total S <10 ppbv, Cl <1 ppbv, and metal carbonyls <5 ppbv at FT reactor inlet"
+    },
+    {
+      "id": "T032",
+      "title": "FT Catalyst & Reactor Selection - Cobalt vs Iron",
+      "description": "Detailed evaluation of FT catalyst options (cobalt vs iron) and reactor configurations (slurry bubble column, multi-tubular fixed bed) considering selectivity, productivity, catalyst cost, wax vs syncrude product slate, and deactivation rates.",
+      "phase": 2,
+      "discipline": "FT Synthesis",
+      "estimated_hours": 160,
+      "priority": "critical",
+      "dependencies": [
+        "T029"
+      ],
+      "deliverables": "FT catalyst & reactor technology selection report",
+      "acceptance_criteria": "Selected catalyst + reactor configuration with C5+ selectivity, productivity per pass, catalyst consumption rate, and licensor evaluation"
+    },
+    {
+      "id": "T033",
+      "title": "Hydrocracker & Isomerization Technology Evaluation and Selection",
+      "description": "Evaluate licensors for hydrocracking and isomerization of FT wax to maximize jet-range yield and meet cold-flow property targets for FT-SPK",
+      "phase": 2,
+      "discipline": "Hydroprocessing",
+      "estimated_hours": 100,
+      "priority": "high",
+      "dependencies": [
+        "T032"
+      ],
+      "deliverables": "Hydrocracker technology selection report",
+      "acceptance_criteria": "Selected hydrocracker technology achieving >80% jet fuel yield (C9-C15) on wax conversion with H2 consumption estimate"
+    },
+    {
+      "id": "T034",
+      "title": "Product Fractionation Scheme Design",
+      "description": "Define fractionation scheme for FT products including naphtha, jet fuel, diesel, and wax cuts. Specify column configuration, operating conditions, and product quality targets meeting ASTM D7566 and D1655 specifications.",
+      "phase": 2,
+      "discipline": "Product Fractionation",
+      "estimated_hours": 80,
+      "priority": "high",
+      "dependencies": [
+        "T033"
+      ],
+      "deliverables": "Fractionation concept design report",
+      "acceptance_criteria": "Preliminary fractionation PFD with column count, reflux ratios, cut points, and product quality estimates"
+    },
+    {
+      "id": "T035",
+      "title": "Hydrogen Supply Strategy & Integration",
+      "description": "Finalise hydrogen supply strategy including internal H2 production (from FT off-gas, SMR, electrolysis) vs external supply. Integrate H2 balance across FT synthesis, hydrocracking, and hydroprocessing units.",
+      "phase": 2,
+      "discipline": "Process Engineering",
+      "estimated_hours": 80,
+      "priority": "high",
+      "dependencies": [
+        "T025",
+        "T033"
+      ],
+      "deliverables": "Hydrogen supply and balance strategy report",
+      "acceptance_criteria": "H2 balance diagram with net consumption, production sources, purity requirements, and CO2 emissions from H2 production"
+    },
+    {
+      "id": "T036",
+      "title": "Pre-FEED Heat & Mass Balance",
+      "description": "Develop preliminary heat and mass balance for the integrated plant covering gasification, syngas cleanup, FT synthesis, hydrocracking, fractionation, and utilities. Calculate overall carbon efficiency and thermal efficiency.",
+      "phase": 2,
+      "discipline": "Process Engineering",
+      "estimated_hours": 160,
+      "priority": "critical",
+      "dependencies": [
+        "T032",
+        "T033",
+        "T034",
+        "T035"
+      ],
+      "deliverables": "Pre-FEED HMB model (Aspen Plus or equivalent)",
+      "acceptance_criteria": "Benchmarked HMB with \u00b115% accuracy, mass/energy balanced, carbon efficiency >35%, and all major streams quantified"
+    },
+    {
+      "id": "T037",
+      "title": "Pre-FEED Process Flow Diagrams (PFDs)",
+      "description": "Develop process flow diagrams for all major process units including feedstock handling, gasification, syngas cleanup, FT synthesis, hydrocracking, fractionation, and utilities.",
+      "phase": 2,
+      "discipline": "Process Engineering",
+      "estimated_hours": 120,
+      "priority": "high",
+      "dependencies": [
+        "T036"
+      ],
+      "deliverables": "Pre-FEED PFD set",
+      "acceptance_criteria": "Complete PFD set (15+ diagrams) with major equipment, streams, operating conditions, and control valves shown"
+    },
+    {
+      "id": "T038",
+      "title": "Preliminary Equipment Sizing & Specification",
+      "description": "Size major equipment including gasifier, FT reactor, hydrocracker, columns, compressors, heat exchangers, and vessels. Develop preliminary equipment datasheets.",
+      "phase": 2,
+      "discipline": "Process Engineering",
+      "estimated_hours": 120,
+      "priority": "high",
+      "dependencies": [
+        "T036"
+      ],
+      "deliverables": "Preliminary equipment list and datasheets",
+      "acceptance_criteria": "Equipment list with 40+ items, key dimensions, operating conditions, and material of construction identified"
+    },
+    {
+      "id": "T039",
+      "title": "Pre-FEED Hazard Identification (HAZID)",
+      "description": "Conduct HAZID study on the conceptual design covering process hazards, external events, natural hazards, and operational hazards. Identify high-risk scenarios for detailed study in FEED.",
+      "phase": 2,
+      "discipline": "HSE",
+      "estimated_hours": 80,
+      "priority": "high",
+      "dependencies": [
+        "T037"
+      ],
+      "deliverables": "HAZID study report",
+      "acceptance_criteria": "HAZID workshop conducted with multidisciplinary team, 50+ hazard scenarios documented with risk ranking and recommendations"
+    },
+    {
+      "id": "T040",
+      "title": "Pre-FEED Cost Estimate (Class 4)",
+      "description": "Develop Class 4 CAPEX estimate (\u00b130%) based on conceptual design, major equipment pricing, bulk factors, and indirect costs. Include OPEX estimate for first 5 years of operation.",
+      "phase": 2,
+      "discipline": "Procurement",
+      "estimated_hours": 120,
+      "priority": "high",
+      "dependencies": [
+        "T036",
+        "T038"
+      ],
+      "deliverables": "Pre-FEED cost estimate report (Class 4)",
+      "acceptance_criteria": "CAPEX \u00b130%, OPEX \u00b130%, with basis of estimate, contingency analysis, and cost breakdown by area"
+    },
+    {
+      "id": "T041",
+      "title": "Technology Licensor Pre-Selection & Tender Package",
+      "description": "Prepare and issue RFI/RFQ packages to shortlisted technology licensors for gasification, FT synthesis, and hydrocracking. Evaluate responses and make pre-selection recommendations.",
+      "phase": 2,
+      "discipline": "Procurement",
+      "estimated_hours": 120,
+      "priority": "high",
+      "dependencies": [
+        "T026",
+        "T027",
+        "T032",
+        "T033"
+      ],
+      "deliverables": "Technology licensor evaluation matrix and recommendation",
+      "acceptance_criteria": "RFIs issued to 6+ licensors, responses evaluated against 20+ criteria, and 2+ shortlisted per technology for FEED"
+    },
+    {
+      "id": "T042",
+      "title": "CO2 Capture & Sequestration Feasibility Screening",
+      "description": "Screen feasibility of CO2 capture from the FT process (high-purity FT tail gas and AGR CO2 stream) for geological sequestration or utilisation. Estimate capture cost and potential carbon credit value.",
+      "phase": 2,
+      "discipline": "Sustainability",
+      "estimated_hours": 60,
+      "priority": "medium",
+      "dependencies": [
+        "T036"
+      ],
+      "deliverables": "CCS screening report",
+      "acceptance_criteria": "CO2 capture potential quantified, transport/storage options identified, cost estimate \u00b130%, and carbon abatement value assessed"
+    },
+    {
+      "id": "T043",
+      "title": "Water Treatment & Recycle Concept",
+      "description": "Develop water treatment concept for process wastewater, cooling tower blowdown, and boiler feed water. Identify treatment technologies, recycle rates, and zero-liquid-discharge feasibility.",
+      "phase": 2,
+      "discipline": "Process Engineering",
+      "estimated_hours": 60,
+      "priority": "medium",
+      "dependencies": [
+        "T036"
+      ],
+      "deliverables": "Water treatment concept report",
+      "acceptance_criteria": "Water balance with treatment train, recycle rate targets, and preliminary equipment sizing"
+    },
+    {
+      "id": "T044",
+      "title": "FEED Engineering - P&ID Development",
+      "description": "Develop piping and instrumentation diagrams (P&IDs) for all process units including gasification island, syngas cleanup, FT synthesis, hydrocracking, fractionation, and utilities. Include line sizing, isolation, and instrumentation.",
+      "phase": 3,
+      "discipline": "Process Engineering",
+      "estimated_hours": 240,
+      "priority": "critical",
+      "dependencies": [
+        "T037"
+      ],
+      "deliverables": "Complete P&ID set",
+      "acceptance_criteria": "50+ P&IDs developed per project standards, 100% reviewed by discipline leads, with line numbers, valve numbering, and instrument tags"
+    },
+    {
+      "id": "T045",
+      "title": "FEED - Detailed Equipment Datasheets & Specifications",
+      "description": "Develop detailed equipment datasheets and specifications for all major and minor equipment including gasifier, FT reactor, hydrocracker, columns (fractionation), compressors, vessels, heat exchangers, pumps, and speciality equipment.",
+      "phase": 3,
+      "discipline": "Process Engineering",
+      "estimated_hours": 200,
+      "priority": "high",
+      "dependencies": [
+        "T038",
+        "T044"
+      ],
+      "deliverables": "Complete equipment datasheet package",
+      "acceptance_criteria": "100+ datasheets completed with process, mechanical, and instrumentation data signed off by discipline leads"
+    },
+    {
+      "id": "T046",
+      "title": "FEED - Piping Design & Layout Development",
+      "description": "Develop 3D model or plot plan, piping layout, isometric drawings, and stress analysis for critical lines. Define piping material classes and specifications.",
+      "phase": 3,
+      "discipline": "EPC",
+      "estimated_hours": 200,
+      "priority": "high",
+      "dependencies": [
+        "T044"
+      ],
+      "deliverables": "Plot plan, piping layouts, and material specification",
+      "acceptance_criteria": "Plot plan approved, 30% isometrics complete, piping material specification issued, and stress analysis for critical lines"
+    },
+    {
+      "id": "T047",
+      "title": "FEED - Civil & Structural Design Basis",
+      "description": "Develop civil and structural design basis including foundation design criteria, steel structure requirements, building specifications, and geotechnical design parameters.",
+      "phase": 3,
+      "discipline": "EPC",
+      "estimated_hours": 120,
+      "priority": "high",
+      "dependencies": [
+        "T017"
+      ],
+      "deliverables": "Civil/structural design basis document",
+      "acceptance_criteria": "Design basis approved with seismic criteria, wind/snow loads, soil bearing capacity incorporation, and structural steel specifications"
+    },
+    {
+      "id": "T048",
+      "title": "FEED - Electrical Design Basis & Single Line Diagrams",
+      "description": "Develop electrical design basis including power distribution philosophy, single line diagrams, load list, motor schedule, UPS sizing, cable sizing, and grounding design.",
+      "phase": 3,
+      "discipline": "EPC",
+      "estimated_hours": 120,
+      "priority": "high",
+      "dependencies": [
+        "T044"
+      ],
+      "deliverables": "Electrical design basis and single line diagrams",
+      "acceptance_criteria": "Single line diagrams approved, load list complete, and power system study basis defined"
+    },
+    {
+      "id": "T049",
+      "title": "FEED - Instrumentation & Control System Philosophy",
+      "description": "Develop control system philosophy including DCS architecture, SIS (safety instrumented system) requirements, control valve specifications, instrumentation index, and alarm management philosophy.",
+      "phase": 3,
+      "discipline": "EPC",
+      "estimated_hours": 120,
+      "priority": "high",
+      "dependencies": [
+        "T044"
+      ],
+      "deliverables": "Instrumentation and control philosophy document",
+      "acceptance_criteria": "DCS/SIS architecture approved, instrumentation index started, and control philosophy aligned with HAZOP outcomes"
+    },
+    {
+      "id": "T050",
+      "title": "HAZOP Study",
+      "description": "Conduct HAZOP study on all major process units. Identify hazard scenarios, evaluate existing safeguards, and define recommendations for risk reduction. Document in HAZOP worksheets.",
+      "phase": 3,
+      "discipline": "HSE",
+      "estimated_hours": 200,
+      "priority": "critical",
+      "dependencies": [
+        "T044"
+      ],
+      "deliverables": "HAZOP study report and worksheets",
+      "acceptance_criteria": "HAZOP completed on all P&IDs, 200+ nodes studied, recommendations documented with assigned owners and due dates"
+    },
+    {
+      "id": "T051",
+      "title": "SIL/LOPA Assessment",
+      "description": "Conduct SIL (Safety Integrity Level) determination using LOPA methodology for all identified safety instrumented functions. Define SIF requirements, SIL targets, and proof test intervals.",
+      "phase": 3,
+      "discipline": "HSE",
+      "estimated_hours": 120,
+      "priority": "high",
+      "dependencies": [
+        "T050"
+      ],
+      "deliverables": "SIL/LOPA assessment report",
+      "acceptance_criteria": "All SIFs assessed with SIL targets assigned, LOPA documentation complete, and SIS design basis updated"
+    },
+    {
+      "id": "T052",
+      "title": "EPC Cost Estimate (Class 3)",
+      "description": "Develop Class 3 CAPEX estimate (\u00b115%) based on FEED engineering deliverables. Include detailed equipment pricing, bulk quantities, construction labour rates, indirect costs, owner's costs, and contingency.",
+      "phase": 3,
+      "discipline": "Procurement",
+      "estimated_hours": 200,
+      "priority": "critical",
+      "dependencies": [
+        "T045",
+        "T046",
+        "T047",
+        "T048",
+        "T049"
+      ],
+      "deliverables": "Class 3 cost estimate report",
+      "acceptance_criteria": "CAPEX \u00b115%, with detailed take-offs, vendor quotes for major equipment, construction labour build-up, and risk-based contingency"
+    },
+    {
+      "id": "T053",
+      "title": "Environmental Impact Assessment (EIA) & Environmental Clearance",
+      "description": "Prepare and submit Environmental Impact Assessment report covering air emissions, water discharges, solid waste, noise, biodiversity, socio-economic impacts, and risk assessment. Obtain environmental clearance from regulatory authority.",
+      "phase": 3,
+      "discipline": "HSE",
+      "estimated_hours": 240,
+      "priority": "critical",
+      "dependencies": [
+        "T018",
+        "T050"
+      ],
+      "deliverables": "EIA report and environmental clearance certificate",
+      "acceptance_criteria": "EIA submitted to regulator, public hearing conducted, environmental clearance received with all conditions documented"
+    },
+    {
+      "id": "T054",
+      "title": "Air Emissions & Air Quality Permit Application",
+      "description": "Prepare air emissions inventory, dispersion modelling, and air quality permit application covering gasifier, heaters, turbines, flaring, and fugitive emissions.",
+      "phase": 3,
+      "discipline": "Permitting",
+      "estimated_hours": 120,
+      "priority": "high",
+      "dependencies": [
+        "T053"
+      ],
+      "deliverables": "Air permit application package",
+      "acceptance_criteria": "Application submitted with emission inventory, dispersion modelling results, BACT analysis, and compliance demonstration"
+    },
+    {
+      "id": "T055",
+      "title": "Water Discharge & Wastewater Permit Application",
+      "description": "Prepare water discharge permit application covering process wastewater, cooling water, stormwater, and sanitary waste. Include treatment system design, effluent quality, and receiving water impact assessment.",
+      "phase": 3,
+      "discipline": "Permitting",
+      "estimated_hours": 80,
+      "priority": "high",
+      "dependencies": [
+        "T053"
+      ],
+      "deliverables": "Water discharge permit application package",
+      "acceptance_criteria": "Application submitted with effluent quality limits, treatment process description, and compliance monitoring plan"
+    },
+    {
+      "id": "T056",
+      "title": "Hazardous Chemicals & PESO Compliance",
+      "description": "Prepare application for hazardous chemicals storage and handling approval under PESO (or equivalent national authority) covering syngas, hydrogen, FT products, and catalyst materials.",
+      "phase": 3,
+      "discipline": "Permitting",
+      "estimated_hours": 100,
+      "priority": "high",
+      "dependencies": [
+        "T050"
+      ],
+      "deliverables": "Hazardous chemicals approval application",
+      "acceptance_criteria": "Application submitted with hazardous chemical inventory, storage design, safety distances, and emergency response plan"
+    },
+    {
+      "id": "T057",
+      "title": "ASTM D7566 Qualification Plan",
+      "description": "Develop detailed plan for ASTM D7566 Annex A1 (or applicable annex) qualification of the FT-SPK fuel. Define testing protocol, sampling plan, test methods, and certification timeline.",
+      "phase": 3,
+      "discipline": "Quality",
+      "estimated_hours": 80,
+      "priority": "critical",
+      "dependencies": [
+        "T004"
+      ],
+      "deliverables": "ASTM D7566 qualification plan",
+      "acceptance_criteria": "Plan approved covering all required tests (freeze point, flash point, density, aromatics, distillation, thermal stability), timeline, and responsible parties"
+    },
+    {
+      "id": "T058",
+      "title": "Sustainability Certification Scheme Selection",
+      "description": "Evaluate and select sustainability certification scheme (CORSIA, ISCC CORSIA/ISCC EU, RSB) for SAF production. Define certification scope, audit requirements, chain of custody approach, and mass balance accounting.",
+      "phase": 3,
+      "discipline": "Sustainability",
+      "estimated_hours": 80,
+      "priority": "high",
+      "dependencies": [
+        "T004"
+      ],
+      "deliverables": "Certification scheme selection report and implementation plan",
+      "acceptance_criteria": "Selected certification scheme with gap analysis completed, implementation plan approved, and chain of custody model defined"
+    },
+    {
+      "id": "T059",
+      "title": "Offtake Term Sheet Negotiation",
+      "description": "Negotiate and execute non-binding term sheets with shortlisted offtakers for SAF offtake, including volume, price formula, duration, delivery terms, and sustainability certification requirements.",
+      "phase": 3,
+      "discipline": "Commercial",
+      "estimated_hours": 160,
+      "priority": "critical",
+      "dependencies": [
+        "T019",
+        "T002"
+      ],
+      "deliverables": "Executed offtake term sheets",
+      "acceptance_criteria": "2+ term sheets signed with airlines/traders covering minimum 70% of nameplate capacity with pricing formula based on fossil jet fuel + green premium"
+    },
+    {
+      "id": "T060",
+      "title": "Feedstock Supply Agreement Negotiation",
+      "description": "Negotiate feedstock supply agreements with multiple suppliers covering volume, quality specifications, pricing mechanism, force majeure, and sustainability certification requirements.",
+      "phase": 3,
+      "discipline": "Feedstock",
+      "estimated_hours": 120,
+      "priority": "high",
+      "dependencies": [
+        "T014"
+      ],
+      "deliverables": "Feedstock supply agreements",
+      "acceptance_criteria": "Agreements covering 120% of annual feedstock requirement with quality specs, price formula, and sustainability rider"
+    },
+    {
+      "id": "T061",
+      "title": "FEED - Fire Protection & Fire Water System Design",
+      "description": "Design fire protection philosophy including fire water system, foam systems, passive fire protection, gas detection, and fire alarm systems per NFPA/IEC standards.",
+      "phase": 3,
+      "discipline": "HSE",
+      "estimated_hours": 80,
+      "priority": "high",
+      "dependencies": [
+        "T050"
+      ],
+      "deliverables": "Fire protection design basis and P&IDs",
+      "acceptance_criteria": "Fire water demand calculations approved, fire protection P&IDs developed, and foam/clean agent systems specified"
+    },
+    {
+      "id": "T062",
+      "title": "FEED - Utility Systems Design",
+      "description": "Design utility systems including cooling water, steam (HP, MP, LP), condensate recovery, instrument air, plant air, nitrogen, fuel gas, and flare system. Develop utility PFDs and P&IDs.",
+      "phase": 3,
+      "discipline": "Utilities",
+      "estimated_hours": 160,
+      "priority": "high",
+      "dependencies": [
+        "T044",
+        "T035"
+      ],
+      "deliverables": "Utility systems design package",
+      "acceptance_criteria": "Complete utility P&IDs, heat integration optimized, steam balance approved, and utility generation equipment specified"
+    },
+    {
+      "id": "T063",
+      "title": "EPC Contract Strategy & Tender Package Preparation",
+      "description": "Define EPC contracting strategy (lump sum turnkey, reimbursable, hybrid), prepare ITT packages, pre-qualify EPC contractors, and issue tender invitations.",
+      "phase": 4,
+      "discipline": "Procurement",
+      "estimated_hours": 160,
+      "priority": "critical",
+      "dependencies": [
+        "T052",
+        "T006"
+      ],
+      "deliverables": "EPC tender package and contractor pre-qualification report",
+      "acceptance_criteria": "ITT packages issued to 4+ pre-qualified EPC contractors with clear commercial terms, schedule, and scope of work"
+    },
+    {
+      "id": "T064",
+      "title": "EPC Contract Award",
+      "description": "Evaluate EPC tender responses, conduct commercial and technical negotiations, and execute EPC contract including scope, price, schedule, guarantees, and warranties.",
+      "phase": 4,
+      "discipline": "Procurement",
+      "estimated_hours": 200,
+      "priority": "critical",
+      "dependencies": [
+        "T063"
+      ],
+      "deliverables": "Executed EPC contract",
+      "acceptance_criteria": "Contract awarded to selected EPC contractor with agreed commercial terms, performance guarantees, and milestone schedule"
+    },
+    {
+      "id": "T065",
+      "title": "Long-Lead Equipment Procurement - Gasifier Package",
+      "description": "Place purchase order for gasifier and associated equipment (feed system, oxidation system, ash handling). Manage vendor engineering, inspections, and delivery schedule to meet construction critical path.",
+      "phase": 4,
+      "discipline": "Procurement",
+      "estimated_hours": 120,
+      "priority": "critical",
+      "dependencies": [
+        "T064",
+        "T041"
+      ],
+      "deliverables": "Gasifier purchase order, vendor documents, and manufacturing schedule",
+      "acceptance_criteria": "PO placed, vendor data review plan established, and manufacturing schedule aligned with project overall schedule"
+    },
+    {
+      "id": "T066",
+      "title": "Long-Lead Equipment Procurement - FT Reactor",
+      "description": "Place purchase order for FT reactor including internal cooling coils, gas distributor, wax separation, and catalyst loading/unloading system. Manage long-lead fabrication and quality plan.",
+      "phase": 4,
+      "discipline": "Procurement",
+      "estimated_hours": 120,
+      "priority": "critical",
+      "dependencies": [
+        "T064",
+        "T041"
+      ],
+      "deliverables": "FT reactor purchase order and vendor document register",
+      "acceptance_criteria": "PO placed with all technical attachments, QA/QC plan agreed, and delivery confirmed within project schedule"
+    },
+    {
+      "id": "T067",
+      "title": "Long-Lead Equipment Procurement - Hydrocracker & Columns",
+      "description": "Place purchase orders for hydrocracker reactor, fractionation columns, and major vessels. Manage long-lead fabrication including special alloys and heavy wall thickness requirements.",
+      "phase": 4,
+      "discipline": "Procurement",
+      "estimated_hours": 100,
+      "priority": "high",
+      "dependencies": [
+        "T064"
+      ],
+      "deliverables": "Hydrocracker and column purchase orders",
+      "acceptance_criteria": "POs placed with material traceability plan, NDE requirements, and delivery aligned with construction sequence"
+    },
+    {
+      "id": "T068",
+      "title": "Long-Lead Equipment Procurement - Compressors",
+      "description": "Place purchase orders for major compressors (syngas compressor, recycle compressor, air compressor, product gas booster). Include driver, lube oil system, and control systems.",
+      "phase": 4,
+      "discipline": "Procurement",
+      "estimated_hours": 80,
+      "priority": "high",
+      "dependencies": [
+        "T064"
+      ],
+      "deliverables": "Compressor purchase orders with technical specifications",
+      "acceptance_criteria": "POs placed for all major compressors, vendor P&IDs and data sheets received, and manufacturing schedule confirmed"
+    },
+    {
+      "id": "T069",
+      "title": "FT Catalyst Order & Supply Agreement",
+      "description": "Place order for initial FT catalyst charge including base metal, promoter, and support materials. Define catalyst specifications, acceptance testing, lead time, and supply logistics.",
+      "phase": 4,
+      "discipline": "FT Synthesis",
+      "estimated_hours": 60,
+      "priority": "critical",
+      "dependencies": [
+        "T032",
+        "T041"
+      ],
+      "deliverables": "FT catalyst purchase order and supply agreement",
+      "acceptance_criteria": "PO placed with catalyst specification (loading volume, activity, selectivity), acceptance criteria, delivery schedule, and spare/replacement catalyst plan"
+    },
+    {
+      "id": "T070",
+      "title": "Site Preparation & Earthworks",
+      "description": "Execute site clearing, grading, compaction, and drainage installation. Prepare foundations for major equipment areas, roads, and laydown yards.",
+      "phase": 4,
+      "discipline": "EPC",
+      "estimated_hours": 160,
+      "priority": "high",
+      "dependencies": [
+        "T064"
+      ],
+      "deliverables": "Ready-for-construction site with graded areas and drainage",
+      "acceptance_criteria": "Site graded to design levels, compaction tested >95% standard Proctor, drainage installed, and survey control established"
+    },
+    {
+      "id": "T071",
+      "title": "Foundations & Civil Construction",
+      "description": "Construct foundations for major equipment (gasifier, FT reactor, columns, compressors), buildings (control room, admin, warehouse), secondary containment, and paving.",
+      "phase": 4,
+      "discipline": "EPC",
+      "estimated_hours": 240,
+      "priority": "high",
+      "dependencies": [
+        "T070"
+      ],
+      "deliverables": "Completed civil works and foundations",
+      "acceptance_criteria": "All foundations poured and cured, concrete strength verified, anchor bolt setting approved, and QA/QC documentation complete"
+    },
+    {
+      "id": "T072",
+      "title": "Mechanical Equipment Installation",
+      "description": "Install major mechanical equipment including gasifier, FT reactor, hydrocracker, columns (fractionation), compressors, heat exchangers, vessels, and pumps per manufacturer specifications.",
+      "phase": 4,
+      "discipline": "EPC",
+      "estimated_hours": 240,
+      "priority": "critical",
+      "dependencies": [
+        "T071",
+        "T065",
+        "T066",
+        "T067",
+        "T068"
+      ],
+      "deliverables": "Installed mechanical equipment",
+      "acceptance_criteria": "All major equipment set and aligned per manufacturer specs, anchor bolt torque verified, and installation records documented"
+    },
+    {
+      "id": "T073",
+      "title": "Piping Installation & Fabrication",
+      "description": "Fabricate and install process and utility piping including carbon steel, stainless steel, and alloy lines. Perform welding, NDT, hydrotesting, and flange management.",
+      "phase": 4,
+      "discipline": "EPC",
+      "estimated_hours": 240,
+      "priority": "high",
+      "dependencies": [
+        "T072",
+        "T046"
+      ],
+      "deliverables": "Installed piping system",
+      "acceptance_criteria": "Piping installed per isometrics, >95% weld NDT passed, hydrotest completed on all circuits, and flange joint integrity verified"
+    },
+    {
+      "id": "T074",
+      "title": "Electrical Installation - Power Systems",
+      "description": "Install main power transformers, switchgear, MCCs, cables (power and control), lighting, grounding, and lightning protection systems.",
+      "phase": 4,
+      "discipline": "EPC",
+      "estimated_hours": 200,
+      "priority": "high",
+      "dependencies": [
+        "T071",
+        "T048"
+      ],
+      "deliverables": "Installed electrical power systems",
+      "acceptance_criteria": "Transformers energised, switchgear commissioned, cable pulling complete, megger tests passed, and grounding verified"
+    },
+    {
+      "id": "T075",
+      "title": "Instrumentation & Control Installation",
+      "description": "Install field instrumentation (pressure, temperature, flow, level, analysers), control valves, on/off valves, junction boxes, and marshalling panels. Terminate and loop-check.",
+      "phase": 4,
+      "discipline": "EPC",
+      "estimated_hours": 200,
+      "priority": "high",
+      "dependencies": [
+        "T071",
+        "T049"
+      ],
+      "deliverables": "Installed instrumentation and control systems",
+      "acceptance_criteria": "All field instruments installed and terminated, loop continuity verified, and calibration documents completed"
+    },
+    {
+      "id": "T076",
+      "title": "DCS & SIS Systems Build and Factory Acceptance Test",
+      "description": "Complete DCS and SIS configuration, graphics development, logic programming, and alarm management setup. Conduct factory acceptance test with client participation.",
+      "phase": 4,
+      "discipline": "EPC",
+      "estimated_hours": 160,
+      "priority": "high",
+      "dependencies": [
+        "T049"
+      ],
+      "deliverables": "FAT-certified DCS/SIS system",
+      "acceptance_criteria": "FAT completed with 100% of I/O and logic tested, all alarms and trips verified, punch items closed before shipment"
+    },
+    {
+      "id": "T077",
+      "title": "Construction HSE Management",
+      "description": "Implement construction HSE program including site-specific HSE plan, daily safety meetings, permit-to-work system, safety inspections, incident management, and safety training for all construction personnel.",
+      "phase": 4,
+      "discipline": "HSE",
+      "estimated_hours": 240,
+      "priority": "critical",
+      "dependencies": [
+        "T064"
+      ],
+      "deliverables": "Construction HSE records and incident statistics",
+      "acceptance_criteria": "Zero lost-time incidents during construction phase, 100% worker HSE induction completion, and weekly HSE performance reports"
+    },
+    {
+      "id": "T078",
+      "title": "Quality Management during Construction",
+      "description": "Implement construction quality program covering ITP development and sign-off, weld traceability, NDT records, material traceability, dimensional checks, and QA/QC documentation turnover.",
+      "phase": 4,
+      "discipline": "Quality",
+      "estimated_hours": 240,
+      "priority": "high",
+      "dependencies": [
+        "T064"
+      ],
+      "deliverables": "Construction QA/QC records and inspection test plans (ITPs)",
+      "acceptance_criteria": "All ITPs signed off, NDT records complete, material traceability verified, and quality documentation ready for turnover"
+    },
+    {
+      "id": "T079",
+      "title": "System Turnover & Pre-Commissioning Preparation",
+      "description": "Develop system turnover philosophy, define system/sub-system breakdown (e.g., system 0100 gasification, 0200 syngas cleanup), prepare turnover packages, and initiate punch list management.",
+      "phase": 5,
+      "discipline": "Commissioning",
+      "estimated_hours": 120,
+      "priority": "critical",
+      "dependencies": [
+        "T073",
+        "T074",
+        "T075"
+      ],
+      "deliverables": "System turnover plan and system breakdown register",
+      "acceptance_criteria": "Systems divided into 30+ sub-systems with defined boundaries, mechanical completion certificates, and punch list system ready"
+    },
+    {
+      "id": "T080",
+      "title": "Hydrostatic & Pneumatic Leak Tests",
+      "description": "Conduct hydrostatic pressure tests on all pressure vessels, piping circuits, and heat exchangers. Perform pneumatic leak tests on gas service systems per ASME B31.3 and applicable codes.",
+      "phase": 5,
+      "discipline": "Commissioning",
+      "estimated_hours": 160,
+      "priority": "high",
+      "dependencies": [
+        "T079"
+      ],
+      "deliverables": "Hydrotest and pneumatic test records",
+      "acceptance_criteria": "All test packages signed off, test pressure held per code requirements, no visible leaks, and test records documented"
+    },
+    {
+      "id": "T081",
+      "title": "Loop Checks & I/O Verification",
+      "description": "Perform field-to-DCS loop checks on all instrument loops including 4-20mA, digital I/O, thermocouple, RTD, analyser, and valve position feedback signals. Verify correct DCS point configuration.",
+      "phase": 5,
+      "discipline": "Commissioning",
+      "estimated_hours": 160,
+      "priority": "high",
+      "dependencies": [
+        "T076",
+        "T075",
+        "T079"
+      ],
+      "deliverables": "Loop check completion certificates",
+      "acceptance_criteria": "100% of 2000+ loops checked and signed off, DCS point-to-field verification complete, and exceptions documented"
+    },
+    {
+      "id": "T082",
+      "title": "Megger Testing & Motor Bump Tests",
+      "description": "Perform insulation resistance (megger) testing on all motors, cables, and electrical equipment. Conduct motor bump tests (direction check) for all rotating equipment.",
+      "phase": 5,
+      "discipline": "Commissioning",
+      "estimated_hours": 80,
+      "priority": "high",
+      "dependencies": [
+        "T079",
+        "T074"
+      ],
+      "deliverables": "Megger test records and motor bump test certificates",
+      "acceptance_criteria": "All motors megger-tested (IR >1 MOhm per kV), bump direction verified, and vibration/current baseline recorded"
+    },
+    {
+      "id": "T083",
+      "title": "Flushing & Chemical Cleaning",
+      "description": "Conduct flushing of piping systems (water flush, oil flush, chemical cleaning) for lube oil, hydraulic, and process systems. Install temporary strainers and filters, and verify cleanliness to specification.",
+      "phase": 5,
+      "discipline": "Commissioning",
+      "estimated_hours": 120,
+      "priority": "medium",
+      "dependencies": [
+        "T080"
+      ],
+      "deliverables": "Flushing and cleaning completion certificates",
+      "acceptance_criteria": "All systems flushed to specified cleanliness level, strainers clean, and flushing records documented"
+    },
+    {
+      "id": "T084",
+      "title": "Refractory Dry-Out & Heat-Up Procedure",
+      "description": "Execute refractory dry-out for gasifier, hot gas filters, and any refractory-lined equipment per manufacturer's heat-up curve. Monitor temperature ramps and moisture removal.",
+      "phase": 5,
+      "discipline": "Gasification",
+      "estimated_hours": 80,
+      "priority": "high",
+      "dependencies": [
+        "T080",
+        "T065"
+      ],
+      "deliverables": "Refractory dry-out completion report",
+      "acceptance_criteria": "Dry-out completed per manufacturer curve, moisture removed to <0.5%, and cool-down/heat-up cycle validated"
+    },
+    {
+      "id": "T085",
+      "title": "Relief Valve Setting & Flare Blow-Down Testing",
+      "description": "Set and tag all pressure safety valves, rupture discs, and vacuum breakers. Conduct flare blow-down and valve testing per API 520/521. Verify flare header sizing and purge gas flow.",
+      "phase": 5,
+      "discipline": "Commissioning",
+      "estimated_hours": 80,
+      "priority": "high",
+      "dependencies": [
+        "T080"
+      ],
+      "deliverables": "PSV setting records and flare blow-down test report",
+      "acceptance_criteria": "All 100+ PSVs set and tagged per datasheet, flare blow-down validated, and purge gas flow verified"
+    },
+    {
+      "id": "T086",
+      "title": "Dry Commissioning - Rotating Equipment",
+      "description": "Perform dry commissioning (no-load test run) for all rotating equipment including compressors, pumps, fans, blowers, and agitators. Verify lubrication, cooling, vibration, and alignment.",
+      "phase": 5,
+      "discipline": "Commissioning",
+      "estimated_hours": 120,
+      "priority": "high",
+      "dependencies": [
+        "T082",
+        "T083"
+      ],
+      "deliverables": "Rotating equipment dry commissioning certificates",
+      "acceptance_criteria": "All rotating equipment run-tested for 4+ hours, bearing temperatures stable, vibration <ISO limits, and alignment verified"
+    },
+    {
+      "id": "T087",
+      "title": "DCS & SIS Logic Testing (SAT)",
+      "description": "Conduct site acceptance test of DCS and SIS systems including cause-and-effect matrix verification, alarm and trip testing, interlock testing, and process control logic validation.",
+      "phase": 5,
+      "discipline": "Commissioning",
+      "estimated_hours": 160,
+      "priority": "critical",
+      "dependencies": [
+        "T076",
+        "T081"
+      ],
+      "deliverables": "SAT completion certificates",
+      "acceptance_criteria": "100% of interlocks and trips tested, cause-and-effect verified per HAZOP/SIL, alarm rationalisation complete, and SAT punch items closed"
+    },
+    {
+      "id": "T088",
+      "title": "HAZOP Recommendation Close-Out",
+      "description": "Review all HAZOP recommendations, verify implementation via design or procedures, and formally close out. Document any open items with management of change (MOC) plan.",
+      "phase": 5,
+      "discipline": "HSE",
+      "estimated_hours": 80,
+      "priority": "high",
+      "dependencies": [
+        "T050",
+        "T087"
+      ],
+      "deliverables": "HAZOP close-out report",
+      "acceptance_criteria": "90%+ recommendations closed with verified implementation, remaining items under MOC with completion dates"
+    },
+    {
+      "id": "T089",
+      "title": "Operator Training Program Delivery",
+      "description": "Deliver comprehensive operator training including classroom modules on process theory, simulator training on DCS, plant walkdowns, and written/proficiency assessments for all shift crews.",
+      "phase": 5,
+      "discipline": "Operations",
+      "estimated_hours": 200,
+      "priority": "critical",
+      "dependencies": [
+        "T076",
+        "T079"
+      ],
+      "deliverables": "Operator training records and qualification certificates",
+      "acceptance_criteria": "All operators (4 crews x 8 persons) trained and qualified on process, DCS, and emergency procedures with written exam pass rate >80%"
+    },
+    {
+      "id": "T090",
+      "title": "Emergency Response Drill & Site Exercise",
+      "description": "Conduct full-scale emergency response drill covering scenarios such as syngas leak, hydrogen fire, FT reactor runaway, and chemical spill. Evaluate emergency response team performance.",
+      "phase": 5,
+      "discipline": "HSE",
+      "estimated_hours": 60,
+      "priority": "high",
+      "dependencies": [
+        "T089"
+      ],
+      "deliverables": "Emergency drill report and lessons learned",
+      "acceptance_criteria": "Drill completed with all emergency response teams activated, response times documented, and improvement actions identified"
+    },
+    {
+      "id": "T091",
+      "title": "Utilities Start-Up & Conditioning",
+      "description": "Start up utility systems in sequence: instrument air, nitrogen, cooling water, steam system (commission boilers/heaters), condensate system, and flare system. Stabilise each before proceeding.",
+      "phase": 6,
+      "discipline": "Utilities",
+      "estimated_hours": 160,
+      "priority": "critical",
+      "dependencies": [
+        "T086",
+        "T087"
+      ],
+      "deliverables": "Utility systems ready-for-service certificates",
+      "acceptance_criteria": "All utility systems operational within design parameters, steam quality verified, cooling water chemistry controlled, and instrument air dry/dew point confirmed"
+    },
+    {
+      "id": "T092",
+      "title": "Feedstock Handling & Drying System Commissioning",
+      "description": "Commission feedstock receiving, storage, reclaim, screening, metal removal, and drying systems. Run with biomass to verify capacity, moisture reduction, and material handling performance.",
+      "phase": 6,
+      "discipline": "Feedstock",
+      "estimated_hours": 120,
+      "priority": "high",
+      "dependencies": [
+        "T091",
+        "T086"
+      ],
+      "deliverables": "Feedstock system commissioning certificate",
+      "acceptance_criteria": "Feedstock handling system runs at 100% nameplate capacity, moisture reduced to target (<15%), and metal/stone removal verified"
+    },
+    {
+      "id": "T093",
+      "title": "Gasifier Cold Commissioning & System Checks",
+      "description": "Conduct cold commissioning of gasifier including feed system calibration, oxidant flow verification, pressure tests, valve stroke checks, and DCS logic verification. Complete without feed firing.",
+      "phase": 6,
+      "discipline": "Gasification",
+      "estimated_hours": 120,
+      "priority": "critical",
+      "dependencies": [
+        "T091",
+        "T087",
+        "T084"
+      ],
+      "deliverables": "Gasifier cold commission certificate",
+      "acceptance_criteria": "All feed systems calibrated, oxidant flow verified (\u00b12%), valve stroke tested, DCS logic confirmed, and refractory integrity checked"
+    },
+    {
+      "id": "T094",
+      "title": "Gasifier Hot Commissioning & First Flame",
+      "description": "Conduct gasifier hot commissioning including feedstock ignition, controlled heat-up to operating temperature, syngas production, and initial syngas quality sampling. First-flame milestone.",
+      "phase": 6,
+      "discipline": "Gasification",
+      "estimated_hours": 120,
+      "priority": "critical",
+      "dependencies": [
+        "T093"
+      ],
+      "deliverables": "Gasifier hot commission certificate and first-flame report",
+      "acceptance_criteria": "Gasifier at steady operating temperature, syngas produced with target H2/CO ratio, carbon conversion >90%, and first-flame milestone achieved"
+    },
+    {
+      "id": "T095",
+      "title": "Syngas Cleanup Commissioning",
+      "description": "Commission syngas cleanup train including cyclone/particulate removal, tar reformer/cracker, acid gas removal unit, and guard beds. Bring online section by section, verifying outlet gas quality at each stage.",
+      "phase": 6,
+      "discipline": "Syngas Cleanup",
+      "estimated_hours": 160,
+      "priority": "critical",
+      "dependencies": [
+        "T094"
+      ],
+      "deliverables": "Syngas cleanup commissioning certificate",
+      "acceptance_criteria": "Outlet gas meeting FT inlet specs: particulates <1 mg/Nm3, tar <5 ppmv, H2S <0.1 ppmv, CO2 <500 ppmv, total S <10 ppbv"
+    },
+    {
+      "id": "T096",
+      "title": "Guard Bed Loading & Activation",
+      "description": "Load guard bed materials (sulphur guard, chlorine guard, metal carbonyl removal) per manufacturer procedures. Pre-treat/activate guard bed materials before FT catalyst loading.",
+      "phase": 6,
+      "discipline": "Syngas Cleanup",
+      "estimated_hours": 60,
+      "priority": "high",
+      "dependencies": [
+        "T095"
+      ],
+      "deliverables": "Guard bed loading certificate and activation report",
+      "acceptance_criteria": "Guard beds loaded per specification, settled height verified, activation completed per procedure, and outlet gases at target purity"
+    },
+    {
+      "id": "T097",
+      "title": "FT Catalyst Loading & Activation",
+      "description": "Load FT catalyst (cobalt or iron) into reactor per licensed procedure including inert atmosphere, bed level checks, and pressure drop verification. Conduct in-situ reduction/activation before syngas introduction.",
+      "phase": 6,
+      "discipline": "FT Synthesis",
+      "estimated_hours": 120,
+      "priority": "critical",
+      "dependencies": [
+        "T096",
+        "T069"
+      ],
+      "deliverables": "FT catalyst loading and activation certificate",
+      "acceptance_criteria": "Catalyst loaded per procedure, bed levels uniform, pressure drop within spec, reduction completed per manufacturer ramp, and catalyst activity verified"
+    },
+    {
+      "id": "T098",
+      "title": "FT Loop Pressurisation & Syngas Introduction",
+      "description": "Pressurise FT loop with inert gas (N2), establish circulation, introduce syngas gradually, and initiate FT reaction. Monitor temperature ramp, conversion, and product formation.",
+      "phase": 6,
+      "discipline": "FT Synthesis",
+      "estimated_hours": 100,
+      "priority": "critical",
+      "dependencies": [
+        "T097"
+      ],
+      "deliverables": "FT pressurisation and first-product report",
+      "acceptance_criteria": "FT loop pressurised to operating conditions, syngas introduced without temperature excursion, FT reaction initiated, and first FT products (wax/syncrude) produced"
+    },
+    {
+      "id": "T099",
+      "title": "FT Ramp-Up to Nameplate Capacity",
+      "description": "Gradually increase FT reactor throughput from initial operation to nameplate capacity. Monitor catalyst selectivity, conversion per pass, product distribution, and reactor temperature profile.",
+      "phase": 6,
+      "discipline": "FT Synthesis",
+      "estimated_hours": 160,
+      "priority": "critical",
+      "dependencies": [
+        "T098"
+      ],
+      "deliverables": "FT ramp-up report and steady-state certificate",
+      "acceptance_criteria": "FT reactor operating at 100% nameplate capacity with stable temperature profile, C5+ selectivity >target, and catalyst activity as expected"
+    },
+    {
+      "id": "T100",
+      "title": "Wax Handling & Hydrocracker Feed Preparation",
+      "description": "Commission wax handling system including filtration, storage, and feed preheating to hydrocracker. Verify wax quality meets hydrocracker feed specification.",
+      "phase": 6,
+      "discipline": "Hydroprocessing",
+      "estimated_hours": 60,
+      "priority": "high",
+      "dependencies": [
+        "T099"
+      ],
+      "deliverables": "Wax handling system commissioning certificate",
+      "acceptance_criteria": "Wax filtration to <1 micron, storage maintained at temperature above pour point, and wax quality (Fe, ash, O content) within hydrocracker feed spec"
+    },
+    {
+      "id": "T101",
+      "title": "Hydrocracker & Isomerization Start-Up and Ramp-Up",
+      "description": "Commission hydrocracking and isomerization unit: catalyst activation, severity adjustment to target jet yield, freeze point, and other ASTM D7566 FT-SPK properties",
+      "phase": 6,
+      "discipline": "Hydroprocessing",
+      "estimated_hours": 160,
+      "priority": "critical",
+      "dependencies": [
+        "T100"
+      ],
+      "deliverables": "Hydrocracker start-up certificate",
+      "acceptance_criteria": "Hydrocracker at steady operation, target conversion achieved, jet fuel fraction (C9-C15) selectivity >75%, and hydrogen consumption within design"
+    },
+    {
+      "id": "T102",
+      "title": "Product Fractionation Commissioning",
+      "description": "Commission fractionation columns including naphtha splitter, jet fuel column, diesel column, and wax column. Optimise cut points, reflux ratios, and product draw rates to meet product specifications.",
+      "phase": 6,
+      "discipline": "Product Fractionation",
+      "estimated_hours": 120,
+      "priority": "high",
+      "dependencies": [
+        "T101"
+      ],
+      "deliverables": "Fractionation commissioning certificate",
+      "acceptance_criteria": "All columns operating at design capacity, product cut points within \u00b15\u00b0C, and product streams meeting interim quality specifications"
+    },
+    {
+      "id": "T103",
+      "title": "Product Sampling & ASTM D7566 Fuel Testing",
+      "description": "Collect representative samples of FT-SPK jet fuel product and perform full ASTM D7566 Annex A1 test suite including freeze point, flash point, density, aromatics, distillation curve (T10, T50, T90, T95), and thermal stability (JFTOT).",
+      "phase": 6,
+      "discipline": "Quality",
+      "estimated_hours": 100,
+      "priority": "critical",
+      "dependencies": [
+        "T102"
+      ],
+      "deliverables": "ASTM D7566 test report",
+      "acceptance_criteria": "All 15+ ASTM D7566 Annex A1 test results within specification limits, certified by accredited laboratory, and data package ready for ASTM review"
+    },
+    {
+      "id": "T104",
+      "title": "SAF Blending Trial & Fit-for-Purpose Testing",
+      "description": "Conduct blending trial of FT-SPK with conventional Jet A-1 at 10% and 50% blend ratios. Verify blend properties meet ASTM D1655 specification. Perform fit-for-purpose testing including materials compatibility and thermal stability.",
+      "phase": 6,
+      "discipline": "Quality",
+      "estimated_hours": 80,
+      "priority": "critical",
+      "dependencies": [
+        "T103"
+      ],
+      "deliverables": "Blending trial report and fit-for-purpose test results",
+      "acceptance_criteria": "Blends at 10% and 50% meet all ASTM D1655 specifications, materials compatibility confirmed, and thermal stability (JFTOT) passes"
+    },
+    {
+      "id": "T105",
+      "title": "72-Hour Performance Test & Guarantee Run",
+      "description": "Conduct 72-hour continuous performance test at nameplate capacity. Measure and verify all performance guarantees including feed rate, product yield, product quality, utility consumption, and catalyst performance.",
+      "phase": 6,
+      "discipline": "Commissioning",
+      "estimated_hours": 120,
+      "priority": "critical",
+      "dependencies": [
+        "T099",
+        "T101",
+        "T102"
+      ],
+      "deliverables": "72-hour performance test certificate",
+      "acceptance_criteria": "All performance guarantees met over 72 hours: feed rate \u00b13%, product yield \u00b15%, product quality per spec, utilities within design, and catalyst performance targets achieved"
+    },
+    {
+      "id": "T106",
+      "title": "Product Qualification Package Submission",
+      "description": "Compile and submit product qualification package to ASTM International including production data, fuel test results, blending data, and fit-for-purpose testing for ASTM D7566 Annex A1 full approval or pathway extension.",
+      "phase": 6,
+      "discipline": "Quality",
+      "estimated_hours": 80,
+      "priority": "critical",
+      "dependencies": [
+        "T104",
+        "T105"
+      ],
+      "deliverables": "ASTM qualification package",
+      "acceptance_criteria": "Package submitted to ASTM with complete test data, production records, and quality management system documentation"
+    },
+    {
+      "id": "T107",
+      "title": "Sustainability Certification Audit (CORSIA/ISCC/RSB)",
+      "description": "Host onsite certification audit by accredited certification body. Demonstrate chain of custody, mass balance accounting, GHG calculation methodology, and sustainability criteria compliance.",
+      "phase": 6,
+      "discipline": "Sustainability",
+      "estimated_hours": 120,
+      "priority": "critical",
+      "dependencies": [
+        "T058",
+        "T105"
+      ],
+      "deliverables": "Sustainability certificate (CORSIA or ISCC/RSB)",
+      "acceptance_criteria": "Audit passed with zero major non-conformities, sustainability certificate issued, and volume of certified SAF documented"
+    },
+    {
+      "id": "T108",
+      "title": "Water & Wastewater Treatment System Commissioning",
+      "description": "Commission water treatment plant, wastewater treatment, and ZLD (if applicable) systems. Verify effluent quality meets discharge permit limits and recycle rates meet design targets.",
+      "phase": 6,
+      "discipline": "Utilities",
+      "estimated_hours": 100,
+      "priority": "medium",
+      "dependencies": [
+        "T091"
+      ],
+      "deliverables": "Water treatment system commissioning certificate",
+      "acceptance_criteria": "Effluent quality within permit limits, water recycle rate >95% of design, and ZLD system producing solids meeting disposal criteria"
+    },
+    {
+      "id": "T109",
+      "title": "Flare & Blowdown System Commissioning",
+      "description": "Commission flare system including purge gas, pilots, ignition, and blowdown valves. Verify safe disposal of relief loads and compliance with flare design basis.",
+      "phase": 6,
+      "discipline": "Utilities",
+      "estimated_hours": 60,
+      "priority": "medium",
+      "dependencies": [
+        "T091",
+        "T085"
+      ],
+      "deliverables": "Flare system commissioning certificate",
+      "acceptance_criteria": "Flare pilots lit and stable, purge gas flow at design rate, blowdown valves stroke-tested, and radiation levels within design limits"
+    },
+    {
+      "id": "T110",
+      "title": "System Handover & Demobilisation",
+      "description": "Formal system-by-system handover from commissioning team to operations team. Demobilise construction and commissioning personnel, transfer spare parts and consumables.",
+      "phase": 7,
+      "discipline": "Commissioning",
+      "estimated_hours": 80,
+      "priority": "high",
+      "dependencies": [
+        "T105"
+      ],
+      "deliverables": "System handover certificates and demobilisation plan",
+      "acceptance_criteria": "All systems formally handed over with signed certificates, punch list <50 items total, spare parts transferred, and demobilisation complete"
+    },
+    {
+      "id": "T111",
+      "title": "Punch List Close-Out & Final Completion",
+      "description": "Complete all remaining punch list items (construction, commissioning, and quality). Issue final completion certificates and establish warranty period tracking.",
+      "phase": 7,
+      "discipline": "PMO",
+      "estimated_hours": 80,
+      "priority": "high",
+      "dependencies": [
+        "T110"
+      ],
+      "deliverables": "Final completion certificates",
+      "acceptance_criteria": "All punch list items closed or accepted as deferred, final completion certificate signed, and warranty tracking system established"
+    },
+    {
+      "id": "T112",
+      "title": "As-Built Documentation & Drawings",
+      "description": "Compile and issue as-built documentation including as-built P&IDs, isometrics, electrical drawings, instrument hook-ups, cable schedules, and equipment documentation. Update 3D model.",
+      "phase": 7,
+      "discipline": "EPC",
+      "estimated_hours": 160,
+      "priority": "high",
+      "dependencies": [
+        "T110"
+      ],
+      "deliverables": "Complete as-built documentation set",
+      "acceptance_criteria": "All P&IDs marked as-built, isometrics updated, electrical/hookup drawings finalised, and documentation controlled per document management system"
+    },
+    {
+      "id": "T113",
+      "title": "O&M Manuals & Maintenance Procedures",
+      "description": "Finalise and deliver operations and maintenance manuals including operating procedures, start-up/shutdown checklists, emergency shutdown procedures, and maintenance schedules for all equipment.",
+      "phase": 7,
+      "discipline": "Operations",
+      "estimated_hours": 120,
+      "priority": "high",
+      "dependencies": [
+        "T110"
+      ],
+      "deliverables": "Complete O&M manual suite",
+      "acceptance_criteria": "Manuals received for all systems, reviewed by operations team, and approved for use including controlled copy distribution"
+    },
+    {
+      "id": "T114",
+      "title": "Catalyst Performance Monitoring Plan",
+      "description": "Establish catalyst performance monitoring program including regular sampling, activity tracking, selectivity monitoring, bed temperature profile analysis, and deactivation rate prediction.",
+      "phase": 7,
+      "discipline": "Quality",
+      "estimated_hours": 60,
+      "priority": "medium",
+      "dependencies": [
+        "T111"
+      ],
+      "deliverables": "Catalyst monitoring plan and baseline data",
+      "acceptance_criteria": "Monitoring plan approved with sampling frequency, KPI targets, and reporting template. Baseline data collected for all catalyst beds"
+    },
+    {
+      "id": "T115",
+      "title": "Carbon Intensity Monitoring & Reporting Cycle",
+      "description": "Establish ongoing carbon intensity monitoring system for regulatory (CORSIA/ReFuelEU) and sustainability certification compliance. Define data collection, calculation methodology, and reporting frequency.",
+      "phase": 7,
+      "discipline": "Sustainability",
+      "estimated_hours": 80,
+      "priority": "high",
+      "dependencies": [
+        "T107",
+        "T020"
+      ],
+      "deliverables": "CI monitoring plan and first annual report",
+      "acceptance_criteria": "Monitoring plan approved, baseline CI confirmed with actual operational data, and first annual CI report submitted to certification body"
+    },
+    {
+      "id": "T116",
+      "title": "Sustainability Reporting Cycle Implementation",
+      "description": "Implement ongoing sustainability reporting including GHG emissions tracking, feedstock sustainability monitoring, waste management reporting, and annual sustainability audit cycle.",
+      "phase": 7,
+      "discipline": "Sustainability",
+      "estimated_hours": 80,
+      "priority": "medium",
+      "dependencies": [
+        "T107"
+      ],
+      "deliverables": "First operational sustainability report",
+      "acceptance_criteria": "Sustainability report covering all certification scheme requirements, mass balance reconciled, GHG emissions verified, and ready for annual audit"
+    },
+    {
+      "id": "T117",
+      "title": "Offtake Logistics & Supply Chain Steady-State",
+      "description": "Transition offtake logistics to steady-state operations including product loading, truck/rail dispatch, inventory management, blending logistics at airport hub, and customer delivery coordination.",
+      "phase": 7,
+      "discipline": "Operations",
+      "estimated_hours": 80,
+      "priority": "high",
+      "dependencies": [
+        "T111",
+        "T059"
+      ],
+      "deliverables": "Steady-state logistics operations plan",
+      "acceptance_criteria": "Offtake dispatches at nameplate rate, inventory management system operational, and first delivery to offtaker completed per agreement"
+    },
+    {
+      "id": "T118",
+      "title": "Continuous Improvement & Performance Optimisation Plan",
+      "description": "Develop continuous improvement framework including yield optimisation, energy efficiency improvement, catalyst lifetime extension, feedstock flexibility enhancement, and cost reduction roadmap.",
+      "phase": 7,
+      "discipline": "Operations",
+      "estimated_hours": 60,
+      "priority": "medium",
+      "dependencies": [
+        "T105"
+      ],
+      "deliverables": "Continuous improvement plan and KPI baseline",
+      "acceptance_criteria": "Plan approved with 20+ improvement initiatives, baseline KPIs established, and quarterly review cycle defined"
+    },
+    {
+      "id": "T119",
+      "title": "Project Close-Out & Lessons Learned",
+      "description": "Conduct project close-out including financial close, final cost report, schedule analysis, lessons learned workshop, and documentation archiving.",
+      "phase": 7,
+      "discipline": "PMO",
+      "estimated_hours": 80,
+      "priority": "medium",
+      "dependencies": [
+        "T111",
+        "T112"
+      ],
+      "deliverables": "Project close-out report and lessons learned register",
+      "acceptance_criteria": "Final cost reconciled to budget \u00b15%, schedule milestone analysis complete, lessons learned documented with 30+ entries, and project documentation archived"
+    },
+    {
+      "id": "T120",
+      "title": "Warranty & Performance Guarantee Tracking",
+      "description": "Establish warranty tracking system for equipment and EPC contract guarantees. Monitor performance against guaranteed values during warranty period and initiate claims for shortfalls as needed.",
+      "phase": 7,
+      "discipline": "PMO",
+      "estimated_hours": 60,
+      "priority": "medium",
+      "dependencies": [
+        "T111"
+      ],
+      "deliverables": "Warranty tracking database and performance report",
+      "acceptance_criteria": "Warranty register established for 50+ equipment items, performance guarantee tracking launched, and first quarterly review completed"
+    },
+    {
+      "id": "T121",
+      "title": "Certification Documentation and Audit Coordination",
+      "description": "Prepare and maintain certification documentation package for ASTM D7566 FT-SPK qualification, sustainability certification (CORSIA/ISCC/RSB), and chain-of-custody evidence",
+      "phase": 3,
+      "discipline": "Certification",
+      "estimated_hours": 120,
+      "priority": "high",
+      "dependencies": [
+        "T047"
+      ],
+      "deliverables": "Certification dossier with ASTM test results, sustainability audit evidence, chain-of-custody documentation",
+      "acceptance_criteria": "Documentation complete and audit-ready for certification body review"
+    },
+    {
+      "id": "T122",
+      "title": "H2/CO Ratio Design Basis and Syngas Conditioning Specification",
+      "description": "Define H2/CO ratio target for FT synthesis based on catalyst selection, size water-gas shift or membrane system, and specify syngas conditioning package",
+      "phase": 2,
+      "discipline": "Syngas Cleanup",
+      "estimated_hours": 100,
+      "priority": "critical",
+      "dependencies": [
+        "T015"
+      ],
+      "deliverables": "H2/CO ratio design basis document, syngas conditioning PFD",
+      "acceptance_criteria": "H2/CO ratio target agreed with FT catalyst vendor; conditioning system sized"
+    },
+    {
+      "id": "T123",
+      "title": "Establish Carbon Intensity Monitoring & Reporting System",
+      "description": "Implement ongoing lifecycle carbon intensity (CI) monitoring aligned with CORSIA/ISCC methodology \u2014 automate data collection from process historians, feedstock records, and utility meters; generate quarterly CI reports",
+      "phase": 7,
+      "discipline": "Sustainability",
+      "estimated_hours": 120,
+      "priority": "high",
+      "dependencies": [
+        "T098",
+        "T099",
+        "T100",
+        "T101",
+        "T102",
+        "T103",
+        "T104",
+        "T105",
+        "T106",
+        "T107",
+        "T108",
+        "T109",
+        "T110",
+        "T111"
+      ],
+      "deliverables": "CI monitoring dashboard; automated CI calculation engine; quarterly CI report template",
+      "acceptance_criteria": "CI calculation validated against certification body methodology; first quarterly report produced within tolerance"
+    },
+    {
+      "id": "T124",
+      "title": "Prepare Sustainability Certification Maintenance Audit Package",
+      "description": "Compile all evidence required for annual sustainability certification renewal (ISCC, RSB, CORSIA) \u2014 including mass balance records, feedstock sustainability declarations, GHG calculations, chain-of-custody documentation, and audit trail",
+      "phase": 7,
+      "discipline": "Sustainability",
+      "estimated_hours": 160,
+      "priority": "high",
+      "dependencies": [
+        "T123"
+      ],
+      "deliverables": "Annual certification audit evidence package; gap analysis against certification body requirements",
+      "acceptance_criteria": "All evidence items compiled and indexed; pre-audit self-assessment completed with zero critical gaps"
+    },
+    {
+      "id": "T125",
+      "title": "Establish Emissions Compliance Monitoring & Reporting",
+      "description": "Set up continuous emissions monitoring systems (CEMS) compliance reporting for air permits \u2014 track NOx, SOx, CO, particulate, and greenhouse gas emissions against permit limits; generate regulatory reports",
+      "phase": 7,
+      "discipline": "HSE",
+      "estimated_hours": 100,
+      "priority": "high",
+      "dependencies": [
+        "T095",
+        "T096"
+      ],
+      "deliverables": "Emissions compliance dashboard; monthly regulatory report template; CEMS calibration schedule",
+      "acceptance_criteria": "Regulatory reports accepted by permitting authority for first reporting period; CEMS within calibration"
+    },
+    {
+      "id": "T126",
+      "title": "Conduct Post-Commissioning Yield Optimisation & Catalyst Performance Benchmarking",
+      "description": "After steady-state operations are established, systematically benchmark FT synthesis conversion, hydrocarbon selectivity (C9-C15 jet yield), hydrocracking severity, and overall carbon efficiency; identify optimisation opportunities to improve SAF yield",
+      "phase": 7,
+      "discipline": "Operations",
+      "estimated_hours": 200,
+      "priority": "high",
+      "dependencies": [
+        "T098",
+        "T099",
+        "T100",
+        "T101",
+        "T102"
+      ],
+      "deliverables": "Yield optimisation study report; catalyst performance benchmark vs guarantee; optimisation opportunity register",
+      "acceptance_criteria": "All key performance parameters benchmarked; optimization opportunities quantified with expected impact; improvement roadmap reviewed with operations"
+    },
+    {
+      "id": "T127",
+      "title": "Conduct Lessons Learned Workshop & Continuous Improvement Plan",
+      "description": "Facilitate cross-functional lessons learned workshop covering all phases from feedstock commissioning through product qualification; document root causes of delays, quality issues, and cost overruns; create a continuous improvement plan for the next SAF project",
+      "phase": 7,
+      "discipline": "PMO",
+      "estimated_hours": 80,
+      "priority": "medium",
+      "dependencies": [
+        "T098",
+        "T099",
+        "T100",
+        "T101",
+        "T102",
+        "T103",
+        "T104",
+        "T105",
+        "T106",
+        "T107",
+        "T108",
+        "T109",
+        "T110",
+        "T111"
+      ],
+      "deliverables": "Lessons learned report; continuous improvement plan; best practice knowledge base entry",
+      "acceptance_criteria": "Lessons learned report signed by project manager and operations head; CI plan approved by steering committee"
+    },
+    {
+      "id": "T128",
+      "title": "Design SAF Blending System & Logistics Architecture",
+      "description": "Design the blending system architecture for blending FT-SPK SAF with conventional Jet A-1 up to 50% v/v \u2014 including blend ratio control, in-line blending or batch blending, storage tank allocation, and quality assurance sampling points",
+      "phase": 4,
+      "discipline": "Operations",
+      "estimated_hours": 120,
+      "priority": "high",
+      "dependencies": [
+        "T064"
+      ],
+      "deliverables": "SAF blending system P&ID; storage and blending tank allocation plan; quality assurance sampling schedule",
+      "acceptance_criteria": "Blending design reviewed with offtake partner and quality assurance team; blend ratio control methodology approved"
+    },
+    {
+      "id": "T129",
+      "title": "Negotiate Airport Fuel Terminal Interface Agreement",
+      "description": "Engage the target airport fuel terminal operator to negotiate interface agreements for SAF delivery \u2014 including product quality acceptance criteria, batch testing protocol, dedicated or shared storage allocation, injection point, and custody transfer metering",
+      "phase": 3,
+      "discipline": "Commercial",
+      "estimated_hours": 120,
+      "priority": "high",
+      "dependencies": [
+        "T060",
+        "T061"
+      ],
+      "deliverables": "Airport fuel terminal interface agreement; custody transfer protocol; quality acceptance criteria schedule",
+      "acceptance_criteria": "Interface agreement signed by both parties; custody transfer metering specification agreed"
+    },
+    {
+      "id": "T130",
+      "title": "Set Up SAF Quality Assurance & Blending Certification Workflow",
+      "description": "Establish quality assurance procedures specific to SAF \u2014 ASTM D7566 Annex A1 FT-SPK specification testing before blending, Jet A-1 compatibility check, blended fuel property testing (freeze point, flash point, density, T90, thermal stability at 325\u00b0C), and certificate of analysis issuance",
+      "phase": 3,
+      "discipline": "Quality",
+      "estimated_hours": 80,
+      "priority": "high",
+      "dependencies": [
+        "T128"
+      ],
+      "deliverables": "SAF QA/QC procedure manual; blended fuel release workflow; COA template for SAF-Jet A-1 blend",
+      "acceptance_criteria": "QA procedures reviewed and accepted by offtake partner; blending certification workflow tested during commissioning"
+    },
+    {
+      "id": "T131",
+      "title": "Conduct SAF Blending Trial & Logistics Dry-Run",
+      "description": "Before commercial delivery, conduct a supervised blending trial with a representative batch of FT-SPK and Jet A-1; sample and test the blend at multiple ratios; dry-run the logistics chain from storage \u2192 blending \u2192 truck/pipeline \u2192 airport terminal receipt",
+      "phase": 6,
+      "discipline": "Operations",
+      "estimated_hours": 160,
+      "priority": "critical",
+      "dependencies": [
+        "T095",
+        "T102",
+        "T128",
+        "T130"
+      ],
+      "deliverables": "Blending trial report with analytical results; logistics dry-run debrief; first commercial batch release authorization",
+      "acceptance_criteria": "Blended fuel passes all ASTM D7566 Annex A1 + Jet A-1 specification tests; logistics chain verified end-to-end"
+    }
+  ],
+  "version": "1.1.0"
+}

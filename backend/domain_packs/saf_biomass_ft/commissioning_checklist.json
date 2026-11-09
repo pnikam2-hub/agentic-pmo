@@ -1,0 +1,329 @@
+{
+  "pack": "saf_biomass_ft",
+  "activities": [
+    {
+      "activity": "Commissioning team mobilisation",
+      "phase": "Phase 5",
+      "prerequisites": ["Construction mechanical completion"],
+      "procedure_required": "COM-001: Commissioning philosophy",
+      "safety_hold_point": "All team members must complete HSE induction",
+      "acceptance_criteria": "Commissioning team in place and trained",
+      "responsible_role": "Commissioning Manager"
+    },
+    {
+      "activity": "Schedule and milestone plan",
+      "phase": "Phase 5",
+      "prerequisites": ["Commissioning team mobilisation"],
+      "procedure_required": "COM-002: Commissioning schedule management",
+      "safety_hold_point": "N/A",
+      "acceptance_criteria": "Approved integrated commissioning schedule with key milestones",
+      "responsible_role": "Planning Engineer"
+    },
+    {
+      "activity": "System breakdown and turnover packages",
+      "phase": "Phase 5",
+      "prerequisites": ["Commissioning schedule approved"],
+      "procedure_required": "COM-003: System turnover package procedure",
+      "safety_hold_point": "E&I system isolation verified before turnover",
+      "acceptance_criteria": "All systems broken down into turnover packages with signed MC dossiers",
+      "responsible_role": "Commissioning Engineer"
+    },
+    {
+      "activity": "Hydrostatic testing (gasifier, FT reactor, hydrocracker, columns, HX, piping)",
+      "phase": "Phase 5",
+      "prerequisites": ["Construction mechanical completion of respective systems", "System turnover package ready"],
+      "procedure_required": "COM-004: Hydrostatic test procedure",
+      "safety_hold_point": "Test pressure not to exceed 1.5x design pressure; area must be barricaded",
+      "acceptance_criteria": "No leaks at test pressure held for minimum 30 minutes per ASME B31.3",
+      "responsible_role": "Testing Supervisor"
+    },
+    {
+      "activity": "Pneumatic leak tests",
+      "phase": "Phase 5",
+      "prerequisites": ["Hydrostatic testing completed and accepted"],
+      "procedure_required": "COM-005: Pneumatic leak test procedure",
+      "safety_hold_point": "Pneumatic test hazard review mandatory; remote pressurisation only",
+      "acceptance_criteria": "Zero leakage at 110% of maximum allowable working pressure",
+      "responsible_role": "Testing Supervisor"
+    },
+    {
+      "activity": "Instrument loop checks (4-20mA, HART, fieldbus)",
+      "phase": "Phase 5",
+      "prerequisites": ["Cable installation and termination complete"],
+      "procedure_required": "COM-006: Instrument loop check procedure",
+      "safety_hold_point": "All loops de-energised during continuity check",
+      "acceptance_criteria": "100% loops checked; signal accuracy within 0.5% of span",
+      "responsible_role": "Instrument Engineer"
+    },
+    {
+      "activity": "DCS/SIS logic testing",
+      "phase": "Phase 5",
+      "prerequisites": ["Instrument loop checks complete"],
+      "procedure_required": "COM-007: DCS/SIS logic test procedure",
+      "safety_hold_point": "SIS override permits must be managed per PTW system",
+      "acceptance_criteria": "All logic functions, interlocks, and alarms verified per cause-and-effect matrix",
+      "responsible_role": "Control System Engineer"
+    },
+    {
+      "activity": "Megger tests, motor bump, rotation check, heat trace verification",
+      "phase": "Phase 5",
+      "prerequisites": ["Electrical installation complete", "DCS logic tested"],
+      "procedure_required": "COM-008: Electrical commissioning procedure",
+      "safety_hold_point": "Lock-out/tag-out (LOTO) in place for all motor bump tests",
+      "acceptance_criteria": "Insulation resistance > 1 MΩ per kV; motor rotation correct; heat trace continuity verified",
+      "responsible_role": "Electrical Engineer"
+    },
+    {
+      "activity": "Piping flush, chemical clean, steam blow",
+      "phase": "Phase 5",
+      "prerequisites": ["Hydrostatic/pneumatic tests complete"],
+      "procedure_required": "COM-009: Line flushing and chemical cleaning procedure",
+      "safety_hold_point": "Chemical handling PPE mandatory; ventilation confirmed",
+      "acceptance_criteria": "Flush targets met (particulate count, cleanliness standard per piping spec); steam blow clean per target disc",
+      "responsible_role": "Mechanical Engineer"
+    },
+    {
+      "activity": "Relief valve setting and flare blow-down system test",
+      "phase": "Phase 5",
+      "prerequisites": ["Piping flushed and cleaned"],
+      "procedure_required": "COM-010: Relief valve and flare test procedure",
+      "safety_hold_point": "Flare system purged with nitrogen before any hydrocarbon introduction",
+      "acceptance_criteria": "All PSVs tagged and set at design pressure; flare header integrity and tip flow verified",
+      "responsible_role": "Process Safety Engineer"
+    },
+    {
+      "activity": "Refractory dry-out (gasifier, reformer)",
+      "phase": "Phase 5",
+      "prerequisites": ["Refractory installation complete and cured"],
+      "procedure_required": "COM-011: Refractory dry-out procedure",
+      "safety_hold_point": "Temperature ramp rate must follow refractory manufacturer curve; continuous gas monitoring",
+      "acceptance_criteria": "Moisture content < 0.5% at outlet; temperature profile within ±10°C of specified ramp",
+      "responsible_role": "Process Engineer"
+    },
+    {
+      "activity": "Desiccant/dryer activation",
+      "phase": "Phase 5",
+      "prerequisites": ["Refractory dry-out complete"],
+      "procedure_required": "COM-012: Desiccant activation procedure",
+      "safety_hold_point": "Oxygen content in regeneration gas < 1% prior to heating",
+      "acceptance_criteria": "Dew point at outlet < -40°C at design flow",
+      "responsible_role": "Process Engineer"
+    },
+    {
+      "activity": "Lube oil system flush and circulation",
+      "phase": "Phase 5",
+      "prerequisites": ["Lube oil piping complete and hydrotested"],
+      "procedure_required": "COM-013: Lube oil flush procedure",
+      "safety_hold_point": "Oil heater operation monitored at all times",
+      "acceptance_criteria": "Oil particle count per NAS 1638 Class 8 or better",
+      "responsible_role": "Rotating Equipment Engineer"
+    },
+    {
+      "activity": "Dry commissioning rotating equipment (compressors, pumps)",
+      "phase": "Phase 5",
+      "prerequisites": ["Lube oil system flushed and circulating"],
+      "procedure_required": "COM-014: Rotating equipment dry commissioning procedure",
+      "safety_hold_point": "Coupling guard in place; emergency stop verified before run",
+      "acceptance_criteria": "Bearing temperature, vibration, and speed within OEM limits; no abnormal noise",
+      "responsible_role": "Rotating Equipment Engineer"
+    },
+    {
+      "activity": "Control valve stroking and ESD valve stroke test",
+      "phase": "Phase 5",
+      "prerequisites": ["Instrument air available", "DCS logic tested"],
+      "procedure_required": "COM-015: Valve stroking procedure",
+      "safety_hold_point": "ESD valves to be stroked only with system de-pressurised and LOTO applied",
+      "acceptance_criteria": "Full stroke 0-100-0% within specified travel time; position feedback within 1%",
+      "responsible_role": "Instrument Engineer"
+    },
+    {
+      "activity": "Fire and gas system functional test",
+      "phase": "Phase 5",
+      "prerequisites": ["DCS/SIS logic testing complete"],
+      "procedure_required": "COM-016: Fire and gas system test procedure",
+      "safety_hold_point": "Fire alarm activation to be coordinated with site emergency response team",
+      "acceptance_criteria": "All detectors, alarms, and suppression activations verified per cause-and-effect matrix",
+      "responsible_role": "HSE Engineer"
+    },
+    {
+      "activity": "Cooling water system commissioning",
+      "phase": "Phase 6 — Utilities",
+      "prerequisites": ["Cooling tower construction complete", "Piping flushed"],
+      "procedure_required": "COM-017: Cooling water commissioning procedure",
+      "safety_hold_point": "Chemical dosing locked out until basin integrity verified",
+      "acceptance_criteria": "Design flow and head achieved; chemical treatment in spec; temperature approach within design",
+      "responsible_role": "Utilities Engineer"
+    },
+    {
+      "activity": "Instrument air and nitrogen system commissioning",
+      "phase": "Phase 6 — Utilities",
+      "prerequisites": ["Compressor dry commissioning complete", "Desiccant/dryer activated"],
+      "procedure_required": "COM-018: Instrument air and nitrogen commissioning procedure",
+      "safety_hold_point": "Nitrogen blanketing only after oxygen monitoring in place",
+      "acceptance_criteria": "Instrument air dew point < -40°C; nitrogen purity > 99.9% at all take-off points",
+      "responsible_role": "Utilities Engineer"
+    },
+    {
+      "activity": "Steam system commissioning (MP/LP steam)",
+      "phase": "Phase 6 — Utilities",
+      "prerequisites": ["Steam piping steam-blown clean", "Relief valves set"],
+      "procedure_required": "COM-019: Steam system commissioning procedure",
+      "safety_hold_point": "Steam lines preheated slowly; condensate drains open; personnel exclusion zone maintained",
+      "acceptance_criteria": "Pressure and temperature at user points within ±5%; steam quality > 99%",
+      "responsible_role": "Utilities Engineer"
+    },
+    {
+      "activity": "Feedstock handling and drying system commissioning",
+      "phase": "Phase 5",
+      "prerequisites": ["Rotating equipment dry commissioned", "Steam/hot oil available for dryer"],
+      "procedure_required": "COM-020: Feedstock system commissioning procedure",
+      "safety_hold_point": "Dust explosion prevention measures verified; inert gas blanketing operational",
+      "acceptance_criteria": "Feed rate within ±2% of design; biomass moisture content < 10 wt% after drying",
+      "responsible_role": "Process Engineer"
+    },
+    {
+      "activity": "Biomass feeding system lock hopper cycle test",
+      "phase": "Phase 5",
+      "prerequisites": ["Feedstock handling system commissioned", "Instrument air/nitrogen available"],
+      "procedure_required": "COM-021: Lock hopper cycle test procedure",
+      "safety_hold_point": "Interlock bypass not permitted during cycle test; lock hopper pressurisation limited to design pressure",
+      "acceptance_criteria": "Minimum 10 consecutive cycles with correct sequence, pressure hold, and no bridging",
+      "responsible_role": "Process Engineer"
+    },
+    {
+      "activity": "Gasifier cold commissioning",
+      "phase": "Phase 7 — Gasification",
+      "prerequisites": ["Refractory dry-out complete", "Lock hopper cycle test passed", "Instrument air/nitrogen available"],
+      "procedure_required": "COM-022: Gasifier cold commissioning procedure",
+      "safety_hold_point": "Syngas detection system functional before any gas introduction",
+      "acceptance_criteria": "Pressure integrity verified; valve sequence and logic correct; feeder system operational at design rate",
+      "responsible_role": "Gasification Engineer"
+    },
+    {
+      "activity": "Gasifier hot commissioning",
+      "phase": "Phase 7 — Gasification",
+      "prerequisites": ["Gasifier cold commissioning complete", "Feedstock available", "Flare system tested"],
+      "procedure_required": "COM-023: Gasifier hot commissioning procedure",
+      "safety_hold_point": "Oxygen supply isolation verified; continuous CO/H2 monitoring in area",
+      "acceptance_criteria": "Stable syngas composition (H2/CO ratio within ±10% of target) for 4 hours at minimum turndown",
+      "responsible_role": "Gasification Engineer"
+    },
+    {
+      "activity": "Syngas cleanup train commissioning",
+      "phase": "Phase 7 — Gasification",
+      "prerequisites": ["Gasifier hot commissioning producing stable syngas"],
+      "procedure_required": "COM-024: Syngas cleanup commissioning procedure",
+      "safety_hold_point": "All vents routed to flare; H2S monitoring active in occupied areas",
+      "acceptance_criteria": "Outlet H2S < 0.1 ppmv; particulates < 0.1 mg/Nm³; temperature at FT inlet within design range",
+      "responsible_role": "Process Engineer"
+    },
+    {
+      "activity": "Guard bed loading and activation",
+      "phase": "Phase 7 — Gasification",
+      "prerequisites": ["Syngas cleanup train commissioned and stable"],
+      "procedure_required": "COM-025: Guard bed loading and activation procedure",
+      "safety_hold_point": "Inert atmosphere maintained during loading; catalyst dust mask and respirator required",
+      "acceptance_criteria": "Bed loaded per spec; activation temperature profile achieved; breakthrough capacity verified",
+      "responsible_role": "Process Engineer"
+    },
+    {
+      "activity": "FT catalyst loading and in-situ reduction",
+      "phase": "Phase 8 — Fischer-Tropsch",
+      "prerequisites": ["Guard bed activated", "Syngas cleanup train stable", "FT reactor hydrotested"],
+      "procedure_required": "COM-026: FT catalyst loading and reduction procedure",
+      "safety_hold_point": "Pyrophoric catalyst handling protocol in force; oxygen < 0.5% during reduction; hydrogen partial pressure monitored",
+      "acceptance_criteria": "Catalyst loaded uniformly; reduction completed per temperature profile; H2 consumption matches stoichiometry",
+      "responsible_role": "FT Engineer"
+    },
+    {
+      "activity": "FT loop pressurisation and syngas introduction",
+      "phase": "Phase 8 — Fischer-Tropsch",
+      "prerequisites": ["FT catalyst reduced and stabilised"],
+      "procedure_required": "COM-027: FT loop pressurisation procedure",
+      "safety_hold_point": "ESD system verified; high-pressure leak test mandatory before syngas introduction",
+      "acceptance_criteria": "Loop pressurised to operating pressure; syngas flow established; no leaks detected",
+      "responsible_role": "FT Engineer"
+    },
+    {
+      "activity": "FT reaction ramp-up",
+      "phase": "Phase 8 — Fischer-Tropsch",
+      "prerequisites": ["FT loop pressurised with syngas flow stable"],
+      "procedure_required": "COM-028: FT reaction ramp-up procedure",
+      "safety_hold_point": "Temperature ramp limited to 5°C/hour; wax level in reactor monitored continuously",
+      "acceptance_criteria": "Steady-state CO conversion > 70%; wax production rate within design envelope; temperature profile uniform",
+      "responsible_role": "FT Engineer"
+    },
+    {
+      "activity": "Wax handling system commissioning",
+      "phase": "Phase 8 — Fischer-Tropsch",
+      "prerequisites": ["FT reaction producing wax at design rate"],
+      "procedure_required": "COM-029: Wax handling system commissioning procedure",
+      "safety_hold_point": "Wax lines heat-traced and insulated; hot wax burn risk — full PPE required",
+      "acceptance_criteria": "Wax filtration, storage, and transfer operating at design temperature and flow; product wax quality meets spec",
+      "responsible_role": "Process Engineer"
+    },
+    {
+      "activity": "Hydrocracker catalyst loading and activation",
+      "phase": "Phase 9 — Hydroprocessing",
+      "prerequisites": ["Hydrocracker reactor hydrotested", "Hydrogen supply available"],
+      "procedure_required": "COM-030: Hydrocracker catalyst loading and activation procedure",
+      "safety_hold_point": "Sulfiding agent handling protocol in place; H2S monitoring active",
+      "acceptance_criteria": "Catalyst loaded evenly; activation (sulfiding) completed per profile; catalyst activity confirmed",
+      "responsible_role": "Hydroprocessing Engineer"
+    },
+    {
+      "activity": "Hydrocracker start-up",
+      "phase": "Phase 9 — Hydroprocessing",
+      "prerequisites": ["Hydrocracker catalyst activated", "Hydrogen system commissioned"],
+      "procedure_required": "COM-031: Hydrocracker start-up procedure",
+      "safety_hold_point": "Reactor temperature monitoring on high-integrity system; emergency depressurisation system verified",
+      "acceptance_criteria": "Reactor at operating temperature/pressure; wax conversion target met; product sulphur < 10 ppm",
+      "responsible_role": "Hydroprocessing Engineer"
+    },
+    {
+      "activity": "Fractionation column start-up",
+      "phase": "Phase 9 — Hydroprocessing",
+      "prerequisites": ["Hydrocracker producing stable hydroprocessed product"],
+      "procedure_required": "COM-032: Fractionation start-up procedure",
+      "safety_hold_point": "Column inerted prior to hydrocarbon feed; level and pressure control loops verified",
+      "acceptance_criteria": "All product cuts on-spec (naphtha, jet, diesel); column pressures and temperatures stable for 8 hours",
+      "responsible_role": "Process Engineer"
+    },
+    {
+      "activity": "Product sampling and lab analysis",
+      "phase": "Phase 10 — Product Qualification",
+      "prerequisites": ["Fractionation columns producing stable cuts"],
+      "procedure_required": "COM-033: Product sampling and analysis protocol",
+      "safety_hold_point": "Aromatic/high-temp samples handled with appropriate PPE; sample bomb integrity checked",
+      "acceptance_criteria": "Representative samples taken per ASTM methods; full compositional and physical analysis report generated",
+      "responsible_role": "Laboratory Manager"
+    },
+    {
+      "activity": "ASTM D7566 fuel property testing",
+      "phase": "Phase 10 — Product Qualification",
+      "prerequisites": ["Product sampling and initial lab analysis complete"],
+      "procedure_required": "ASTM D7566 — Standard Specification for Aviation Turbine Fuel Containing Synthesized Hydrocarbons",
+      "safety_hold_point": "Fuel samples handled in grounded containers; static electricity prevention in force",
+      "acceptance_criteria": "All Annex A2 (FT-SPK) property limits met: freezing point, flash point, density, aromatics, distillation profile",
+      "responsible_role": "Quality Manager"
+    },
+    {
+      "activity": "SAF blending trial",
+      "phase": "Phase 10 — Product Qualification",
+      "prerequisites": ["ASTM D7566 testing passed", "Blend tank and in-line blending system commissioned"],
+      "procedure_required": "COM-034: SAF blending trial procedure",
+      "safety_hold_point": "Blend ratio limited to 50% FT-SPK per D7566; batch documentation reviewed before blending",
+      "acceptance_criteria": "50% blend with conventional Jet A-1 meets all D7566 specification requirements; no phase separation",
+      "responsible_role": "Blending Supervisor"
+    },
+    {
+      "activity": "72-hour performance guarantee test",
+      "phase": "Phase 10 — Product Qualification",
+      "prerequisites": ["All plant systems operating stably", "SAF blending trial successful"],
+      "procedure_required": "COM-035: Performance guarantee test procedure",
+      "safety_hold_point": "Test aborted if any safety-critical alarm activates; continuous operations team coverage required",
+      "acceptance_criteria": "72 continuous hours at > 90% design capacity; product quality on-spec; utility consumption within guarantees; SAF product batch meets ASTM D7566 Annex A2",
+      "responsible_role": "Plant Manager"
+    }
+  ]
+}

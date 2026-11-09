@@ -1,0 +1,2415 @@
+{
+  "template_name": "EPC Capital Project \u2014 Full Lifecycle",
+  "pack": "epc_project",
+  "version": "1.2.0",
+  "total_tasks": 165,
+  "phases": [
+    {
+      "id": 0,
+      "name": "Strategic Framing & Initiation",
+      "weeks": "1-4"
+    },
+    {
+      "id": 1,
+      "name": "FEL / FEED / Basic Engineering",
+      "weeks": "5-20"
+    },
+    {
+      "id": 2,
+      "name": "Detailed Engineering",
+      "weeks": "21-40"
+    },
+    {
+      "id": 3,
+      "name": "Permitting & Statutory Approvals",
+      "weeks": "1-40"
+    },
+    {
+      "id": 4,
+      "name": "Procurement & Supply Chain",
+      "weeks": "8-52"
+    },
+    {
+      "id": 5,
+      "name": "Construction \u2014 Civil & Mechanical",
+      "weeks": "20-68"
+    },
+    {
+      "id": 6,
+      "name": "Construction \u2014 E&I, HSE & Quality",
+      "weeks": "40-76"
+    },
+    {
+      "id": 7,
+      "name": "Pre-Commissioning, Commissioning & Handover",
+      "weeks": "68-88"
+    }
+  ],
+  "tags": [
+    "epc",
+    "capital-project",
+    "industrial-construction",
+    "process-plant",
+    "engineering",
+    "procurement",
+    "construction",
+    "commissioning",
+    "domain-pack",
+    "domain-pack:epc_project"
+  ],
+  "tasks": [
+    {
+      "id": "T001",
+      "title": "Develop Project Charter",
+      "description": "Draft and approve the project charter defining scope, objectives, key stakeholders, and authority of the project manager for the EPC capital project.",
+      "phase": 0,
+      "discipline": "PMO",
+      "estimated_hours": 80,
+      "priority": "high",
+      "dependencies": [],
+      "deliverables": "Approved Project Charter",
+      "acceptance_criteria": "Charter signed by sponsor; scope boundaries defined; PMO assigned."
+    },
+    {
+      "id": "T002",
+      "title": "Establish Project Governance Framework",
+      "description": "Define governance structure including steering committee, project board, decision escalation matrix, and reporting cadence for the EPC programme.",
+      "phase": 0,
+      "discipline": "PMO",
+      "estimated_hours": 60,
+      "priority": "high",
+      "dependencies": [
+        "T001"
+      ],
+      "deliverables": "Governance Charter & RACI Matrix",
+      "acceptance_criteria": "Steering committee formed; RACI matrix approved; meeting schedule established."
+    },
+    {
+      "id": "T003",
+      "title": "Prepare Project Execution Plan (PEP)",
+      "description": "Develop the Project Execution Plan covering project lifecycle, controls philosophy, risk management approach, quality plan, HSE strategy, and communication protocols.",
+      "phase": 0,
+      "discipline": "PMO",
+      "estimated_hours": 120,
+      "priority": "high",
+      "dependencies": [
+        "T002"
+      ],
+      "deliverables": "Project Execution Plan (PEP) Document",
+      "acceptance_criteria": "PEP reviewed and approved by steering committee; all sections complete."
+    },
+    {
+      "id": "T004",
+      "title": "Develop Business Case & Financial Model",
+      "description": "Prepare the business case including NPV, IRR, payback period, capital cost estimate (Order-of-Magnitude Class 5), and funding strategy for board approval.",
+      "phase": 0,
+      "discipline": "PMO",
+      "estimated_hours": 160,
+      "priority": "high",
+      "dependencies": [
+        "T001"
+      ],
+      "deliverables": "Business Case & Financial Model Report",
+      "acceptance_criteria": "NPV positive; IRR above hurdle rate; funding sources identified; board approval obtained."
+    },
+    {
+      "id": "T005",
+      "title": "Conduct Stakeholder Mapping & Engagement Plan",
+      "description": "Identify all internal and external stakeholders, assess influence/interest, and develop a stakeholder engagement and communication plan.",
+      "phase": 0,
+      "discipline": "PMO",
+      "estimated_hours": 60,
+      "priority": "medium",
+      "dependencies": [
+        "T002"
+      ],
+      "deliverables": "Stakeholder Register & Engagement Plan",
+      "acceptance_criteria": "All stakeholders mapped; engagement actions defined; plan reviewed by project board."
+    },
+    {
+      "id": "T006",
+      "title": "Prepare Risk Register & Initial Risk Assessment",
+      "description": "Facilitate risk identification workshop, document risks in the project risk register, assign owners, and define initial mitigation strategies for the EPC delivery.",
+      "phase": 0,
+      "discipline": "PMO",
+      "estimated_hours": 80,
+      "priority": "high",
+      "dependencies": [
+        "T003"
+      ],
+      "deliverables": "Project Risk Register (Initial)",
+      "acceptance_criteria": "Minimum 20 risks identified; owners assigned; mitigation actions drafted."
+    },
+    {
+      "id": "T007",
+      "title": "Develop Contractor Pre-Qualification Criteria",
+      "description": "Define technical, financial, and HSE pre-qualification criteria for EPC contractor selection, including minimum experience with similar process plants.",
+      "phase": 0,
+      "discipline": "PMO",
+      "estimated_hours": 60,
+      "priority": "high",
+      "dependencies": [
+        "T003"
+      ],
+      "deliverables": "Pre-Qualification Criteria Matrix",
+      "acceptance_criteria": "Criteria approved by procurement and legal; minimum scores defined."
+    },
+    {
+      "id": "T008",
+      "title": "Issue Request for Proposal (RFP) for EPC Contractor",
+      "description": "Prepare and issue the RFP package including scope of work, technical specifications, commercial terms, and evaluation criteria to pre-qualified bidders.",
+      "phase": 0,
+      "discipline": "Procurement",
+      "estimated_hours": 100,
+      "priority": "high",
+      "dependencies": [
+        "T007"
+      ],
+      "deliverables": "RFP Package Issued to Bidders",
+      "acceptance_criteria": "RFP reviewed by legal; technical and commercial volumes complete; minimum 3 bidders invited."
+    },
+    {
+      "id": "T009",
+      "title": "Evaluate EPC Bids & Conduct TBE",
+      "description": "Perform Technical and Commercial Bid Evaluations (TBE), conduct bidder clarification meetings, and prepare comparison matrices for steering committee review.",
+      "phase": 0,
+      "discipline": "PMO",
+      "estimated_hours": 120,
+      "priority": "high",
+      "dependencies": [
+        "T008"
+      ],
+      "deliverables": "TBE Report & Bid Comparison Matrix",
+      "acceptance_criteria": "TBE completed per evaluation criteria; recommendation submitted to steering committee."
+    },
+    {
+      "id": "T010",
+      "title": "Negotiate & Award EPC Contract",
+      "description": "Lead contract negotiation with preferred bidder covering terms, schedule, liquidated damages, change order mechanism, and claim resolution framework.",
+      "phase": 0,
+      "discipline": "PMO",
+      "estimated_hours": 160,
+      "priority": "high",
+      "dependencies": [
+        "T009"
+      ],
+      "deliverables": "Executed EPC Contract",
+      "acceptance_criteria": "Contract signed by both parties; insurance and bonds in place; notice to proceed issued."
+    },
+    {
+      "id": "T011",
+      "title": "Establish Project Baselines (Cost & Schedule)",
+      "description": "Set the initial cost baseline (Class 5 estimate), schedule baseline, and earned value measurement baselines. Define S-curve targets and critical path milestones.",
+      "phase": 0,
+      "discipline": "PMO",
+      "estimated_hours": 80,
+      "priority": "high",
+      "dependencies": [
+        "T006"
+      ],
+      "deliverables": "Baseline Budget & Schedule Document",
+      "acceptance_criteria": "Baselines approved by project board; contingency defined; critical path identified."
+    },
+    {
+      "id": "T012",
+      "title": "Develop Resource Management Plan",
+      "description": "Plan staffing ramp-up for owner's team and contractor mobilisation, including key discipline leads for Process Engineering, Civil/Structural, Mechanical, Piping, Electrical, and Instrumentation/Controls.",
+      "phase": 0,
+      "discipline": "PMO",
+      "estimated_hours": 60,
+      "priority": "medium",
+      "dependencies": [
+        "T006"
+      ],
+      "deliverables": "Resource Management Plan & Org Chart",
+      "acceptance_criteria": "Resource plan approved; key positions filled; mobilisation timeline established."
+    },
+    {
+      "id": "T013",
+      "title": "Develop Process Flow Diagrams (PFD)",
+      "description": "Create Process Flow Diagrams for all process units showing major equipment, flow streams, mass flows, temperatures, and pressures. Establish basis for heat and mass balance.",
+      "phase": 1,
+      "discipline": "Process Engineering",
+      "estimated_hours": 200,
+      "priority": "high",
+      "dependencies": [
+        "T010"
+      ],
+      "deliverables": "PFD Package (all units)",
+      "acceptance_criteria": "PFDs reviewed and approved; major equipment identified; stream data complete."
+    },
+    {
+      "id": "T014",
+      "title": "Prepare Heat and Mass Balance",
+      "description": "Develop complete heat and mass balance for the entire process including all unit operations, recycle streams, utility balances, and off-gas systems.",
+      "phase": 1,
+      "discipline": "Process Engineering",
+      "estimated_hours": 240,
+      "priority": "high",
+      "dependencies": [
+        "T013"
+      ],
+      "deliverables": "Heat & Mass Balance Report",
+      "acceptance_criteria": "Energy and material balances closed within tolerance; basis of design verified."
+    },
+    {
+      "id": "T015",
+      "title": "Develop Piping & Instrumentation Diagrams (P&ID)",
+      "description": "Produce preliminary P&IDs for all process and utility systems including all equipment, piping, valves, instrumentation, and control logic.",
+      "phase": 1,
+      "discipline": "Process Engineering",
+      "estimated_hours": 400,
+      "priority": "high",
+      "dependencies": [
+        "T014"
+      ],
+      "deliverables": "Preliminary P&ID Set",
+      "acceptance_criteria": "P&IDs reviewed by process, piping, and I&C disciplines; line numbering and tag numbering established."
+    },
+    {
+      "id": "T016",
+      "title": "Conduct HAZOP Study",
+      "description": "Facilitate HAZOP (Hazard and Operability) study on all P&IDs with multi-discipline team. Identify hazard scenarios, assign risk rankings, and define recommendation actions.",
+      "phase": 1,
+      "discipline": "Process Engineering",
+      "estimated_hours": 320,
+      "priority": "high",
+      "dependencies": [
+        "T015"
+      ],
+      "deliverables": "HAZOP Study Report & Action Tracker",
+      "acceptance_criteria": "All nodes reviewed; recommendations logged; SIL/LOPA screening triggered for identified scenarios."
+    },
+    {
+      "id": "T017",
+      "title": "Perform SIL Classification & LOPA Study",
+      "description": "Conduct Safety Integrity Level (SIL) classification and Layer of Protection Analysis (LOPA) for all safety instrumented functions identified during HAZOP.",
+      "phase": 1,
+      "discipline": "Process Engineering",
+      "estimated_hours": 160,
+      "priority": "high",
+      "dependencies": [
+        "T016"
+      ],
+      "deliverables": "SIL/LOPA Assessment Report",
+      "acceptance_criteria": "SIL targets assigned; LOPA scenarios documented; SIF requirements defined for each safety function."
+    },
+    {
+      "id": "T018",
+      "title": "Prepare Equipment Datasheets & Process Specifications",
+      "description": "Develop detailed equipment datasheets for all major equipment \u2014 vessels, columns, heat exchangers, pumps, compressors, fired heaters \u2014 including process duty conditions and materials of construction.",
+      "phase": 1,
+      "discipline": "Process Engineering",
+      "estimated_hours": 300,
+      "priority": "high",
+      "dependencies": [
+        "T014"
+      ],
+      "deliverables": "Equipment Datasheet Package",
+      "acceptance_criteria": "Datasheets complete for all major equipment; reviewed by Mechanical Engineering; issued for inquiry."
+    },
+    {
+      "id": "T019",
+      "title": "Develop Preliminary Piping & Instrumentation Schedule",
+      "description": "Create preliminary line list and instrument index based on P&IDs, defining line classes, insulation requirements, and instrument tag numbers.",
+      "phase": 1,
+      "discipline": "Piping Engineering",
+      "estimated_hours": 120,
+      "priority": "high",
+      "dependencies": [
+        "T015"
+      ],
+      "deliverables": "Line List & Instrument Index (Preliminary)",
+      "acceptance_criteria": "Line numbers assigned; instrument tags allocated; line classes defined per piping spec."
+    },
+    {
+      "id": "T020",
+      "title": "Prepare Preliminary Material Take-Off (MTO)",
+      "description": "Generate preliminary MTO for bulk materials \u2014 piping, structural steel, cables, instruments \u2014 based on PFDs and preliminary P&IDs for Class 3 cost estimate.",
+      "phase": 1,
+      "discipline": "Piping Engineering",
+      "estimated_hours": 160,
+      "priority": "high",
+      "dependencies": [
+        "T018"
+      ],
+      "deliverables": "Preliminary MTO Report",
+      "acceptance_criteria": "MTO quantities reviewed; unit rates applied; allowances factored for unknowns."
+    },
+    {
+      "id": "T021",
+      "title": "Conduct Long-Lead Equipment (LLE) Identification & Inquiry",
+      "description": "Identify long-lead equipment items (compressors, large vessels, DCS system, major pumps) and issue preliminary inquiry packages to vendors.",
+      "phase": 1,
+      "discipline": "Procurement",
+      "estimated_hours": 120,
+      "priority": "high",
+      "dependencies": [
+        "T017"
+      ],
+      "deliverables": "LLE Inquiry Package",
+      "acceptance_criteria": "Long-lead items identified; inquiry packages issued; vendor list approved."
+    },
+    {
+      "id": "T022",
+      "title": "Develop Class 3 Cost Estimate",
+      "description": "Prepare Class 3 cost estimate (budget-level, \u00b110-15% accuracy) based on preliminary MTO, equipment pricing from LLE inquiries, and factored bulk material costs.",
+      "phase": 1,
+      "discipline": "PMO",
+      "estimated_hours": 280,
+      "priority": "high",
+      "dependencies": [
+        "T019",
+        "T020"
+      ],
+      "deliverables": "Class 3 Cost Estimate Report",
+      "acceptance_criteria": "Estimate reviewed by project controls; contingency applied; reconciliation with business case completed."
+    },
+    {
+      "id": "T023",
+      "title": "Establish Schedule Baseline with Critical Path",
+      "description": "Develop the Level 3 schedule baseline from FEED deliverables, identifying critical path milestones, key dependencies, engineering-to-procurement handoffs, and construction logic.",
+      "phase": 1,
+      "discipline": "PMO",
+      "estimated_hours": 200,
+      "priority": "high",
+      "dependencies": [
+        "T021"
+      ],
+      "deliverables": "Level 3 Schedule Baseline",
+      "acceptance_criteria": "Critical path defined; milestones with dates; logic ties validated; baseline frozen for earned value tracking."
+    },
+    {
+      "id": "T024",
+      "title": "Conduct Value Engineering (VE) Study",
+      "description": "Facilitate multi-discipline value engineering workshop to optimise capital cost vs. lifecycle cost, challenging design basis and material selections.",
+      "phase": 1,
+      "discipline": "PMO",
+      "estimated_hours": 80,
+      "priority": "medium",
+      "dependencies": [
+        "T021"
+      ],
+      "deliverables": "VE Study Report & Recommendations",
+      "acceptance_criteria": "Minimum 10 VE ideas evaluated; accepted recommendations incorporated into design basis."
+    },
+    {
+      "id": "T025",
+      "title": "Develop Preliminary Plot Plan & Layout",
+      "description": "Prepare preliminary plot plan showing equipment arrangement, process units, utility corridors, roads, and laydown areas for constructability review.",
+      "phase": 1,
+      "discipline": "Civil/Structural",
+      "estimated_hours": 120,
+      "priority": "high",
+      "dependencies": [
+        "T017"
+      ],
+      "deliverables": "Preliminary Plot Plan Drawing",
+      "acceptance_criteria": "Plot plan reviewed by operations, construction, and HSE; access and maintenance clearances validated."
+    },
+    {
+      "id": "T026",
+      "title": "Prepare Process Utility Design Basis",
+      "description": "Define basis of design for all utilities \u2014 cooling water, steam, instrument air, nitrogen, waste water treatment \u2014 including consumption and quality requirements.",
+      "phase": 1,
+      "discipline": "Process Engineering",
+      "estimated_hours": 160,
+      "priority": "high",
+      "dependencies": [
+        "T014"
+      ],
+      "deliverables": "Utility Design Basis Document",
+      "acceptance_criteria": "All utility balances closed; treatment philosophies defined; tie-in points identified."
+    },
+    {
+      "id": "T027",
+      "title": "Conduct FEED Design Review (Internal)",
+      "description": "Perform multi-discipline internal review of all FEED deliverables \u2014 PFDs, P&IDs, datasheets, MTO \u2014 for completeness and consistency before freezing design basis.",
+      "phase": 1,
+      "discipline": "PMO",
+      "estimated_hours": 100,
+      "priority": "high",
+      "dependencies": [
+        "T015",
+        "T018",
+        "T022"
+      ],
+      "deliverables": "FEED Review Issue (FRI) Package",
+      "acceptance_criteria": "Review comments resolved; design basis frozen; scope changes captured in change order log."
+    },
+    {
+      "id": "T028",
+      "title": "Develop Preliminary Civil/Structural Design Criteria",
+      "description": "Establish design criteria for civil and structural works including soil bearing capacity, seismic zone, wind loads, concrete specifications, and steel grades.",
+      "phase": 1,
+      "discipline": "Civil/Structural",
+      "estimated_hours": 80,
+      "priority": "high",
+      "dependencies": [
+        "T025"
+      ],
+      "deliverables": "Civil/Structural Design Criteria Document",
+      "acceptance_criteria": "Criteria approved by discipline lead; geotechnical investigation input incorporated."
+    },
+    {
+      "id": "T029",
+      "title": "Develop Preliminary Electrical Single-Line Diagram",
+      "description": "Prepare preliminary single-line diagram (SLD) for main power distribution including incoming feeders, transformers, switchgear, MCCs, and major drives.",
+      "phase": 1,
+      "discipline": "Electrical Engineering",
+      "estimated_hours": 120,
+      "priority": "high",
+      "dependencies": [
+        "T017"
+      ],
+      "deliverables": "Preliminary Electrical Single-Line Diagram",
+      "acceptance_criteria": "SLD reviewed; load list developed; voltage levels defined; utility power supply confirmed."
+    },
+    {
+      "id": "T030",
+      "title": "Develop Preliminary Instrumentation Philosophy",
+      "description": "Define instrumentation and control philosophy including DCS architecture, fieldbus protocol, ESD system, fire and gas detection philosophy, and control valve selection criteria.",
+      "phase": 1,
+      "discipline": "Instrumentation/Controls",
+      "estimated_hours": 120,
+      "priority": "high",
+      "dependencies": [
+        "T017"
+      ],
+      "deliverables": "Instrumentation & Control Philosophy Document",
+      "acceptance_criteria": "Philosophy reviewed by process and operations; DCS vendor pre-qualification initiated."
+    },
+    {
+      "id": "T031",
+      "title": "Prepare Basis of Design (BOD) Document",
+      "description": "Compile the Basis of Design document consolidating all process, mechanical, civil, electrical, and instrumentation design bases into a single controlled reference.",
+      "phase": 1,
+      "discipline": "Process Engineering",
+      "estimated_hours": 160,
+      "priority": "high",
+      "dependencies": [
+        "T013",
+        "T026",
+        "T027"
+      ],
+      "deliverables": "Basis of Design (BOD) Document",
+      "acceptance_criteria": "BOD approved by all disciplines; issued as controlled document; version control established."
+    },
+    {
+      "id": "T032",
+      "title": "Conduct Constructability Review (Phase 1)",
+      "description": "Engage construction team in early constructability review of plot plan, equipment layout, modularisation opportunities, and erection methodology.",
+      "phase": 1,
+      "discipline": "Mechanical Engineering",
+      "estimated_hours": 60,
+      "priority": "medium",
+      "dependencies": [
+        "T025"
+      ],
+      "deliverables": "Constructability Review Report (Phase 1)",
+      "acceptance_criteria": "Constructability recommendations documented; incorporated into FEED deliverables."
+    },
+    {
+      "id": "T033",
+      "title": "Develop Preliminary Fire Protection Philosophy",
+      "description": "Define fire protection approach including passive fire protection (PFP), firewater system, deluge systems, monitors, and detection coverage.",
+      "phase": 1,
+      "discipline": "Process Engineering",
+      "estimated_hours": 60,
+      "priority": "medium",
+      "dependencies": [
+        "T016"
+      ],
+      "deliverables": "Fire Protection Philosophy Document",
+      "acceptance_criteria": "Philosophy reviewed by HSE and insurance underwriter; PFP requirements defined."
+    },
+    {
+      "id": "T034",
+      "title": "Issue FEED Final Report & Cost Estimate",
+      "description": "Compile final FEED report including all engineering deliverables, Class 3 cost estimate, schedule baseline, and risk register for project gate review / final investment decision (FID).",
+      "phase": 1,
+      "discipline": "PMO",
+      "estimated_hours": 160,
+      "priority": "high",
+      "dependencies": [
+        "T021",
+        "T022",
+        "T030"
+      ],
+      "deliverables": "FEED Final Report & FID Package",
+      "acceptance_criteria": "Gate review completed; FID approval obtained; project moved to detailed engineering phase."
+    },
+    {
+      "id": "T035",
+      "title": "Develop IFC Civil/Structural Drawings",
+      "description": "Produce Issued for Construction (IFC) civil and structural drawings including foundation plans, column schedules, reinforcement details, and structural steel framing plans.",
+      "phase": 2,
+      "discipline": "Civil/Structural",
+      "estimated_hours": 600,
+      "priority": "high",
+      "dependencies": [
+        "T031"
+      ],
+      "deliverables": "IFC Civil/Structural Drawing Set",
+      "acceptance_criteria": "Drawings approved by discipline lead; all RCDC/Staad models signed off; BOQ extracted."
+    },
+    {
+      "id": "T036",
+      "title": "Develop IFC Piping Isometrics & Spool Drawings",
+      "description": "Produce IFC piping isometric drawings for all lines including weld points, branch connections, support details, and material take-off for fabrication.",
+      "phase": 2,
+      "discipline": "Piping Engineering",
+      "estimated_hours": 800,
+      "priority": "high",
+      "dependencies": [
+        "T015"
+      ],
+      "deliverables": "IFC Piping Isometric Package",
+      "acceptance_criteria": "Isometrics issued per line list; spool breaks optimised for fabrication; BOQ reconciled with MTO."
+    },
+    {
+      "id": "T037",
+      "title": "Develop IFC Electrical Drawings",
+      "description": "Produce IFC electrical drawings including single-line diagrams, cable tray routing plans, lighting layouts, earthing/grounding plans, and cable schedules.",
+      "phase": 2,
+      "discipline": "Electrical Engineering",
+      "estimated_hours": 500,
+      "priority": "high",
+      "dependencies": [
+        "T029"
+      ],
+      "deliverables": "IFC Electrical Drawing Set",
+      "acceptance_criteria": "Drawings reviewed by civil for clash; cable schedule complete; load list finalised."
+    },
+    {
+      "id": "T038",
+      "title": "Develop IFC Instrumentation Drawings",
+      "description": "Produce IFC instrumentation drawings including instrument location plans, loop diagrams, hook-up details, junction box schedules, and DCS I/O allocation.",
+      "phase": 2,
+      "discipline": "Instrumentation/Controls",
+      "estimated_hours": 500,
+      "priority": "high",
+      "dependencies": [
+        "T030"
+      ],
+      "deliverables": "IFC Instrumentation Drawing Set",
+      "acceptance_criteria": "Loop diagrams complete for all loops; hook-up details standardised; I/O assignment verified."
+    },
+    {
+      "id": "T039",
+      "title": "Conduct 30% 3D Model Review",
+      "description": "Conduct the 30% model review using 3D CAD environment (SP3D/E3D/PDMS) for equipment modelling, main pipe routing, and structural steel framing.",
+      "phase": 2,
+      "discipline": "Piping Engineering",
+      "estimated_hours": 120,
+      "priority": "high",
+      "dependencies": [
+        "T033",
+        "T034",
+        "T035"
+      ],
+      "deliverables": "30% Model Review Minutes & Action List",
+      "acceptance_criteria": "Comments logged; action owners assigned; model maturity targets confirmed for 60% review."
+    },
+    {
+      "id": "T040",
+      "title": "Conduct 60% 3D Model Review",
+      "description": "Conduct the 60% model review for detailed piping routing, cable tray coordination, pipe support placement, and inter-discipline clash detection.",
+      "phase": 2,
+      "discipline": "Piping Engineering",
+      "estimated_hours": 160,
+      "priority": "high",
+      "dependencies": [
+        "T039"
+      ],
+      "deliverables": "60% Model Review Minutes & Clash Report",
+      "acceptance_criteria": "All critical clashes resolved; cable tray and pipe routing confirmed; no-go zones respected."
+    },
+    {
+      "id": "T041",
+      "title": "Conduct 90% 3D Model Review / Constructability Review",
+      "description": "Conduct the 90% model review for final inter-discipline coordination, constructability verification, maintenance access validation, and punch items.",
+      "phase": 2,
+      "discipline": "Piping Engineering",
+      "estimated_hours": 160,
+      "priority": "high",
+      "dependencies": [
+        "T040"
+      ],
+      "deliverables": "90% Model Review Report & Punch Items",
+      "acceptance_criteria": "All clashes resolved; maintenance access confirmed; constructability issues closed; model issued for construction approval."
+    },
+    {
+      "id": "T042",
+      "title": "Perform Piping Stress Analysis",
+      "description": "Conduct piping stress analysis for critical and high-temperature lines using Caesar II or similar. Verify flexibility, nozzle loads, and support loads.",
+      "phase": 2,
+      "discipline": "Piping Engineering",
+      "estimated_hours": 300,
+      "priority": "high",
+      "dependencies": [
+        "T015",
+        "T033"
+      ],
+      "deliverables": "Piping Stress Analysis Report",
+      "acceptance_criteria": "All critical lines analysed; nozzle loads within vendor limits; support loads validated."
+    },
+    {
+      "id": "T043",
+      "title": "Develop Bill of Quantities (BOQ) for Civil Works",
+      "description": "Extract detailed BOQ from IFC civil/structural drawings including excavation, concrete, rebar, formwork, structural steel tonnage, and finishing works.",
+      "phase": 2,
+      "discipline": "Civil/Structural",
+      "estimated_hours": 200,
+      "priority": "high",
+      "dependencies": [
+        "T033"
+      ],
+      "deliverables": "Civil/Structural BOQ Document",
+      "acceptance_criteria": "BOQ quantities reconciled with MTO; unit rates applied; issued for procurement."
+    },
+    {
+      "id": "T044",
+      "title": "Develop Material Requisitions (MRs) for Bulk Materials",
+      "description": "Prepare Material Requisitions (MRs) for bulk materials \u2014 valves, fittings, flanges, gaskets, bolts, cable, conduit, instruments, and structural steel.",
+      "phase": 2,
+      "discipline": "Piping Engineering",
+      "estimated_hours": 240,
+      "priority": "high",
+      "dependencies": [
+        "T034",
+        "T035"
+      ],
+      "deliverables": "MR Packages for Bulk Materials",
+      "acceptance_criteria": "MRs reviewed by procurement; specifications and quantities verified; approved for tendering."
+    },
+    {
+      "id": "T045",
+      "title": "Develop MRs for Major Equipment Packages",
+      "description": "Prepare detailed MRs for all major equipment \u2014 vessels, columns, heat exchangers, pumps, compressors, fired heaters \u2014 including technical specifications and data sheets.",
+      "phase": 2,
+      "discipline": "Mechanical Engineering",
+      "estimated_hours": 300,
+      "priority": "high",
+      "dependencies": [
+        "T017"
+      ],
+      "deliverables": "MR Packages for Major Equipment",
+      "acceptance_criteria": "MRs issued for quotation; TBE criteria defined; vendor list approved by engineering."
+    },
+    {
+      "id": "T046",
+      "title": "Develop Instrument Index & IO List",
+      "description": "Create final instrument index and IO list including all field instruments, DCS IO allocation, marshalling panel assignments, and cable schedule references.",
+      "phase": 2,
+      "discipline": "Instrumentation/Controls",
+      "estimated_hours": 200,
+      "priority": "high",
+      "dependencies": [
+        "T037"
+      ],
+      "deliverables": "Final Instrument Index & IO List",
+      "acceptance_criteria": "IO list reconciled with DCS capacity; spare IO identified; instrument index aligned with P&ID."
+    },
+    {
+      "id": "T047",
+      "title": "Develop Electrical Load List & Cable Schedule",
+      "description": "Prepare final electrical load list and cable schedule including all motor loads, UPS loads, lighting, heat tracing, and cable sizing calculations.",
+      "phase": 2,
+      "discipline": "Electrical Engineering",
+      "estimated_hours": 180,
+      "priority": "high",
+      "dependencies": [
+        "T036"
+      ],
+      "deliverables": "Electrical Load List & Cable Schedule",
+      "acceptance_criteria": "Load list reconciled with single-line diagram; cable sizing verified; voltage drop checks passed."
+    },
+    {
+      "id": "T048",
+      "title": "Prepare Detailed Plot Plan & Equipment Layout",
+      "description": "Issue detailed plot plan and equipment layout drawings incorporating all nozzle orientations, access platforms, laydown areas, and crane positioning zones.",
+      "phase": 2,
+      "discipline": "Civil/Structural",
+      "estimated_hours": 160,
+      "priority": "high",
+      "dependencies": [
+        "T025"
+      ],
+      "deliverables": "Detailed Plot Plan & Equipment Layout Drawing",
+      "acceptance_criteria": "Layout approved by operations and construction; crane access routes defined; no clashes with yard piping."
+    },
+    {
+      "id": "T049",
+      "title": "Design Underground Utilities Network",
+      "description": "Design underground utility networks including cooling water, firewater, sewer, stormwater, and chemical drain piping with pipe class, slope, and manhole locations.",
+      "phase": 2,
+      "discipline": "Civil/Structural",
+      "estimated_hours": 200,
+      "priority": "high",
+      "dependencies": [
+        "T026"
+      ],
+      "deliverables": "Underground Utilities Design Drawings",
+      "acceptance_criteria": "Drainage analysis complete; utility clash check passed; civil design criteria satisfied."
+    },
+    {
+      "id": "T050",
+      "title": "Develop Structural Steel Detailing & Connection Design",
+      "description": "Produce structural steel detail drawings including connection designs, base plates, bracing details, and lift lug designs for all steel structures.",
+      "phase": 2,
+      "discipline": "Civil/Structural",
+      "estimated_hours": 300,
+      "priority": "high",
+      "dependencies": [
+        "T033"
+      ],
+      "deliverables": "Structural Steel Detail Drawings & Connection Schedules",
+      "acceptance_criteria": "Detailing approved by fabricator; connection designs checked by discipline lead; material BOQ issued."
+    },
+    {
+      "id": "T051",
+      "title": "Prepare Piping Support Standard Details",
+      "description": "Develop standard pipe support details for all line classes including shoe supports, spring supports, trunnions, guides, anchors, and sleepers.",
+      "phase": 2,
+      "discipline": "Piping Engineering",
+      "estimated_hours": 120,
+      "priority": "medium",
+      "dependencies": [
+        "T042"
+      ],
+      "deliverables": "Piping Support Standard Details Drawings",
+      "acceptance_criteria": "All standard details issued; support spacing verified against stress report; BOQ extracted."
+    },
+    {
+      "id": "T052",
+      "title": "Conduct Inter-Discipline Design Review (IDC)",
+      "description": "Conduct formal inter-discipline coordination (IDC) reviews covering all interfaces between civil, structural, piping, electrical, and instrumentation disciplines.",
+      "phase": 2,
+      "discipline": "PMO",
+      "estimated_hours": 80,
+      "priority": "high",
+      "dependencies": [
+        "T033",
+        "T036",
+        "T037"
+      ],
+      "deliverables": "IDC Review Report",
+      "acceptance_criteria": "All interface issues documented and resolved; drawing issue schedule updated."
+    },
+    {
+      "id": "T053",
+      "title": "Perform Lightning Protection & Earthing Design",
+      "description": "Design lightning protection system including air terminals, down conductors, earthing grid, and equipment bonding per IEC/NFC standards.",
+      "phase": 2,
+      "discipline": "Electrical Engineering",
+      "estimated_hours": 100,
+      "priority": "high",
+      "dependencies": [
+        "T036"
+      ],
+      "deliverables": "Lightning Protection & Earthing Design Drawings",
+      "acceptance_criteria": "Earth grid resistance calculated; step/touch potentials within limits; design certified by electrical lead."
+    },
+    {
+      "id": "T054",
+      "title": "Develop DCS Architecture & Control Network Design",
+      "description": "Design the Distributed Control System (DCS) architecture including controller configuration, network topology, operator stations, gateways, and cybersecurity requirements.",
+      "phase": 2,
+      "discipline": "Instrumentation/Controls",
+      "estimated_hours": 160,
+      "priority": "high",
+      "dependencies": [
+        "T046"
+      ],
+      "deliverables": "DCS Architecture Design Document",
+      "acceptance_criteria": "Architecture reviewed by IT/cybersecurity; network bandwidth verified; controller loading within limits."
+    },
+    {
+      "id": "T055",
+      "title": "Prepare Fire Detection & Gas Detection Layout",
+      "description": "Design fire and gas detection coverage including detector type, spacing, zoning, and alarm philosophy per NFPA and company standards.",
+      "phase": 2,
+      "discipline": "Instrumentation/Controls",
+      "estimated_hours": 80,
+      "priority": "high",
+      "dependencies": [
+        "T032"
+      ],
+      "deliverables": "Fire & Gas Detection Layout Drawings",
+      "acceptance_criteria": "Detector coverage mapped; alarm philosophy aligned with ESD matrix; zoning approved by HSE."
+    },
+    {
+      "id": "T056",
+      "title": "Issue Final IFC Drawing Register & Transmittal",
+      "description": "Compile the complete IFC drawing register for all disciplines, issue drawing transmittals to construction contractor, and archive the master drawing set.",
+      "phase": 2,
+      "discipline": "PMO",
+      "estimated_hours": 80,
+      "priority": "high",
+      "dependencies": [
+        "T033",
+        "T034",
+        "T035"
+      ],
+      "deliverables": "IFC Drawing Register & Transmittal Record",
+      "acceptance_criteria": "All IFC drawings logged; transmittal note completed; construction confirmation received."
+    },
+    {
+      "id": "T057",
+      "title": "Prepare Environmental Impact Assessment (EIA) Report",
+      "description": "Conduct environmental impact assessment including baseline studies, air/water/noise modelling, ecological survey, and prepare EIA report for regulatory submission.",
+      "phase": 3,
+      "discipline": "Permitting",
+      "estimated_hours": 400,
+      "priority": "high",
+      "dependencies": [
+        "T013"
+      ],
+      "deliverables": "EIA Report",
+      "acceptance_criteria": "EIA submitted to environmental ministry; public hearing completed; responses to queries submitted."
+    },
+    {
+      "id": "T058",
+      "title": "Obtain Environmental Clearance (EC)",
+      "description": "Submit application and supporting documents for Environmental Clearance from the Ministry of Environment, Forest and Climate Change (or equivalent authority).",
+      "phase": 3,
+      "discipline": "Permitting",
+      "estimated_hours": 100,
+      "priority": "high",
+      "dependencies": [
+        "T053"
+      ],
+      "deliverables": "Environmental Clearance Certificate",
+      "acceptance_criteria": "EC obtained with stipulated conditions; compliance report framework established."
+    },
+    {
+      "id": "T059",
+      "title": "Apply for Consent to Establish (CTE)",
+      "description": "Submit Consent to Establish application to State Pollution Control Board including process description, pollution loads, and proposed treatment schemes.",
+      "phase": 3,
+      "discipline": "Permitting",
+      "estimated_hours": 80,
+      "priority": "high",
+      "dependencies": [
+        "T054"
+      ],
+      "deliverables": "Consent to Establish (CTE) Order",
+      "acceptance_criteria": "CTE granted with conditions; emission/discharge limits noted; compliance schedule documented."
+    },
+    {
+      "id": "T060",
+      "title": "Obtain Factory License & Registration",
+      "description": "Apply for factory license under the Factories Act including building plan approval, occupancy certificate, and registration of factory manager.",
+      "phase": 3,
+      "discipline": "Permitting",
+      "estimated_hours": 60,
+      "priority": "high",
+      "dependencies": [
+        "T025"
+      ],
+      "deliverables": "Factory License Certificate",
+      "acceptance_criteria": "License issued; building plans approved; safety officer appointed per statutory requirements."
+    },
+    {
+      "id": "T061",
+      "title": "Register Boilers & Pressure Vessels",
+      "description": "Submit boiler and pressure vessel design registrations to the Chief Inspector of Boilers including design calculations, material certificates, and welding procedures.",
+      "phase": 3,
+      "discipline": "Mechanical Engineering",
+      "estimated_hours": 80,
+      "priority": "high",
+      "dependencies": [
+        "T017",
+        "T055"
+      ],
+      "deliverables": "Boiler Registration Certificates",
+      "acceptance_criteria": "All boilers and pressure vessels registered; design approval obtained; inspection booked."
+    },
+    {
+      "id": "T062",
+      "title": "Obtain Fire NOC from Fire Department",
+      "description": "Submit fire safety plan, hydrant coverage study, foam system design, and escape route plan to fire department for No Objection Certificate (NOC).",
+      "phase": 3,
+      "discipline": "Permitting",
+      "estimated_hours": 100,
+      "priority": "high",
+      "dependencies": [
+        "T055",
+        "T032"
+      ],
+      "deliverables": "Fire NOC Certificate",
+      "acceptance_criteria": "Fire NOC issued; fire water storage capacity approved; access for fire engines certified."
+    },
+    {
+      "id": "T063",
+      "title": "Obtain Electrical Safety Approval",
+      "description": "Submit electrical installation design, single-line diagram, and earthing/grounding report to the Electrical Inspectorate for approval and energisation clearance.",
+      "phase": 3,
+      "discipline": "Electrical Engineering",
+      "estimated_hours": 60,
+      "priority": "high",
+      "dependencies": [
+        "T036"
+      ],
+      "deliverables": "Electrical Approval Certificate",
+      "acceptance_criteria": "Electrical installation approved; meter sealing completed; energisation permission granted."
+    },
+    {
+      "id": "T064",
+      "title": "Obtain Major Accident Hazard (MAH) Approval",
+      "description": "Prepare and submit the Safety Report and Site-Specific Safety Management Plan for MAH notification per the Chemical Accident Prevention Rules.",
+      "phase": 3,
+      "discipline": "Permitting",
+      "estimated_hours": 160,
+      "priority": "high",
+      "dependencies": [
+        "T016",
+        "T053"
+      ],
+      "deliverables": "MAH Approval & Safety Report",
+      "acceptance_criteria": "MAH notification accepted; safety report reviewed by competent authority; off-site emergency plan coordinated with district authority."
+    },
+    {
+      "id": "T065",
+      "title": "Obtain Hazardous Waste Authorisation",
+      "description": "Apply for hazardous waste generation, storage, and disposal authorisation from the Pollution Control Board including waste characterisation and disposal agreements.",
+      "phase": 3,
+      "discipline": "Permitting",
+      "estimated_hours": 60,
+      "priority": "medium",
+      "dependencies": [
+        "T054"
+      ],
+      "deliverables": "Hazardous Waste Authorisation Certificate",
+      "acceptance_criteria": "Authorisation granted; waste manifests established; disposal vendor approved."
+    },
+    {
+      "id": "T066",
+      "title": "Develop Project-Specific PTW System Documentation",
+      "description": "Prepare the Permit to Work (PTW) system documentation for the construction phase including permit categories (hot work, confined space, excavation, etc.) and approval authorities.",
+      "phase": 3,
+      "discipline": "HSE",
+      "estimated_hours": 60,
+      "priority": "high",
+      "dependencies": [
+        "T055"
+      ],
+      "deliverables": "PTW System Manual & Permit Formats",
+      "acceptance_criteria": "PTW system reviewed by project HSE and construction; permit templates approved; training material developed."
+    },
+    {
+      "id": "T067",
+      "title": "Prepare Request for Quotation (RFQ) Packages",
+      "description": "Develop RFQ packages for approved MRs including technical specifications, commercial terms, delivery schedule, and quality requirements.",
+      "phase": 4,
+      "discipline": "Procurement",
+      "estimated_hours": 120,
+      "priority": "high",
+      "dependencies": [
+        "T043",
+        "T044"
+      ],
+      "deliverables": "RFQ Packages Issued to Vendors",
+      "acceptance_criteria": "RFQs reviewed by engineering and commercial teams; vendor list approved; minimum 3 bids per package."
+    },
+    {
+      "id": "T068",
+      "title": "Receive & Evaluate Vendor Bids (TBE Process)",
+      "description": "Receive vendor quotations and conduct Technical and Commercial Bid Evaluation (TBE) including clarification meetings and compliance matrices.",
+      "phase": 4,
+      "discipline": "Procurement",
+      "estimated_hours": 200,
+      "priority": "high",
+      "dependencies": [
+        "T064"
+      ],
+      "deliverables": "TBE Reports & Recommendation Letters",
+      "acceptance_criteria": "TBE completed per evaluation criteria; recommendation approved by project manager; award in principle secured."
+    },
+    {
+      "id": "T069",
+      "title": "Issue Purchase Orders (PO) & Contracts",
+      "description": "Issue purchase orders and supply contracts for all approved procurement packages including terms, delivery milestones, payment terms, and LD clauses.",
+      "phase": 4,
+      "discipline": "Procurement",
+      "estimated_hours": 160,
+      "priority": "high",
+      "dependencies": [
+        "T065"
+      ],
+      "deliverables": "Executed POs & Supply Contracts",
+      "acceptance_criteria": "POs issued in SAP/ERP; vendor order acknowledgements received; advance payment processed (if applicable)."
+    },
+    {
+      "id": "T070",
+      "title": "Manage Vendor Document Review (VDR) Cycle",
+      "description": "Coordinate the Vendor Document Review (VDR) cycle for all equipment vendors including transmittal of vendor drawings, engineering review, and formal approval/resubmission.",
+      "phase": 4,
+      "discipline": "PMO",
+      "estimated_hours": 300,
+      "priority": "high",
+      "dependencies": [
+        "T066"
+      ],
+      "deliverables": "VDR Transmittal Log & Approved Vendor Documents",
+      "acceptance_criteria": "All critical vendor documents approved; review cycle tracked in VDR log; approved prints issued to site."
+    },
+    {
+      "id": "T071",
+      "title": "Perform Expediting on Long-Lead Items",
+      "description": "Conduct proactive expediting on all long-lead and critical-path vendor orders including weekly progress calls, shop visit reports, and recovery plans for slippage.",
+      "phase": 4,
+      "discipline": "Procurement",
+      "estimated_hours": 200,
+      "priority": "high",
+      "dependencies": [
+        "T066"
+      ],
+      "deliverables": "Expediting Reports & Recovery Plans",
+      "acceptance_criteria": "Expediting reports filed weekly; all milestones on track or with documented recovery plans."
+    },
+    {
+      "id": "T072",
+      "title": "Conduct Stage Inspection (In-Process & Pre-Dispatch)",
+      "description": "Perform stage inspections at vendor works \u2014 raw material verification, in-process inspection, dimensional checks, and pressure testing \u2014 per ITP.",
+      "phase": 4,
+      "discipline": "Quality",
+      "estimated_hours": 240,
+      "priority": "high",
+      "dependencies": [
+        "T066"
+      ],
+      "deliverables": "Stage Inspection Reports & ITP Sign-Offs",
+      "acceptance_criteria": "All hold points signed off per ITP; NCRs raised for non-conformances; re-inspection passed."
+    },
+    {
+      "id": "T073",
+      "title": "Witness Factory Acceptance Test (FAT)",
+      "description": "Attend and witness Factory Acceptance Tests (FAT) for major equipment packages including performance testing, functional testing, and control logic verification.",
+      "phase": 4,
+      "discipline": "Mechanical Engineering",
+      "estimated_hours": 160,
+      "priority": "high",
+      "dependencies": [
+        "T069"
+      ],
+      "deliverables": "FAT Certificates & Test Reports",
+      "acceptance_criteria": "All FAT criteria met; test data reviewed and approved; punch items resolved before dispatch."
+    },
+    {
+      "id": "T074",
+      "title": "Arrange Packing, Preservation & Marking",
+      "description": "Define and verify packing and preservation standards for all shipped equipment \u2014 including coating, desiccant, crating, and export marking \u2014 per project specification.",
+      "phase": 4,
+      "discipline": "Procurement",
+      "estimated_hours": 80,
+      "priority": "medium",
+      "dependencies": [
+        "T069",
+        "T070"
+      ],
+      "deliverables": "Packing List & Preservation Records",
+      "acceptance_criteria": "Packing verified per specification; preservation duration adequate for shipping and storage; marking compliant."
+    },
+    {
+      "id": "T075",
+      "title": "Manage Logistics & Shipping Documentation",
+      "description": "Coordinate freight forwarding, customs clearance, bill of lading, insurance, and shipping documentation for all international and domestic consignments.",
+      "phase": 4,
+      "discipline": "Procurement",
+      "estimated_hours": 120,
+      "priority": "high",
+      "dependencies": [
+        "T071"
+      ],
+      "deliverables": "Shipping Documents & Customs Clearance Records",
+      "acceptance_criteria": "All consignments cleared at origin; shipping documents complete; customs broker assigned at destination."
+    },
+    {
+      "id": "T076",
+      "title": "Coordinate Site Receipt & Inspection",
+      "description": "Manage receipt inspection at site including material verification against packing list, visual inspection for damage, and handover to site storage/construction.",
+      "phase": 4,
+      "discipline": "Quality",
+      "estimated_hours": 160,
+      "priority": "high",
+      "dependencies": [
+        "T072"
+      ],
+      "deliverables": "Goods Receipt Notes (GRN) & Inspection Reports",
+      "acceptance_criteria": "All receipts verified; damage/quantity discrepancies documented as NCRs; material handed over to site stores."
+    },
+    {
+      "id": "T077",
+      "title": "Manage Site Storage & Preservation",
+      "description": "Establish and maintain site storage areas for equipment and materials with proper preservation, climate control, FIFO rotations, and security.",
+      "phase": 4,
+      "discipline": "Construction",
+      "estimated_hours": 160,
+      "priority": "high",
+      "dependencies": [
+        "T073"
+      ],
+      "deliverables": "Site Storage & Preservation Logs",
+      "acceptance_criteria": "Storage conditions compliant; preservation schedule maintained; monthly inventory reconciled."
+    },
+    {
+      "id": "T078",
+      "title": "Track & Close Procurement Register",
+      "description": "Maintain the master procurement register tracking all MR-to-PO-to-delivery status, open orders, overdue milestones, and expediting priorities.",
+      "phase": 4,
+      "discipline": "PMO",
+      "estimated_hours": 80,
+      "priority": "medium",
+      "dependencies": [
+        "T066",
+        "T067"
+      ],
+      "deliverables": "Procurement Register (Up-to-Date)",
+      "acceptance_criteria": "Register reconciled monthly; all open orders tracked with recovery plans; status reported in project controls."
+    },
+    {
+      "id": "T079",
+      "title": "Prepare Vendor Performance Evaluation",
+      "description": "Evaluate vendor performance on delivery, quality, compliance, and responsiveness; feed lessons learned into the approved vendor list for future projects.",
+      "phase": 4,
+      "discipline": "Procurement",
+      "estimated_hours": 60,
+      "priority": "medium",
+      "dependencies": [
+        "T070",
+        "T073"
+      ],
+      "deliverables": "Vendor Performance Scorecards",
+      "acceptance_criteria": "All major vendors evaluated; scores recorded in procurement database; vendor list updated."
+    },
+    {
+      "id": "T080",
+      "title": "Coordinate with Engineering on Substitutions & Technical Queries",
+      "description": "Process technical queries and substitution requests from vendors through engineering review, change order assessment, and approval cycle.",
+      "phase": 4,
+      "discipline": "PMO",
+      "estimated_hours": 80,
+      "priority": "medium",
+      "dependencies": [
+        "T067"
+      ],
+      "deliverables": "Technical Query Log & Substitution Approvals",
+      "acceptance_criteria": "All queries resolved with engineering; substitution impact assessed for cost/schedule; change orders issued as needed."
+    },
+    {
+      "id": "T081",
+      "title": "Expedite Rework & Replacement Orders",
+      "description": "Proactively manage rework or replacement orders for items rejected at stage inspection or site receipt, including accelerated scheduling and expediting.",
+      "phase": 4,
+      "discipline": "Procurement",
+      "estimated_hours": 80,
+      "priority": "high",
+      "dependencies": [
+        "T070",
+        "T073"
+      ],
+      "deliverables": "Rework/Replacement Order Status Reports",
+      "acceptance_criteria": "Replacement orders placed with accelerated delivery; original NCR closed; lessons learned captured."
+    },
+    {
+      "id": "T082",
+      "title": "Conduct SAT with Vendor at Site",
+      "description": "Coordinate and witness Site Acceptance Tests (SAT) for critical equipment after installation, verifying performance guarantees under site conditions.",
+      "phase": 4,
+      "discipline": "Mechanical Engineering",
+      "estimated_hours": 120,
+      "priority": "high",
+      "dependencies": [
+        "T090",
+        "T085"
+      ],
+      "deliverables": "SAT Reports & Punch Lists",
+      "acceptance_criteria": "All SAT criteria met; site-installed performance verified; punch items logged and assigned."
+    },
+    {
+      "id": "T083",
+      "title": "Prepare & Issue Tender for Balance-of-Plant Contracts",
+      "description": "Prepare tender packages for balance-of-plant construction contracts including scope definition, technical specs, commercial terms, HSE requirements, and bid evaluation criteria.",
+      "phase": 4,
+      "discipline": "Procurement",
+      "estimated_hours": 120,
+      "priority": "high",
+      "dependencies": [
+        "T044"
+      ],
+      "deliverables": "Balance-of-Plant Tender Packages Issued",
+      "acceptance_criteria": "Tender packages reviewed by legal and commercial; minimum 3 bidders invited; bid submission deadline set."
+    },
+    {
+      "id": "T084",
+      "title": "Manage Contract Change Orders & Claims (Procurement)",
+      "description": "Process all change order requests and potential claims from vendors and contractors through technical review, cost/schedule impact assessment, and approval cycle per contract T&Cs.",
+      "phase": 4,
+      "discipline": "PMO",
+      "estimated_hours": 100,
+      "priority": "high",
+      "dependencies": [
+        "T066"
+      ],
+      "deliverables": "Change Order Log & Approved Change Orders",
+      "acceptance_criteria": "All change requests documented; impact assessed; change orders approved per delegation of authority; claim notices tracked."
+    },
+    {
+      "id": "T085",
+      "title": "Prepare Weekly Material Status Reports & Dashboard",
+      "description": "Generate weekly material status reports showing procurement progress against schedule, critical delivery dates, and dashboard for project controls S-curve integration.",
+      "phase": 4,
+      "discipline": "PMO",
+      "estimated_hours": 60,
+      "priority": "medium",
+      "dependencies": [
+        "T075"
+      ],
+      "deliverables": "Weekly Material Status Report & Dashboard",
+      "acceptance_criteria": "Report submitted to project controls weekly; critical-path items flagged; expediting priorities updated."
+    },
+    {
+      "id": "T086",
+      "title": "Coordinate Logistics for Oversized & Heavy-Lift Items",
+      "description": "Plan and execute transportation logistics for oversized and heavy items \u2014 route survey, trailer selection, bridge/road permits, escort vehicles, and crane offloading at site.",
+      "phase": 4,
+      "discipline": "Procurement",
+      "estimated_hours": 100,
+      "priority": "high",
+      "dependencies": [
+        "T072"
+      ],
+      "deliverables": "Heavy-Lift Logistics Plan & Transport Permits",
+      "acceptance_criteria": "Transport route surveyed; permits obtained; offloading plan reviewed with construction; heavy-lift executed without incident."
+    },
+    {
+      "id": "T087",
+      "title": "Close Out Procurement Phase & Issue Final Report",
+      "description": "Compile procurement phase close-out report including final PO values, savings/overruns, lessons learned, and handover of warranties to commissioning team.",
+      "phase": 4,
+      "discipline": "PMO",
+      "estimated_hours": 60,
+      "priority": "medium",
+      "dependencies": [
+        "T077",
+        "T078"
+      ],
+      "deliverables": "Procurement Close-Out Report",
+      "acceptance_criteria": "All POs closed; warranty certificates transferred; lessons learned documented in project knowledge base."
+    },
+    {
+      "id": "T088",
+      "title": "Mobilise Construction Contractor & Site Setup",
+      "description": "Complete contractor mobilisation including site office setup, labour camp, laydown yards, material storage areas, and temporary utilities for construction.",
+      "phase": 5,
+      "discipline": "Construction",
+      "estimated_hours": 200,
+      "priority": "high",
+      "dependencies": [
+        "T011"
+      ],
+      "deliverables": "Construction Site Setup Complete Report",
+      "acceptance_criteria": "Site boundaries secured; temporary facilities operational; contractor manpower and equipment on site."
+    },
+    {
+      "id": "T089",
+      "title": "Prepare Site Clearing & Earthworks",
+      "description": "Perform site clearing, topsoil stripping, grading, compaction testing, and establishment of site drainage and access roads for construction.",
+      "phase": 5,
+      "discipline": "Civil/Structural",
+      "estimated_hours": 300,
+      "priority": "high",
+      "dependencies": [
+        "T082"
+      ],
+      "deliverables": "Site Clearing & Earthworks Completion Report",
+      "acceptance_criteria": "Site graded to design levels; compaction tests passed; drainage ditches functional; survey benchmarks established."
+    },
+    {
+      "id": "T090",
+      "title": "Execute Deep Foundations & Piling Works",
+      "description": "Install deep foundations including bored cast-in-situ piles, driven piles, pile caps, and pile integrity testing (PIT) for major equipment and structures.",
+      "phase": 5,
+      "discipline": "Civil/Structural",
+      "estimated_hours": 600,
+      "priority": "high",
+      "dependencies": [
+        "T083"
+      ],
+      "deliverables": "Piling Completion Report & Pile Test Results",
+      "acceptance_criteria": "All piles installed to design depth and capacity; PIT test results satisfactory; pile caps poured and cured."
+    },
+    {
+      "id": "T091",
+      "title": "Construct Reinforced Concrete Foundations",
+      "description": "Construct all RCC foundations \u2014 column footings, equipment foundations, turbine/generator pedestals, foundation bolts installation, and anchor bolt template checks.",
+      "phase": 5,
+      "discipline": "Civil/Structural",
+      "estimated_hours": 800,
+      "priority": "high",
+      "dependencies": [
+        "T084"
+      ],
+      "deliverables": "Foundation Completion & Concrete Test Reports",
+      "acceptance_criteria": "All foundations poured; concrete cube tests passed; anchor bolt positions verified; foundation acceptance criteria met."
+    },
+    {
+      "id": "T092",
+      "title": "Erect Structural Steel Frames & Platforms",
+      "description": "Erect structural steel including main process structure frames, pipe racks, platform steel, handrails, and stairways with bolted/welded connections per IFC drawings.",
+      "phase": 5,
+      "discipline": "Civil/Structural",
+      "estimated_hours": 700,
+      "priority": "high",
+      "dependencies": [
+        "T085"
+      ],
+      "deliverables": "Structural Steel Erection Completion Certificate",
+      "acceptance_criteria": "Steel erected per sequence plan; plumbness and alignment within tolerance; high-strength bolt torque verified."
+    },
+    {
+      "id": "T093",
+      "title": "Set Major Equipment (Columns, Vessels, Heat Exchangers)",
+      "description": "Lift, set, and align major process equipment including distillation columns, reactors, separators, heat exchangers, and vertical/horizontal pressure vessels.",
+      "phase": 5,
+      "discipline": "Mechanical Engineering",
+      "estimated_hours": 800,
+      "priority": "high",
+      "dependencies": [
+        "T085",
+        "T086"
+      ],
+      "deliverables": "Equipment Setting & Alignment Reports",
+      "acceptance_criteria": "Equipment set to elevation and plumb within tolerance; nozzle orientations verified; bolted down and grouted."
+    },
+    {
+      "id": "T094",
+      "title": "Install & Align Rotating Equipment (Pumps, Compressors, Turbines)",
+      "description": "Set, align, and grout rotating equipment including centrifugal pumps, reciprocating compressors, steam turbines, blowers, and gearboxes with laser alignment.",
+      "phase": 5,
+      "discipline": "Mechanical Engineering",
+      "estimated_hours": 600,
+      "priority": "high",
+      "dependencies": [
+        "T087"
+      ],
+      "deliverables": "Rotating Equipment Installation & Alignment Records",
+      "acceptance_criteria": "Shaft alignment within tolerance; grouting completed; run-in checks passed; coupling alignment verified."
+    },
+    {
+      "id": "T095",
+      "title": "Fabricate & Erect Piping Spools (Aboveground)",
+      "description": "Fabricate piping spools based on isometrics, install pipe supports, erect pipe spools aboveground, and complete tack welding fit-up for all systems.",
+      "phase": 5,
+      "discipline": "Piping Engineering",
+      "estimated_hours": 1000,
+      "priority": "high",
+      "dependencies": [
+        "T085",
+        "T088"
+      ],
+      "deliverables": "Piping Erection Progress Report & Weld Log",
+      "acceptance_criteria": "Piping erection progress per lookahead plan; support installation complete; fit-up inspected before final welding."
+    },
+    {
+      "id": "T096",
+      "title": "Develop Welding Procedures (WPS/PQR) & Quality Plan",
+      "description": "Qualify Welding Procedure Specifications (WPS) and Procedure Qualification Records (PQR) for all applicable material joints and welding processes. Establish weld map and NDT strategy.",
+      "phase": 5,
+      "discipline": "Quality",
+      "estimated_hours": 120,
+      "priority": "high",
+      "dependencies": [
+        "T082"
+      ],
+      "deliverables": "Qualified WPS/PQR Package & Weld Map",
+      "acceptance_criteria": "All WPS/PQRs qualified per code; welder qualifications current; weld map issued; NDT plan approved."
+    },
+    {
+      "id": "T097",
+      "title": "Execute Piping Welding (All Systems)",
+      "description": "Perform piping welding for all process, utility, and instrument air systems including root, hot, fill, and cap passes per WPS with continuous NDT monitoring.",
+      "phase": 5,
+      "discipline": "Piping Engineering",
+      "estimated_hours": 1200,
+      "priority": "high",
+      "dependencies": [
+        "T090",
+        "T089"
+      ],
+      "deliverables": "Welding Record Books & NDT Results",
+      "acceptance_criteria": "Welding progress per schedule; NDT (RT/UT) passed per ITP; weld rejection rate below target; rework tracked."
+    },
+    {
+      "id": "T098",
+      "title": "Perform Non-Destructive Testing (NDT) \u2014 RT & UT",
+      "description": "Conduct radiographic testing (RT) and ultrasonic testing (UT) on all critical process welds. Interpret films, document results, and flag rejectable indications for repair.",
+      "phase": 5,
+      "discipline": "Quality",
+      "estimated_hours": 400,
+      "priority": "high",
+      "dependencies": [
+        "T091"
+      ],
+      "deliverables": "NDT Reports & Film Interpretation Log",
+      "acceptance_criteria": "All required welds tested; NDT reports certified by Level II/III; rejected welds repaired and retested."
+    },
+    {
+      "id": "T099",
+      "title": "Conduct Piping Pre-Fabrication (Spool Shop)",
+      "description": "Pre-fabricate piping spools in the fabrication shop including cutting, beveling, fit-up, welding, and hydrostatic testing before transport to site.",
+      "phase": 5,
+      "discipline": "Piping Engineering",
+      "estimated_hours": 600,
+      "priority": "high",
+      "dependencies": [
+        "T089"
+      ],
+      "deliverables": "Pre-Fabricated Spool Release Notes",
+      "acceptance_criteria": "All spools fabricated per isometric; hydrotest passed; spool identification marked; NDT complete."
+    },
+    {
+      "id": "T100",
+      "title": "Execute Grouting & Precision Alignment of Equipment",
+      "description": "Perform final grouting of all equipment baseplates using epoxy or cementitious grout, followed by precision re-alignment check. Finish surface waterproofing.",
+      "phase": 5,
+      "discipline": "Mechanical Engineering",
+      "estimated_hours": 200,
+      "priority": "high",
+      "dependencies": [
+        "T087",
+        "T088"
+      ],
+      "deliverables": "Grouting Completion & Alignment Verification Reports",
+      "acceptance_criteria": "Grout cured to specified strength; alignment rechecked within tolerance after grouting; surface finish approved."
+    },
+    {
+      "id": "T101",
+      "title": "Construct Pipe Racks & Support Structures",
+      "description": "Erect pipe rack structures including main beams, cross-bracing, cantilever supports, cable tray supports, and sleeper beams for ground-level piping.",
+      "phase": 5,
+      "discipline": "Civil/Structural",
+      "estimated_hours": 400,
+      "priority": "high",
+      "dependencies": [
+        "T086"
+      ],
+      "deliverables": "Pipe Rack & Support Structure Completion Report",
+      "acceptance_criteria": "All pipe racks erected; steel bolted/welded to design; levels checked; handover to piping discipline completed."
+    },
+    {
+      "id": "T102",
+      "title": "Install Underground Piping & Drainage Systems",
+      "description": "Install underground process and utility piping including excavation, bedding, pipe laying, jointing, backfill, compaction testing, and as-built recording.",
+      "phase": 5,
+      "discipline": "Piping Engineering",
+      "estimated_hours": 300,
+      "priority": "high",
+      "dependencies": [
+        "T048"
+      ],
+      "deliverables": "Underground Piping Completion & As-Built Drawings",
+      "acceptance_criteria": "Pressure/leak test passed for underground piping; backfill compaction tested; as-built drawings marked up."
+    },
+    {
+      "id": "T103",
+      "title": "Perform Hydrostatic Testing of Piping Systems (Phase 5)",
+      "description": "Conduct hydrostatic pressure testing on completed aboveground piping systems per ITP. Verify test pressure, duration, and acceptance criteria.",
+      "phase": 5,
+      "discipline": "Quality",
+      "estimated_hours": 400,
+      "priority": "high",
+      "dependencies": [
+        "T091"
+      ],
+      "deliverables": "Hydrostatic Test Certificates",
+      "acceptance_criteria": "All test pressures held within limits; leaks identified and repaired; test certificates signed by inspector."
+    },
+    {
+      "id": "T104",
+      "title": "Manage Construction RFI & Technical Query Resolution",
+      "description": "Process construction RFIs (Request for Information) from the contractor \u2014 coordinate engineering response, evaluate impact, and issue field change instructions as needed.",
+      "phase": 5,
+      "discipline": "PMO",
+      "estimated_hours": 200,
+      "priority": "high",
+      "dependencies": [
+        "T083"
+      ],
+      "deliverables": "RFI Log & Engineering Response Records",
+      "acceptance_criteria": "All RFIs answered within target turnaround; change order impact assessed; field changes documented."
+    },
+    {
+      "id": "T105",
+      "title": "Conduct Monthly Progress Measurement & S-Curve Update",
+      "description": "Measure physical progress using earned value methodology, update S-curves, track critical path variance, and prepare monthly progress report for the steering committee.",
+      "phase": 5,
+      "discipline": "PMO",
+      "estimated_hours": 120,
+      "priority": "high",
+      "dependencies": [
+        "T082"
+      ],
+      "deliverables": "Monthly Progress Report (S-Curve, Earned Value, KPIs)",
+      "acceptance_criteria": "Progress measured per approved measurement system; S-curve updated; variance analysis complete; forecast EAC calculated."
+    },
+    {
+      "id": "T106",
+      "title": "Execute Temporary Works & Construction Aids",
+      "description": "Plan and execute temporary works including crane pads, access scaffolding, cofferdams, shoring, and temporary weather protection for ongoing construction activities.",
+      "phase": 5,
+      "discipline": "Civil/Structural",
+      "estimated_hours": 160,
+      "priority": "medium",
+      "dependencies": [
+        "T083"
+      ],
+      "deliverables": "Temporary Works Design & Completion Records",
+      "acceptance_criteria": "All temporary works designed by competent engineer; inspected before use; dismantled upon completion."
+    },
+    {
+      "id": "T107",
+      "title": "Prepare Lookahead Plan (4-Week Rolling)",
+      "description": "Prepare weekly rolling 4-week lookahead plan for construction activities, identifying resource requirements, material availability, and interface constraints.",
+      "phase": 5,
+      "discipline": "PMO",
+      "estimated_hours": 60,
+      "priority": "high",
+      "dependencies": [
+        "T098"
+      ],
+      "deliverables": "4-Week Rolling Lookahead Plan",
+      "acceptance_criteria": "Lookahead reviewed in weekly progress meeting; constraints logged; resource loading validated."
+    },
+    {
+      "id": "T108",
+      "title": "Install Cable Trays, Conduit & Raceway Systems",
+      "description": "Install cable tray networks, galvanised rigid steel (GRS) conduit, PVC conduit, and liquidtight flexible conduit per IFC electrical drawings and tray loading schedules.",
+      "phase": 6,
+      "discipline": "Electrical Engineering",
+      "estimated_hours": 400,
+      "priority": "high",
+      "dependencies": [
+        "T101",
+        "T036"
+      ],
+      "deliverables": "Cable Tray & Conduit Installation Completion Report",
+      "acceptance_criteria": "Tray installation per drawing; fill ratio within limits; supports at correct spacing; bonding continuity verified."
+    },
+    {
+      "id": "T109",
+      "title": "Pull & Terminate Power Cables (LV/MV)",
+      "description": "Pull low-voltage and medium-voltage power cables through trays/conducts, terminate at switchgear, MCCs, VFDs, motors, and distribution boards with proper lugs and torque.",
+      "phase": 6,
+      "discipline": "Electrical Engineering",
+      "estimated_hours": 500,
+      "priority": "high",
+      "dependencies": [
+        "T105"
+      ],
+      "deliverables": "Power Cable Pulling & Termination Records",
+      "acceptance_criteria": "Cable pulling tension within limits; meggar/insulation resistance tested before termination; terminations torqued per specification."
+    },
+    {
+      "id": "T110",
+      "title": "Install and Terminate Control & Instrument Cables",
+      "description": "Pull, dress, and terminate instrumentation cables (single pair, multipair, triaxial, fibre optic) at field instruments, junction boxes, marshalling panels, and DCS cabinets.",
+      "phase": 6,
+      "discipline": "Instrumentation/Controls",
+      "estimated_hours": 500,
+      "priority": "high",
+      "dependencies": [
+        "T105"
+      ],
+      "deliverables": "Instrument Cable Termination Records & Continuity Checks",
+      "acceptance_criteria": "Cable continuity verified; shield earthing per philosophy; terminations checked against loop diagram; meggar test passed."
+    },
+    {
+      "id": "T111",
+      "title": "Install MCCs, VFDs & Motor Control Centres",
+      "description": "Install and commission Motor Control Centres (MCCs), Variable Frequency Drives (VFDs), soft starters, and associated control wiring in electrical rooms.",
+      "phase": 6,
+      "discipline": "Electrical Engineering",
+      "estimated_hours": 300,
+      "priority": "high",
+      "dependencies": [
+        "T103"
+      ],
+      "deliverables": "MCC/VFD Installation & Inspection Records",
+      "acceptance_criteria": "All cubicles installed and secured; busbar torque checked; control wiring terminated; pre-commissioning checks complete."
+    },
+    {
+      "id": "T112",
+      "title": "Install DCS Panels, Cabinets & Marshalling Racks",
+      "description": "Install DCS system cabinets, marshalling panels, and IO racks in the control room. Route and terminate field cables per IO list and loop drawings.",
+      "phase": 6,
+      "discipline": "Instrumentation/Controls",
+      "estimated_hours": 300,
+      "priority": "high",
+      "dependencies": [
+        "T107"
+      ],
+      "deliverables": "DCS Installation & IO Termination Records",
+      "acceptance_criteria": "All IO modules installed; termination verified per IO list; cabinet earth bonding complete; fibre optic links tested."
+    },
+    {
+      "id": "T113",
+      "title": "Install Field Instruments (Transmitters, Switches, Valves)",
+      "description": "Install field instruments including pressure/temperature/level/flow transmitters, limit switches, solenoid valves, analysers, and actuated on-off valves with proper impulse lines.",
+      "phase": 6,
+      "discipline": "Instrumentation/Controls",
+      "estimated_hours": 400,
+      "priority": "high",
+      "dependencies": [
+        "T106"
+      ],
+      "deliverables": "Field Instrument Installation Record & Calibration Reports",
+      "acceptance_criteria": "Instruments installed per location plan; impulse lines blown and leak tested; calibration certificates current."
+    },
+    {
+      "id": "T114",
+      "title": "Implement Permit to Work (PTW) System on Site",
+      "description": "Operate the site PTW system for all construction activities \u2014 hot work, confined space, excavation, lifting, electrical isolation, and radiography permits.",
+      "phase": 6,
+      "discipline": "HSE",
+      "estimated_hours": 200,
+      "priority": "high",
+      "dependencies": [
+        "T063",
+        "T082"
+      ],
+      "deliverables": "PTW Register & Issued Permits",
+      "acceptance_criteria": "All work covered by valid permits; permit compliance audited weekly; safety observations tracked; PTW system compliance >95%."
+    },
+    {
+      "id": "T115",
+      "title": "Manage Simultaneous Operations (SIMOPS)",
+      "description": "Coordinate and manage SIMOPS (simultaneous operations) risks during concurrent construction, commissioning, and testing activities through risk assessment and exclusion zones.",
+      "phase": 6,
+      "discipline": "HSE",
+      "estimated_hours": 120,
+      "priority": "high",
+      "dependencies": [
+        "T111"
+      ],
+      "deliverables": "SIMOPS Risk Register & Coordination Log",
+      "acceptance_criteria": "SIMOPS assessments completed; exclusion zones defined and enforced; incident-free SIMOPS period achieved."
+    },
+    {
+      "id": "T116",
+      "title": "Develop & Execute Inspection Test Plans (ITPs)",
+      "description": "Develop and implement system-specific Inspection and Test Plans (ITPs) covering all quality hold points, witness points, and review points for electrical and instrumentation installation.",
+      "phase": 6,
+      "discipline": "Quality",
+      "estimated_hours": 200,
+      "priority": "high",
+      "dependencies": [
+        "T105"
+      ],
+      "deliverables": "ITP Documents & Signed Hold Point Records",
+      "acceptance_criteria": "All ITPs issued per system; hold/witness points executed per schedule; ITP records compiled in quality dossier."
+    },
+    {
+      "id": "T117",
+      "title": "Perform Hydrostatic Testing of E&I-Connected Piping",
+      "description": "Execute hydrostatic pressure tests for instrument impulse lines, air headers, hydraulic systems, and small-bore piping connected to E&I systems.",
+      "phase": 6,
+      "discipline": "Quality",
+      "estimated_hours": 200,
+      "priority": "high",
+      "dependencies": [
+        "T110"
+      ],
+      "deliverables": "Hydrostatic Test Certificates (E&I Systems)",
+      "acceptance_criteria": "All instrument impulse lines pressure tested; air headers leak tested at operating pressure; test records signed."
+    },
+    {
+      "id": "T118",
+      "title": "Conduct NDT on E&I Support & Structural Welds",
+      "description": "Perform NDT (dye penetrant, magnetic particle, ultrasonic) on structural welds for cable tray supports, instrument stands, and electrical equipment pedestals.",
+      "phase": 6,
+      "discipline": "Quality",
+      "estimated_hours": 100,
+      "priority": "medium",
+      "dependencies": [
+        "T105",
+        "T107"
+      ],
+      "deliverables": "NDT Reports for E&I Supports",
+      "acceptance_criteria": "All critical support welds tested; rejections repaired and retested; NDT records filed in quality dossier."
+    },
+    {
+      "id": "T119",
+      "title": "Manage Non-Conformance Reports (NCRs) for E&I",
+      "description": "Raise, assign, and close Non-Conformance Reports (NCRs) for E&I installation deviations. Track root cause analysis, corrective actions, and re-verification.",
+      "phase": 6,
+      "discipline": "Quality",
+      "estimated_hours": 120,
+      "priority": "high",
+      "dependencies": [
+        "T105",
+        "T111"
+      ],
+      "deliverables": "NCR Log & Closed NCR Records",
+      "acceptance_criteria": "All NCRs closed within target; root cause analysis documented; corrective actions verified; repeat NCR rate below target."
+    },
+    {
+      "id": "T120",
+      "title": "Develop & Manage E&I Punch Lists",
+      "description": "Compile and manage punch lists for electrical and instrumentation systems covering incomplete works, commissioning punch items, and pre-commissioning readiness gaps.",
+      "phase": 6,
+      "discipline": "Commissioning",
+      "estimated_hours": 100,
+      "priority": "high",
+      "dependencies": [
+        "T105",
+        "T107",
+        "T110"
+      ],
+      "deliverables": "E&I Punch List Register",
+      "acceptance_criteria": "All punch items logged with priority and assignee; punch list closure tracked weekly; zero outstanding for MC."
+    },
+    {
+      "id": "T121",
+      "title": "Conduct HSE Site Audits & Safety Observations",
+      "description": "Conduct weekly HSE site audits, safety observations, behaviour-based safety walks, and near-miss reporting. Track leading and lagging safety indicators.",
+      "phase": 6,
+      "discipline": "HSE",
+      "estimated_hours": 160,
+      "priority": "high",
+      "dependencies": [
+        "T111"
+      ],
+      "deliverables": "HSE Audit Reports & Safety Statistics Dashboard",
+      "acceptance_criteria": "Audit observations closed; safety statistics reported monthly; incident rate below project target; leading indicators tracked."
+    },
+    {
+      "id": "T122",
+      "title": "Perform Pre-Commissioning Inspection of E&I Systems",
+      "description": "Complete pre-commissioning inspection of all E&I systems including visual inspection, meggar testing of cables, continuity checks, and loop integrity verification.",
+      "phase": 6,
+      "discipline": "Commissioning",
+      "estimated_hours": 200,
+      "priority": "high",
+      "dependencies": [
+        "T105",
+        "T107"
+      ],
+      "deliverables": "E&I Pre-Commissioning Inspection Reports",
+      "acceptance_criteria": "All systems inspected; meggar values within limits; continuity and polarity confirmed; systems ready for commissioning."
+    },
+    {
+      "id": "T123",
+      "title": "Compile Mechanical Completion (MC) Dossiers",
+      "description": "Assemble Mechanical Completion dossiers per system including design documents, as-built drawings, material certificates, NDT reports, test records, and punch list status.",
+      "phase": 7,
+      "discipline": "Commissioning",
+      "estimated_hours": 300,
+      "priority": "high",
+      "dependencies": [
+        "T091",
+        "T093",
+        "T118"
+      ],
+      "deliverables": "MC Dossiers (All Systems)",
+      "acceptance_criteria": "All dossiers complete and reviewed; documents indexed per system; dossier signed off by discipline leads."
+    },
+    {
+      "id": "T124",
+      "title": "Flush & Clean Piping Systems",
+      "description": "Perform flushing and cleaning of all piping systems \u2014 water flush, air blow, steam blow, or chemical cleaning as specified \u2014 to remove debris and mill scale.",
+      "phase": 7,
+      "discipline": "Commissioning",
+      "estimated_hours": 300,
+      "priority": "high",
+      "dependencies": [
+        "T116"
+      ],
+      "deliverables": "Flushing & Cleaning Completion Reports",
+      "acceptance_criteria": "Flushing acceptance criteria met (target cleanliness level); strainers inspected and cleaned; evidence logged with photos."
+    },
+    {
+      "id": "T125",
+      "title": "Conduct Chemical Cleaning of Process Systems",
+      "description": "Execute chemical cleaning (acid cleaning, degreasing, passivation) for critical process systems such as lube oil, hydraulic oil, and chemical injection systems.",
+      "phase": 7,
+      "discipline": "Commissioning",
+      "estimated_hours": 200,
+      "priority": "high",
+      "dependencies": [
+        "T117"
+      ],
+      "deliverables": "Chemical Cleaning Reports & Passivation Verification",
+      "acceptance_criteria": "Chemical cleaning completed per procedure; passivation verified; neutralisation confirmed; waste disposed per permit."
+    },
+    {
+      "id": "T126",
+      "title": "Perform Hydrostatic & Pneumatic Leak Testing",
+      "description": "Conduct final hydrostatic and pneumatic leak tests on all completed systems per testing and commissioning plan. Verify test pressures, hold times, and sign off.",
+      "phase": 7,
+      "discipline": "Commissioning",
+      "estimated_hours": 400,
+      "priority": "high",
+      "dependencies": [
+        "T116"
+      ],
+      "deliverables": "Leak Test Certificates (Hydrostatic & Pneumatic)",
+      "acceptance_criteria": "All tests passed per procedure; leak rate within acceptable limits; certificates signed by commissioning engineer and QC."
+    },
+    {
+      "id": "T127",
+      "title": "Execute Loop Checks (I/O Continuity & Functionality)",
+      "description": "Perform loop checks on all control and safety instrumented loops including I/O continuity, polarity, signal scaling, valve stroking, and alarm validation.",
+      "phase": 7,
+      "discipline": "Instrumentation/Controls",
+      "estimated_hours": 400,
+      "priority": "high",
+      "dependencies": [
+        "T108",
+        "T118"
+      ],
+      "deliverables": "Loop Check Logs & Signed Loop Cards",
+      "acceptance_criteria": "All loops checked; I/O signals verified at DCS; valve stroked full travel; alarms tested; loop cards signed."
+    },
+    {
+      "id": "T128",
+      "title": "Energise Electrical Systems (LV & MV)",
+      "description": "Execute energisation of low voltage and medium voltage electrical systems following approved energisation plan \u2014 including meggar, IR testing, breaker racking, transformer inrush, and bus charging.",
+      "phase": 7,
+      "discipline": "Electrical Engineering",
+      "estimated_hours": 300,
+      "priority": "high",
+      "dependencies": [
+        "T112"
+      ],
+      "deliverables": "Energisation Reports & Test Sheets",
+      "acceptance_criteria": "All panels energised; voltage levels confirmed; phasing checked; no earth faults; energisation sequence logged."
+    },
+    {
+      "id": "T129",
+      "title": "Run-In Rotating Equipment (No-Load & Load Test)",
+      "description": "Perform run-in of rotating equipment \u2014 pumps, compressors, turbines, fans \u2014 starting with no-load (bump test) followed by progressive loading to full operating conditions.",
+      "phase": 7,
+      "discipline": "Mechanical Engineering",
+      "estimated_hours": 300,
+      "priority": "high",
+      "dependencies": [
+        "T088"
+      ],
+      "deliverables": "Run-In Test Records & Vibration Analysis Reports",
+      "acceptance_criteria": "Bearing temperatures stable; vibration within limits; no abnormal noise; run-in curve approved by commissioning team."
+    },
+    {
+      "id": "T130",
+      "title": "Load Catalyst & Chemical Charges",
+      "description": "Load catalyst beds, molecular sieves, desiccant charges, activated carbon, and chemical consumables into reactors, dryers, and treatment vessels per loading plan.",
+      "phase": 7,
+      "discipline": "Process Engineering",
+      "estimated_hours": 200,
+      "priority": "high",
+      "dependencies": [
+        "T087"
+      ],
+      "deliverables": "Catalyst Loading Reports & Bed Depth Verification",
+      "acceptance_criteria": "Catalyst loaded per vendor procedure; bed depth and density verified; settling time allowed; record of lot numbers maintained."
+    },
+    {
+      "id": "T131",
+      "title": "Conduct System-Level Pre-Commissioning (All Systems)",
+      "description": "Complete system-level pre-commissioning checks \u2014 valve alignment, line walkdown, P&ID verification, blind/spade removal, and protective device settings verification.",
+      "phase": 7,
+      "discipline": "Commissioning",
+      "estimated_hours": 400,
+      "priority": "high",
+      "dependencies": [
+        "T119",
+        "T122"
+      ],
+      "deliverables": "Pre-Commissioning Sign-Off Certificates (by System)",
+      "acceptance_criteria": "All systems signed off as pre-commissioned; P&ID line walkdown complete; blinds removed; protective device settings verified."
+    },
+    {
+      "id": "T132",
+      "title": "Start-Up & Commissioning (First-of-Process)",
+      "description": "Execute first start-up of the process plant including feed introduction, parameter ramping, product take-off, and stabilisation at nameplate capacity.",
+      "phase": 7,
+      "discipline": "Process Engineering",
+      "estimated_hours": 800,
+      "priority": "high",
+      "dependencies": [
+        "T126"
+      ],
+      "deliverables": "Start-Up Log & Commissioning Completion Report",
+      "acceptance_criteria": "Process parameters achieved per operating manual; product within specification; steady-state operation maintained for minimum 4 hours."
+    },
+    {
+      "id": "T133",
+      "title": "Conduct Performance Test & Guarantee Run",
+      "description": "Execute formal performance test to verify all guarantees \u2014 throughput, product quality, utility consumption, yield, and emissions \u2014 per contract specification.",
+      "phase": 7,
+      "discipline": "Process Engineering",
+      "estimated_hours": 400,
+      "priority": "high",
+      "dependencies": [
+        "T127"
+      ],
+      "deliverables": "Performance Test Report & Guarantee Certificate",
+      "acceptance_criteria": "All performance guarantees met; test witnessed by owner and contractor; performance certificate signed."
+    },
+    {
+      "id": "T134",
+      "title": "Prepare & Issue As-Built Drawings",
+      "description": "Compile complete set of as-built drawings for all disciplines reflecting all field changes, design revisions, and red-line mark-ups made during construction.",
+      "phase": 7,
+      "discipline": "PMO",
+      "estimated_hours": 300,
+      "priority": "high",
+      "dependencies": [
+        "T119"
+      ],
+      "deliverables": "As-Built Drawing Set (All Disciplines)",
+      "acceptance_criteria": "All red-line drawings transferred to as-builts; revisions tracked; as-built set issued in hard copy and digital archive."
+    },
+    {
+      "id": "T135",
+      "title": "Execute Operator Training & Handover Training",
+      "description": "Deliver systematic operator training programme covering process description, start-up/shutdown procedures, emergency response, DCS operation, and troubleshooting.",
+      "phase": 7,
+      "discipline": "Commissioning",
+      "estimated_hours": 200,
+      "priority": "high",
+      "dependencies": [
+        "T119",
+        "T126"
+      ],
+      "deliverables": "Operator Training Records & Competency Assessment Reports",
+      "acceptance_criteria": "All operators trained per training matrix; competency assessment passed; simulator training completed; training records filed."
+    },
+    {
+      "id": "T136",
+      "title": "Obtain Provisional Acceptance Certificate (PAC)",
+      "description": "Complete all pre-commissioning and commissioning activities, resolve all Category A punch items, and obtain Provisional Acceptance Certificate from the owner.",
+      "phase": 7,
+      "discipline": "PMO",
+      "estimated_hours": 160,
+      "priority": "high",
+      "dependencies": [
+        "T127",
+        "T128"
+      ],
+      "deliverables": "Signed Provisional Acceptance Certificate (PAC)",
+      "acceptance_criteria": "All Category A punch items closed; systems handed over; PAC signed by owner and contractor; defects liability period commenced."
+    },
+    {
+      "id": "T137",
+      "title": "Handover Project to Operations Team",
+      "description": "Formally hand over the completed plant to the operations team including all documentation, spare parts, tool kits, warranty certificates, and O&M manuals.",
+      "phase": 7,
+      "discipline": "PMO",
+      "estimated_hours": 200,
+      "priority": "high",
+      "dependencies": [
+        "T130"
+      ],
+      "deliverables": "Handover Checklist & Transfer of Custody Certificate",
+      "acceptance_criteria": "All deliverables transferred; spare parts inventory verified; O&M manuals accepted; operations team acknowledges plant readiness."
+    },
+    {
+      "id": "T138",
+      "title": "Complete Final Account & Issue FAC Certificate",
+      "description": "Finalise the contract account including all change orders, claims, variations, and retention release. Issue the Final Acceptance Certificate (FAC) upon expiry of defects liability period.",
+      "phase": 7,
+      "discipline": "PMO",
+      "estimated_hours": 200,
+      "priority": "high",
+      "dependencies": [
+        "T130",
+        "T131"
+      ],
+      "deliverables": "Final Account Statement & Final Acceptance Certificate (FAC)",
+      "acceptance_criteria": "Final account agreed and signed; all claims resolved; retention released; FAC issued; project close-out report completed."
+    },
+    {
+      "id": "T139",
+      "title": "Conduct Front-End Loading (FEL) Assessment",
+      "description": "Perform FEL assessment at the end of Phase 1 to evaluate definition maturity across scope, cost, schedule, risk, and execution strategy before authorising detailed engineering. Target FEL Index >= 3 (Industry benchmark for process plants).",
+      "phase": 1,
+      "discipline": "PMO",
+      "estimated_hours": 80,
+      "priority": "high",
+      "dependencies": [
+        "T034"
+      ],
+      "deliverables": "FEL Assessment Report (FEL Index score + gap closure plan)",
+      "acceptance_criteria": "FEL Index >= 3.0; all identified gaps have closure actions with owners and target dates."
+    },
+    {
+      "id": "T140",
+      "title": "Establish Earned Value Management (EVM) System",
+      "description": "Set up the project EVM system including control accounts, work packages, performance measurement baseline (PMB), and reporting templates. Configure earned value calculations (EV, PV, AC, SPI, CPI) with monthly reporting cadence.",
+      "phase": 0,
+      "discipline": "PMO",
+      "estimated_hours": 120,
+      "priority": "high",
+      "dependencies": [
+        "T011"
+      ],
+      "deliverables": "Control Account Dictionary; EVM reports template; IMS with EVM integration",
+      "acceptance_criteria": "EVM baseline approved by project controls; all control accounts assigned to managers."
+    },
+    {
+      "id": "T141",
+      "title": "Calculate Earned Value & S-Curve Analysis (Monthly)",
+      "description": "Produce monthly EVM report: calculate EV, AC, PV, SPI, CPI, EAC, and generate S-curve showing plan vs actual. Highlight variances exceeding thresholds and recommend corrective actions.",
+      "phase": 2,
+      "discipline": "PMO",
+      "estimated_hours": 40,
+      "priority": "high",
+      "dependencies": [
+        "T140"
+      ],
+      "deliverables": "Monthly EVM Report with S-Curve",
+      "acceptance_criteria": "EVM data reconciled with cost system; variances > 10% flagged with corrective action plan."
+    },
+    {
+      "id": "T142",
+      "title": "Update EVM Progress and Reforecast (Ongoing - All Phases)",
+      "description": "Monthly update of EVM progress across all active phases. Re-forecast EAC, TCPI, and variance at completion. Present at monthly project review board with recommended corrective actions for off-target control accounts.",
+      "phase": 3,
+      "discipline": "PMO",
+      "estimated_hours": 30,
+      "priority": "medium",
+      "dependencies": [
+        "T141"
+      ],
+      "deliverables": "Monthly EVM Reforecast Report",
+      "acceptance_criteria": "EAC variance explained; TCPI feasible; corrective actions documented for off-target accounts."
+    },
+    {
+      "id": "T143",
+      "title": "Conduct FEL/Pre-FEED Phase Gate Review",
+      "description": "Conduct formal stage-gate review at the transition from FEL/Pre-FEED to detailed engineering. Verify that FEL Index, risk register, cost estimate confidence interval, and project execution plan meet gate criteria before authorising full detailed engineering release.",
+      "phase": 2,
+      "discipline": "PMO",
+      "estimated_hours": 60,
+      "priority": "critical",
+      "dependencies": [
+        "T139"
+      ],
+      "deliverables": "Gate Review Record; Authorisation to Proceed to Detailed Engineering",
+      "acceptance_criteria": "All gate criteria met; FEL Index >= 3.0; Cost Estimate Accuracy within -15%/+25%; Risk Register reviewed and updated."
+    },
+    {
+      "id": "T144",
+      "title": "Prepare Construction Environmental Management Plan (CEMP)",
+      "description": "Develop a site-specific CEMP covering dust suppression, noise control, waste management, water discharge, and emergency spill response during construction phase.",
+      "phase": 3,
+      "discipline": "HSE",
+      "estimated_hours": 120,
+      "priority": "high",
+      "dependencies": [
+        "T057"
+      ],
+      "deliverables": "CEMP document approved by regulatory authority",
+      "acceptance_criteria": "CEMP submitted and acknowledged by pollution control board"
+    },
+    {
+      "id": "T145",
+      "title": "Apply for Temporary Construction Power Connection",
+      "description": "Apply to the electricity board for temporary high-voltage power supply for construction equipment, lighting, and site facilities during the construction period.",
+      "phase": 3,
+      "discipline": "Permitting",
+      "estimated_hours": 40,
+      "priority": "medium",
+      "dependencies": [],
+      "deliverables": "Temporary power sanction letter from electricity board",
+      "acceptance_criteria": "Temporary power connection approved and metered"
+    },
+    {
+      "id": "T146",
+      "title": "Obtain Weights and Measures / Metrology Approval",
+      "description": "Register and obtain approval for all weighbridges, custody-transfer meters, and process weighing systems from the legal metrology department as applicable.",
+      "phase": 3,
+      "discipline": "Permitting",
+      "estimated_hours": 40,
+      "priority": "medium",
+      "dependencies": [],
+      "deliverables": "Metrology approval certificates for each device",
+      "acceptance_criteria": "All weighbridges and meters registered and stamped"
+    },
+    {
+      "id": "T147",
+      "title": "Submit Groundwater Abstraction Application",
+      "description": "Apply to the groundwater authority for permission to extract water from borewells or surface sources for construction and/or operation, including hydrology study if required.",
+      "phase": 3,
+      "discipline": "Permitting",
+      "estimated_hours": 80,
+      "priority": "high",
+      "dependencies": [
+        "T057",
+        "T059"
+      ],
+      "deliverables": "Groundwater abstraction permit or NOC",
+      "acceptance_criteria": "Permit received with approved annual abstraction volume"
+    },
+    {
+      "id": "T148",
+      "title": "Prepare Pre-Commissioning Plan & Flushing Philosophy",
+      "description": "Develop systematic pre-commissioning plan covering system turnover sequence, flushing/cleaning philosophy, chemical cleaning specs, and hydrotest package grouping.",
+      "phase": 5,
+      "discipline": "Commissioning",
+      "estimated_hours": 120,
+      "priority": "high",
+      "dependencies": [
+        "T122"
+      ],
+      "deliverables": "Pre-commissioning plan document and test package register",
+      "acceptance_criteria": "Pre-commissioning plan reviewed and approved by commissioning manager"
+    },
+    {
+      "id": "T149",
+      "title": "Develop System Turnover Sequence & Package Boundaries",
+      "description": "Define system-by-system turnover sequence from construction to commissioning, including turnover package boundaries, dossiers, and completion certificate templates per system.",
+      "phase": 6,
+      "discipline": "Commissioning",
+      "estimated_hours": 80,
+      "priority": "high",
+      "dependencies": [
+        "T122"
+      ],
+      "deliverables": "System turnover schedule and package boundary mark-up on P&IDs",
+      "acceptance_criteria": "Turnover sequence aligned with construction completion plan and commissioning priority"
+    },
+    {
+      "id": "T150",
+      "title": "Conduct Pre-Startup Safety Review (PSSR)",
+      "description": "Formal cross-functional review of all safety systems, operating procedures, training records, and equipment readiness before first introduction of hazardous process fluids.",
+      "phase": 7,
+      "discipline": "HSE",
+      "estimated_hours": 80,
+      "priority": "critical",
+      "dependencies": [
+        "T123",
+        "T124",
+        "T125"
+      ],
+      "deliverables": "PSSR close-out report and readiness certificate",
+      "acceptance_criteria": "All PSSR action items closed or accepted; signed by operations, HSE, and plant manager"
+    },
+    {
+      "id": "T151",
+      "title": "Complete Equipment Inspection & Material Dossier for Warranty",
+      "description": "Compile complete equipment records (serial numbers, certificates, test reports, warranty cards, spare parts lists) for all major equipment and hand over to operations for warranty tracking.",
+      "phase": 7,
+      "discipline": "Quality",
+      "estimated_hours": 120,
+      "priority": "medium",
+      "dependencies": [
+        "T134"
+      ],
+      "deliverables": "Equipment dossier register with all certificates and warranty documents",
+      "acceptance_criteria": "Dossier complete and signed off by operations; warranty start dates recorded"
+    },
+    {
+      "id": "T152",
+      "title": "Establish Project Document Control & Master Document Register",
+      "description": "Set up a centralized document control system (EDMS) with master document register, revision control, transmittal tracking, and document numbering procedure.",
+      "phase": 0,
+      "discipline": "PMO",
+      "estimated_hours": 60,
+      "priority": "high",
+      "dependencies": [
+        "T001"
+      ],
+      "deliverables": "EDMS configured; master document register with revision 0",
+      "acceptance_criteria": "Document control procedure approved; all team members trained on system"
+    },
+    {
+      "id": "T153",
+      "title": "Execute Flange Management & Joint Integrity Program",
+      "description": "Implement bolted flange management program including joint integrity training, flange management software/database, torque/tension calibration, and joint integrity verification.",
+      "phase": 5,
+      "discipline": "Quality",
+      "estimated_hours": 120,
+      "priority": "high",
+      "dependencies": [
+        "T097"
+      ],
+      "deliverables": "Flange register with joint integrity records; trained joint integrity team",
+      "acceptance_criteria": "All critical flanges torqued/tensioned per spec; joint integrity records in database"
+    },
+    {
+      "id": "T154",
+      "title": "Coordinate Third-Party Statutory Inspections (Pressure Vessels, Lifting Equipment)",
+      "description": "Engage third-party inspection agencies for statutory inspections of pressure vessels, lifting equipment, hoists, and cranes as required by local regulations before commissioning.",
+      "phase": 6,
+      "discipline": "Quality",
+      "estimated_hours": 60,
+      "priority": "high",
+      "dependencies": [
+        "T061"
+      ],
+      "deliverables": "Statutory inspection certificates for all registered equipment",
+      "acceptance_criteria": "All inspections passed; certificates issued and filed in equipment dossier"
+    },
+    {
+      "id": "T155",
+      "title": "Conduct Construction Completion Walkdown & Mechanical Completion Certificate",
+      "description": "Systematic walkdown of each package/area jointly by construction, commissioning, and quality teams; verify construction completion per IFC drawings and specifications; issue MC certificate.",
+      "phase": 7,
+      "discipline": "Commissioning",
+      "estimated_hours": 200,
+      "priority": "critical",
+      "dependencies": [
+        "T123"
+      ],
+      "deliverables": "Signed MC certificates for each turnover package; punch list items documented",
+      "acceptance_criteria": "All systems walked down; MC certificates signed; punch list items classified and assigned"
+    },
+    {
+      "id": "T156",
+      "title": "Implement Lessons Learned System & Close-Out Report Template",
+      "description": "Establish a live lessons-learned capture system during execution (not post-project), with periodic workshops at phase gates, and prepare close-out report template for final handover.",
+      "phase": 0,
+      "discipline": "PMO",
+      "estimated_hours": 40,
+      "priority": "medium",
+      "dependencies": [
+        "T001"
+      ],
+      "deliverables": "Lessons learned database template; phase-gate LL workshop schedule",
+      "acceptance_criteria": "LL system deployed; first LL workshop completed at end of Phase 1"
+    },
+    {
+      "id": "T157",
+      "title": "Establish Master Document Register & Document Numbering Procedure",
+      "description": "Set up a centralized master document register (MDR) with a consistent document numbering scheme covering all engineering disciplines, vendor documents, and project correspondence",
+      "phase": 0,
+      "discipline": "Document Control",
+      "estimated_hours": 60,
+      "priority": "high",
+      "dependencies": [
+        "T001"
+      ],
+      "deliverables": "Master Document Register v1.0; Document Numbering Procedure approved",
+      "acceptance_criteria": "MDR covers all document types; numbering scheme is unambiguous and extensible"
+    },
+    {
+      "id": "T158",
+      "title": "Implement Electronic Document Management System (EDMS)",
+      "description": "Configure EDMS platform (e.g., Aconex, SharePoint, Procore) with project structure, user roles, security permissions, transmittal workflows, and revision control per project procedure",
+      "phase": 0,
+      "discipline": "Document Control",
+      "estimated_hours": 80,
+      "priority": "high",
+      "dependencies": [
+        "T157"
+      ],
+      "deliverables": "EDMS configured and tested; user training conducted; system go-live memo",
+      "acceptance_criteria": "EDMS operational with all user roles; test transmittal cycle completed successfully"
+    },
+    {
+      "id": "T159",
+      "title": "Manage Engineering Document Transmittal & Review Cycles",
+      "description": "Process incoming and outgoing document transmittals for all engineering disciplines; track review status, revision history, and approval signatures; issue weekly transmittal status reports",
+      "phase": 1,
+      "discipline": "Document Control",
+      "estimated_hours": 160,
+      "priority": "medium",
+      "dependencies": [
+        "T158"
+      ],
+      "deliverables": "Transmittal register; weekly document status reports",
+      "acceptance_criteria": "All transmittals logged within 1 business day; review cycle status visible in EDMS"
+    },
+    {
+      "id": "T160",
+      "title": "Coordinate Vendor Document Register (VDR) Index & Status Tracking",
+      "description": "Create and maintain the vendor document register tracking all vendor submissions, engineering review cycles (A/B/C status), and resubmission due dates per purchase order",
+      "phase": 4,
+      "discipline": "Document Control",
+      "estimated_hours": 200,
+      "priority": "high",
+      "dependencies": [
+        "T070"
+      ],
+      "deliverables": "VDR status dashboard; overdue vendor submission alerts; monthly VDR status report",
+      "acceptance_criteria": "All PO-related submissions tracked; 100% of overdue items flagged weekly"
+    },
+    {
+      "id": "T161",
+      "title": "Hand Over As-Built Document Set & O&M Manuals",
+      "description": "Compile, verify, and deliver the complete as-built documentation package (IFC drawings marked up with red-line changes, O&M manuals, equipment certificates, and inspection records) to operations",
+      "phase": 7,
+      "discipline": "Document Control",
+      "estimated_hours": 200,
+      "priority": "critical",
+      "dependencies": [
+        "T134"
+      ],
+      "deliverables": "Complete as-built document set (digital + hard copy); O&M manual library; handover certificate",
+      "acceptance_criteria": "Operations team confirms receipt and completeness; all red-line mark-ups incorporated; PAC condition met"
+    },
+    {
+      "id": "T162",
+      "title": "Develop Project Carbon Footprint Baseline (Design Phase)",
+      "description": "Calculate the project's Scope 1, 2, and 3 carbon footprint baseline based on the FEED design \u2014 including process emissions, utility consumption, construction materials, and logistics \u2014 using recognized protocols (GHG Protocol, ISO 14064)",
+      "phase": 1,
+      "discipline": "Process Engineering",
+      "estimated_hours": 120,
+      "priority": "medium",
+      "dependencies": [
+        "T014"
+      ],
+      "deliverables": "Project carbon footprint baseline report; emission factor datasheet and sources document",
+      "acceptance_criteria": "Baseline reviewed with sustainability team; Scope 1/2/3 boundaries defined; report ready for ESG due diligence"
+    },
+    {
+      "id": "T163",
+      "title": "Integrate Carbon Reduction Criteria in Material & Equipment Procurement",
+      "description": "Include embodied carbon and environmental product declaration (EPD) requirements in procurement specifications for major materials (steel, concrete, insulation, piping); evaluate vendor EPD submissions alongside cost and technical criteria",
+      "phase": 4,
+      "discipline": "Procurement",
+      "estimated_hours": 80,
+      "priority": "medium",
+      "dependencies": [
+        "T093",
+        "T094",
+        "T095"
+      ],
+      "deliverables": "Procurement carbon criteria incorporated into MR/RFQ templates; EPD evaluation summary",
+      "acceptance_criteria": "All major material RFQs include embodied carbon or EPD requirement; EPDs collected and evaluated for top-10 suppliers"
+    },
+    {
+      "id": "T164",
+      "title": "Monitor & Report Construction Phase Carbon Emissions",
+      "description": "Track monthly diesel, electricity, and fuel consumption across construction site; compute actual Scope 1/2 emissions; compare against baseline; identify emission reduction opportunities (electrification, solar lighting, efficient logistics)",
+      "phase": 5,
+      "discipline": "HSE",
+      "estimated_hours": 80,
+      "priority": "medium",
+      "dependencies": [
+        "T162"
+      ],
+      "deliverables": "Monthly carbon emission reports; cumulative emissions tracker; reduction opportunity register",
+      "acceptance_criteria": "Monthly reports submitted to PMO within 10 working days of month end; reduction opportunities quantified"
+    },
+    {
+      "id": "T165",
+      "title": "Conduct Post-Project Carbon Accounting & Close-Out",
+      "description": "Complete final carbon account for the project \u2014 reconcile construction emissions, establish operational baseline, document carbon reduction achievements, and provide handover data for ongoing operational ESG reporting",
+      "phase": 7,
+      "discipline": "PMO",
+      "estimated_hours": 100,
+      "priority": "low",
+      "dependencies": [
+        "T138",
+        "T164"
+      ],
+      "deliverables": "Final project carbon account report; operational carbon baseline; ESG data pack for operations handover",
+      "acceptance_criteria": "Carbon account reconciled; operational baseline accepted by operations team; report suitable for ESG disclosure"
+    }
+  ]
+}

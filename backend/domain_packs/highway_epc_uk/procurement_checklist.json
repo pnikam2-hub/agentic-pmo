@@ -1,0 +1,132 @@
+{
+  "pack": "highway_epc_uk",
+  "total_packages": 14,
+  "packages": [
+    {
+      "package_name": "Structural steel (bridges)",
+      "criticality": "critical",
+      "long_lead": true,
+      "vendor_qualification_criteria": "CE-marked structural steelwork fabrication to EN 1090 Execution Class 3; National Highways Highway Sector Plan acceptance; third-party welder qualifications.",
+      "technical_documents_required": ["Structural steel drawings", "Material certificates", "Welding procedure specifications (WPS)", "Corrosion protection system details"],
+      "inspection_requirements": "Source inspection at fabricator incl. welding, dimensional and paint checks;Factory Acceptance Test (FAT) records.",
+      "acceptance_tests": "Erection trial fit; bolt torque/weld inspection on site; non-destructive testing (NDT) sample."
+    },
+    {
+      "package_name": "Precast concrete beams",
+      "criticality": "critical",
+      "long_lead": true,
+      "vendor_qualification_criteria": "BES 6001/CE-marked precast concrete manufacturer; National Highways acceptance; demonstrated prestressing capability.",
+      "technical_documents_required": ["Beam design and shop drawings", "Concrete mix design", "Prestressing calculations", "Lifting and handling method"],
+      "inspection_requirements": "Factory inspection of prestressing, concrete strength and geometry;FAT.",
+      "acceptance_tests": "Cube strength verification; geometry check; lifting proof check; installation inspection."
+    },
+    {
+      "package_name": "Pavement plant & materials (asphalt)",
+      "criticality": "high",
+      "long_lead": false,
+      "vendor_qualification_criteria": "CE-marked asphalt to BS EN 13108; accredited asphalt plant; National Highways acceptance.",
+      "technical_documents_required": ["Asphalt mix design", "Aggregate source approvals", "Plant calibration records"],
+      "inspection_requirements": "Plant audit; daily laying temperature and density checks; coring programme.",
+      "acceptance_tests": "Composition and volumetric testing; in-situ density; skid resistance (pendulum/SCRIM)."
+    },
+    {
+      "package_name": "Road restraint systems (VRS)",
+      "criticality": "high",
+      "long_lead": false,
+      "vendor_qualification_criteria": "VRS with current vehicle restraint full-scale impact test certification to EN 1317; National Highways accepted system.",
+      "technical_documents_required": ["System impact certification", "Installation drawings", "Foundation design", "Containment/working-width data"],
+      "inspection_requirements": "Installation inspection against the certified system; foundation verification.",
+      "acceptance_tests": "Confirmation of certified system, containment level and working width; post-installation sign-off."
+    },
+    {
+      "package_name": "Gantries & VMS",
+      "criticality": "critical",
+      "long_lead": true,
+      "vendor_qualification_criteria": "National Highways accepted gantry and VMS supplier; structural and electrical type approval.",
+      "technical_documents_required": ["Gantry structural design", "VMS type approval", "Foundation design", "Electrical schematics"],
+      "inspection_requirements": "Factory inspection andFAT; site erection inspection.",
+      "acceptance_tests": "Structural certification; VMS functional and visibility test; communications integration."
+    },
+    {
+      "package_name": "Smart motorway technology (MIDAS/HAR/ERF/HSR)",
+      "criticality": "critical",
+      "long_lead": true,
+      "vendor_qualification_criteria": "National Highways accepted ITS supplier for all-lane-running systems; cybersecurity accreditation.",
+      "technical_documents_required": ["Systems architecture", "Interface control documents", "Detector (MIDAS) specifications", "ERF/HSR and HAR device specs"],
+      "inspection_requirements": "Factory testing of devices; site commissioning and integration testing.",
+      "acceptance_tests": "Detector accuracy; end-to-end integration test; cybersecurity and comms resilience test."
+    },
+    {
+      "package_name": "Signage & lighting columns",
+      "criticality": "high",
+      "long_lead": false,
+      "vendor_qualification_criteria": "CE-marked lighting columns and traffic signs to relevant standards; National Highways acceptance.",
+      "technical_documents_required": ["Column and sign drawings", "Foundation design", "BS 5489 compliance", "Wind/loading calculations"],
+      "inspection_requirements": "Factory dimensional and finish inspection; site installation inspection.",
+      "acceptance_tests": "Structural certification; electrical safety test; photometric verification."
+    },
+    {
+      "package_name": "Drainage (culverts, pipes, attenuation)",
+      "criticality": "high",
+      "long_lead": false,
+      "vendor_qualification_criteria": "CE-marked drainage products manufacturer; compliant with CD 527 and water-company specs.",
+      "technical_documents_required": ["Product specifications", "Structural design for buried pipes", "Attenuation sizing", "Outfall details"],
+      "inspection_requirements": "Product inspection; site installation and joint inspection.",
+      "acceptance_tests": "CCTV survey; mandrel/ovality test; outfall proving; watertightness test."
+    },
+    {
+      "package_name": "Noise barriers",
+      "criticality": "medium",
+      "long_lead": false,
+      "vendor_qualification_criteria": "Supplier of acoustically-rated barriers with proven durability; National Highways acceptance.",
+      "technical_documents_required": ["Acoustic performance data", "Barrier drawings", "Foundation design", "Material durability data"],
+      "inspection_requirements": "Product inspection; site installation inspection.",
+      "acceptance_tests": "Acoustic performance confirmation; structural/wind check; visual acceptance."
+    },
+    {
+      "package_name": "Geotechnical (reinforced earth, geogrids)",
+      "criticality": "high",
+      "long_lead": false,
+      "vendor_qualification_criteria": "System supplier with independent design and accreditation for reinforced soil and geogrids.",
+      "technical_documents_required": ["Reinforced earth design", "Geogrid specifications", "Connection details", "QA plan"],
+      "inspection_requirements": "Product inspection; site placement and compaction verification.",
+      "acceptance_tests": "Pull-out/connection checks; compaction tests; geometry verification."
+    },
+    {
+      "package_name": "ITS / electrical cabling & ducting",
+      "criticality": "high",
+      "long_lead": false,
+      "vendor_qualification_criteria": "Supplier of highway-spec ducting and cabling; National Highways accepted; BSI accredited.",
+      "technical_documents_required": ["Cable and duct specifications", "Route drawings", "Drainage/ducting interface", "Test certificates"],
+      "inspection_requirements": "Product inspection; site installation and continuity inspection.",
+      "acceptance_tests": "Continuity and insulation testing; duct proving; as-built verification."
+    },
+    {
+      "package_name": "Temporary traffic management infrastructure",
+      "criticality": "high",
+      "long_lead": false,
+      "vendor_qualification_criteria": "Sector Scheme qualified TM supplier; competent TM operatives and designers.",
+      "technical_documents_required": ["TM design to standard", "Taper/closure details", "Vehicle restraint/cones spec", "Operative competencies"],
+      "inspection_requirements": "Pre-work TM inspection; continuous monitoring; handback check.",
+      "acceptance_tests": "TM compliance check against design; safe handback; signage and lighting verification."
+    },
+    {
+      "package_name": "Bridge bearings & expansion joints",
+      "criticality": "critical",
+      "long_lead": true,
+      "vendor_qualification_criteria": "CE-marked bearings and joints to EN 1337; National Highways acceptance.",
+      "technical_documents_required": ["Bearing design", "Expansion joint details", "Movement calculations", "Installation method"],
+      "inspection_requirements": "Factory inspection andFAT; site installation inspection.",
+      "acceptance_tests": "Bearing movement test; joint watertightness and noise test; installation sign-off."
+    },
+    {
+      "package_name": "Concrete & cementitious materials",
+      "criticality": "high",
+      "long_lead": false,
+      "vendor_qualification_criteria": "BES 6001/CE-marked ready-mixed concrete supplier; QA-accredited batching.",
+      "technical_documents_required": ["Mix designs", "Cement/additions source", "Aggregate approvals", "QA plan"],
+      "inspection_requirements": "Plant audit; slump and cube sampling; placement inspection.",
+      "acceptance_tests": "Cube strength verification; slump/flow; cover and reinforcement inspection."
+    }
+  ]
+}

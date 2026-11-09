@@ -1,0 +1,558 @@
+{
+  "pack": "saf_biomass_ft",
+  "rules": [
+    {
+      "rule_id": "M01",
+      "trigger_condition": "Feedstock contracts not secured by pre-FEED gate",
+      "severity": "high",
+      "recommended_action": "Notify feedstock manager to finalise contracts",
+      "related_phase": [
+        1,
+        2,
+        3
+      ],
+      "related_risks": [
+        "R01",
+        "R05"
+      ]
+    },
+    {
+      "rule_id": "M02",
+      "trigger_condition": "Feedstock moisture > 20% consistently",
+      "severity": "high",
+      "recommended_action": "Engage feedstock pretreatment vendor to reduce moisture below 15%",
+      "related_phase": [
+        2,
+        3
+      ],
+      "related_risks": [
+        "R01",
+        "R02"
+      ]
+    },
+    {
+      "rule_id": "M03",
+      "trigger_condition": "Feedstock ash content > 5% consistently",
+      "severity": "high",
+      "recommended_action": "Audit feedstock source and implement ash reduction preprocessing",
+      "related_phase": [
+        2,
+        3,
+        4
+      ],
+      "related_risks": [
+        "R02",
+        "R03"
+      ]
+    },
+    {
+      "rule_id": "M04",
+      "trigger_condition": "Feedstock alkali/chlorine/sulfur exceeding design",
+      "severity": "critical",
+      "recommended_action": "Halt procurement from non-compliant sources; update feedstock specification and retest",
+      "related_phase": [
+        2,
+        3
+      ],
+      "related_risks": [
+        "R02",
+        "R03",
+        "R06"
+      ]
+    },
+    {
+      "rule_id": "M05",
+      "trigger_condition": "Gasifier vendor delay > 30 days",
+      "severity": "critical",
+      "recommended_action": "Escalate to project director; explore liquidated damages or alternative vendor",
+      "related_phase": [
+        3
+      ],
+      "related_risks": [
+        "R04",
+        "R07"
+      ]
+    },
+    {
+      "rule_id": "M06",
+      "trigger_condition": "Gasifier cold gas efficiency below 70%",
+      "severity": "critical",
+      "recommended_action": "Commission performance test and engage gasifier OEM for troubleshooting",
+      "related_phase": [
+        3,
+        4
+      ],
+      "related_risks": [
+        "R06",
+        "R08"
+      ]
+    },
+    {
+      "rule_id": "M07",
+      "trigger_condition": "Syngas cleanup package not procured by EPC start",
+      "severity": "critical",
+      "recommended_action": "Initiate emergency procurement; request expedited bidding from prequalified vendors",
+      "related_phase": [
+        3
+      ],
+      "related_risks": [
+        "R04",
+        "R09"
+      ]
+    },
+    {
+      "rule_id": "M08",
+      "trigger_condition": "Syngas tar > 50 mg/Nm3 after cleanup",
+      "severity": "critical",
+      "recommended_action": "Investigate scrubber and reformer performance; increase temperature if needed",
+      "related_phase": [
+        3,
+        4
+      ],
+      "related_risks": [
+        "R06",
+        "R09",
+        "R10"
+      ]
+    },
+    {
+      "rule_id": "M09",
+      "trigger_condition": "Sulfur breakthrough > 10 ppbv in guard bed outlet",
+      "severity": "critical",
+      "recommended_action": "Replace guard bed sorbent immediately; check upstream desulfurisation unit",
+      "related_phase": [
+        4,
+        5
+      ],
+      "related_risks": [
+        "R09",
+        "R11"
+      ]
+    },
+    {
+      "rule_id": "M10",
+      "trigger_condition": "Chlorine breakthrough > 10 ppbv",
+      "severity": "critical",
+      "recommended_action": "Replace chlorine guard material; verify upstream chloride removal efficiency",
+      "related_phase": [
+        4,
+        5
+      ],
+      "related_risks": [
+        "R09",
+        "R11"
+      ]
+    },
+    {
+      "rule_id": "M11",
+      "trigger_condition": "H2/CO ratio unresolved before FEED close",
+      "severity": "high",
+      "recommended_action": "Conduct WGS reactor sizing review and finalise H2 addition strategy",
+      "related_phase": [
+        2
+      ],
+      "related_risks": [
+        "R03",
+        "R08"
+      ]
+    },
+    {
+      "rule_id": "M12",
+      "trigger_condition": "H2/CO ratio outside 1.8-2.2 for cobalt FT",
+      "severity": "critical",
+      "recommended_action": "Adjust WGS bypass or H2 injection rate; recalculate syngas composition target",
+      "related_phase": [
+        3,
+        4,
+        5
+      ],
+      "related_risks": [
+        "R08",
+        "R12"
+      ]
+    },
+    {
+      "rule_id": "M13",
+      "trigger_condition": "FT catalyst order not placed 12 months before loading",
+      "severity": "high",
+      "recommended_action": "Release purchase order with premium expedite; check catalyst shelf-life constraints",
+      "related_phase": [
+        3
+      ],
+      "related_risks": [
+        "R13",
+        "R14"
+      ]
+    },
+    {
+      "rule_id": "M14",
+      "trigger_condition": "FT reactor package delayed > 30 days",
+      "severity": "critical",
+      "recommended_action": "Activate recovery schedule; review critical path and re-sequence downstream activities",
+      "related_phase": [
+        3
+      ],
+      "related_risks": [
+        "R04",
+        "R13"
+      ]
+    },
+    {
+      "rule_id": "M15",
+      "trigger_condition": "FT catalyst performance below 60% conversion",
+      "severity": "critical",
+      "recommended_action": "Initiate catalyst root-cause analysis; prepare catalyst change-out plan",
+      "related_phase": [
+        4,
+        5
+      ],
+      "related_risks": [
+        "R12",
+        "R14",
+        "R15"
+      ]
+    },
+    {
+      "rule_id": "M16",
+      "trigger_condition": "Hydrocracker/isomerization vendor selection delayed",
+      "severity": "high",
+      "recommended_action": "Conduct accelerated bid evaluation; reduce shortlist to two vendors",
+      "related_phase": [
+        2,
+        3
+      ],
+      "related_risks": [
+        "R04",
+        "R16"
+      ]
+    },
+    {
+      "rule_id": "M17",
+      "trigger_condition": "Hydrocracker catalyst not ordered by EPC start",
+      "severity": "high",
+      "recommended_action": "Place catalyst order with lead-time buffer; confirm regeneration cycle compatibility",
+      "related_phase": [
+        3
+      ],
+      "related_risks": [
+        "R16",
+        "R17"
+      ]
+    },
+    {
+      "rule_id": "M18",
+      "trigger_condition": "Jet fractionation column spec not complete",
+      "severity": "high",
+      "recommended_action": "Complete process design basis and submit column datasheet to vendor",
+      "related_phase": [
+        2,
+        3
+      ],
+      "related_risks": [
+        "R03",
+        "R18"
+      ]
+    },
+    {
+      "rule_id": "M19",
+      "trigger_condition": "ASTM D7566 qualification plan not started by FEED",
+      "severity": "high",
+      "recommended_action": "Engage ASTM testing lab and draft qualification test protocol",
+      "related_phase": [
+        2,
+        3
+      ],
+      "related_risks": [
+        "R19",
+        "R20"
+      ]
+    },
+    {
+      "rule_id": "M20",
+      "trigger_condition": "ASTM fuel test schedule not defined before commissioning",
+      "severity": "high",
+      "recommended_action": "Define fuel sampling and testing schedule; reserve laboratory capacity",
+      "related_phase": [
+        3,
+        4
+      ],
+      "related_risks": [
+        "R19",
+        "R20"
+      ]
+    },
+    {
+      "rule_id": "M21",
+      "trigger_condition": "Sustainability certification scheme not selected by Phase 2",
+      "severity": "warning",
+      "recommended_action": "Evaluate ISCC, RSB, and CORSIA requirements; select scheme by Phase 2 gate",
+      "related_phase": [
+        2
+      ],
+      "related_risks": [
+        "R21",
+        "R22"
+      ]
+    },
+    {
+      "rule_id": "M22",
+      "trigger_condition": "ISCC/RSB/CORSIA chain-of-custody evidence gaps",
+      "severity": "high",
+      "recommended_action": "Audit mass balance records; remediate documentation gaps with feedstock suppliers",
+      "related_phase": [
+        3,
+        4,
+        5
+      ],
+      "related_risks": [
+        "R21",
+        "R22"
+      ]
+    },
+    {
+      "rule_id": "M23",
+      "trigger_condition": "Carbon intensity estimate not completed before FEED",
+      "severity": "high",
+      "recommended_action": "Commission CI modelling from sustainability consultant before FEED close",
+      "related_phase": [
+        2
+      ],
+      "related_risks": [
+        "R22",
+        "R23"
+      ]
+    },
+    {
+      "rule_id": "M24",
+      "trigger_condition": "HAZOP recommendations not closed before construction",
+      "severity": "critical",
+      "recommended_action": "Assign owners and deadlines; escalate overdue actions to project steering committee",
+      "related_phase": [
+        3
+      ],
+      "related_risks": [
+        "R24",
+        "R25"
+      ]
+    },
+    {
+      "rule_id": "M25",
+      "trigger_condition": "HAZOP recommendations overdue > 60 days",
+      "severity": "high",
+      "recommended_action": "Issue non-compliance notice to action owner; escalate to HSE director",
+      "related_phase": [
+        3,
+        4
+      ],
+      "related_risks": [
+        "R24",
+        "R25"
+      ]
+    },
+    {
+      "rule_id": "M26",
+      "trigger_condition": "EIA application not submitted by Phase 3 gate",
+      "severity": "critical",
+      "recommended_action": "Mobilise environmental consultant for expedited submission; engage regulator pre-submission",
+      "related_phase": [
+        3
+      ],
+      "related_risks": [
+        "R26",
+        "R27"
+      ]
+    },
+    {
+      "rule_id": "M27",
+      "trigger_condition": "Air emissions permit not submitted",
+      "severity": "critical",
+      "recommended_action": "Complete emissions modelling and permit application; engage regulatory liaison",
+      "related_phase": [
+        3,
+        4
+      ],
+      "related_risks": [
+        "R26",
+        "R27"
+      ]
+    },
+    {
+      "rule_id": "M28",
+      "trigger_condition": "Commissioning readiness below 70% at 60 days to start-up",
+      "severity": "critical",
+      "recommended_action": "Increase commissioning workforce; compress pre-commissioning checklist timeline",
+      "related_phase": [
+        4
+      ],
+      "related_risks": [
+        "R28",
+        "R29"
+      ]
+    },
+    {
+      "rule_id": "M29",
+      "trigger_condition": "Commissioning punch list exceeds 50 items 30 days to start-up",
+      "severity": "high",
+      "recommended_action": "Prioritise safety-critical and quality-critical items; mobilise additional contractor resources",
+      "related_phase": [
+        4
+      ],
+      "related_risks": [
+        "R28",
+        "R29"
+      ]
+    },
+    {
+      "rule_id": "M30",
+      "trigger_condition": "Product quality test plan not established",
+      "severity": "high",
+      "recommended_action": "Draft product quality plan covering all ASTM D7566 Annex requirements",
+      "related_phase": [
+        2,
+        3,
+        4
+      ],
+      "related_risks": [
+        "R19",
+        "R20"
+      ]
+    },
+    {
+      "rule_id": "M31",
+      "trigger_condition": "SAF freeze point fails specification",
+      "severity": "critical",
+      "recommended_action": "Adjust hydrocracker severity or isomerisation conditions; re-test batch",
+      "related_phase": [
+        4,
+        5
+      ],
+      "related_risks": [
+        "R18",
+        "R30"
+      ]
+    },
+    {
+      "rule_id": "M32",
+      "trigger_condition": "SAF flash point fails specification",
+      "severity": "critical",
+      "recommended_action": "Review fractionation cut points; adjust distillation column temperature profile",
+      "related_phase": [
+        4,
+        5
+      ],
+      "related_risks": [
+        "R18",
+        "R30"
+      ]
+    },
+    {
+      "rule_id": "M33",
+      "trigger_condition": "SAF density outside 730-770 kg/m3",
+      "severity": "high",
+      "recommended_action": "Adjust blending ratio or hydrocracker conversion rate to meet density target",
+      "related_phase": [
+        4,
+        5
+      ],
+      "related_risks": [
+        "R18",
+        "R30"
+      ]
+    },
+    {
+      "rule_id": "M34",
+      "trigger_condition": "SAF thermal stability (JFTOT) fails at 325\u00b0C",
+      "severity": "critical",
+      "recommended_action": "Investigate trace contaminants; check hydrotreating severity and adsorbent beds",
+      "related_phase": [
+        4,
+        5
+      ],
+      "related_risks": [
+        "R18",
+        "R30"
+      ]
+    },
+    {
+      "rule_id": "M35",
+      "trigger_condition": "Offtake agreement not signed before commissioning",
+      "severity": "high",
+      "recommended_action": "Finalise offtake negotiations; engage legal team to close commercial terms",
+      "related_phase": [
+        3,
+        4
+      ],
+      "related_risks": [
+        "R31",
+        "R32"
+      ]
+    },
+    {
+      "rule_id": "M36",
+      "trigger_condition": "Blending logistics not confirmed before first production",
+      "severity": "high",
+      "recommended_action": "Confirm truck/rail/pipeline logistics provider; execute blending services agreement",
+      "related_phase": [
+        4
+      ],
+      "related_risks": [
+        "R31",
+        "R32"
+      ]
+    },
+    {
+      "rule_id": "M37",
+      "trigger_condition": "Airport fuel terminal interface not established",
+      "severity": "high",
+      "recommended_action": "Engage airport fuel consortium; finalise terminal connection and custody transfer protocol",
+      "related_phase": [
+        4
+      ],
+      "related_risks": [
+        "R31",
+        "R33"
+      ]
+    },
+    {
+      "rule_id": "M38",
+      "trigger_condition": "Operator training not completed",
+      "severity": "high",
+      "recommended_action": "Schedule simulator and field training sessions; verify competency assessments passed",
+      "related_phase": [
+        4
+      ],
+      "related_risks": [
+        "R28",
+        "R34"
+      ]
+    },
+    {
+      "rule_id": "M39",
+      "trigger_condition": "Emergency response drill not conducted",
+      "severity": "warning",
+      "recommended_action": "Schedule tabletop and full-scale emergency drill before start-up",
+      "related_phase": [
+        4
+      ],
+      "related_risks": [
+        "R24",
+        "R34"
+      ]
+    },
+    {
+      "rule_id": "M40",
+      "trigger_condition": "H2 supply not secured before commissioning",
+      "severity": "critical",
+      "recommended_action": "Finalise H2 supply agreement; confirm delivery schedule and backup supply provision",
+      "related_phase": [
+        3,
+        4
+      ],
+      "related_risks": [
+        "R08",
+        "R35"
+      ]
+    }
+  ],
+  "total_rules": 40
+}

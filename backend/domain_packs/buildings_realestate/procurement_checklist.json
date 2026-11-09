@@ -1,0 +1,194 @@
+{
+  "pack": "buildings_realestate",
+  "packages": [
+    {
+      "package_name": "Tower cranes (climbing/flat-top)",
+      "criticality": "Critical",
+      "long_lead": true,
+      "vendor_qualification_criteria": "Proven high-rise climbing crane fleet, in-house climbing engineers, 24/7 maintenance support, safety record with zero major crane incidents in 5 years, financial standing for multi-year hire",
+      "technical_documents_required": ["Crane data sheets and load charts", "Climbing sequence engineering", "Foundation/loading drawings", "Maintenance and inspection regime", "Operator competency matrix"],
+      "inspection_requirements": "Third-party thorough examination at erection, after each climb, and at statutory intervals; weekly operator checks and monthly independent audits",
+      "acceptance_tests": "Erection load test at 110% SWL, safety device function tests (limit switches, anti-collision), slew brake holding test, documented handover certificate"
+    },
+    {
+      "package_name": "Piling rig and secant/contiguous piling works",
+      "criticality": "Critical",
+      "long_lead": true,
+      "vendor_qualification_criteria": "Track record on deep basements adjacent to occupied buildings, rig fleet suited to constrained access, vibration-managed techniques, in-house geotechnical engineers",
+      "technical_documents_required": ["Pile schedule and setting out", "Rig method statements", "Vibration and noise predictions", "Spoil management plan", "QA sampling regime"],
+      "inspection_requirements": "Full-time piling foreman and engineer presence, cage inspection before concreting, concrete pour records with tremie logs",
+      "acceptance_tests": "100% low-strain integrity testing, selected static or bi-directional load tests to design verification factor, as-built survey of pile positions and verticality"
+    },
+    {
+      "package_name": "Structural steel package",
+      "criticality": "High",
+      "long_lead": true,
+      "vendor_qualification_criteria": "Accredited fabrication (ISO 3834/equivalent welding certification), capacity for podium-scale tonnage, in-house connection design or design-assist capability",
+      "technical_documents_required": ["Fabrication drawings", "Material mill certificates", "Welding procedure specifications", "Bolting assemblies specification", "Fire protection datasheets"],
+      "inspection_requirements": "Factory witness of welding NDT on principal connections, coating thickness checks, pre-erection bolting assembly audits",
+      "acceptance_tests": "Torque/tension verification on structural bolts, NDT of site welds, alignment and plumb survey before decking sign-off"
+    },
+    {
+      "package_name": "Post-tensioned slab system",
+      "criticality": "Critical",
+      "long_lead": true,
+      "vendor_qualification_criteria": "Specialist PT contractor with high-rise flat slab portfolio, design-assist capability, calibrated stressing equipment fleet, documented grouting QA history",
+      "technical_documents_required": ["PT shop drawings per floor", "Stressing sequence and elongation calculations", "Anchorage system certifications", "Grout specification and test regime"],
+      "inspection_requirements": "Tendon placement inspection before each pour, stressing supervision with elongation records, grout vent observation and cube testing",
+      "acceptance_tests": "Elongation within +/-7% of calculated values, grout cube strength results, anchorage seating measurements, per-slab QA record sign-off"
+    },
+    {
+      "package_name": "Ready-mix concrete (multiple plants)",
+      "criticality": "Critical",
+      "long_lead": false,
+      "vendor_qualification_criteria": "At least two plants within haul radius, capacity assurance for continuous pours, quality accreditation, admixture capability for retarded/early-strength mixes",
+      "technical_documents_required": ["Mix designs per element", "Plant capacity statements", "Continuity/back-up plan", "Batch ticket format and traceability protocol"],
+      "inspection_requirements": "Batch ticket verification each truck, slump/flow testing at discharge, temperature checks for mass pours",
+      "acceptance_tests": "Cube/cylinder sampling per pour per specification, maturity sensor correlation on critical slabs, trial mix approval before production"
+    },
+    {
+      "package_name": "Self-climbing core formwork system",
+      "criticality": "Critical",
+      "long_lead": true,
+      "vendor_qualification_criteria": "Engineered climbing system supplier with high-rise references, climb-cycle engineering service, spare parts availability, site technical support",
+      "technical_documents_required": ["System engineering calculations", "Climb sequence methodology", "Component inventory and inspection records", "Concrete strength gain requirements per jump"],
+      "inspection_requirements": "Pre-jump system inspection checklist, hydraulic system servicing logs, anchor pocket verification each cycle",
+      "acceptance_tests": "Load test of climbing mechanism per manufacturer protocol, first-jump witnessed trial, anchor pull-out tests on initial installations"
+    },
+    {
+      "package_name": "Unitised curtain wall and glazing",
+      "criticality": "Critical",
+      "long_lead": true,
+      "vendor_qualification_criteria": "Fabricator with 45+ storey unitised references, in-house testing facility or accredited test house partnership, financial capacity for bonded stock, installer competency certification",
+      "technical_documents_required": ["System performance calculations (wind, thermal, acoustic)", "Glazing specifications and coatings data", "Mock-up test plan", "Factory QA procedures", "Installation sequence drawings"],
+      "inspection_requirements": "Resident factory QA inspector during production, incoming unit inspection regime on site, gasket and sealant batch traceability",
+      "acceptance_tests": "Laboratory mock-up passing air/water/structural/thermal cycling, on-building zone air and water tests, per-unit torque and compression records"
+    },
+    {
+      "package_name": "Cladding panels (terracotta/metal/GRC)",
+      "criticality": "High",
+      "long_lead": true,
+      "vendor_qualification_criteria": "Manufacturers with certified fire performance for specified application height, colour/finish consistency capability, export packaging competence for international shipment",
+      "technical_documents_required": ["Fire classification certificates", "Fixing system design and pull-out data", "Finish samples and batch consistency plan", "Subframe and cavity barrier details"],
+      "inspection_requirements": "Pre-shipment factory inspection, incoming panel inspection for cracks/chips, fixing torque audits during installation",
+      "acceptance_tests": "Fixing pull-out tests on installed subframes, cavity barrier continuity photographic audit, panel alignment tolerance survey per elevation"
+    },
+    {
+      "package_name": "Elevators and escalators",
+      "criticality": "Critical",
+      "long_lead": true,
+      "vendor_qualification_criteria": "Major OEM with high-speed traction references above 250m/min, local service presence for DLP, factory capacity confirmation for delivery dates, machine-room-less options evaluated",
+      "technical_documents_required": ["Lift traffic analysis validation", "Shaft dimensional requirements and tolerances", "Machine and controller datasheets", "Firefighter/evacuation mode specifications", "Installation programme"],
+      "inspection_requirements": "Progressive factory inspections, shaft handover plumbness surveys, installation stage inspections by independent lift consultant",
+      "acceptance_tests": "Safety circuit proofing, dynamic test at contract speed, levelling accuracy, door protection tests, firefighter recall demonstration, ride quality measurement"
+    },
+    {
+      "package_name": "MEP/HVAC package",
+      "criticality": "High",
+      "long_lead": true,
+      "vendor_qualification_criteria": "Contractor able to resource riser installation at floor-cycle pace, prefabrication capability, commissioning management team, high-rise references",
+      "technical_documents_required": ["Coordinated shop drawings", "Prefabrication module drawings", "Pressure test procedures", "Commissioning methodology and responsibilities matrix"],
+      "inspection_requirements": "Stage inspections of riser installations, weld/braze joint sampling, insulation integrity checks post pressure test",
+      "acceptance_tests": "Hydrostatic pressure tests per system, duct leakage tests, electrical insulation resistance, flushing cleanliness verification"
+    },
+    {
+      "package_name": "Electrical switchgear and MCC",
+      "criticality": "High",
+      "long_lead": true,
+      "vendor_qualification_criteria": "Type-tested assembly manufacturer, arc fault containment ratings per specification, factory acceptance testing culture, spares and support commitment",
+      "technical_documents_required": ["Single line diagrams", "Type test certificates", "Protection coordination study", "Factory acceptance test procedures"],
+      "inspection_requirements": "Witness FAT at factory, transport damage inspection, installation torque and busbar joint checks",
+      "acceptance_tests": "Site FAT repetition of key tests, relay protection secondary injection, transformer oil/insulation tests, phasing and rotation verification"
+    },
+    {
+      "package_name": "Fire alarm and fire suppression (sprinkler pump set)",
+      "criticality": "High",
+      "long_lead": true,
+      "vendor_qualification_criteria": "Certified designers/installers to recognized fire codes, pump set OEM with hydrostatic test records, addressable system compatibility with BMS integration scope",
+      "technical_documents_required": ["Cause and effect matrix", "Hydraulic calculations", "Pump performance curves", "Device layout drawings per floor"],
+      "inspection_requirements": "Pipe weld/joint inspections pre-cover, pump skid factory witness, device spacing audits",
+      "acceptance_tests": "Hydrostatic test at 1.5x working pressure held 2 hours, pump churn/duty/standby tests, alarm cause-and-effect witnessed demonstration"
+    },
+    {
+      "package_name": "BMS / building automation",
+      "criticality": "Medium",
+      "long_lead": false,
+      "vendor_qualification_criteria": "Integration experience across fire, lifts, and metering vendors, open-protocol capability, graphics and analytics deliverable quality, cyber-security compliance",
+      "technical_documents_required": ["Points list per system", "Network architecture diagram", "Graphics specification", "Integration matrix with third-party systems"],
+      "inspection_requirements": "Panel factory inspections, network commissioning checkpoints, graphic page walkthroughs",
+      "acceptance_tests": "100% point-to-point verification, integration alarm and trend tests, failover/redundancy tests, cyber-security penetration review"
+    },
+    {
+      "package_name": "Basement waterproofing membranes",
+      "criticality": "High",
+      "long_lead": false,
+      "vendor_qualification_criteria": "Manufacturer-certified installer network, system warranty for basement use class, electronic leak detection capability, track record on deep basements",
+      "technical_documents_required": ["System datasheets and detail drawings", "Installer certification records", "Detailing at penetrations and joints", "Warranty terms"],
+      "inspection_requirements": "Supervised lap and detail checks, electronic leak detection sweep before covering, protection board installation verification",
+      "acceptance_tests": "Leak detection scan with zero breaches, flood test of accessible zones, warranty registration upon completion"
+    },
+    {
+      "package_name": "Glass and insulation materials",
+      "criticality": "Medium",
+      "long_lead": false,
+      "vendor_qualification_criteria": "Coated glass processor with consistent batch quality, insulation suppliers with certified fire ratings for facade application, capacity for phased tower deliveries",
+      "technical_documents_required": ["Glass makeup specifications and coatings data", "Thermal/acoustic performance certificates", "Fire classification of insulation", "Batch traceability protocol"],
+      "inspection_requirements": "Incoming batch inspection for coating uniformity and edge damage, storage and handling audits",
+      "acceptance_tests": "Sample spectrophotometric verification of coatings, thermal conductivity certification checks, moisture content checks on mineral wool"
+    },
+    {
+      "package_name": "Perimeter scaffolding",
+      "criticality": "Medium",
+      "long_lead": false,
+      "vendor_qualification_criteria": "Licensed scaffolding contractor with high-rise facade access experience, design capability for wind-loaded facade zones, inspection regime compliance",
+      "technical_documents_required": ["Scaffold design calculations", "Tie pattern drawings", "Loading class specifications", "Inspection and tag regime"],
+      "inspection_requirements": "Weekly statutory inspections with tags, post-alteration re-inspections, wind damage checks after storms",
+      "acceptance_tests": "Handover inspection certificate per scaffold lift, tie pull tests where specified, load platform proof tests"
+    },
+    {
+      "package_name": "Construction hoists (personnel/material)",
+      "criticality": "High",
+      "long_lead": false,
+      "vendor_qualification_criteria": "Hoist supplier with rack-and-pinion high-rise units, maintenance response SLA, operator training provision, capacity matched to facade/logistics demand",
+      "technical_documents_required": ["Hoist schedule and capacities", "Mast tie design to structure", "Base and runway drawings", "Maintenance regime"],
+      "inspection_requirements": "Daily pre-use checks, weekly thorough inspections, mast tie bolt audits",
+      "acceptance_tests": "Drop test of safety gear, overload device verification, brake holding tests, documented operator competency sign-off"
+    },
+    {
+      "package_name": "Generator and standby power",
+      "criticality": "Medium",
+      "long_lead": false,
+      "vendor_qualification_criteria": "Generator OEM or integrator with paralleling capability, fuel system design competence, acoustic enclosure performance, load bank testing service",
+      "technical_documents_required": ["Load schedules", "Acoustic emission data", "Fuel storage and polishing system design", "Paralleling and ATS schematics"],
+      "inspection_requirements": "Factory witness of engine/generator set tests, installation alignment checks, fuel system leak tests",
+      "acceptance_tests": "Load bank test to rated kW with step loading, blackout transfer time measurement, acoustic compliance measurement"
+    },
+    {
+      "package_name": "Facade access cradles (BMU)",
+      "criticality": "High",
+      "long_lead": true,
+      "vendor_qualification_criteria": "BMU manufacturer with high-rise machine experience, structural interface design service, local maintenance support, safety system redundancy",
+      "technical_documents_required": ["Machine layout and track drawings", "Roof structural loading requirements", "Wire rope and hoist certifications", "Rescue procedures"],
+      "inspection_requirements": "Factory acceptance of machine functions, track alignment survey, rope and hoist serial traceability",
+      "acceptance_tests": "125% load test of cradle and suspension, travel and parking position verification, emergency lowering and rescue drill demonstration"
+    },
+    {
+      "package_name": "Acoustic ceilings and drywall",
+      "criticality": "Medium",
+      "long_lead": false,
+      "vendor_qualification_criteria": "Interior fit-out subcontractor with high-volume floor throughput, acoustic performance installation competence, fire-rated partition certification experience",
+      "technical_documents_required": ["Partition and ceiling schedules", "Acoustic detail drawings", "Fire rating test evidence for assemblies", "Room data sheet templates"],
+      "inspection_requirements": "Background fixing inspections pre-board, fire-stopping inspections at service penetrations, grid level surveys",
+      "acceptance_tests": "Acoustic field testing of sample partitions, fire door and damper integration checks, level and finish tolerance surveys"
+    },
+    {
+      "package_name": "Brickwork/masonry and stone hard landscaping",
+      "criticality": "Medium",
+      "long_lead": false,
+      "vendor_qualification_criteria": "Podium facade and paving subcontractor with public realm references, stone sourcing traceability, slip-resistance compliance knowledge",
+      "technical_documents_required": ["Material samples and source quarry data", "Fixing and bedding details", "Slip resistance certificates", "Expansion joint layout"],
+      "inspection_requirements": "Sample panel approval, mortar mix control checks, bedding and joint width surveys",
+      "acceptance_tests": "Pull-out tests on mechanically fixed stone, slip resistance measurement, drainage fall verification to outlets"
+    }
+  ]
+}

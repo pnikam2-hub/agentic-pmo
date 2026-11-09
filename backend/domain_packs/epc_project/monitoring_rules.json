@@ -1,0 +1,377 @@
+{
+  "pack": "epc_project",
+  "version": "1.0.0",
+  "total_rules": 40,
+  "category_counts": {
+    "Engineering Progress": 6,
+    "Procurement Status": 6,
+    "Construction Progress": 6,
+    "HSE & Safety": 5,
+    "Quality & Inspection": 5,
+    "Commissioning Readiness": 5,
+    "Project Controls": 4,
+    "Commercial & Contract": 3
+  },
+  "rules": [
+    {
+      "rule_id": "M01",
+      "category": "Engineering Progress",
+      "trigger_condition": "FEED package review > 30 days overdue with > 20 open comments",
+      "severity": "high",
+      "recommended_action": "Escalate to Engineering Manager; schedule accelerated review session with owner; evaluate FEED-to-detailed engineering overlap",
+      "related_phase": [1, 2],
+      "related_risks": ["R01"]
+    },
+    {
+      "rule_id": "M02",
+      "category": "Engineering Progress",
+      "trigger_condition": "P&ID issue rate exceeds target by > 25% for two consecutive weeks",
+      "severity": "high",
+      "recommended_action": "Investigate root cause with discipline leads; rebalance drafting resources; review P&ID completeness against line list",
+      "related_phase": [2],
+      "related_risks": ["R02", "R05"]
+    },
+    {
+      "rule_id": "M03",
+      "category": "Engineering Progress",
+      "trigger_condition": "HAZOP close-out < 80% within 4 weeks of completion meeting",
+      "severity": "critical",
+      "recommended_action": "Issue HAZOP action tracking report to Project Director; assign owners to overdue actions; schedule weekly close-out sprint",
+      "related_phase": [1, 2],
+      "related_risks": ["R03", "R12"]
+    },
+    {
+      "rule_id": "M04",
+      "category": "Engineering Progress",
+      "trigger_condition": "IFC drawing release backlog > 50 drawings past scheduled issue date",
+      "severity": "high",
+      "recommended_action": "Audit drawing register vs. schedule; surge-allocate to drafting team; revisit IFC priority sequence with construction",
+      "related_phase": [2, 5],
+      "related_risks": ["R04", "R15"]
+    },
+    {
+      "rule_id": "M05",
+      "category": "Engineering Progress",
+      "trigger_condition": "3D model review not started by scheduled milestone date",
+      "severity": "warning",
+      "recommended_action": "Confirm model freeze date with discipline leads; assign model review coordinator; schedule inter-discipline clash detection session",
+      "related_phase": [2],
+      "related_risks": ["R05"]
+    },
+    {
+      "rule_id": "M06",
+      "category": "Engineering Progress",
+      "trigger_condition": "Design change notices accumulating at > 10 per week with no disposition within 14 days",
+      "severity": "high",
+      "recommended_action": "Conduct change impact triage with Engineering Manager; enforce 14-day disposition SLA; escalate unresolved changes to Change Control Board",
+      "related_phase": [2, 5],
+      "related_risks": ["R06", "R72"]
+    },
+    {
+      "rule_id": "M07",
+      "category": "Procurement Status",
+      "trigger_condition": "Long-lead equipment purchase order not placed within 2 weeks of approved award recommendation date",
+      "severity": "critical",
+      "recommended_action": "Expedite commercial close-out with vendor; escalate to Procurement Director; evaluate price escalation risk and re-forecast delivery",
+      "related_phase": [4],
+      "related_risks": ["R07", "R08"]
+    },
+    {
+      "rule_id": "M08",
+      "category": "Procurement Status",
+      "trigger_condition": "Vendor Document Review (VDR) cycle exceeds 45 days from submission to approval",
+      "severity": "high",
+      "recommended_action": "Flag to Engineering and Procurement leads; prioritise vendor submittals; implement 15-day turnaround SLA with automatic escalation",
+      "related_phase": [2, 4],
+      "related_risks": ["R09", "R10"]
+    },
+    {
+      "rule_id": "M09",
+      "category": "Procurement Status",
+      "trigger_condition": "FAT schedule slippage > 2 weeks from baseline with no recovery plan",
+      "severity": "high",
+      "recommended_action": "Request FAT recovery schedule from vendor; assign FAT observer; evaluate waiver of factory testing scope if risk-assessed",
+      "related_phase": [4],
+      "related_risks": ["R11", "R13"]
+    },
+    {
+      "rule_id": "M10",
+      "category": "Procurement Status",
+      "trigger_condition": "L/C or payment milestone > 10 days overdue without documented vendor agreement",
+      "severity": "high",
+      "recommended_action": "Verify vendor invoice completeness; contact Trade Finance team; issue payment status memo to Project Controls",
+      "related_phase": [4],
+      "related_risks": ["R14"]
+    },
+    {
+      "rule_id": "M11",
+      "category": "Procurement Status",
+      "trigger_condition": "Expediting report overdue by > 5 working days for two consecutive reporting cycles",
+      "severity": "warning",
+      "recommended_action": "Follow up with expeditor; send reminder to Supply Chain Manager; consider rotating expediting resource",
+      "related_phase": [4],
+      "related_risks": ["R16"]
+    },
+    {
+      "rule_id": "M12",
+      "category": "Procurement Status",
+      "trigger_condition": "Logistics booking not confirmed within 7 days of shipping window opening",
+      "severity": "high",
+      "recommended_action": "Contact logistics broker/forwarder; identify alternate shipping routes; escalate to Logistics Manager for premium freight approval",
+      "related_phase": [4, 5],
+      "related_risks": ["R17", "R08"]
+    },
+    {
+      "rule_id": "M13",
+      "category": "Construction Progress",
+      "trigger_condition": "Critical path activity delay > 2 weeks with no approved recovery schedule",
+      "severity": "critical",
+      "recommended_action": "Immediately convene recovery planning session with Construction Manager; re-sequence remaining scope; evaluate overtime or shift work",
+      "related_phase": [5, 6],
+      "related_risks": ["R18", "R19"]
+    },
+    {
+      "rule_id": "M14",
+      "category": "Construction Progress",
+      "trigger_condition": "S-curve actual progress deviation > -10% from planned for three consecutive weeks",
+      "severity": "critical",
+      "recommended_action": "Perform earned value analysis; identify productivity gaps by work package; re-forecast remaining durations and adjust manpower ramp",
+      "related_phase": [5, 6],
+      "related_risks": ["R20", "R21"]
+    },
+    {
+      "rule_id": "M15",
+      "category": "Construction Progress",
+      "trigger_condition": "Lookahead plan schedule coverage < 90% for next 3-week window",
+      "severity": "high",
+      "recommended_action": "Request updated lookahead from site planning team; verify constraint removal (materials, drawings, permits); hold weekly plan review with superintendents",
+      "related_phase": [5, 6],
+      "related_risks": ["R22"]
+    },
+    {
+      "rule_id": "M16",
+      "category": "Construction Progress",
+      "trigger_condition": "SIMOPS conflicts identified but not resolved within 48 hours of identification",
+      "severity": "high",
+      "recommended_action": "Schedule SIMOPS coordination meeting with all affected trades; update construction sequence plan; issue conflict resolution memo",
+      "related_phase": [5, 6],
+      "related_risks": ["R23", "R24"]
+    },
+    {
+      "rule_id": "M17",
+      "category": "Construction Progress",
+      "trigger_condition": "Site productivity below baseline by > 15% for any work package in two consecutive reporting periods",
+      "severity": "high",
+      "recommended_action": "Investigate root cause (materials, access, supervision, weather); implement productivity improvement plan; adjust crew composition if needed",
+      "related_phase": [5, 6],
+      "related_risks": ["R25", "R33"]
+    },
+    {
+      "rule_id": "M18",
+      "category": "Construction Progress",
+      "trigger_condition": "Civil/structural handover to mechanical delayed by > 2 weeks with no revised date",
+      "severity": "high",
+      "recommended_action": "Conduct area readiness walkdown with civil and mechanical leads; agree revised handover schedule; escalate to Project Manager if re-sequencing required",
+      "related_phase": [5],
+      "related_risks": ["R26", "R27"]
+    },
+    {
+      "rule_id": "M19",
+      "category": "HSE & Safety",
+      "trigger_condition": "Lost Time Incident Rate (LTIR) exceeds project target by > 50%",
+      "severity": "critical",
+      "recommended_action": "Stand down affected area; convene HSE incident review board; implement immediate corrective and preventive action plan; notify client and regulatory bodies",
+      "related_phase": [5, 6],
+      "related_risks": ["R28", "R29"]
+    },
+    {
+      "rule_id": "M20",
+      "category": "HSE & Safety",
+      "trigger_condition": "Permit to Work (PTW) compliance audit failure rate > 15% in any single month",
+      "severity": "high",
+      "recommended_action": "Re-train all supervisors on PTW procedure; re-issue permits with area-specific signoffs; increase spot-check frequency to daily",
+      "related_phase": [5, 6],
+      "related_risks": ["R30"]
+    },
+    {
+      "rule_id": "M21",
+      "category": "HSE & Safety",
+      "trigger_condition": "Confined space entry detected without valid permit or gas test certificate",
+      "severity": "critical",
+      "recommended_action": "Immediately evacuate all personnel from confined space; issue stop-work order; conduct incident investigation; discipline responsible supervisor",
+      "related_phase": [5, 6],
+      "related_risks": ["R31"]
+    },
+    {
+      "rule_id": "M22",
+      "category": "HSE & Safety",
+      "trigger_condition": "Hot work observed within 15 m of flammable storage without fire watch",
+      "severity": "critical",
+      "recommended_action": "Stop hot work immediately; re-locate operation to designated safe area; verify fire suppression equipment; re-issue hot work permit with strict conditions",
+      "related_phase": [5, 6],
+      "related_risks": ["R32"]
+    },
+    {
+      "rule_id": "M23",
+      "category": "HSE & Safety",
+      "trigger_condition": "Scheduled emergency response drill > 30 days overdue against quarterly plan",
+      "severity": "warning",
+      "recommended_action": "Schedule make-up drill within 7 days; verify drill scenarios cover current risk profile; update drill tracker in HSE dashboard",
+      "related_phase": [5, 6, 7],
+      "related_risks": ["R33"]
+    },
+    {
+      "rule_id": "M24",
+      "category": "Quality & Inspection",
+      "trigger_condition": "Non-Conformance Report (NCR) backlog exceeds 20 open items for more than 2 weeks",
+      "severity": "high",
+      "recommended_action": "Assign NCR disposition responsibility to discipline leads; schedule weekly NCR review board; escalate repeat findings to Quality Manager",
+      "related_phase": [5, 6],
+      "related_risks": ["R34", "R35"]
+    },
+    {
+      "rule_id": "M25",
+      "category": "Quality & Inspection",
+      "trigger_condition": "Weld NDT rejection rate exceeds 5% in any rolling monthly window",
+      "severity": "high",
+      "recommended_action": "Review welder qualifications and procedure qualifications; increase supervision of welding operations; conduct retraining if consistent pattern found",
+      "related_phase": [5],
+      "related_risks": ["R36"]
+    },
+    {
+      "rule_id": "M26",
+      "category": "Quality & Inspection",
+      "trigger_condition": "Hydrotest pack documentation incomplete > 5 working days before scheduled test date",
+      "severity": "high",
+      "recommended_action": "Expedite submission of missing documents (weld maps, NDT reports, isometrics, pressure test procedure); delay test date if documentation not approved",
+      "related_phase": [5, 7],
+      "related_risks": ["R37"]
+    },
+    {
+      "rule_id": "M27",
+      "category": "Quality & Inspection",
+      "trigger_condition": "Punch list items exceed 100 in any single system or area",
+      "severity": "warning",
+      "recommended_action": "Segment punch list by trade; assign target close-out dates per contractor; conduct weekly punch list walkdowns with emphasis on safety-critical items",
+      "related_phase": [5, 6, 7],
+      "related_risks": ["R38"]
+    },
+    {
+      "rule_id": "M28",
+      "category": "Quality & Inspection",
+      "trigger_condition": "ITP witness or hold point not signed off by client or third party within 5 working days of completion",
+      "severity": "high",
+      "recommended_action": "Contact client/third-party inspector directly; reschedule witness; escalate to Quality Manager if pattern persists; document as risk",
+      "related_phase": [5, 6],
+      "related_risks": ["R39", "R40"]
+    },
+    {
+      "rule_id": "M29",
+      "category": "Commissioning Readiness",
+      "trigger_condition": "Pre-commissioning plan not started at least 8 weeks before scheduled mechanical completion date",
+      "severity": "critical",
+      "recommended_action": "Appoint Commissioning Manager if not assigned; fast-track pre-commissioning plan development; identify lead-time items for flushing and chemicals",
+      "related_phase": [7],
+      "related_risks": ["R41", "R42"]
+    },
+    {
+      "rule_id": "M30",
+      "category": "Commissioning Readiness",
+      "trigger_condition": "Mechanical Completion System (MCS) documentation < 50% complete within 4 weeks of planned turnover date",
+      "severity": "high",
+      "recommended_action": "Assign document controllers per system; populate MCS dossiers with available records; accelerate turnover walkdown schedule",
+      "related_phase": [5, 7],
+      "related_risks": ["R43"]
+    },
+    {
+      "rule_id": "M31",
+      "category": "Commissioning Readiness",
+      "trigger_condition": "Loop check backlog > 30% of total loops within 6 weeks of mechanical completion",
+      "severity": "high",
+      "recommended_action": "Increase commissioning technicians on loop checking; prioritise safety-critical and interlock loops; extend shift pattern if required",
+      "related_phase": [6, 7],
+      "related_risks": ["R44", "R45"]
+    },
+    {
+      "rule_id": "M32",
+      "category": "Commissioning Readiness",
+      "trigger_condition": "Flushing and cleaning procedure not approved within 4 weeks of scheduled start date",
+      "severity": "high",
+      "recommended_action": "Expedite procedure review cycle with client; check chemical procurement lead times; consider parallel flushing for separate systems",
+      "related_phase": [7],
+      "related_risks": ["R46"]
+    },
+    {
+      "rule_id": "M33",
+      "category": "Commissioning Readiness",
+      "trigger_condition": "Performance test procedure not submitted to client 12 weeks before planned initial operation date",
+      "severity": "high",
+      "recommended_action": "Draft procedure using manufacturer commissioning manuals; review with process engineer; submit for client approval as priority deliverable",
+      "related_phase": [7],
+      "related_risks": ["R47", "R48"]
+    },
+    {
+      "rule_id": "M34",
+      "category": "Project Controls",
+      "trigger_condition": "Earned Value Schedule Variance (SV) < -15% for two consecutive reporting periods",
+      "severity": "critical",
+      "recommended_action": "Perform detailed earned value analysis by work package; identify root causes of schedule lag; develop and approve recovery plan with contingency draw",
+      "related_phase": [1, 2, 5, 6],
+      "related_risks": ["R49", "R50"]
+    },
+    {
+      "rule_id": "M35",
+      "category": "Project Controls",
+      "trigger_condition": "Estimate-at-completion (EAC) trending > 10% over awarded budget value",
+      "severity": "high",
+      "recommended_action": "Review cost forecast assumptions with Project Controls Manager; identify overrun drivers; prepare change order or contingency release request",
+      "related_phase": [1, 2, 4, 5],
+      "related_risks": ["R51", "R52"]
+    },
+    {
+      "rule_id": "M36",
+      "category": "Project Controls",
+      "trigger_condition": "Change order approval cycle exceeds 30 days from submission to signed approval",
+      "severity": "warning",
+      "recommended_action": "Trace change order through approval chain; identify bottleneck approver; escalate to Project Director; enforce 21-day SLA for all change orders",
+      "related_phase": [1, 2, 4, 5, 6],
+      "related_risks": ["R53"]
+    },
+    {
+      "rule_id": "M37",
+      "category": "Project Controls",
+      "trigger_condition": "Monthly progress report not submitted within 5 working days of month-end for two consecutive months",
+      "severity": "warning",
+      "recommended_action": "Reinforce reporting deadlines with all discipline leads; pre-populate standard sections; escalate to Project Controls Manager for workflow improvement",
+      "related_phase": [0, 1, 2, 3, 4, 5, 6, 7],
+      "related_risks": ["R54"]
+    },
+    {
+      "rule_id": "M38",
+      "category": "Commercial & Contract",
+      "trigger_condition": "Claims reserve value increasing quarter-over-quarter by > 20% with no settlement progress",
+      "severity": "high",
+      "recommended_action": "Review claims basis with Commercial Manager; engage legal counsel if meritorious; pursue early settlement or alternative dispute resolution",
+      "related_phase": [1, 2, 4, 5, 6, 7],
+      "related_risks": ["R55", "R56"]
+    },
+    {
+      "rule_id": "M39",
+      "category": "Commercial & Contract",
+      "trigger_condition": "Subcontractor payment > 60 days overdue against contract milestone schedule",
+      "severity": "critical",
+      "recommended_action": "Verify certified progress against application; process urgent payment; contact subcontractor to confirm receipt; review cash flow contingency allocation",
+      "related_phase": [4, 5, 6],
+      "related_risks": ["R57", "R58"]
+    },
+    {
+      "rule_id": "M40",
+      "category": "Commercial & Contract",
+      "trigger_condition": "Change order log discrepancy detected between PMIS and contract administrator records exceeding 5 unmatched items",
+      "severity": "high",
+      "recommended_action": "Reconcile change order logs from both sources; identify root cause of discrepancy; implement single-source of truth protocol for all COs",
+      "related_phase": [1, 2, 4, 5, 6, 7],
+      "related_risks": ["R59"]
+    }
+  ]
+}

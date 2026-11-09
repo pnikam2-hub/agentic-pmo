@@ -1,0 +1,231 @@
+{
+  "pack": "industry_4_0",
+  "version": "1.0.1",
+  "total_rules": 28,
+  "rules": [
+    {
+      "rule_id": "MR01",
+      "trigger_condition": "No heartbeat received from edge device for > 3 consecutive polling intervals (> 90 s)",
+      "severity": "critical",
+      "recommended_action": "Page OT support; check power/network to the device; verify process is running; fail over to redundant node if available.",
+      "related_phase": [4, 5, 6, 7],
+      "related_risks": ["R25"]
+    },
+    {
+      "rule_id": "MR02",
+      "trigger_condition": "Edge GPU temperature > 85 C sustained for > 2 minutes",
+      "severity": "warning",
+      "recommended_action": "Inspect cabinet cooling; reduce inference load or shed non-critical models; schedule maintenance if recurring.",
+      "related_phase": [6, 7],
+      "related_risks": ["R25"]
+    },
+    {
+      "rule_id": "MR03",
+      "trigger_condition": "Edge node disk usage > 85% on buffer partition",
+      "severity": "warning",
+      "recommended_action": "Verify store-and-forward draining; expand retention policy; clear old buffers; investigate stalled upload.",
+      "related_phase": [4, 5, 6, 7],
+      "related_risks": ["R25", "R26"]
+    },
+    {
+      "rule_id": "MR04",
+      "trigger_condition": "Edge CPU usage > 90% sustained for > 5 minutes",
+      "severity": "warning",
+      "recommended_action": "Review workloads for runaway processes; rebalance models across nodes; scale edge compute if persistent.",
+      "related_phase": [4, 5, 6, 7],
+      "related_risks": ["R25"]
+    },
+    {
+      "rule_id": "MR05",
+      "trigger_condition": "Edge memory usage > 90% sustained for > 5 minutes",
+      "severity": "warning",
+      "recommended_action": "Investigate memory leaks; restart affected services; resize node memory if recurring.",
+      "related_phase": [4, 5, 6, 7],
+      "related_risks": ["R25"]
+    },
+    {
+      "rule_id": "MR06",
+      "trigger_condition": "Machine-to-dashboard end-to-end latency > 10 s for > 5 consecutive minutes",
+      "severity": "warning",
+      "recommended_action": "Check for ingestion backlog or slow transforms; inspect broker and historian queues; scale consumers if needed.",
+      "related_phase": [5, 6, 7],
+      "related_risks": ["R18", "R26"]
+    },
+    {
+      "rule_id": "MR07",
+      "trigger_condition": "Data completeness for an asset or line < 95% over 15 minutes",
+      "severity": "critical",
+      "recommended_action": "Identify missing tags; check sensors, gateways, and connectivity; verify protocol bridges; flag affected intervals low-confidence.",
+      "related_phase": [5, 6, 7],
+      "related_risks": ["R17", "R18"]
+    },
+    {
+      "rule_id": "MR08",
+      "trigger_condition": "Data ingestion rate deviates > 3 sigma from baseline for > 10 minutes",
+      "severity": "warning",
+      "recommended_action": "Investigate the deviating source; check for device floods or silent failure; reconcile against expected tag counts.",
+      "related_phase": [5, 6, 7],
+      "related_risks": ["R17", "R18", "R25"]
+    },
+    {
+      "rule_id": "MR09",
+      "trigger_condition": "Historian write failure rate > 0.5% over 5 minutes",
+      "severity": "critical",
+      "recommended_action": "Check historian capacity and disk; verify tag schema; inspect for rejected/duplicate writes; engage platform on-call.",
+      "related_phase": [5, 6, 7],
+      "related_risks": ["R17", "R24"]
+    },
+    {
+      "rule_id": "MR10",
+      "trigger_condition": "Line OEE drops below target minus 5 points sustained over a shift-to-date window",
+      "severity": "warning",
+      "recommended_action": "Drill into availability/performance/quality; identify the dominant loss reason; dispatch the relevant team (maintenance/quality/ops).",
+      "related_phase": [5, 6, 7],
+      "related_risks": ["R03", "R17", "R31"]
+    },
+    {
+      "rule_id": "MR11",
+      "trigger_condition": "Asset or line enters unplanned downtime for > 2 minutes",
+      "severity": "critical",
+      "recommended_action": "Trigger downtime reason capture; notify maintenance; start MTTR clock; engage PdM insight if available.",
+      "related_phase": [5, 6, 7],
+      "related_risks": ["R03", "R07"]
+    },
+    {
+      "rule_id": "MR12",
+      "trigger_condition": "First-pass yield deviates below rolling mean minus 2 sigma over 1 hour",
+      "severity": "warning",
+      "recommended_action": "Run root-cause diagnostics; check material lots and process parameters; isolate affected period for review.",
+      "related_phase": [6, 7],
+      "related_risks": ["R17", "R19"]
+    },
+    {
+      "rule_id": "MR13",
+      "trigger_condition": "Scrap rate exceeds rolling mean plus 3 sigma over 30 minutes",
+      "severity": "critical",
+      "recommended_action": "Halt or quarantine affected output if critical; investigate defect source; engage quality and process engineering.",
+      "related_phase": [6, 7],
+      "related_risks": ["R19", "R20"]
+    },
+    {
+      "rule_id": "MR14",
+      "trigger_condition": "Line throughput falls below 90% of expected rate sustained for > 30 minutes",
+      "severity": "warning",
+      "recommended_action": "Identify the bottleneck station; check for micro-stops and buffer starvation; review operator logs.",
+      "related_phase": [5, 6, 7],
+      "related_risks": ["R03", "R07", "R31"]
+    },
+    {
+      "rule_id": "MR15",
+      "trigger_condition": "Production model mean prediction confidence drops below threshold for > 15 minutes",
+      "severity": "warning",
+      "recommended_action": "Check for input drift; verify upstream data quality; engage safe-state fallback if needed; review with model owner.",
+      "related_phase": [6, 7],
+      "related_risks": ["R20"]
+    },
+    {
+      "rule_id": "MR16",
+      "trigger_condition": "Model performance metric or output distribution drift exceeds threshold (PSI > 0.2)",
+      "severity": "warning",
+      "recommended_action": "Trigger retraining workflow; validate candidate model; plan redeployment; keep last validated model in production.",
+      "related_phase": [6, 7],
+      "related_risks": ["R20", "R22"]
+    },
+    {
+      "rule_id": "MR17",
+      "trigger_condition": "Input feature drift (PSI) > 0.2 on a monitored feature",
+      "severity": "warning",
+      "recommended_action": "Investigate process/material change; correlate with events; assess model impact and schedule retraining.",
+      "related_phase": [6, 7],
+      "related_risks": ["R20"]
+    },
+    {
+      "rule_id": "MR18",
+      "trigger_condition": "p95 model inference latency exceeds real-time budget for > 5 minutes",
+      "severity": "warning",
+      "recommended_action": "Check edge compute load and batching; optimize or offload model; scale edge resources if persistent.",
+      "related_phase": [6, 7],
+      "related_risks": ["R25", "R26"]
+    },
+    {
+      "rule_id": "MR19",
+      "trigger_condition": "Model prediction count drops below 50% of baseline for > 15 minutes",
+      "severity": "warning",
+      "recommended_action": "Verify upstream data flow and model service health; check edge connectivity; resume once data restored.",
+      "related_phase": [6, 7],
+      "related_risks": ["R20", "R26"]
+    },
+    {
+      "rule_id": "MR20",
+      "trigger_condition": "Unusual outbound traffic from OT zone exceeding baseline plus 3 sigma to non-approved destinations",
+      "severity": "critical",
+      "recommended_action": "Investigate source; block anomalous destinations; isolate device; initiate incident response if confirmed.",
+      "related_phase": [4, 5, 6, 7],
+      "related_risks": ["R09", "R10"]
+    },
+    {
+      "rule_id": "MR21",
+      "trigger_condition": "Detected change to controller logic/firewall/access config without a matching approved change ticket",
+      "severity": "critical",
+      "recommended_action": "Verify change ticket; revert if unauthorized; forensically review; tighten change control.",
+      "related_phase": [4, 5, 6, 7],
+      "related_risks": ["R12", "R15"]
+    },
+    {
+      "rule_id": "MR22",
+      "trigger_condition": "Failed login attempts on OT systems exceed threshold (e.g., 5 in 5 minutes) per account or host",
+      "severity": "warning",
+      "recommended_action": "Review source; lock or reset account if needed; check for credential compromise; monitor for escalation.",
+      "related_phase": [4, 5, 6, 7],
+      "related_risks": ["R11", "R12", "R16"]
+    },
+    {
+      "rule_id": "MR23",
+      "trigger_condition": "Firewall or segmentation rule change without a matching approved Change Advisory Board ticket",
+      "severity": "critical",
+      "recommended_action": "Validate against CAB log; revert if unauthorized; review segmentation posture; escalate to security and OT governance.",
+      "related_phase": [4, 5, 6, 7],
+      "related_risks": ["R09", "R12"]
+    },
+    {
+      "rule_id": "MR24",
+      "trigger_condition": "High or critical EDR/AV alert raised on an OT-zone asset",
+      "severity": "critical",
+      "recommended_action": "Isolate affected asset; investigate indicator; run OT incident response; remediate and validate before reconnecting.",
+      "related_phase": [4, 5, 6, 7],
+      "related_risks": ["R10", "R14", "R16"]
+    },
+    {
+      "rule_id": "MR25",
+      "trigger_condition": "OT system has known CVEs without available patches, exposing unmitigated vulnerabilities in production",
+      "severity": "critical",
+      "recommended_action": "Engage vendor for patch status; implement compensating controls (segmentation, monitoring); track remediation timeline.",
+      "related_phase": [4, 5, 6, 7],
+      "related_risks": ["R15"]
+    },
+    {
+      "rule_id": "MR26",
+      "trigger_condition": "Pilot phase exceeds 90-day timeline without measurable OEE or yield improvement on the pilot line",
+      "severity": "warning",
+      "recommended_action": "Review pilot scope and baseline data; escalate to steering committee; assess whether to pivot or extend scope.",
+      "related_phase": [5, 6],
+      "related_risks": ["R30", "R35"]
+    },
+    {
+      "rule_id": "MR27",
+      "trigger_condition": "Project budget burn rate exceeds planned by > 15% for two consecutive months during Phase 4 or 5",
+      "severity": "warning",
+      "recommended_action": "Review change order log and scope creep; engage PMO for re-forecast; escalate to steering committee.",
+      "related_phase": [4, 5],
+      "related_risks": ["R37", "R39"]
+    },
+    {
+      "rule_id": "MR28",
+      "trigger_condition": "Punch list or commissioning checkpoints > 20% open within 2 weeks of scheduled go-live date",
+      "severity": "critical",
+      "recommended_action": "Assess go/no-go decision; accelerate close-out sprint; engage stakeholders on timeline risk; document risk acceptance for deferred items.",
+      "related_phase": [5, 6],
+      "related_risks": ["R32"]
+    }
+  ]
+}

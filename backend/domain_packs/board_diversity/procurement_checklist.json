@@ -1,0 +1,77 @@
+{
+  "pack": "board_diversity",
+  "packages": [
+    {
+      "package_name": "Board diversity benchmarking data subscription",
+      "criticality": "Critical",
+      "long_lead": false,
+      "vendor_qualification_criteria": "Provider with FTSE 350/250 board composition data, proven methodology for diversity metrics, and an annual refresh cycle aligned to AGM seasons.",
+      "technical_documents_required": ["Data dictionary", "Methodology note", "Coverage universe"],
+      "inspection_requirements": "Verify data refresh date and check classification methodology for ethnicity/race categories against the client's reporting taxonomy.",
+      "acceptance_tests": "Spot-check data accuracy against five company annual reports; confirm refresh date is current."
+    },
+    {
+      "package_name": "Board evaluation platform or survey tool",
+      "criticality": "High",
+      "long_lead": false,
+      "vendor_qualification_criteria": "Secure survey/evaluation platform supporting confidential board assessments, anonymity thresholds, and exportable coded results.",
+      "technical_documents_required": ["Security and data-residency statement", "Anonymity threshold controls", "Configurable question-bank documentation"],
+      "inspection_requirements": "Confirm UK GDPR-aligned data residency, access controls, and that anonymity thresholds prevent re-identification of small boards.",
+      "acceptance_tests": "Run a pilot questionnaire with the engagement team; verify anonymity aggregation and report export."
+    },
+    {
+      "package_name": "External board evaluation provider",
+      "criticality": "High",
+      "long_lead": true,
+      "vendor_qualification_criteria": "Independent evaluator with FTSE 350 experience, no conflicts of interest, and a documented effectiveness methodology; rotation compliant with UK Code Provision 21 (no more than six consecutive engagements).",
+      "technical_documents_required": ["Methodology statement", "Independence and conflict-of-interest declaration", "Sample evaluation report (redacted)"],
+      "inspection_requirements": "Confirm independence declaration, six-year rotation compliance, and that the methodology covers diversity and dynamics.",
+      "acceptance_tests": "Review references from two comparable FTSE 350 boards; confirm scope and deliverables in the statement of work."
+    },
+    {
+      "package_name": "Board candidate database / executive search firm",
+      "criticality": "High",
+      "long_lead": true,
+      "vendor_qualification_criteria": "Search firm with demonstrable access to diverse, board-ready candidate networks; transparent sourcing methodology; willing to commit to diverse slates.",
+      "technical_documents_required": ["Sourcing methodology", "Diversity of slate commitments", "Fee and exclusivity terms"],
+      "inspection_requirements": "Verify the firm's track record on diverse appointments and the breadth of its candidate network.",
+      "acceptance_tests": "Require a diverse slate for a live or test vacancy; assess candidate quality and fit."
+    },
+    {
+      "package_name": "DEI maturity assessment tool or framework",
+      "criticality": "Medium",
+      "long_lead": false,
+      "vendor_qualification_criteria": "Provider offering a validated DEI maturity model (Compliance to Belonging) with board-applicable assessment instruments.",
+      "technical_documents_required": ["Maturity model definition", "Assessment instrument", "Scoring rubric"],
+      "inspection_requirements": "Confirm the model is board-applicable (not workforce-only) and evidence-based.",
+      "acceptance_tests": "Apply the assessment to the client baseline; confirm stage assignment is defensible and reproducible."
+    },
+    {
+      "package_name": "Diversity data analytics dashboard software",
+      "criticality": "High",
+      "long_lead": false,
+      "vendor_qualification_criteria": "BI/dashboard platform supporting the engagement KPI set, role-based access, and secure handling of sensitive diversity data.",
+      "technical_documents_required": ["Data model and connector list", "Security and access-control documentation", "KPI template library"],
+      "inspection_requirements": "Confirm access controls, audit logging, and compatibility with the data collection infrastructure.",
+      "acceptance_tests": "Load the kpi_definitions.json set; verify each KPI renders against sample data with correct access roles."
+    },
+    {
+      "package_name": "Legal / regulatory compliance research tool",
+      "criticality": "Medium",
+      "long_lead": false,
+      "vendor_qualification_criteria": "Service providing current corporate governance code, listing-rule, and disclosure requirements (UK, EU CSRD/ESRS, SEC) with update alerts.",
+      "technical_documents_required": ["Coverage statement", "Update cadence", "Source authority list"],
+      "inspection_requirements": "Confirm coverage of all applicable regimes and timely update alerts.",
+      "acceptance_tests": "Validate that recent regulatory changes are reflected and that alerting works."
+    },
+    {
+      "package_name": "Stakeholder engagement survey platform",
+      "criticality": "Medium",
+      "long_lead": false,
+      "vendor_qualification_criteria": "Survey platform supporting confidential stakeholder feedback (board, leadership, employees) with anonymity controls and analytics.",
+      "technical_documents_required": ["Security statement", "Anonymity controls", "Analytics and export options"],
+      "inspection_requirements": "Confirm confidentiality controls adequate for board and senior respondents.",
+      "acceptance_tests": "Pilot a stakeholder feedback survey; verify anonymity and analytics output."
+    }
+  ]
+}

@@ -1,0 +1,141 @@
+{
+  "pack": "highway_epc_uk",
+  "total_activities": 15,
+  "activities": [
+    {
+      "activity": "Structural bearings & expansion joints commissioning",
+      "phase": "Phase 6",
+      "prerequisites": ["Bridge structure accepted", "Bearings and joints installed"],
+      "procedure_required": "Commissioning procedure for bearing movement and joint operation",
+      "safety_hold_point": "Movement-range verification before live loading",
+      "acceptance_criteria": "Bearings and joints verified to design movement; joint watertightness confirmed.",
+      "responsible_role": "Commissioning Lead"
+    },
+    {
+      "activity": "Drainage outfall proving",
+      "phase": "Phase 6",
+      "prerequisites": ["Drainage installation complete", "Outfalls constructed"],
+      "procedure_required": "Outfall proving and CCTV survey procedure",
+      "safety_hold_point": "Confined-space / watercourse risk assessed before proving",
+      "acceptance_criteria": "All outfalls proven free-flowing and connecting as designed; CCTV accepted.",
+      "responsible_role": "Commissioning Lead"
+    },
+    {
+      "activity": "Asphalt compaction validation",
+      "phase": "Phase 6",
+      "prerequisites": ["Surface course laid", "Density testing complete"],
+      "procedure_required": "Compaction validation and coring procedure",
+      "safety_hold_point": "Traffic exclusion during coring",
+      "acceptance_criteria": "Compaction validated to specification; density and thickness confirmed.",
+      "responsible_role": "Quality Manager"
+    },
+    {
+      "activity": "Electrical lighting energisation into operation",
+      "phase": "Phase 6",
+      "prerequisites": ["Lighting installation complete", "Circuits tested", "Power supply available"],
+      "procedure_required": "Energisation procedure with permit-to-work and lock-off",
+      "safety_hold_point": "Permit-to-work and isolation before energisation",
+      "acceptance_criteria": "Lighting energised into operation; photometric and circuit tests passed.",
+      "responsible_role": "Electrical Lead"
+    },
+    {
+      "activity": "Smart motorway technology integration test",
+      "phase": "Phase 6",
+      "prerequisites": ["ITS devices installed and powered", "Communications live", "Control room ready"],
+      "procedure_required": "End-to-end integration test procedure (MIDAS, ERF, HSR, HAR)",
+      "safety_hold_point": "Confirm fail-safe and fallback before any operational use",
+      "acceptance_criteria": "Integration test passed; detector accuracy and control-room response verified.",
+      "responsible_role": "ITS/Controls Lead"
+    },
+    {
+      "activity": "VRS impact certification & acceptance",
+      "phase": "Phase 6",
+      "prerequisites": ["VRS installation complete", "Certified system verified"],
+      "procedure_required": "VRS acceptance and certification confirmation procedure",
+      "safety_hold_point": "No opening of carriageway until VRS acceptance confirmed",
+      "acceptance_criteria": "Installed VRS matches a certified system; containment and working width confirmed.",
+      "responsible_role": "Quality Manager"
+    },
+    {
+      "activity": "Traffic trial load & structural loading check",
+      "phase": "Phase 6",
+      "prerequisites": ["Structure complete", "Design check (Cat 3) complete"],
+      "procedure_required": "Trial load / proof loading procedure",
+      "safety_hold_point": "Exclusion zone during loading; monitoring in place",
+      "acceptance_criteria": "Load test accepted; deflections within limits; no distress.",
+      "responsible_role": "Commissioning Lead"
+    },
+    {
+      "activity": "Final snagging walkdown with National Highways",
+      "phase": "Phase 7",
+      "prerequisites": ["Substantial completion", "Snagging list issued"],
+      "procedure_required": "Joint walkdown and snagging close-out procedure",
+      "safety_hold_point": "Traffic management in place for walkdown",
+      "acceptance_criteria": "Walkdown signed off by National Highways; residual snagging list agreed.",
+      "responsible_role": "Commissioning Lead"
+    },
+    {
+      "activity": "Category 3 / Stage 3 safety audit (DMRB CD 377)",
+      "phase": "Phase 6",
+      "prerequisites": ["Works substantially complete", "Road open or about to open"],
+      "procedure_required": "Stage 3 Road Safety Audit procedure (DMRB CD 377)",
+      "safety_hold_point": "Audit recommendations addressed before full opening",
+      "acceptance_criteria": "Stage 3 RSA report issued and recommendations closed out.",
+      "responsible_role": "Safety/HSE Lead"
+    },
+    {
+      "activity": "Systems manual & as-built handover",
+      "phase": "Phase 7",
+      "prerequisites": ["As-builts complete", "O&M manuals compiled", "Tests passed"],
+      "procedure_required": "Handover and acceptance procedure",
+      "safety_hold_point": "Maintainer acceptance before transfer of responsibility",
+      "acceptance_criteria": "As-built record and O&M manuals accepted by the maintainer; completion certificate issued.",
+      "responsible_role": "Document Control Lead"
+    },
+    {
+      "activity": "Communications & network integration test",
+      "phase": "Phase 6",
+      "prerequisites": ["Network installed", "ITS devices connected"],
+      "procedure_required": "End-to-end communications resilience test procedure",
+      "safety_hold_point": "Confirm redundant comms paths before go-live",
+      "acceptance_criteria": "Communications verified; redundancy and failover tested.",
+      "responsible_role": "ITS/Controls Lead"
+    },
+    {
+      "activity": "Pavement ride quality & skid resistance validation",
+      "phase": "Phase 6",
+      "prerequisites": ["Surface course complete", "White lining complete"],
+      "procedure_required": "Ride quality and skid resistance measurement procedure",
+      "safety_hold_point": "Traffic exclusion during measurement",
+      "acceptance_criteria": "Ride quality and SCRIM/skid values within specification.",
+      "responsible_role": "Quality Manager"
+    },
+    {
+      "activity": "Drainage pollution prevention device proving",
+      "phase": "Phase 6",
+      "prerequisites": ["Pollution prevention devices installed", "Outfalls proven"],
+      "procedure_required": "Pollution prevention device proving procedure",
+      "safety_hold_point": "Spill-response readiness confirmed",
+      "acceptance_criteria": "Shut-off/pollution devices operate as designed; alarms tested.",
+      "responsible_role": "Commissioning Lead"
+    },
+    {
+      "activity": "CCTV & incident detection system commissioning",
+      "phase": "Phase 6",
+      "prerequisites": ["CCTV and detection devices installed", "Control room ready"],
+      "procedure_required": "CCTV and incident detection commissioning procedure",
+      "safety_hold_point": "Image and alert verification before operational use",
+      "acceptance_criteria": "Coverage, image quality and incident-detection alerts verified.",
+      "responsible_role": "ITS/Controls Lead"
+    },
+    {
+      "activity": "Final completion certificate & handover sign-off",
+      "phase": "Phase 7",
+      "prerequisites": ["All commissioning complete", "Snagging closed", "Manuals accepted"],
+      "procedure_required": "Completion certificate issue and handover procedure",
+      "safety_hold_point": "Formal transfer of operational responsibility",
+      "acceptance_criteria": "Completion certificate issued; scheme accepted by National Highways and the maintainer.",
+      "responsible_role": "PMO Lead"
+    }
+  ]
+}

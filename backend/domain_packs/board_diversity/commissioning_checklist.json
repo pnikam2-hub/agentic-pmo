@@ -1,0 +1,95 @@
+{
+  "pack": "board_diversity",
+  "activities": [
+    {
+      "activity": "Diversity policy document review sign-off",
+      "phase": "Phase 1",
+      "prerequisites": ["Data access agreement signed", "Current diversity policy and prior initiative records received"],
+      "procedure_required": "Read the current diversity policy and prior initiative records end-to-end; document strengths, gaps, target history, and outcomes against the applicable code and review frameworks.",
+      "safety_hold_point": "Policy is missing, unsigned, or more than 24 months out of date with no review record - flag as a compliance and credibility risk before proceeding.",
+      "acceptance_criteria": "Review note signed off by the DEI Policy Lead covering policy content, targets, and prior outcomes.",
+      "responsible_role": "DEI Policy Lead"
+    },
+    {
+      "activity": "Board interview protocol approval",
+      "phase": "Phase 1",
+      "prerequisites": ["Stakeholder map complete", "Access to chair, nomination chair, and CEO confirmed"],
+      "procedure_required": "Finalise the semi-structured elite interview protocol, consent form, and confidentiality provisions; obtain ethics and GC approval before any interview is conducted.",
+      "safety_hold_point": "Protocol or consent form not approved, or confidentiality provisions inadequate for board-level informants - hold interviews until approved.",
+      "acceptance_criteria": "Protocol, consent form, and confidentiality approach approved by GC and engagement lead; informants briefed.",
+      "responsible_role": "Board Research Lead"
+    },
+    {
+      "activity": "Board baseline data validation",
+      "phase": "Phase 2",
+      "prerequisites": ["Data access agreement signed", "Board composition spreadsheet received"],
+      "procedure_required": "Cross-reference the board register with the annual report, Companies House, and the company website. Flag discrepancies older than 24 hours for resolution.",
+      "safety_hold_point": "Discrepancy rate greater than 5% between sources - hold for clarification before proceeding to benchmark.",
+      "acceptance_criteria": "All board member data (name, gender, ethnicity, age, tenure, independence, committee membership) confirmed against a minimum of two sources.",
+      "responsible_role": "Data Analyst / Governance Researcher"
+    },
+    {
+      "activity": "Benchmarking methodology sign-off",
+      "phase": "Phase 2",
+      "prerequisites": ["Baseline data validated", "Comparator universe and data source agreed"],
+      "procedure_required": "Document the benchmarking methodology: comparator set (FTSE 350/250 and sector peers), metrics, weighting, and treatment of small-N boards; obtain sponsor and analytics sign-off.",
+      "safety_hold_point": "Comparator universe not defensible or metrics inconsistent with regulatory definitions - hold before producing the benchmark report.",
+      "acceptance_criteria": "Methodology note signed off by sponsor and Data Analytics Lead; comparator set documented.",
+      "responsible_role": "Data Analytics Lead"
+    },
+    {
+      "activity": "Policy recommendation review by legal",
+      "phase": "Phase 3",
+      "prerequisites": ["Diversity policy framework drafted", "Target-setting methodology drafted"],
+      "procedure_required": "Submit draft policy, appointment process, and target methodology to GC for review of legality (avoiding unlawful quotas), data protection, and disclosure alignment.",
+      "safety_hold_point": "Legal flags risk of unlawful quota, discrimination exposure, or disclosure non-compliance - hold adoption until remediated.",
+      "acceptance_criteria": "Written legal sign-off with any conditions resolved and documented.",
+      "responsible_role": "General Counsel"
+    },
+    {
+      "activity": "Board presentation materials approval",
+      "phase": "Phase 4",
+      "prerequisites": ["Benchmark report accepted", "Draft recommendations prioritised"],
+      "procedure_required": "Prepare and review board presentation materials for accuracy, tone, and confidentiality; confirm no data is presented outside the agreed access ring-fence; obtain sponsor approval.",
+      "safety_hold_point": "Materials contain non-ring-fenced sensitive data or unverified claims - hold presentation until corrected.",
+      "acceptance_criteria": "Materials approved by sponsor and Governance Advisory Lead; data handling confirmed compliant.",
+      "responsible_role": "Governance Advisory Lead"
+    },
+    {
+      "activity": "Policy adoption board resolution",
+      "phase": "Phase 5",
+      "prerequisites": ["Policy wording approved", "Board slot secured", "AGM materials lodged where required"],
+      "procedure_required": "Place the diversity policy adoption on the board agenda; secure a formal resolution; minute the decision and prepare any AGM resolution materials.",
+      "safety_hold_point": "Resolution deferred without a revised date within the AGM cycle - escalate as a disclosure-slip risk.",
+      "acceptance_criteria": "Board resolution adopted and minuted; AGM materials lodged where required.",
+      "responsible_role": "Company Secretary"
+    },
+    {
+      "activity": "KPI dashboard deployment verification",
+      "phase": "Phase 6",
+      "prerequisites": ["Diversity data collection infrastructure live", "Baselined metrics available"],
+      "procedure_required": "Deploy the dashboard against the kpi_definitions.json set; verify each KPI renders from validated data with correct access roles; confirm variance triggers are active.",
+      "safety_hold_point": "KPIs render from unvalidated data or access controls inadequate for sensitive metrics - hold go-live until resolved.",
+      "acceptance_criteria": "All KPIs verified live against validated data; access roles and variance triggers confirmed.",
+      "responsible_role": "Data Analytics Lead"
+    },
+    {
+      "activity": "Annual board effectiveness review acceptance",
+      "phase": "Phase 7",
+      "prerequisites": ["Annual effectiveness review completed under new framework", "Findings shared with board"],
+      "procedure_required": "Complete the annual effectiveness review; share findings with the board; obtain acceptance that findings and recommended actions are agreed and owned.",
+      "safety_hold_point": "Effectiveness score has declined materially and findings are unaddressed - hold acceptance until remediation owners are assigned.",
+      "acceptance_criteria": "Review report accepted by the board with actions assigned to owners and dates.",
+      "responsible_role": "Governance Advisory Lead"
+    },
+    {
+      "activity": "Phase 7 close-out report acceptance",
+      "phase": "Phase 7",
+      "prerequisites": ["Roadmap refined", "Lessons learned workshop held", "Knowledge transfer complete"],
+      "procedure_required": "Compile the engagement close-out report (scope, outcomes, residual risks, handover); confirm knowledge transfer to the client governance team; obtain sponsor acceptance.",
+      "safety_hold_point": "Residual risks unowned or knowledge transfer incomplete - hold close-out until owners and handover are confirmed.",
+      "acceptance_criteria": "Close-out report accepted by sponsor; capability handover confirmed; residual risks owned.",
+      "responsible_role": "Engagement Director"
+    }
+  ]
+}

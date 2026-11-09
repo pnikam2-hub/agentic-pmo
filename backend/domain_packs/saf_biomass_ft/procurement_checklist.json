@@ -1,0 +1,355 @@
+{
+  "pack": "saf_biomass_ft",
+  "packages": [
+    {
+      "package_name": "Biomass handling and receiving system",
+      "criticality": "Critical",
+      "long_lead": false,
+      "vendor_qualification_criteria": "Experience with biomass handling systems 3+ references",
+      "technical_documents_required": ["Layout drawing", "Conveyor spec", "Capacity calculation"],
+      "inspection_requirements": "Factory acceptance test (FAT) for control system",
+      "acceptance_tests": "24-hour continuous operation at design throughput",
+      "typical_lead_time_months": 10
+    },
+    {
+      "package_name": "Biomass drying system (rotary dryer)",
+      "criticality": "Critical",
+      "long_lead": true,
+      "vendor_qualification_criteria": "Proven rotary dryer installations for biomass ≥5 references, experience with moisture reduction from 50% to <10%",
+      "technical_documents_required": ["Thermal mass balance", "Dryer P&ID", "Moisture control philosophy", "Fire/explosion protection layout"],
+      "inspection_requirements": "FAT for burner management system; SAT on moisture uniformity",
+      "acceptance_tests": "72-hour continuous drying at target moisture ±1%",
+      "typical_lead_time_months": 14
+    },
+    {
+      "package_name": "Biomass sizing and grinding system",
+      "criticality": "High",
+      "long_lead": false,
+      "vendor_qualification_criteria": "Experience with hammer mills or knife mills for biomass; particle size distribution guarantees",
+      "technical_documents_required": ["Mill P&ID", "Motor and drive spec", "Size distribution curve guarantee"],
+      "inspection_requirements": "Run test at vendor facility with target feedstock",
+      "acceptance_tests": "Continuous grinding achieving P80 < 2 mm at rated throughput",
+      "typical_lead_time_months": 8
+    },
+    {
+      "package_name": "Biomass covered storage system",
+      "criticality": "High",
+      "long_lead": false,
+      "vendor_qualification_criteria": "Experience with silo or dome storage for combustible dust materials, NFPA compliance",
+      "technical_documents_required": ["Storage dome/silo structural drawings", "Dust explosion venting design", "Reclaim system layout", "Fire protection design"],
+      "inspection_requirements": "Site weld inspection per AWS D1.1; pressure decay test on dome seal",
+      "acceptance_tests": "Full loading/unloading cycle at design capacity",
+      "typical_lead_time_months": 10
+    },
+    {
+      "package_name": "Gasifier island",
+      "criticality": "Critical",
+      "long_lead": true,
+      "vendor_qualification_criteria": "Proven biomass gasification installations ≥3 commercial references; technology licensor with >10 years operating data",
+      "technical_documents_required": ["Gasifier P&ID", "Isometric layout", "Refractory specification", "Feed/nozzle design", "Ash handling system design", "Syngas composition guarantee"],
+      "inspection_requirements": "Full FAT including control system simulation; refractory inspection by specialist; hydrotest of pressure parts",
+      "acceptance_tests": "7-day continuous operation at design capacity achieving syngas composition guarantees (H2/CO ratio, tar content, cold gas efficiency)",
+      "typical_lead_time_months": 22
+    },
+    {
+      "package_name": "Air separation unit or oxygen supply system",
+      "criticality": "Critical",
+      "long_lead": true,
+      "vendor_qualification_criteria": "Proven ASU supplier with 5+ references in chemical/petrochemical; ability to supply LOX/LIN",
+      "technical_documents_required": ["ASU process flow diagram", "Cold box design", "Distillation column specs", "Compressor train datasheet", "Purity guarantee"],
+      "inspection_requirements": "FAT for main air compressor; cold box X-ray inspection; piping hydrotest",
+      "acceptance_tests": "72-hour continuous oxygen production at 99.5% purity at design rate",
+      "typical_lead_time_months": 24
+    },
+    {
+      "package_name": "Oxidant compression system",
+      "criticality": "High",
+      "long_lead": true,
+      "vendor_qualification_criteria": "Experience with oxygen service compressors; API 617 compliance; material compatibility for O2 service",
+      "technical_documents_required": ["Compressor datasheet", "Lube/seal oil system P&ID", "Interstage cooler specs", "Material selection report for O2 service"],
+      "inspection_requirements": "FAT per API 617; mechanical run test; instrument calibration",
+      "acceptance_tests": "4-hour full-load test on closed loop with O2-grade clean conditions",
+      "typical_lead_time_months": 18
+    },
+    {
+      "package_name": "Biomass high-pressure feeding system (lock hoppers)",
+      "criticality": "Critical",
+      "long_lead": true,
+      "vendor_qualification_criteria": "Proven experience with lock hopper feeding systems for pressurized gasifiers ≥2 references; ability to handle 30+ barg",
+      "technical_documents_required": ["Lock hopper pressure vessel design", "Valve sequencing logic", "Feeder isolation valve spec", "Pressurization/depressurization cycle design"],
+      "inspection_requirements": "Pressure vessel inspection per ASME Sec VIII Div 1; FAT for valve sequencing logic; cycle testing",
+      "acceptance_tests": "1000-cycle test at design pressure and temperature",
+      "typical_lead_time_months": 16
+    },
+    {
+      "package_name": "Syngas cooling and heat recovery system",
+      "criticality": "High",
+      "long_lead": true,
+      "vendor_qualification_criteria": "Experience with syngas coolers / waste heat boilers in biomass or coal gasification; TEMA standards",
+      "technical_documents_required": ["Heat exchanger TEMA datasheet", "Steam drum design", "Heat recovery P&ID", "Thermal stress analysis"],
+      "inspection_requirements": "Hydrotest of HX bundles; weld inspection per ASME Sec IX; FAT for steam drum level control",
+      "acceptance_tests": "48-hour operation achieving design outlet temperature ±10°C at full load",
+      "typical_lead_time_months": 14
+    },
+    {
+      "package_name": "Particulate removal system (cyclone, filter, scrubber)",
+      "criticality": "High",
+      "long_lead": false,
+      "vendor_qualification_criteria": "Proven syngas particulate removal; experience with high-temperature candle filters and wet scrubbers",
+      "technical_documents_required": ["Cyclone/filter mechanical drawings", "Bag/candle filter spec", "Scrubber P&ID", "Pressure drop calculation"],
+      "inspection_requirements": "FAT for filter pulse cleaning control; scrubber spray nozzle flow test",
+      "acceptance_tests": "Particulate emission <1 mg/Nm³ over 72-hour continuous run",
+      "typical_lead_time_months": 12
+    },
+    {
+      "package_name": "Tar reformer / catalytic cracking unit",
+      "criticality": "Critical",
+      "long_lead": true,
+      "vendor_qualification_criteria": "Proven tar reforming technology with 3+ commercial biomass syngas references; catalyst lifetime guarantees",
+      "technical_documents_required": ["Reformer P&ID", "Catalyst bed design", "Temperature control scheme", "Catalyst loading/unloading plan"],
+      "inspection_requirements": "FAT for reformer control system; catalyst performance test in lab; reactor pressure test",
+      "acceptance_tests": "72-hour operation achieving tar conversion >99% at design space velocity",
+      "typical_lead_time_months": 18
+    },
+    {
+      "package_name": "Acid gas removal system (H2S and CO2 removal)",
+      "criticality": "Critical",
+      "long_lead": true,
+      "vendor_qualification_criteria": "Proven amine system or Selexol/Rectisol licensor with 3+ synthesis gas references; experience with CO2 removal for FT",
+      "technical_documents_required": ["Absorber/regenerator vessel design", "Amine circulation P&ID", "Heat integration diagram", "Solvent selection report"],
+      "inspection_requirements": "FAT for solvent circulation pumps; vessel hydrotest; amine reclaimer test",
+      "acceptance_tests": "72-hour operation achieving H2S <0.1 ppmv and CO2 removal to spec",
+      "typical_lead_time_months": 20
+    },
+    {
+      "package_name": "Chlorine removal guard bed",
+      "criticality": "High",
+      "long_lead": false,
+      "vendor_qualification_criteria": "Supplier of chlorine guard materials with proven performance in syngas service",
+      "technical_documents_required": ["Vessel design drawing", "Bed loading diagram", "Media spec and performance data"],
+      "inspection_requirements": "Visual bed loading inspection; pressure test on vessel",
+      "acceptance_tests": "On-stream chloride breakthrough monitoring; acceptance when Cl <0.1 ppmv outlet",
+      "typical_lead_time_months": 8
+    },
+    {
+      "package_name": "Sulfur guard bed / polishing system",
+      "criticality": "High",
+      "long_lead": false,
+      "vendor_qualification_criteria": "Supplier of sulfur polishing materials with references in syngas/FT applications",
+      "technical_documents_required": ["Guard bed vessel design", "Media loading plan", "Sulfur breakthrough curve"],
+      "inspection_requirements": "Bed loading inspection; vessel hydrotest",
+      "acceptance_tests": "Sulfur <0.01 ppmv outlet over design bed life",
+      "typical_lead_time_months": 8
+    },
+    {
+      "package_name": "Syngas compression system",
+      "criticality": "High",
+      "long_lead": true,
+      "vendor_qualification_criteria": "Experience with syngas compressors; API 618/619 compliance; references for FT syngas service at 20-30 barg",
+      "technical_documents_required": ["Compressor train datasheet", "Pulsation study report", "Lube oil system P&ID", "Interstage coolers and knockout drums design"],
+      "inspection_requirements": "FAT per API 618; mechanical run test; pulsation study validation",
+      "acceptance_tests": "4-hour full-capacity closed-loop performance test",
+      "typical_lead_time_months": 16
+    },
+    {
+      "package_name": "Water-gas shift / ratio adjustment and CO2 membrane system",
+      "criticality": "High",
+      "long_lead": true,
+      "vendor_qualification_criteria": "WGS catalyst supplier with syngas references; membrane supplier with commercial CO2/H2 separation references",
+      "technical_documents_required": ["WGS reactor P&ID", "Catalyst volume and bed design", "Membrane module specifications", "H2/CO ratio control strategy"],
+      "inspection_requirements": "FAT for membrane module integrity; catalyst lab test; reactor hydrotest",
+      "acceptance_tests": "72-hour operation achieving target H2/CO ratio ±0.05 at design throughput",
+      "typical_lead_time_months": 14
+    },
+    {
+      "package_name": "Fischer-Tropsch reactor package (slurry/fixed bed)",
+      "criticality": "Critical",
+      "long_lead": true,
+      "vendor_qualification_criteria": "FT technology licensor with 3+ commercial references; proven slurry bed or fixed bed reactors for GTL/BTL",
+      "technical_documents_required": ["Reactor vessel design", "Internal gas distributor design", "Heat removal / cooling coil design", "Catalyst loading/unloading plan", "Reactor P&ID and control philosophy"],
+      "inspection_requirements": "Full FAT including DCS simulation; reactor hydrotest; weld X-ray; catalyst loading demonstration",
+      "acceptance_tests": "7-day continuous operation at design temperature, pressure, and GHSV achieving CO conversion ≥80% and C5+ selectivity guarantees",
+      "typical_lead_time_months": 26
+    },
+    {
+      "package_name": "FT catalyst (initial charge and spare)",
+      "criticality": "Critical",
+      "long_lead": true,
+      "vendor_qualification_criteria": "Proven FT catalyst manufacturer; demonstrated performance in commercial GTL/BTL plants ≥3.5 years lifetime; cobalt or iron catalyst",
+      "technical_documents_required": ["Catalyst technical data sheet", "Performance guarantees (activity, selectivity, attrition resistance)", "MSDS and handling procedure", "Shelf life and storage requirements"],
+      "inspection_requirements": "FAT for each batch — XRD phase purity, BET surface area, attrition index; retained samples per batch",
+      "acceptance_tests": "Bench-scale PBR test certifying CO conversion and C5+ selectivity within tolerance",
+      "typical_lead_time_months": 10
+    },
+    {
+      "package_name": "Wax handling and filtration system",
+      "criticality": "High",
+      "long_lead": false,
+      "vendor_qualification_criteria": "Experience with hot wax filtration (150-250°C); references from FT or wax processing plants",
+      "technical_documents_required": ["Wax filter P&ID", "Heat tracing / jacketing design", "Filter element spec", "Wax storage tank design"],
+      "inspection_requirements": "FAT for filter control logic; heat tracing continuity test",
+      "acceptance_tests": "48-hour continuous wax filtration achieving <0.1 wt% catalyst carryover",
+      "typical_lead_time_months": 12
+    },
+    {
+      "package_name": "Wax hydrotreating unit",
+      "criticality": "High",
+      "long_lead": true,
+      "vendor_qualification_criteria": "Hydrotreating technology provider with 3+ references for wax/fat/oil hydroprocessing; catalyst and reactor design",
+      "technical_documents_required": ["Hydrotreater P&ID", "Reactor design and catalyst bed layout", "Hydrogen quench system", "Product fractionation scheme"],
+      "inspection_requirements": "FAT for reactor and quench system; catalyst loading inspection; hydrotest",
+      "acceptance_tests": "72-hour run achieving target cetane number and sulfur/nitrogen removal",
+      "typical_lead_time_months": 18
+    },
+    {
+      "package_name": "Hydrocracker / isomerization reactor",
+      "criticality": "High",
+      "long_lead": true,
+      "vendor_qualification_criteria": "Proven hydrocracking/isomerization licensor; references for renewable diesel or SAF production",
+      "technical_documents_required": ["Reactor P&ID", "Catalyst loading design", "Hydrogen recycle compressor spec", "Product properties guarantee"],
+      "inspection_requirements": "FAT for reactor and recycle compressor; catalyst loading verification; pressure test",
+      "acceptance_tests": "72-hour operation achieving target cold-flow properties and SAF boiling range yield",
+      "typical_lead_time_months": 20
+    },
+    {
+      "package_name": "Hydrogen supply / PSA system",
+      "criticality": "Critical",
+      "long_lead": true,
+      "vendor_qualification_criteria": "Proven PSA supplier with 5+ refinery/chemical references; ability to deliver 99.99%+ purity H2",
+      "technical_documents_required": ["PSA unit PFD", "Adsorbent vessel design", "Valve skid P&ID", "H2 purity guarantee"],
+      "inspection_requirements": "FAT for PSA valve sequencing; vessel hydrotest; adsorbent loading inspection",
+      "acceptance_tests": "72-hour continuous operation with H2 purity ≥99.99% and recovery ≥85%",
+      "typical_lead_time_months": 16
+    },
+    {
+      "package_name": "Fractionation columns (distillation train)",
+      "criticality": "High",
+      "long_lead": true,
+      "vendor_qualification_criteria": "Experience with multi-column fractionation for hydrocarbon separation; refinery/petrochemical references",
+      "technical_documents_required": ["Column mechanical design", "Tray/packing hydraulic design", "Overhead/reboiler system P&ID", "Heat integration diagram"],
+      "inspection_requirements": "FAT for column trays; weld X-ray per ASME; hydrotest; packing installation inspection",
+      "acceptance_tests": "72-hour operation achieving product cut points within ±3°C of design",
+      "typical_lead_time_months": 18
+    },
+    {
+      "package_name": "Condensate and offgas treatment system",
+      "criticality": "Medium",
+      "long_lead": false,
+      "vendor_qualification_criteria": "Experience with sour water strippers and offgas handling in refining/chemical plants",
+      "technical_documents_required": ["Sour water stripper P&ID", "Offgas compressor spec", "Condensate storage and routing", "Emissions compliance report"],
+      "inspection_requirements": "FAT for stripper control system; vessel hydrotest",
+      "acceptance_tests": "48-hour operation meeting wastewater spec and offgas emission limits",
+      "typical_lead_time_months": 10
+    },
+    {
+      "package_name": "Product storage tanks (SAF, naphtha, diesel range)",
+      "criticality": "High",
+      "long_lead": true,
+      "vendor_qualification_criteria": "API 650 tank fabricator with 5+ references for refined fuel storage; floating roof experience",
+      "technical_documents_required": ["Storage tank general arrangement", "Floating roof design (if applicable)", "Cathodic protection design", "Fire protection foam system design"],
+      "inspection_requirements": "API 650 weld inspection; hydrostatic test; floating roof seal test",
+      "acceptance_tests": "Hydrostatic test per API 650 for 24 hours",
+      "typical_lead_time_months": 14
+    },
+    {
+      "package_name": "SAF blending system",
+      "criticality": "Medium",
+      "long_lead": false,
+      "vendor_qualification_criteria": "Experience with automated blending skids for jet fuel / diesel; in-line blending references",
+      "technical_documents_required": ["Blending skid P&ID", "Flow meter and additive injection specs", "Batch control philosophy"],
+      "inspection_requirements": "FAT for blending control logic; meter calibration certificates",
+      "acceptance_tests": "Blend accuracy within ±0.5% of target specification over 10 consecutive batches",
+      "typical_lead_time_months": 8
+    },
+    {
+      "package_name": "Loading and unloading gantry system",
+      "criticality": "Medium",
+      "long_lead": false,
+      "vendor_qualification_criteria": "Experience with truck/rail loading gantries for fuels; vapor recovery system integration",
+      "technical_documents_required": ["Gantry layout drawing", "Loading arm spec", "Vapor recovery P&ID", "Metering and custody transfer design"],
+      "inspection_requirements": "FAT for loading control system; meter calibration; vapor recovery efficiency test",
+      "acceptance_tests": "100 consecutive loading cycles with accuracy ±0.1%",
+      "typical_lead_time_months": 10
+    },
+    {
+      "package_name": "Laboratory and QC equipment package",
+      "criticality": "Medium",
+      "long_lead": false,
+      "vendor_qualification_criteria": "Supplier of fuel characterization lab equipment with ASTM methods; GC, distillation, elemental analyzers",
+      "technical_documents_required": ["Lab equipment list and specs", "GC and wet chem method books", "Lab layout and ventilation design"],
+      "inspection_requirements": "FAT for GC and key analyzers; certificate of calibration",
+      "acceptance_tests": "ASTM round-robin validation across all test methods",
+      "typical_lead_time_months": 6
+    },
+    {
+      "package_name": "DCS / distributed control system",
+      "criticality": "Critical",
+      "long_lead": true,
+      "vendor_qualification_criteria": "Major DCS vendor (Honeywell, Emerson, ABB, Yokogawa) with refinery/petrochemical references; 5+ SAF or similar installations",
+      "technical_documents_required": ["DCS architecture diagram", "IO list and cabinet layout", "HMI philosophy", "Alarm management plan", "Network architecture and cybersecurity design"],
+      "inspection_requirements": "FAT for all control logic; IO check-out; SAT on-site",
+      "acceptance_tests": "48-hour loop check with all instruments simulating 100% of IO points",
+      "typical_lead_time_months": 16
+    },
+    {
+      "package_name": "SIS / emergency shutdown system",
+      "criticality": "Critical",
+      "long_lead": true,
+      "vendor_qualification_criteria": "TÜV-certified SIS provider; experience with SIL-rated safety systems in petrochemical/hydrogen environments",
+      "technical_documents_required": ["SIL analysis report", "Cause-and-effect matrix", "SIS architecture diagram", "Logic solver specification"],
+      "inspection_requirements": "FAT per IEC 61508/61511; SIL verification testing",
+      "acceptance_tests": "Proof test of all SIF loops demonstrating SIL target performance",
+      "typical_lead_time_months": 14
+    },
+    {
+      "package_name": "Flare / thermal oxidiser system",
+      "criticality": "High",
+      "long_lead": false,
+      "vendor_qualification_criteria": "Flare system supplier with 3+ petrochemical/refinery references; compliance with EPA and local emissions regs",
+      "technical_documents_required": ["Flare system P&ID", "Knockout drum design", "Flare tip / thermal oxidiser spec", "Emissions guarantee"],
+      "inspection_requirements": "FAT for flare ignition system; KO drum hydrotest; stack emission measurement",
+      "acceptance_tests": "48-hour continuous operation achieving 99.9% destruction efficiency",
+      "typical_lead_time_months": 12
+    },
+    {
+      "package_name": "Wastewater treatment system",
+      "criticality": "High",
+      "long_lead": true,
+      "vendor_qualification_criteria": "Proven wastewater treatment supplier with 3+ chemical/petrochemical plant references; experience with sour water and oily wastewater",
+      "technical_documents_required": ["WWTP PFD", "Biological treatment tank design", "Sludge handling system", "Discharge compliance criteria"],
+      "inspection_requirements": "FAT for WWTP control system; basin leak test; equipment mechanical run test",
+      "acceptance_tests": "30-day continuous operation meeting discharge permit limits",
+      "typical_lead_time_months": 16
+    },
+    {
+      "package_name": "Cooling water system",
+      "criticality": "High",
+      "long_lead": false,
+      "vendor_qualification_criteria": "Experience with closed-loop cooling water systems for chemical plants; cooling tower supplier with 5+ references",
+      "technical_documents_required": ["Cooling tower mechanical drawings", "Circulation pump spec", "Water treatment chemical injection P&ID", "Heat rejection calculation"],
+      "inspection_requirements": "FAT for cooling tower fan and gearbox; pump performance test; basin leak test",
+      "acceptance_tests": "72-hour continuous operation achieving design approach temperature ±1°C",
+      "typical_lead_time_months": 12
+    },
+    {
+      "package_name": "Instrument air and nitrogen system",
+      "criticality": "Medium",
+      "long_lead": false,
+      "vendor_qualification_criteria": "Compressed air and nitrogen generation supplier with industrial reference plants",
+      "technical_documents_required": ["Air compressor P&ID", "Dryer and filter spec", "Nitrogen generator (membrane/PSA) design", "Distribution piping layout"],
+      "inspection_requirements": "FAT for compressor skid; dryer performance test; nitrogen purity analyzer calibration",
+      "acceptance_tests": "24-hour operation delivering instrument air at dew point -40°C and N2 at 99.5% purity",
+      "typical_lead_time_months": 8
+    },
+    {
+      "package_name": "Fire water and deluge system",
+      "criticality": "Critical",
+      "long_lead": false,
+      "vendor_qualification_criteria": "NFPA-compliant fire protection system supplier; experience with foam deluge for hydrocarbon storage",
+      "technical_documents_required": ["Fire water ring layout", "Fire pump P&ID", "Deluge valve and nozzle schedule", "Foam concentrate storage and proportioning design"],
+      "inspection_requirements": "FAT for fire pump; deluge valve flow test; foam proportioning test",
+      "acceptance_tests": "Full-system flow test at design pressure and coverage as per NFPA",
+      "typical_lead_time_months": 10
+    }
+  ]
+}

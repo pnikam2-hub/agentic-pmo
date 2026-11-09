@@ -1,0 +1,221 @@
+{
+  "pack": "green_methanol_biomass",
+  "packages": [
+    {
+      "package_name": "Biomass handling system (receiving, storage, conveying)",
+      "criticality": "High",
+      "long_lead": true,
+      "vendor_qualification_criteria": "Proven experience in biomass handling systems for gasification; reference plant operating > 2 years",
+      "technical_documents_required": "General arrangement drawings, capacity calculations, motor power, material selection for abrasion resistance",
+      "inspection_requirements": "Factory acceptance test for conveying system; run test at vendor shop",
+      "acceptance_tests": "168-hour continuous run at design capacity with target feedstock"
+    },
+    {
+      "package_name": "Biomass dryer system",
+      "criticality": "Medium",
+      "long_lead": false,
+      "vendor_qualification_criteria": "Experience with high-moisture biomass drying; references for rotary/fluidised bed dryers on similar feedstock",
+      "technical_documents_required": "Heat and mass balance, drying curves, emissions from dryer, safety interlocks",
+      "inspection_requirements": "Shop inspection of drum/rotor; motor performance test",
+      "acceptance_tests": "Moisture reduction from design inlet to outlet at rated throughput"
+    },
+    {
+      "package_name": "Gasifier (including feed system, refractory, syngas quench)",
+      "criticality": "Critical",
+      "long_lead": true,
+      "vendor_qualification_criteria": "Licensed gasification technology with at least 3 reference plants > 50% of proposed capacity; experience with target feedstock type",
+      "technical_documents_required": "Process design package, P&IDs, equipment drawings, refractory specification, oxidant injection design",
+      "inspection_requirements": "Stage-wise inspection: refractory installation, pressure parts welding, NDT of critical welds; performance test witnessed",
+      "acceptance_tests": "72-hour continuous run at nameplate capacity within guaranteed syngas composition and cold gas efficiency"
+    },
+    {
+      "package_name": "Air separation unit (if oxygen-blown)",
+      "criticality": "High",
+      "long_lead": true,
+      "vendor_qualification_criteria": "Proven ASU supplier with references at or above required scale; experience with biomass gasification integration",
+      "technical_documents_required": "Process description, purity guarantee, power consumption guarantee, delivery pressure, liquid oxygen backup capacity",
+      "inspection_requirements": "Shop inspection of cold box; control system FAT; performance test at site",
+      "acceptance_tests": "Oxygen purity and flow at design conditions; specific power consumption within guarantee"
+    },
+    {
+      "package_name": "Syngas cooler / waste heat boiler",
+      "criticality": "High",
+      "long_lead": true,
+      "vendor_qualification_criteria": "Experience with syngas cooling in dirty gas service (tar-containing); references for high-temperature heat recovery",
+      "technical_documents_required": "Thermal design (duty, approach, turndown), materials for corrosion/erosion resistance, soot blowing system",
+      "inspection_requirements": "Hydrotest at shop; welding NDT; tube-to-tubesheet joint inspection",
+      "acceptance_tests": "Steam generation rate and outlet syngas temperature at design conditions"
+    },
+    {
+      "package_name": "Particulate filter (baghouse / candle filter)",
+      "criticality": "High",
+      "long_lead": false,
+      "vendor_qualification_criteria": "Proven in biomass syngas service; filter element life > 12 months in similar service",
+      "technical_documents_required": "Filter area, material (temperature rating), pulse-jet cleaning design, pressure drop at design flow",
+      "inspection_requirements": "Shop inspection of housing; filter element quality check; pressure test",
+      "acceptance_tests": "Outlet particulates < 5 mg/Nm\u00b3 at design conditions"
+    },
+    {
+      "package_name": "Tar reformer / catalytic cracker",
+      "criticality": "High",
+      "long_lead": true,
+      "vendor_qualification_criteria": "Licensed tar reforming technology with reference at similar or larger scale; catalyst life and regeneration strategy",
+      "technical_documents_required": "Process design, catalyst volume, operating temperature/pressure, steam/carbon ratio",
+      "inspection_requirements": "Reformer tube/weld NDT; catalyst supplier certificate; refractory installation inspection",
+      "acceptance_tests": "Outlet tar < 10 mg/Nm\u00b3 at design throughput; catalyst activity after 1000 hours"
+    },
+    {
+      "package_name": "Wet scrubber system",
+      "criticality": "High",
+      "long_lead": false,
+      "vendor_qualification_criteria": "Proven in syngas cleanup for particulate and soluble gas removal",
+      "technical_documents_required": "Scrubber design (L/G ratio, pressure drop), liquid circulation pump, mist eliminator, blowdown treatment",
+      "inspection_requirements": "Shop hydrotest; internal inspection of spray nozzles and packing",
+      "acceptance_tests": "Outlet particulates < 20 mg/Nm\u00b3; outlet temperature within spec"
+    },
+    {
+      "package_name": "Acid gas removal system (amine or Selexol)",
+      "criticality": "High",
+      "long_lead": true,
+      "vendor_qualification_criteria": "Licensed AGR technology with references in syngas; solvent selection appropriate for CO2/H2S ratio",
+      "technical_documents_required": "Process description, solvent specification, regeneration system design, reboiler duty, solvent losses",
+      "inspection_requirements": "Shop inspection of absorber/regenerator columns; packing installation supervision",
+      "acceptance_tests": "Outlet H2S < 0.1 ppmv; CO2 removal rate within spec; solvent consumption per guarantee"
+    },
+    {
+      "package_name": "Guard bed vessels",
+      "criticality": "Critical",
+      "long_lead": false,
+      "vendor_qualification_criteria": "Design and supply of guard beds with proven sorbent materials for sulfur and chlorine polishing",
+      "technical_documents_required": "Vessel design (pressure/temperature), sorbent volume, bed geometry, inlet/outlet distributors",
+      "inspection_requirements": "Shop pressure test; internal distributor inspection",
+      "acceptance_tests": "Outlet S < 0.1 ppmv, Cl < 1 ppmv; pressure drop at design flow"
+    },
+    {
+      "package_name": "Syngas compressor",
+      "criticality": "Critical",
+      "long_lead": true,
+      "vendor_qualification_criteria": "Centrifugal or reciprocating compressor supplier with syngas service references; certified for required discharge pressure",
+      "technical_documents_required": "Compressor curve, driver sizing, seal system (dry gas or oil), interstage cooling, vibration monitoring",
+      "inspection_requirements": "Mechanical run test at vendor shop; performance test per API 617 or 618",
+      "acceptance_tests": "Flow and discharge pressure at design; power consumption within guarantee"
+    },
+    {
+      "package_name": "Methanol synthesis reactor",
+      "criticality": "Critical",
+      "long_lead": true,
+      "vendor_qualification_criteria": "Licensed methanol synthesis technology with 5+ references at similar scale; boiling water reactor or isothermal experience",
+      "technical_documents_required": "Reactor mechanical design (pressure, temperature), catalyst bed design, heat removal system, startup heater",
+      "inspection_requirements": "Shop hydrotest; catalyst basket fit check; weld NDT; heat exchanger tube test",
+      "acceptance_tests": "Methanol production rate; conversion per pass; heat removal capacity; outlet temperature profile"
+    },
+    {
+      "package_name": "Methanol synthesis catalyst (Cu/ZnO/Al2O3)",
+      "criticality": "Critical",
+      "long_lead": true,
+      "vendor_qualification_criteria": "Catalyst supplier with proven performance at 5+ commercial methanol plants; lifetime guarantee offered",
+      "technical_documents_required": "Catalyst specification, activation/reduction procedure, loading instructions, expected lifetime, activity curves",
+      "inspection_requirements": "Batch quality certificate; particle size distribution; crush strength test",
+      "acceptance_tests": "Catalyst performance during 72-hour performance guarantee run of methanol loop"
+    },
+    {
+      "package_name": "Distillation columns (2 or 3 columns)",
+      "criticality": "High",
+      "long_lead": true,
+      "vendor_qualification_criteria": "Column supplier with experience in methanol/water distillation; tray or packing design for high-purity methanol",
+      "technical_documents_required": "Column hydraulic design, tray/packing specification, reboiler and condenser duty, pressure drop, product spec target",
+      "inspection_requirements": "Stage-wise shop inspection; tray installation tolerances; packing pressure drop test",
+      "acceptance_tests": "Product methanol purity \u2265 99.85 wt%; ethanol < 50 ppm; other impurities per IMPCA spec"
+    },
+    {
+      "package_name": "Heat exchangers (process and utility)",
+      "criticality": "Medium",
+      "long_lead": false,
+      "vendor_qualification_criteria": "TEMA-type exchanger manufacturer with experience in high-pressure and high-temperature service",
+      "technical_documents_required": "Thermal design sheets (HTRI/HTFS), mechanical datasheets, material selection, tube bundle drawing",
+      "inspection_requirements": "Hydrotest; tube expansion inspection; NDT of welds",
+      "acceptance_tests": "Thermal performance within 5% of guarantee at design conditions"
+    },
+    {
+      "package_name": "Methanol storage tanks",
+      "criticality": "High",
+      "long_lead": true,
+      "vendor_qualification_criteria": "Tank fabricator with API 620 or 650 experience; methanol service reference required; internal floating roof supplier if applicable",
+      "technical_documents_required": "Tank design (diameter, height, material), roof type, seal system, fire protection (foam), blanketing system",
+      "inspection_requirements": "Bottom/floor inspection, shell plate NDT, hydrotest, floating roof tightness test",
+      "acceptance_tests": "Tank tightness, vapour recovery efficiency, foam system coverage"
+    },
+    {
+      "package_name": "Methanol loading system (truck / rail / ship)",
+      "criticality": "Medium",
+      "long_lead": false,
+      "vendor_qualification_criteria": "Methanol loading system supplier with vapour recovery and safety interlock experience",
+      "technical_documents_required": "Loading arm design, flow meter, vapour return, grounding system, emergency shutdown, breakaway coupling",
+      "inspection_requirements": "Factory test of loading arm; flow meter calibration certificate",
+      "acceptance_tests": "Loading rate at design; vapour recovery efficiency; shutdown system function test"
+    },
+    {
+      "package_name": "Flare / thermal oxidiser system",
+      "criticality": "High",
+      "long_lead": true,
+      "vendor_qualification_criteria": "Flare supplier with biomass syngas and methanol off-gas experience; compliance with local emission standards",
+      "technical_documents_required": "Flare design (height, diameter, tip type), purge gas rate, pilot system, radiation contours, knockout drum",
+      "inspection_requirements": "Shop inspection of flare tip, pilot burner, KO drum; sub-supplier certificates for instrumentation",
+      "acceptance_tests": "Destruction efficiency \u2265 99%; radiation within allowable limits; noise within permit"
+    },
+    {
+      "package_name": "DCS / SCADA system",
+      "criticality": "High",
+      "long_lead": true,
+      "vendor_qualification_criteria": "DCS supplier with references in process industries (chemical/petrochemical); SIL-rated logic solver for safety functions",
+      "technical_documents_required": "System architecture, I/O list, network topology, HMI philosophy, alarm management, historian specification",
+      "inspection_requirements": "Factory acceptance test (FAT) with full system simulation; site acceptance test (SAT) after installation",
+      "acceptance_tests": "All control loops functional; alarm and interlogics verified; historian data collection operational"
+    },
+    {
+      "package_name": "Emergency shutdown (ESD) and fire & gas system",
+      "criticality": "Critical",
+      "long_lead": true,
+      "vendor_qualification_criteria": "SIL-rated system supplier; experience in oil/gas or chemical sector; IEC 61508 certified",
+      "technical_documents_required": "SIL determination, logic diagrams, cause-and-effect matrix, fire/gas detector layout, voting philosophy",
+      "inspection_requirements": "FAT of logic solver; SAT of field device testing; cause-and-effect matrix testing",
+      "acceptance_tests": "All ESD levels (plant, unit, equipment) functional; fire/gas detection coverage validated"
+    },
+    {
+      "package_name": "Analytical laboratory equipment",
+      "criticality": "Medium",
+      "long_lead": false,
+      "vendor_qualification_criteria": "Supplier of GC, moisture analyser, Karl Fischer titrator, density meter; experience with methanol quality testing",
+      "technical_documents_required": "Instrument specification (detection limits, range, precision), calibration standards, installation requirements",
+      "inspection_requirements": "Factory calibration certificate; installation and commissioning support",
+      "acceptance_tests": "Method validation against IMPCA reference standards; repeatability within limits"
+    },
+    {
+      "package_name": "Cooling tower and cooling water system",
+      "criticality": "Medium",
+      "long_lead": true,
+      "vendor_qualification_criteria": "Cooling tower supplier with references in process industry; ambient temperature design based on site conditions",
+      "technical_documents_required": "Thermal design (approach, range, wet bulb), tower type (induced/forced draft), fill specification, drift eliminators",
+      "inspection_requirements": "Factory test of fan/motor assembly; drift test during commissioning",
+      "acceptance_tests": "Cooling water temperature at design approach/range; fan power within guarantee"
+    },
+    {
+      "package_name": "Water treatment plant (demin, RO, effluent)",
+      "criticality": "Medium",
+      "long_lead": true,
+      "vendor_qualification_criteria": "Water treatment supplier with experience in chemical/petrochemical plants; zero-liquid-discharge capability if required",
+      "technical_documents_required": "Raw water analysis, treatment process design (RO/EDI/IX), product water specification, waste stream analysis",
+      "inspection_requirements": "Shop inspection of RO skids; membrane quality certificate; control system FAT",
+      "acceptance_tests": "Product water quality (conductivity, silica, TOC) within spec; recovery rate per design"
+    },
+    {
+      "package_name": "Steam system (package boiler or HRSG)",
+      "criticality": "High",
+      "long_lead": true,
+      "vendor_qualification_criteria": "Package boiler supplier with experience in biomass plant steam systems; IBR certified design",
+      "technical_documents_required": "Boiler design (steam pressure, temperature, capacity), fuel (syngas/off-gas/start-up fuel), economiser design",
+      "inspection_requirements": "IBR inspection during fabrication; hydrotest; safety valve testing",
+      "acceptance_tests": "Steam generation rate and quality at design conditions; boiler efficiency within guarantee"
+    }
+  ]
+}

@@ -1,0 +1,106 @@
+{
+  "pack": "industry_4_0",
+  "version": "1.0.1",
+  "purpose": "Equipment and services procurement packages for Industry 4.0 smart manufacturing implementation. Each package includes criticality, vendor qualification criteria, technical documents, inspection requirements, and acceptance tests.",
+  "packages": [
+    {
+      "package_name": "Edge Gateways & Computing Nodes",
+      "criticality": "Critical",
+      "long_lead": false,
+      "vendor_qualification_criteria": "IEC 62443-4-2 conformance; proven OPC UA/MQTT support; local support availability; backward compatibility with existing PLC protocols (Modbus, Profinet, EtherNet/IP)",
+      "technical_documents_required": ["Asset register with protocol mapping", "Worst-case edge site environmental survey", "Edge node OS requirements and inference workload profile"],
+      "inspection_requirements": "Stage-wise: factory functional test with protocol bridging validation; thermal chamber test for environmental rating verification",
+      "acceptance_tests": "72-hour sustained operation at site conditions with all protocols active and data flowing to historian"
+    },
+    {
+      "package_name": "Edge Compute & GPU Inference Nodes",
+      "criticality": "Critical",
+      "long_lead": true,
+      "vendor_qualification_criteria": "Benchmarked inference latency for target vision/PdM models; industrial form factor; GPU compute meets target model concurrency with 30% headroom",
+      "technical_documents_required": ["Model inference latency benchmarks", "Cooling and power requirements", "Storage buffer sizing for expected connectivity gaps"],
+      "inspection_requirements": "FAT with benchmark models at expected concurrency; thermal validation at worst-case cabinet temperature",
+      "acceptance_tests": "Inference latency within budget at full concurrency; buffer integrity during 1-hour connectivity gap test"
+    },
+    {
+      "package_name": "IIoT Sensor Suite (Vibration, Temperature, Current, Environmental)",
+      "criticality": "High",
+      "long_lead": false,
+      "vendor_qualification_criteria": "Accuracy/range matching PdM use cases; connectivity (IO-Link, 4-20 mA, Modbus, wireless) compatible with edge gateways; environmental rating for installation zone",
+      "technical_documents_required": ["Sensor data sheets with accuracy/range specs", "Mounting options and hazardous-area certification", "Gateway compatibility matrix"],
+      "inspection_requirements": "Sample batch calibration verification against reference instruments",
+      "acceptance_tests": "Inline calibration check post-installation; data quality comparison against baseline instrumentation over 7-day period"
+    },
+    {
+      "package_name": "Vision Inspection System (Cameras, Lighting, Optics)",
+      "criticality": "Critical",
+      "long_lead": true,
+      "vendor_qualification_criteria": "Resolution and frame rate sufficient for smallest defect at line speed; SDK/API supports ML pipeline integration; lighting/optics validated for defect type",
+      "technical_documents_required": ["Defect catalogue with size/contrast specs", "Line speed and cycle time requirements", "Integration interface specification (API/SDK/trigger)"],
+      "inspection_requirements": "FAT: defect detection rate validated against reference defect set at required line speed",
+      "acceptance_tests": "SAT: 8-hour production run at nameplate line speed; detection accuracy within agreed tolerance"
+    },
+    {
+      "package_name": "Historian / Time-Series Data Platform License",
+      "criticality": "Critical",
+      "long_lead": false,
+      "vendor_qualification_criteria": "Native OPC UA and MQTT/Sparkplug B connectors; open APIs for downstream consumers; scalable to full-plant tag volumes with predictable licensing; non-punitive per-tag pricing curve",
+      "technical_documents_required": ["System architecture and scalability limits", "API documentation (read/write/bulk export)", "Security architecture (encryption, auth, audit)"],
+      "inspection_requirements": "Proof-of-concept: 7-day data ingestion from representative edge nodes at full-scale tag rates",
+      "acceptance_tests": "Sustained ingestion of full expected tag count at < 5 s end-to-end latency; export of 30-day dataset within SLA"
+    },
+    {
+      "package_name": "Data Lake & Analytics Platform (Cloud or On-Premise)",
+      "criticality": "High",
+      "long_lead": false,
+      "vendor_qualification_criteria": "Standard formats (Parquet, Avro, Delta/Iceberg) for data interoperability; ML pipeline integration; IT/OT governance support",
+      "technical_documents_required": ["Platform architecture and data model", "Data retention and lifecycle policies", "Cost model at full scale (ingest, store, compute, egress)"],
+      "inspection_requirements": "Validate data model against ISA-95 information model; review security and access controls",
+      "acceptance_tests": "End-to-end pipeline: edge → historian → lake → dashboard; data quality metrics within tolerance"
+    },
+    {
+      "package_name": "OT Network & Security Appliances (Firewalls, Switches, DMZ)",
+      "criticality": "Critical",
+      "long_lead": true,
+      "vendor_qualification_criteria": "IEC 62443-4-2 conformance for OT-rated switches and firewalls; deep packet inspection for industrial protocols; throughput meets peak traffic with inspection enabled",
+      "technical_documents_required": ["IEC 62443 certification evidence", "Network topology and zone/conduit design", "Throughput benchmarks with DPI enabled"],
+      "inspection_requirements": "FAT: validation of zone segmentation rules and firewall policy enforcement in test rig",
+      "acceptance_tests": "SAT: pen test confirms deny-by-default segmentation; no OT-IT cross-zone traffic without explicit conduit rules"
+    },
+    {
+      "package_name": "System Integration Services (SI Contract)",
+      "criticality": "Critical",
+      "long_lead": false,
+      "vendor_qualification_criteria": "Proven Industry 4.0 and OT delivery experience; IEC 62443 credentials; references from comparable manufacturing engagements; knowledge transfer and post-go-live support commitment",
+      "technical_documents_required": ["Detailed SOW with deliverables and acceptance criteria", "Staffing plan and key personnel CVs", "Transition and knowledge transfer plan"],
+      "inspection_requirements": "Stage-payment gates tied to verified milestones (architecture sign-off, connectivity test, UAT pass, operations handover)",
+      "acceptance_tests": "UAT sign-off by plant operations team; all deliverables accepted per SOW; knowledge transfer sessions completed"
+    },
+    {
+      "package_name": "MES/QMS/WMS Integration Adapters & Connectors",
+      "criticality": "High",
+      "long_lead": false,
+      "vendor_qualification_criteria": "Proven connectors to the specific MES/QMS/WMS instances at site; support for ISA-95 data model mapping; open APIs for data platform integration",
+      "technical_documents_required": ["Interface control documents for each system", "Data model mapping (ISA-95 to system schema)", "Error handling and retry strategy"],
+      "inspection_requirements": "FAT: data flow validation between each system and the data platform in a staging environment",
+      "acceptance_tests": "SAT: 7-day continuous data flow validation; all expected data points flowing without gaps; error handling verified"
+    },
+    {
+      "package_name": "ML/AI Model Development & MLOps Platform",
+      "criticality": "High",
+      "long_lead": false,
+      "vendor_qualification_criteria": "Support for reproducible training, model registry, CI/CD for ML, and production monitoring; edge deployment capability for vision/PdM models",
+      "technical_documents_required": ["MLOps platform architecture", "Model deployment pipeline (training → registry → edge → monitoring)", "Data lineage and versioning approach"],
+      "inspection_requirements": "Proof-of-concept: deploy one vision and one PdM model through the full pipeline; validate monitoring and drift detection",
+      "acceptance_tests": "Full MLOps pipeline validated with representative models; model rollback tested; drift detection operational"
+    },
+    {
+      "package_name": "Time Synchronization Infrastructure (PTP/NTP)",
+      "criticality": "Medium",
+      "long_lead": false,
+      "vendor_qualification_criteria": "PTP grandmaster clock (IEEE 1588) with GPS/GNSS reference; NTP server for IT zone; accuracy within target microseconds; supports mixed hardwired/wireless topology",
+      "technical_documents_required": ["Timing architecture and sync hierarchy", "Accuracy specs at expected hop count", "Redundancy and failover design"],
+      "inspection_requirements": "Factory calibration against reference clock",
+      "acceptance_tests": "Post-installation accuracy measurement across all time-sensitive devices within target tolerance"
+    }
+  ]
+}

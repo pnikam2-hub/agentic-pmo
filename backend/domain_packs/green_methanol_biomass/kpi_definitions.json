@@ -1,0 +1,356 @@
+{
+  "pack": "green_methanol_biomass",
+  "kpis": [
+    {
+      "kpi_id": "KPI01",
+      "name": "Schedule Variance (SV)",
+      "description": "% deviation of actual progress from planned progress (earned value vs planned value)",
+      "unit": "%",
+      "frequency": "Monthly",
+      "target": "SV >= -5%",
+      "formula": "SV = (EV - PV) / PV * 100",
+      "source": "Project controls system / P6",
+      "related_phase": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "kpi_id": "KPI02",
+      "name": "Cost Performance Index (CPI)",
+      "description": "Ratio of earned value to actual cost, indicating budget efficiency",
+      "unit": "ratio",
+      "frequency": "Monthly",
+      "target": "CPI >= 0.95",
+      "formula": "CPI = EV / AC",
+      "source": "Project controls system",
+      "related_phase": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "kpi_id": "KPI03",
+      "name": "Procurement Delay Index",
+      "description": "Number of long-lead procurement packages delayed by > 30 days as % of total critical packages",
+      "unit": "%",
+      "frequency": "Monthly",
+      "target": "PDI < 10%",
+      "formula": "PDI = Delayed critical packages / Total critical packages * 100",
+      "source": "Procurement tracker",
+      "related_phase": [
+        3,
+        4
+      ]
+    },
+    {
+      "kpi_id": "KPI04",
+      "name": "Permit Readiness",
+      "description": "% of required permits and approvals secured or in final stage for the current phase gate",
+      "unit": "%",
+      "frequency": "Quarterly / per gate",
+      "target": "100% for gate pass",
+      "formula": "PR = Permits obtained + permits in final review / Total permits required * 100",
+      "source": "Permit register",
+      "related_phase": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
+    },
+    {
+      "kpi_id": "KPI05",
+      "name": "HAZOP Close-out %",
+      "description": "% of HAZOP recommendations closed (implemented and verified) vs total",
+      "unit": "%",
+      "frequency": "Monthly",
+      "target": "> 95% by pre-start-up, > 80% during construction",
+      "formula": "HCO = Recommendations closed / Total recommendations * 100",
+      "source": "HAZOP tracking log",
+      "related_phase": [
+        3,
+        4,
+        5
+      ]
+    },
+    {
+      "kpi_id": "KPI06",
+      "name": "Feedstock Security %",
+      "description": "% of annual feedstock requirement covered by signed supply agreements or firm commitments",
+      "unit": "%",
+      "frequency": "Quarterly",
+      "target": "> 80%",
+      "formula": "FSS = Firmly contracted feedstock volume / Annual requirement * 100",
+      "source": "Feedstock supply register",
+      "related_phase": [
+        1,
+        2,
+        6,
+        7
+      ]
+    },
+    {
+      "kpi_id": "KPI07",
+      "name": "Gasifier Availability Target",
+      "description": "Actual gasifier operating availability vs design target",
+      "unit": "%",
+      "frequency": "Monthly (operations phase)",
+      "target": ">= 90% after 6-month stabilisation",
+      "formula": "GA = Operating hours / (Operating + forced outage hours) * 100",
+      "source": "DCS historian",
+      "related_phase": [
+        6,
+        7
+      ]
+    },
+    {
+      "kpi_id": "KPI08",
+      "name": "Syngas Cleanup Readiness",
+      "description": "% of syngas cleanup systems commissioned and verified to meet outlet specifications",
+      "unit": "%",
+      "frequency": "Biweekly during commissiong",
+      "target": "100% before methanol loop start-up",
+      "formula": "SCR = Commissioned cleanup systems / Total cleanup systems * 100",
+      "source": "Commissioning punch list",
+      "related_phase": [
+        5,
+        6
+      ]
+    },
+    {
+      "kpi_id": "KPI09",
+      "name": "Catalyst Procurement Status",
+      "description": "Status of catalyst procurement against schedule (ordered, in-transit, received, loaded)",
+      "unit": "Red/Amber/Green",
+      "frequency": "Monthly",
+      "target": "Green (ordered >12 months before loading, on schedule)",
+      "formula": "RAG: ordered on schedule = Green, delayed < 30 days = Amber, delayed > 30 days = Red",
+      "source": "Procurement tracker",
+      "related_phase": [
+        3,
+        4,
+        5
+      ]
+    },
+    {
+      "kpi_id": "KPI10",
+      "name": "Commissioning Readiness",
+      "description": "% of pre-commissioning activities completed per approved plan",
+      "unit": "%",
+      "frequency": "Weekly during pre-comm",
+      "target": "100% before start of commissioning phase",
+      "formula": "CR = Pre-commissioning activities complete / Total planned * 100",
+      "source": "Commissioning plan",
+      "related_phase": [
+        5
+      ]
+    },
+    {
+      "kpi_id": "KPI11",
+      "name": "Methanol Quality Pass Rate",
+      "description": "% of product batches meeting IMPCA specification on first pass",
+      "unit": "%",
+      "frequency": "Per batch",
+      "target": "> 95%",
+      "formula": "MQP = On-spec batches / Total batches * 100",
+      "source": "QA/QC lab records",
+      "related_phase": [
+        6,
+        7
+      ]
+    },
+    {
+      "kpi_id": "KPI12",
+      "name": "Performance Test Completion",
+      "description": "Whether the 72-hour performance guarantee test has been completed with all guarantees met",
+      "unit": "Pass/Fail",
+      "frequency": "One-time",
+      "target": "Pass (all guarantees met)",
+      "formula": "N/A \u2014 binary pass/fail per EPC contract",
+      "source": "Performance test report",
+      "related_phase": [
+        6
+      ]
+    },
+    {
+      "kpi_id": "KPI13",
+      "name": "Change Order Rate",
+      "description": "Number of change orders per month and their aggregate cost impact as % of approved budget",
+      "unit": "Count and %",
+      "frequency": "Monthly",
+      "target": "< 3 change orders/month, aggregate < 5% budget",
+      "formula": "COR = Total change order cost / Approved budget * 100",
+      "source": "Change order log",
+      "related_phase": [
+        3,
+        4
+      ]
+    },
+    {
+      "kpi_id": "KPI14",
+      "name": "Safety Performance (LTIF)",
+      "description": "Lost time injury frequency per million man-hours worked",
+      "unit": "LTIF",
+      "frequency": "Monthly",
+      "target": "< 0.5",
+      "formula": "LTIF = Total LTI * 1,000,000 / Total man-hours",
+      "source": "HSE incident records",
+      "related_phase": [
+        3,
+        4,
+        5,
+        6,
+        7
+      ]
+    },
+    {
+      "kpi_id": "KPI15",
+      "name": "Project Cost of Methanol Production",
+      "description": "Actual cost per tonne of methanol produced vs target cost of production",
+      "unit": "USD/tonne",
+      "frequency": "Monthly (operations)",
+      "target": "Within \u00b15% of business case",
+      "formula": "CoP = Total monthly operating cost / Methanol produced (tonnes)",
+      "source": "Operations accounting",
+      "related_phase": [
+        6,
+        7
+      ]
+    },
+    {
+      "kpi_id": "KPI16",
+      "name": "Syngas Stoichiometric Number (SN)",
+      "description": "Ratio (H2 - CO2) / (CO + CO2) measured at methanol synthesis inlet",
+      "unit": "ratio",
+      "frequency": "Continuous/Shift",
+      "target": "SN = 2.0 \u00b1 0.1",
+      "formula": "SN = (H2_mol% - CO2_mol%) / (CO_mol% + CO2_mol%)",
+      "source": "Online gas chromatograph",
+      "related_phase": [
+        6,
+        7
+      ]
+    },
+    {
+      "kpi_id": "KPI17",
+      "name": "Tar Concentration After Cleanup",
+      "description": "Gravimetric tar concentration in cleaned syngas before methanol synthesis",
+      "unit": "mg/Nm\u00b3",
+      "frequency": "Weekly during commissioning, then monthly",
+      "target": "< 10 mg/Nm\u00b3 or per design spec",
+      "formula": "Tar = mass collected / sample volume (standard conditions)",
+      "source": "Lab analysis / manual tar sampling",
+      "related_phase": [
+        6,
+        7
+      ]
+    },
+    {
+      "kpi_id": "KPI18",
+      "name": "Carbon Efficiency (C in methanol / C in biomass)",
+      "description": "Overall carbon conversion efficiency from biomass carbon to methanol carbon",
+      "unit": "%",
+      "frequency": "Monthly",
+      "target": ">= 40% (varies by pathway)",
+      "formula": "CE = (Methanol tonnes * C_fraction_methanol) / (Biomass tonnes * C_fraction_biomass) * 100",
+      "source": "Mass balance / operations data",
+      "related_phase": [
+        6,
+        7
+      ]
+    },
+    {
+      "kpi_id": "KPI19",
+      "name": "Plant On-Stream Factor",
+      "description": "% of calendar time the plant operates at or above minimum stable rate",
+      "unit": "%",
+      "frequency": "Monthly",
+      "target": "> 92% after first year",
+      "formula": "OSF = Operating hours / Calendar hours * 100",
+      "source": "DCS historian",
+      "related_phase": [
+        6,
+        7
+      ]
+    },
+    {
+      "kpi_id": "KPI20",
+      "name": "Commissioning Schedule Compliance",
+      "description": "% of commissioning milestones achieved within \u00b17 days of baseline schedule",
+      "unit": "%",
+      "frequency": "Biweekly",
+      "target": "> 85%",
+      "formula": "CSC = Milestones achieved on schedule / Total commissioning milestones * 100",
+      "source": "Commissioning schedule",
+      "related_phase": [
+        5,
+        6
+      ]
+    },
+    {
+      "kpi_id": "KPI21",
+      "name": "Carbon Intensity (gCO2e/MJ methanol)",
+      "description": "Well-to-gate carbon intensity of green methanol product \u2014 total lifecycle CO2e emissions per megajoule of methanol produced, verifying the carbon reduction claim relative to fossil methanol",
+      "unit": "gCO2e/MJ",
+      "frequency": "Quarterly",
+      "target": "<= baseline target per ISCC/RSB methodology (e.g., < 30 gCO2e/MJ for biomass gasification route)",
+      "formula": "Total lifecycle emissions (feedstock, transport, processing) / Total methanol energy output (MJ)",
+      "source": "GHG calculation model per ISCC/RSB methodology; verified at certification audit",
+      "related_phase": [
+        1,
+        7
+      ]
+    },
+    {
+      "kpi_id": "KPI22",
+      "name": "Biogenic Carbon Share (%)",
+      "description": "Percentage of carbon in the final methanol product that is biogenic (from biomass feedstock) rather than fossil-derived \u2014 key for carbon accounting and green product claims",
+      "unit": "%",
+      "frequency": "Quarterly",
+      "target": ">= 95% biogenic carbon",
+      "formula": "(Biogenic C in product / Total C in product) x 100 \u2014 determined by 14C radiocarbon analysis (ASTM D6866)",
+      "source": "Radiocarbon analysis lab report; feedstock mass balance records",
+      "related_phase": [
+        7
+      ]
+    },
+    {
+      "kpi_id": "KPI23",
+      "name": "Renewable Energy Fraction in Process Energy",
+      "description": "Share of total process energy demand (power, steam) supplied from renewable sources \u2014 critical for overall carbon intensity and sustainability certification",
+      "unit": "%",
+      "frequency": "Monthly",
+      "target": ">= target % per project sustainability charter (e.g., 80%)",
+      "formula": "(Renewable power + renewable steam energy) / (Total process power + total process steam energy) x 100",
+      "source": "Utility meters / PPA records / biomass boiler fuel logs",
+      "related_phase": [
+        6,
+        7
+      ]
+    },
+    {
+      "kpi_id": "KPI24",
+      "name": "Water Consumption Intensity (m3/t methanol)",
+      "description": "Fresh water consumed per tonne of methanol produced \u2014 tracking water efficiency improvement and compliance with water abstraction permit limits",
+      "unit": "m3/t MeOH",
+      "frequency": "Monthly",
+      "target": "<= design target from FEED (typically 3-6 m3/t depending on cooling technology)",
+      "formula": "Total fresh water consumption (m3) / Total methanol production (tonnes)",
+      "source": "Water meter readings at abstraction points / process water balance model",
+      "related_phase": [
+        6,
+        7
+      ]
+    }
+  ],
+  "total_kpis": 24,
+  "version": "1.1.0"
+}

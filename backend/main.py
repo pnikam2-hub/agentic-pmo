@@ -5,7 +5,7 @@ from fastapi import FastAPI, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from backend.database import init_db
-from backend.routers import projects, tasks, agents, dashboard, auth, alerts, templates
+from backend.routers import projects, tasks, agents, dashboard, auth, alerts, templates, packs
 from backend.auth import require_auth, check_auth_config, enforce_auth_config
 from backend.rate_limit import limiter
 from slowapi import _rate_limit_exceeded_handler
@@ -55,6 +55,7 @@ app.include_router(agents.router, dependencies=[Depends(require_auth)])
 app.include_router(dashboard.router, dependencies=[Depends(require_auth)])
 app.include_router(alerts.router, dependencies=[Depends(require_auth)])
 app.include_router(templates.router, dependencies=[Depends(require_auth)])
+app.include_router(packs.router, dependencies=[Depends(require_auth)])
 
 # Health check
 @app.get("/api/health")

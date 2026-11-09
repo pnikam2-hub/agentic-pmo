@@ -1,0 +1,532 @@
+{
+  "pack": "saf_biomass_ft",
+  "permits": [
+    {
+      "permit_name": "Terms of Reference (ToR) for EIA",
+      "why_needed": "Required to define scope, methodology, and study areas for the Environmental Impact Assessment before conducting the EIA study for the SAF biomass FT facility",
+      "responsible_role": "Regulatory Affairs Manager",
+      "required_inputs": [
+        "Form 1 / Form 1A application",
+        "site layout and location map",
+        "project brief and feasibility report",
+        "baseline data on air, water, soil, ecology"
+      ],
+      "phase": 2,
+      "dependencies": [
+        "Project concept note approved",
+        "site selection completed"
+      ],
+      "evidence_required": "Terms of Reference letter from MoEFCC/SEIAA"
+    },
+    {
+      "permit_name": "Environmental Clearance (EC)",
+      "why_needed": "Mandatory statutory clearance under EIA Notification for construction and operation of the SAF biomass FT facility; covers air, water, land, ecological impacts",
+      "responsible_role": "Regulatory Affairs Manager",
+      "required_inputs": [
+        "EIA report",
+        "site selection report",
+        "public hearing minutes",
+        "Form 2 / application"
+      ],
+      "phase": 3,
+      "dependencies": [
+        "ToR approved",
+        "EIA completed",
+        "public hearing conducted"
+      ],
+      "evidence_required": "Environmental Clearance letter from MoEFCC/SEIAA"
+    },
+    {
+      "permit_name": "Public Hearing / Public Consultation Certificate",
+      "why_needed": "Required as part of the EIA process to gather and address concerns of local communities and stakeholders affected by the SAF facility construction",
+      "responsible_role": "Regulatory Affairs Manager",
+      "required_inputs": [
+        "EIA summary report (executive summary in local language)",
+        "public hearing notice and advertisement",
+        "venue and logistics arrangements",
+        "minutes of public hearing"
+      ],
+      "phase": 2,
+      "dependencies": [
+        "Draft EIA report completed"
+      ],
+      "evidence_required": "Public hearing proceedings report duly signed by the presiding officer"
+    },
+    {
+      "permit_name": "Consent for Establishment (CFE) / Air Emissions Consent",
+      "why_needed": "Required under the Air (Prevention & Control of Pollution) Act before construction begins; covers emissions from gasifiers, turbines, boilers, heaters, and flaring",
+      "responsible_role": "Environmental Manager",
+      "required_inputs": [
+        "air emission inventory and source list",
+        "stack emission calculations",
+        "pollution control equipment details (ESP, scrubbers, bag filters)",
+        "ambient air quality monitoring report"
+      ],
+      "phase": 3,
+      "dependencies": [
+        "Environmental Clearance received"
+      ],
+      "evidence_required": "Consent for Establishment (CFE) letter from State Pollution Control Board (SPCB)"
+    },
+    {
+      "permit_name": "Groundwater Abstraction Permit (CGWA)",
+      "why_needed": "Required by Central Ground Water Authority for withdrawing groundwater for cooling, process water, and utility needs of the SAF facility; critical in water-stressed regions",
+      "responsible_role": "Utility Manager",
+      "required_inputs": [
+        "hydrogeological study report",
+        "water balance diagram",
+        "rainwater harvesting plan",
+        "existing and proposed borewell details"
+      ],
+      "phase": 3,
+      "dependencies": [
+        "Site selected",
+        "water demand assessment completed"
+      ],
+      "evidence_required": "Groundwater Abstraction / NOC letter from CGWA"
+    },
+    {
+      "permit_name": "Surface Water Abstraction Permit",
+      "why_needed": "Required if the facility draws water from rivers, canals, or reservoirs for process or cooling needs; governed by state irrigation/water resources departments",
+      "responsible_role": "Utility Manager",
+      "required_inputs": [
+        "water demand assessment report",
+        "source water availability certificate",
+        "water conservation and recycling plan",
+        "riparian rights assessment"
+      ],
+      "phase": 3,
+      "dependencies": [
+        "Water demand assessment completed",
+        "site water source identified"
+      ],
+      "evidence_required": "Surface Water Abstraction License from state Irrigation/Water Resources Department"
+    },
+    {
+      "permit_name": "Consent to Establish / Water (Effluent) Discharge Consent",
+      "why_needed": "Required under the Water (Prevention & Control of Pollution) Act for discharge of treated effluent from the SAF facility; covers wastewater from FT synthesis, cooling tower blowdown, and utilities",
+      "responsible_role": "Environmental Manager",
+      "required_inputs": [
+        "wastewater generation and characterization report",
+        "effluent treatment plant (ETP) design details",
+        "ZLD/recycle scheme",
+        "receiving water body details"
+      ],
+      "phase": 3,
+      "dependencies": [
+        "Environmental Clearance received"
+      ],
+      "evidence_required": "Consent for Establishment (Water) letter from SPCB"
+    },
+    {
+      "permit_name": "Hazardous Waste Authorisation",
+      "why_needed": "Required under Hazardous and Other Wastes (Management & Transboundary Movement) Rules for generation, storage, treatment, and disposal of hazardous wastes including ash, char, spent catalyst, spent guard bed, and spent caustic from the SAF facility",
+      "responsible_role": "Environment, Health & Safety (EHS) Manager",
+      "required_inputs": [
+        "hazardous waste inventory and characterization (ash, char, spent catalyst, spent guard bed, spent caustic)",
+        "storage area design and containment details",
+        "TSDF (treatment, storage, disposal facility) agreement",
+        "waste minimization and recycling plan"
+      ],
+      "phase": 3,
+      "dependencies": [
+        "Environmental Clearance received",
+        "waste characterization completed"
+      ],
+      "evidence_required": "Hazardous Waste Authorisation letter from SPCB"
+    },
+    {
+      "permit_name": "Hazardous Chemicals Licence (PESO)",
+      "why_needed": "Required under the Static & Mobile Pressure Vessels (SMPV) Rules and Petroleum Rules for manufacturing, storage, and handling of hazardous chemicals including syngas, H2, CO, and FT fuels (naphtha, SAF, diesel) at the SAF facility",
+      "responsible_role": "PESO Compliance Manager",
+      "required_inputs": [
+        "list of hazardous chemicals with quantities (syngas, H2, CO, SAF, naphtha, diesel, wax)",
+        "process flow diagram and storage layout",
+        "safety data sheets (SDS) for all hazardous chemicals",
+        "fire protection and mitigation plan"
+      ],
+      "phase": 3,
+      "dependencies": [
+        "Detailed engineering completed",
+        "site layout approved"
+      ],
+      "evidence_required": "PESO licence (Form XIV / SMPV licence) from Chief Controller of Explosives"
+    },
+    {
+      "permit_name": "Pressure Vessels and Boilers Licence (Factory Inspectorate)",
+      "why_needed": "Required under the Boilers Act and Indian Boiler Regulations (IBR) / local regulations for design, fabrication, installation, and operation of pressure vessels, boilers, waste heat recovery units, and syngas coolers at the SAF facility",
+      "responsible_role": "Mechanical / Maintenance Manager",
+      "required_inputs": [
+        "pressure vessel and boiler design drawings (IBR / ASME certified)",
+        "material test certificates and welding procedures",
+        "hydrostatic test reports",
+        "third-party inspection certificates"
+      ],
+      "phase": 3,
+      "dependencies": [
+        "Detailed engineering completed",
+        "equipment procurement finalized"
+      ],
+      "evidence_required": "Boiler / Pressure Vessel registration certificate from Chief Inspector of Boilers / Factory Inspectorate"
+    },
+    {
+      "permit_name": "Fire NOC (No Objection Certificate) from Fire Department",
+      "why_needed": "Required for building plan approval and facility operation to ensure compliance with fire safety standards for the SAF facility handling flammable gases, liquids, and biomass feedstocks",
+      "responsible_role": "Fire & Safety Manager",
+      "required_inputs": [
+        "fire protection system design (hydrants, sprinklers, detectors, foam system)",
+        "building plan with fire escape routes",
+        "fire water tank and pump capacity calculations",
+        "hazard classification of process areas"
+      ],
+      "phase": 3,
+      "dependencies": [
+        "Building plan prepared",
+        "fire protection design completed"
+      ],
+      "evidence_required": "Fire NOC letter from local Fire Department / Chief Fire Officer"
+    },
+    {
+      "permit_name": "Storage Tank Licence (Naphtha, SAF, Diesel, Wax)",
+      "why_needed": "Required under Petroleum Rules and SMPV Rules for installation and operation of above-ground storage tanks (fixed roof, floating roof) for liquid fuels including naphtha, SAF, diesel, and wax intermediates at the FT facility",
+      "responsible_role": "PESO Compliance Manager",
+      "required_inputs": [
+        "tank design and construction specifications (API 650 / API 620)",
+        "dyke/wall containment layout",
+        "tank farm layout with spacing calculations",
+        "fire protection and bonding/earthing details"
+      ],
+      "phase": 3,
+      "dependencies": [
+        "Detailed engineering completed",
+        "tank farm layout approved"
+      ],
+      "evidence_required": "Storage Tank Licence from PESO / Chief Controller of Explosives"
+    },
+    {
+      "permit_name": "Explosives Licence (Oxygen, High-Pressure Storage)",
+      "why_needed": "Required under the Explosives Rules for storage of oxygen cylinders and high-pressure gas storage vessels (e.g., H2 and CO at >100 bar) used in the FT synthesis and gasification sections",
+      "responsible_role": "PESO Compliance Manager",
+      "required_inputs": [
+        "high-pressure storage vessel specifications and test certificates",
+        "storage area layout with safety distances",
+        "handling and operating procedures",
+        "emergency response plan"
+      ],
+      "phase": 3,
+      "dependencies": [
+        "PESO licence process initiated",
+        "storage area design completed"
+      ],
+      "evidence_required": "Explosives Licence from PESO / Chief Controller of Explosives"
+    },
+    {
+      "permit_name": "Aviation Fuel Handling Interface / Airport Fuel Permit",
+      "why_needed": "Required for supplying SAF (Sustainable Aviation Fuel) to airports; covers fuel quality specifications, offloading, storage, blending, and custody transfer at airport fuel hydrant systems",
+      "responsible_role": "Supply Chain / Aviation Fuel Manager",
+      "required_inputs": [
+        "SAF quality certificates (ASTM D7566 / D1655 compliance)",
+        "fuel handling and blending procedures",
+        "airport fuel hydrant interface agreement",
+        "fuel quality monitoring and testing protocol"
+      ],
+      "phase": 5,
+      "dependencies": [
+        "SAF production trials completed",
+        "ISCC / RSB certification obtained",
+        "offtake agreement with airline/airport"
+      ],
+      "evidence_required": "Airport Fuel Handling Permit / Fuel Suppliers Licence from airport authority"
+    },
+    {
+      "permit_name": "Local Zoning / Land Use Permit",
+      "why_needed": "Required to confirm that the selected site is zoned for industrial / chemical / heavy manufacturing use and complies with local municipal or district land-use plans for the SAF facility",
+      "responsible_role": "Project Development Manager",
+      "required_inputs": [
+        "land deed and title documents",
+        "zoning map and land-use classification certificate",
+        "survey report and site plan",
+        "local development authority NOC"
+      ],
+      "phase": 1,
+      "dependencies": [
+        "Site selection completed",
+        "land acquisition finalized"
+      ],
+      "evidence_required": "Zoning clearance / Land Use Certificate from local municipal authority / district planning department"
+    },
+    {
+      "permit_name": "Building Plan Approval (Municipal Authority)",
+      "why_needed": "Required for approval of all structural building plans, layouts, and elevations of the SAF facility from the local municipal corporation or development authority before construction",
+      "responsible_role": "Engineering / Civil Manager",
+      "required_inputs": [
+        "architectural and structural drawings",
+        "geotechnical investigation report",
+        "fire safety compliance certificate",
+        "parking, green area, and drainage plans"
+      ],
+      "phase": 3,
+      "dependencies": [
+        "Environmental Clearance received",
+        "zoning permit obtained",
+        "Fire NOC obtained"
+      ],
+      "evidence_required": "Building Plan Approval letter / Commencement Certificate from municipal authority"
+    },
+    {
+      "permit_name": "Construction Permit",
+      "why_needed": "Required to legally commence construction activities at the SAF facility site; covers site preparation, civil works, foundations, and structural erection",
+      "responsible_role": "Construction Manager",
+      "required_inputs": [
+        "approved building plans",
+        "contractor licences and insurance",
+        "construction safety plan",
+        "traffic and logistics management plan"
+      ],
+      "phase": 3,
+      "dependencies": [
+        "Building plan approved",
+        "CFE (Consent for Establishment) received",
+        "zoning permit obtained"
+      ],
+      "evidence_required": "Construction Permit / Work Order from municipal authority or relevant permitting body"
+    },
+    {
+      "permit_name": "Factory Licence (Occupational Safety / Factories Act)",
+      "why_needed": "Required under the Factories Act for registration and operation of the SAF manufacturing facility; covers worker safety, working conditions, hazardous process notifications, and compliance with occupational health standards",
+      "responsible_role": "Factory Manager / EHS Head",
+      "required_inputs": [
+        "factory plan and layout with hazardous area classification",
+        "list of manufacturing processes and equipment",
+        "worker health and safety policy",
+        "hazard identification and risk assessment (HIRA) report"
+      ],
+      "phase": 4,
+      "dependencies": [
+        "Construction completed",
+        "equipment installation completed"
+      ],
+      "evidence_required": "Factory Registration Certificate / Factory Licence from Director of Industrial Safety / Chief Inspector of Factories"
+    },
+    {
+      "permit_name": "Electrical Safety Approval",
+      "why_needed": "Required under the Electricity Act and state electricity rules for approval of electrical installations, high-tension connections, switchyards, substations, and hazardous area electrical equipment at the SAF facility",
+      "responsible_role": "Electrical Manager",
+      "required_inputs": [
+        "single-line diagram (SLD) of electrical system",
+        "hazardous area classification drawing (zone 1/2 classification)",
+        "earthing and lightning protection design",
+        "equipment test certificates (flameproof, intrinsically safe)"
+      ],
+      "phase": 3,
+      "dependencies": [
+        "Detailed electrical engineering completed",
+        "equipment procurement finalized"
+      ],
+      "evidence_required": "Electrical Safety Approval / Chief Electrical Inspector certificate from state electrical inspectorate"
+    },
+    {
+      "permit_name": "Consent to Operate (CTO)",
+      "why_needed": "Required under Air and Water Acts before commencing commercial production; certifies that pollution control systems are installed and operational as per the approved design",
+      "responsible_role": "Environmental Manager",
+      "required_inputs": [
+        "CFE and EC compliance report",
+        "commissioning reports of pollution control equipment",
+        "stack monitoring and effluent analysis results",
+        "hazardous waste disposal records"
+      ],
+      "phase": 4,
+      "dependencies": [
+        "Construction and commissioning completed",
+        "CFE conditions satisfied"
+      ],
+      "evidence_required": "Consent to Operate (CTO) letter from State Pollution Control Board (SPCB)"
+    },
+    {
+      "permit_name": "CORSIA Registration",
+      "why_needed": "Required under ICAO's Carbon Offsetting and Reduction Scheme for International Aviation to certify that the SAF produced meets CORSIA sustainability criteria and is eligible for emissions reduction credits",
+      "responsible_role": "Sustainability / Carbon Manager",
+      "required_inputs": [
+        "lifecycle GHG assessment (CORSICA methodology)",
+        "sustainability declaration and feedstock traceability",
+        "mass balance report",
+        "third-party verification report"
+      ],
+      "phase": 5,
+      "dependencies": [
+        "SAF production process validated",
+        "ISCC / RSB certification in progress"
+      ],
+      "evidence_required": "CORSIA eligible fuel certificate from approved sustainability certification body"
+    },
+    {
+      "permit_name": "ISCC / RSB Certification Registration",
+      "why_needed": "Required to certify that the biomass feedstock, production process, and entire supply chain for SAF meet International Sustainability & Carbon Certification (ISCC) or Roundtable on Sustainable Biomaterials (RSB) standards for market access",
+      "responsible_role": "Sustainability Manager",
+      "required_inputs": [
+        "sustainability policy and procedures",
+        "mass balance accounting system",
+        "greenhouse gas (GHG) emissions calculation",
+        "feedstock origin and chain-of-custody documentation"
+      ],
+      "phase": 4,
+      "dependencies": [
+        "Production facility commissioned",
+        "feedstock supply agreements in place"
+      ],
+      "evidence_required": "ISCC / RSB Certificate (EU RED or CORSIA compliant)"
+    },
+    {
+      "permit_name": "Carbon Credits Registration (Carbon Registry)",
+      "why_needed": "Required to register the SAF facility's GHG emission reductions under a carbon credit standard (e.g., VCS/Verra, Gold Standard, CORSIA) to generate tradeable carbon credits from biomass feedstock carbon savings",
+      "responsible_role": "Carbon / Sustainability Manager",
+      "required_inputs": [
+        "project design document (PDD)",
+        "baseline emissions assessment",
+        "monitoring and verification plan",
+        "additionality and leakage assessment"
+      ],
+      "phase": 5,
+      "dependencies": [
+        "ISCC / RSB certification obtained",
+        "production data available for baseline period"
+      ],
+      "evidence_required": "Carbon credit registration letter from Verra / Gold Standard / relevant registry"
+    },
+    {
+      "permit_name": "Public Liability Insurance (PLI)",
+      "why_needed": "Required under the Public Liability Insurance Act for industries handling hazardous substances; provides immediate relief to victims of accidents involving hazardous chemicals at the SAF facility",
+      "responsible_role": "Risk / Insurance Manager",
+      "required_inputs": [
+        "hazardous substance inventory (quantities stored)",
+        "risk assessment report",
+        "historical accident data (if any)",
+        "insurance policy documentation"
+      ],
+      "phase": 4,
+      "dependencies": [
+        "Facility commissioned",
+        "hazardous chemicals storage operational"
+      ],
+      "evidence_required": "Public Liability Insurance policy certificate from approved insurer"
+    },
+    {
+      "permit_name": "Environmental Damage / Environmental Insurance",
+      "why_needed": "Required to cover remediation costs from potential environmental damage (soil contamination, groundwater pollution, ecological damage) from leaks, spills, or accidents at the SAF biomass FT facility",
+      "responsible_role": "Risk / Insurance Manager",
+      "required_inputs": [
+        "environmental risk assessment report",
+        "site contamination baseline study",
+        "proposed remediation plan",
+        "insurance policy documentation"
+      ],
+      "phase": 4,
+      "dependencies": [
+        "Facility commissioned",
+        "environmental baseline established"
+      ],
+      "evidence_required": "Environmental Impairment Liability (EIL) insurance policy certificate"
+    },
+    {
+      "permit_name": "Health and Safety Case / Major Hazard Facility (MHFA) Approval",
+      "why_needed": "Required under the Manufacture, Storage and Import of Hazardous Chemicals (MSIHC) Rules for facilities exceeding threshold quantities of hazardous chemicals; requires submission of a detailed safety case covering risk assessment, consequence modelling, and emergency planning",
+      "responsible_role": "EHS / Process Safety Manager",
+      "required_inputs": [
+        "major accident hazard (MAH) identification and risk assessment",
+        "consequence modelling report (dispersion, overpressure, thermal radiation)",
+        "safety management system (SMS) documentation",
+        "on-site and off-site emergency plan"
+      ],
+      "phase": 4,
+      "dependencies": [
+        "Detailed engineering completed",
+        "hazard identification study (HAZOP) completed"
+      ],
+      "evidence_required": "Major Hazard Facility (MHF) approval letter from the competent authority (MoEFCC / Factory Inspectorate)"
+    },
+    {
+      "permit_name": "High-Pressure Gas Transmission / Piping Approval (H2, CO, Syngas)",
+      "why_needed": "Required under SMPV Rules / Gas Cylinder Rules for design, fabrication, testing, and operation of high-pressure interconnecting piping conveying H2, CO, and syngas at elevated pressures throughout the FT facility",
+      "responsible_role": "Piping / Mechanical Manager",
+      "required_inputs": [
+        "piping and instrumentation diagrams (P&IDs)",
+        "piping stress analysis and flexible connection design",
+        "pipeline material certificates and welding qualifications (ASME B31.3)",
+        "hydrostatic and leak test reports"
+      ],
+      "phase": 3,
+      "dependencies": [
+        "Detailed engineering completed",
+        "HAZOP study completed"
+      ],
+      "evidence_required": "High-pressure gas piping approval from PESO / Factory Inspectorate"
+    },
+    {
+      "permit_name": "Wastewater Treatment / ZLD (Zero Liquid Discharge) Approval",
+      "why_needed": "Required to ensure that the SAF facility's wastewater treatment system achieves zero liquid discharge standards; covers design, performance, and discharge compliance for treated water reuse within the facility",
+      "responsible_role": "Environmental / Utility Manager",
+      "required_inputs": [
+        "ZLD system design (RO, MEE, crystallizer, evaporator)",
+        "water and mass balance report",
+        "treated water quality analysis and reuse plan",
+        "solid waste (salt) management plan"
+      ],
+      "phase": 3,
+      "dependencies": [
+        "Water (effluent) consent initiated",
+        "ETP/ZLD design completed"
+      ],
+      "evidence_required": "ZLD approval / NOC from State Pollution Control Board (SPCB)"
+    },
+    {
+      "permit_name": "Solid Waste Management Plan Approval",
+      "why_needed": "Required under Solid Waste Management Rules for management of non-hazardous solid waste including biomass ash, char fines, spent guard bed material, spent catalyst, and waste oils generated from the FT and gasification processes",
+      "responsible_role": "Environmental Manager",
+      "required_inputs": [
+        "solid waste characterization and quantification report",
+        "waste segregation, storage, and disposal plan",
+        "recycling / co-processing agreements",
+        "landfill disposal allocation (if applicable)"
+      ],
+      "phase": 3,
+      "dependencies": [
+        "Waste characterization completed",
+        "Hazardous waste authorisation process initiated"
+      ],
+      "evidence_required": "Solid Waste Management Plan approval letter from SPCB / local municipal authority"
+    },
+    {
+      "permit_name": "Noise Pollution / Ambient Noise Level Consent",
+      "why_needed": "Required under the Noise Pollution (Regulation & Control) Rules to ensure noise levels from compressors, turbines, gasifiers, coolers, and flares at the SAF facility comply with prescribed limits for industrial zones",
+      "responsible_role": "Environmental Manager",
+      "required_inputs": [
+        "noise source inventory (compressors, turbines, flaring, fans)",
+        "noise modelling and prediction report",
+        "noise attenuation measures design (enclosures, silencers, barriers)",
+        "baseline ambient noise monitoring report"
+      ],
+      "phase": 3,
+      "dependencies": [
+        "Environmental Clearance received"
+      ],
+      "evidence_required": "Noise level compliance certificate / NOC from SPCB"
+    },
+    {
+      "permit_name": "Biomass Feedstock Storage & Handling Permit (Biodiversity/Customs)",
+      "why_needed": "Required for storage, handling, and processing of large quantities of biomass feedstock; may require phytosanitary certification, biodiversity impact assessment, and customs clearance for imported biomass",
+      "responsible_role": "Feedstock / Supply Chain Manager",
+      "required_inputs": [
+        "feedstock sourcing and storage plan",
+        "biodiversity impact assessment (if sourcing from ecologically sensitive areas)",
+        "phytosanitary certificate (for imported biomass)",
+        "storage yard design with dust and leachate control"
+      ],
+      "phase": 2,
+      "dependencies": [
+        "Feedstock sourcing agreements finalized",
+        "site layout completed"
+      ],
+      "evidence_required": "Feedstock storage permit / phytosanitary clearance from agriculture / forestry department"
+    }
+  ]
+}

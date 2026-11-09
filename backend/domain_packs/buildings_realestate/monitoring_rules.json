@@ -1,0 +1,350 @@
+{
+  "pack": "buildings_realestate",
+  "rules": [
+    {
+      "rule_id": "M01",
+      "trigger_condition": "Crane lift plan deviation count exceeds threshold in any rolling week",
+      "severity": "critical",
+      "recommended_action": "Alert Agent notifies HSE Manager and Construction Manager immediately; Monitor Agent suspends confidence scoring for lifting tasks and flags all crane-dependent tasks as at-risk in the plan.",
+      "related_phase": [
+        5,
+        6
+      ],
+      "related_risks": [
+        "R01",
+        "R02"
+      ]
+    },
+    {
+      "rule_id": "M02",
+      "trigger_condition": "Tower crane inspection overdue or thorough examination certificate expiring within 7 days",
+      "severity": "high",
+      "recommended_action": "Monitor Agent flags crane-dependent tasks; Alert Agent sends warning to Construction Manager to book examination before certificate lapse and halt affected lifts if lapsed.",
+      "related_phase": [
+        5,
+        6
+      ],
+      "related_risks": [
+        "R01",
+        "R44"
+      ]
+    },
+    {
+      "rule_id": "M03",
+      "trigger_condition": "Wind speed stoppages of crane lifting operations occurring more than planned frequency",
+      "severity": "warning",
+      "recommended_action": "Monitor Agent correlates stoppages with floor cycle slippage; Alert Agent warns Project Controls to re-forecast slab cycle and consider night-shift lifting windows.",
+      "related_phase": [
+        5,
+        6
+      ],
+      "related_risks": [
+        "R01",
+        "R13"
+      ]
+    },
+    {
+      "rule_id": "M04",
+      "trigger_condition": "Working at height near-miss reports spike above baseline in any week",
+      "severity": "high",
+      "recommended_action": "Alert Agent notifies HSE Manager for targeted intervention on affected floors; Monitor Agent increases scrutiny of edge protection and harness compliance records.",
+      "related_phase": [
+        5,
+        6
+      ],
+      "related_risks": [
+        "R03",
+        "R49"
+      ]
+    },
+    {
+      "rule_id": "M05",
+      "trigger_condition": "Lost time injury recorded on site",
+      "severity": "critical",
+      "recommended_action": "Alert Agent immediately notifies HSE Manager and Project Manager with incident context; Monitor Agent freezes productivity expectations for affected zone pending investigation.",
+      "related_phase": [
+        5,
+        6
+      ],
+      "related_risks": [
+        "R49",
+        "R03"
+      ]
+    },
+    {
+      "rule_id": "M06",
+      "trigger_condition": "Piling refusal or unexpected obstruction logged during boring operations",
+      "severity": "high",
+      "recommended_action": "Monitor Agent links event to geotechnical baseline; Alert Agent notifies Foundation/Geotech Engineer and Commercial Manager to assess variation exposure and programme impact.",
+      "related_phase": [
+        5
+      ],
+      "related_risks": [
+        "R04",
+        "R07"
+      ]
+    },
+    {
+      "rule_id": "M07",
+      "trigger_condition": "Groundwater inflow or piezometer levels exceed dewatering design triggers",
+      "severity": "critical",
+      "recommended_action": "Alert Agent escalates to Foundation/Geotech Engineer and Construction Manager; Monitor Agent checks neighbouring settlement monitoring for correlated movement.",
+      "related_phase": [
+        5
+      ],
+      "related_risks": [
+        "R05",
+        "R07"
+      ]
+    },
+    {
+      "rule_id": "M08",
+      "trigger_condition": "Concrete cube or cylinder test failure reported on structural pour",
+      "severity": "high",
+      "recommended_action": "Monitor Agent holds dependent striking/stressing tasks pending disposition; Alert Agent notifies Quality Manager and Structural Engineer for investigation workflow.",
+      "related_phase": [
+        5,
+        6
+      ],
+      "related_risks": [
+        "R11",
+        "R12"
+      ]
+    },
+    {
+      "rule_id": "M09",
+      "trigger_condition": "Ready-mix concrete delivery missed for two or more consecutive scheduled pours",
+      "severity": "high",
+      "recommended_action": "Alert Agent notifies Procurement Lead to activate secondary plant; Monitor Agent recalculates floor cycle forecast and flags downstream facade and MEP sequencing.",
+      "related_phase": [
+        5,
+        6
+      ],
+      "related_risks": [
+        "R10",
+        "R13"
+      ]
+    },
+    {
+      "rule_id": "M10",
+      "trigger_condition": "Slab cycle time exceeds baseline by more than 15 percent over rolling three floors",
+      "severity": "warning",
+      "recommended_action": "Monitor Agent produces cycle-time variance analysis by activity; Alert Agent warns Construction Manager to deploy recovery actions before buffer erosion becomes critical-path impact.",
+      "related_phase": [
+        5,
+        6
+      ],
+      "related_risks": [
+        "R13",
+        "R45"
+      ]
+    },
+    {
+      "rule_id": "M11",
+      "trigger_condition": "Subcontractor insolvency warning signs detected such as late supplier payments or key staff departures",
+      "severity": "critical",
+      "recommended_action": "Alert Agent notifies Commercial Manager for immediate financial health review; Monitor Agent flags all tasks of that subcontractor and identifies backup contractor options.",
+      "related_phase": [
+        4,
+        5,
+        6
+      ],
+      "related_risks": [
+        "R33",
+        "R39"
+      ]
+    },
+    {
+      "rule_id": "M12",
+      "trigger_condition": "Skilled labour absenteeism or vacancy rate rising on facade or post-tensioning crews",
+      "severity": "warning",
+      "recommended_action": "Monitor Agent adjusts productivity factors for affected trades; Alert Agent warns Construction Manager to trigger labour supply contingency and retention incentives.",
+      "related_phase": [
+        5,
+        6
+      ],
+      "related_risks": [
+        "R34",
+        "R13"
+      ]
+    },
+    {
+      "rule_id": "M13",
+      "trigger_condition": "Change order backlog value or count exceeds agreed threshold",
+      "severity": "warning",
+      "recommended_action": "Alert Agent notifies Commercial Manager and Project Manager; Monitor Agent quantifies unassessed time impact on critical path and reports contingency drawdown correlation.",
+      "related_phase": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "related_risks": [
+        "R36",
+        "R35"
+      ]
+    },
+    {
+      "rule_id": "M14",
+      "trigger_condition": "Subcontractor claims submissions trending upward week over week",
+      "severity": "high",
+      "recommended_action": "Monitor Agent compiles contemporaneous records coverage report; Alert Agent notifies Commercial Manager to convene claims review and settlement strategy session.",
+      "related_phase": [
+        5,
+        6
+      ],
+      "related_risks": [
+        "R35",
+        "R36"
+      ]
+    },
+    {
+      "rule_id": "M15",
+      "trigger_condition": "Planning permission or building control approval milestone forecast slipping beyond float",
+      "severity": "high",
+      "recommended_action": "Alert Agent notifies Permitting Lead and Project Manager; Monitor Agent re-baselines dependent procurement and mobilisation dates and quantifies knock-on long-lead exposure.",
+      "related_phase": [
+        1,
+        2,
+        3
+      ],
+      "related_risks": [
+        "R29",
+        "R30"
+      ]
+    },
+    {
+      "rule_id": "M16",
+      "trigger_condition": "Facade air or water infiltration test failure recorded on installed zone",
+      "severity": "high",
+      "recommended_action": "Monitor Agent blocks zone sign-off and dependent internal fit-out tasks; Alert Agent notifies Facade Manager and Quality Manager with diagnostic and retest workflow.",
+      "related_phase": [
+        6
+      ],
+      "related_risks": [
+        "R19",
+        "R17"
+      ]
+    },
+    {
+      "rule_id": "M17",
+      "trigger_condition": "Cladding fire performance evidence missing or non-conforming in submitted documentation",
+      "severity": "critical",
+      "recommended_action": "Alert Agent immediately escalates to Facade Manager, Quality Manager, and Project Manager; Monitor Agent suspends acceptance of affected cladding tasks pending certified evidence.",
+      "related_phase": [
+        3,
+        4,
+        6
+      ],
+      "related_risks": [
+        "R20",
+        "R21"
+      ]
+    },
+    {
+      "rule_id": "M18",
+      "trigger_condition": "Curtain wall or cladding delivery schedule slip reported by supplier",
+      "severity": "warning",
+      "recommended_action": "Monitor Agent re-sequences facade installation zones against available stock; Alert Agent notifies Procurement Lead to expedite shipments and assess closing-in sequence impact.",
+      "related_phase": [
+        4,
+        6
+      ],
+      "related_risks": [
+        "R21",
+        "R18"
+      ]
+    },
+    {
+      "rule_id": "M19",
+      "trigger_condition": "MEP riser clash count rising in federated model week over week",
+      "severity": "warning",
+      "recommended_action": "Alert Agent notifies MEP Coordinator and Design Manager; Monitor Agent tracks clash burn-down and flags riser installation tasks within two weeks of unresolved critical clashes.",
+      "related_phase": [
+        3,
+        5,
+        6
+      ],
+      "related_risks": [
+        "R25",
+        "R26"
+      ]
+    },
+    {
+      "rule_id": "M20",
+      "trigger_condition": "Elevator or escalator delivery milestone at risk per supplier forecast",
+      "severity": "high",
+      "recommended_action": "Alert Agent notifies Lift/Elevator Specialist and Procurement Lead; Monitor Agent models impact on shaft handover, commissioning, and overall completion critical path.",
+      "related_phase": [
+        4,
+        6
+      ],
+      "related_risks": [
+        "R23",
+        "R24"
+      ]
+    },
+    {
+      "rule_id": "M21",
+      "trigger_condition": "Waterproofing leak or basement water ingress reported post tanking installation",
+      "severity": "critical",
+      "recommended_action": "Alert Agent escalates to Quality Manager and Foundation/Geotech Engineer; Monitor Agent links to monitoring data, blocks dependent finishing tasks, and initiates diagnostic workflow.",
+      "related_phase": [
+        5,
+        7
+      ],
+      "related_risks": [
+        "R42",
+        "R43"
+      ]
+    },
+    {
+      "rule_id": "M22",
+      "trigger_condition": "Steel or rebar price index movement beyond escalation band in cost plan",
+      "severity": "warning",
+      "recommended_action": "Monitor Agent re-prices remaining steel tonnage and updates forecast; Alert Agent notifies Commercial Manager to consider early bulk ordering or hedging decisions.",
+      "related_phase": [
+        2,
+        3,
+        4
+      ],
+      "related_risks": [
+        "R15",
+        "R40"
+      ]
+    },
+    {
+      "rule_id": "M23",
+      "trigger_condition": "Design drawing non-conformance rate or RFI volume rising on recent information releases",
+      "severity": "warning",
+      "recommended_action": "Alert Agent notifies Design Manager for consultant performance intervention; Monitor Agent flags tasks relying on late information and quantifies potential claim exposure.",
+      "related_phase": [
+        2,
+        3
+      ],
+      "related_risks": [
+        "R27",
+        "R26"
+      ]
+    },
+    {
+      "rule_id": "M24",
+      "trigger_condition": "Cost forecast overrun beyond contingency consumption threshold",
+      "severity": "critical",
+      "recommended_action": "Alert Agent escalates to Commercial Manager, Project Manager, and developer-client sponsor; Monitor Agent provides earned value decomposition identifying dominant cost growth drivers.",
+      "related_phase": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "related_risks": [
+        "R38",
+        "R37"
+      ]
+    }
+  ],
+  "total_rules": 24
+}

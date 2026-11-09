@@ -1,0 +1,205 @@
+{
+  "pack": "industry_4_0",
+  "version": "1.0.1",
+  "purpose": "Go-live commissioning checklist for Industry 4.0 deployment. All applicable items must pass (or be formally risk-accepted) before operations handover.",
+  "activities": [
+    {
+      "activity": "OFC termination testing and certification",
+      "phase": "Phase 4",
+      "prerequisites": ["All fiber optic cables pulled and terminated", "OTDR / power meter available and calibrated"],
+      "procedure_required": "Per-link OTDR certification per project cabling specification",
+      "safety_hold_point": "None",
+      "acceptance_criteria": "All OFC links within loss budget; results recorded per link",
+      "responsible_role": "Network Engineering"
+    },
+    {
+      "activity": "Copper and fiber cable certification",
+      "phase": "Phase 4",
+      "prerequisites": ["All runs pulled, terminated, and labeled"],
+      "procedure_required": "Cable certifier continuity, length, crosstalk, and loss per TIA/EIA standards",
+      "safety_hold_point": "None",
+      "acceptance_criteria": "Every run certified and labeled to match as-built documentation",
+      "responsible_role": "Network Engineering"
+    },
+    {
+      "activity": "VLAN segmentation and OT/IT DMZ validation",
+      "phase": "Phase 4",
+      "prerequisites": ["Switches and firewalls installed and configured per solution architecture", "VLAN and firewall rule set approved by ARB"],
+      "procedure_required": "Segmentation test plan with deny-by-default verification per switch port and firewall rule",
+      "safety_hold_point": "OT network not yet connected to production — segmentation must be verified before connection",
+      "acceptance_criteria": "Deny-by-default confirmed; only explicitly permitted cross-zone traffic allowed; pen test passes",
+      "responsible_role": "Network Engineering"
+    },
+    {
+      "activity": "Time synchronization (PTP/NTP) validation",
+      "phase": "Phase 4",
+      "prerequisites": ["PTP grandmaster and NTP servers installed and configured", "All time-sensitive devices configured with PTP/NTP client"],
+      "procedure_required": "Time offset measurement at each time-sensitive device against GPS/GNSS reference",
+      "safety_hold_point": "None",
+      "acceptance_criteria": "All time-sensitive devices within target accuracy tolerance (microseconds for PTP, milliseconds for NTP)",
+      "responsible_role": "Network Engineering"
+    },
+    {
+      "activity": "Edge gateway commissioning and protocol bridging validation",
+      "phase": "Phase 4",
+      "prerequisites": ["Edge gateway installed, powered, and network connected", "PLC/SCADA/DCS southbound interfaces documented"],
+      "procedure_required": "Per-gateway commissioning checklist: southbound protocol discovery → tag mapping → northbound OPC UA/MQTT publication → data receipt at historian",
+      "safety_hold_point": "Read-only data collection verified before any bidirectional connection is enabled",
+      "acceptance_criteria": "All mapped tags publishing to historian with correct values and metadata; no unexpected write operations",
+      "responsible_role": "OT Engineering"
+    },
+    {
+      "activity": "Sensor installation and data quality validation",
+      "phase": "Phase 4",
+      "prerequisites": ["Sensors mounted per specification and wired to gateway/I-O module", "Edge gateway commissioned for the asset"],
+      "procedure_required": "Per-sensor validation: raw value vs. reference measurement over full range → data platform receipt confirmation",
+      "safety_hold_point": "Sensor wiring confirmed; no unapproved wiring in hazardous area without permit",
+      "acceptance_criteria": "Sensor values within accuracy spec; data appearing in historian at expected rate; no alarms from sensor faults",
+      "responsible_role": "OT Engineering"
+    },
+    {
+      "activity": "Industrial wireless survey and signal validation",
+      "phase": "Phase 4",
+      "prerequisites": ["Wireless access points and clients installed per design"],
+      "procedure_required": "Site survey tool walk-path across all wireless coverage zones; signal strength and packet loss measurement",
+      "safety_hold_point": "None",
+      "acceptance_criteria": "RSSI ≥ -70 dBm and packet loss < 1% at all expected device locations; no coverage gaps in required zones",
+      "responsible_role": "Network Engineering"
+    },
+    {
+      "activity": "Historian / time-series data platform deployment and data ingestion validation",
+      "phase": "Phase 5",
+      "prerequisites": ["Historian platform installed and licensed", "Edge gateways publishing data northbound"],
+      "procedure_required": "Tag group import from edge gateway; verify data ingestion rate, completeness, and latency",
+      "safety_hold_point": "None",
+      "acceptance_criteria": "All expected tags ingesting; latency < 5 s end-to-end; data completeness > 99% over 24-hour run",
+      "responsible_role": "Data Engineering"
+    },
+    {
+      "activity": "Control tower / OEE dashboard UAT",
+      "phase": "Phase 5",
+      "prerequisites": ["Historian data flowing for pilot line", "OEE calculation engine deployed and configured"],
+      "procedure_required": "User acceptance test script walk-through with plant operations and shift supervisors",
+      "safety_hold_point": "None",
+      "acceptance_criteria": "OEE values match manual calculation on representative shift data; operators confirm dashboard usability",
+      "responsible_role": "Solution Architecture"
+    },
+    {
+      "activity": "MES/QMS/WMS integration data flow validation",
+      "phase": "Phase 5",
+      "prerequisites": ["Connectors deployed between data platform and each source system", "Data model mapping approved"],
+      "procedure_required": "End-to-end trace order through MES → production → QMS test → data platform → dashboard",
+      "safety_hold_point": "None — integration is read-only from data platform to source systems",
+      "acceptance_criteria": "Order genealogy complete end-to-end; quality results linked to production run; traceability query completes within 5 s",
+      "responsible_role": "Software Engineering"
+    },
+    {
+      "activity": "Data quality enforcement rules validation",
+      "phase": "Phase 5",
+      "prerequisites": ["Data quality rules defined per asset class", "Data platform configured to enforce rules"],
+      "procedure_required": "Inject known-bad data (nulls, outliers, stale values) and verify rule firing and flagging",
+      "safety_hold_point": "None",
+      "acceptance_criteria": "All test data quality violations detected, flagged, and alerted within 2 minutes",
+      "responsible_role": "Data Engineering"
+    },
+    {
+      "activity": "End-to-end traceability (module genealogy) validation",
+      "phase": "Phase 5",
+      "prerequisites": ["MES and QMS integrated", "Data platform pipeline operational"],
+      "procedure_required": "Trace a test lot from raw material receipt through production stages to final shipment using the traceability dashboard",
+      "safety_hold_point": "None",
+      "acceptance_criteria": "Complete genealogy (material lots, process params, quality results, timestamps) available within 5 s query time",
+      "responsible_role": "Data Engineering"
+    },
+    {
+      "activity": "Computer vision model deployment and edge inference validation",
+      "phase": "Phase 6",
+      "prerequisites": ["Cameras installed and calibrated", "Vision model trained and validated", "Edge GPU commissioned"],
+      "procedure_required": "Deploy model to edge GPU; run through test defect set at line speed; measure inference latency and detection rate",
+      "safety_hold_point": "Model output must not yet control any process — operator-in-the-loop only until closed-loop is validated separately",
+      "acceptance_criteria": "Inference latency within budget at full line speed; detection rate above threshold on reference defect set",
+      "responsible_role": "ML Engineering"
+    },
+    {
+      "activity": "Predictive maintenance model validation on live data",
+      "phase": "Phase 6",
+      "prerequisites": ["PdM model trained on historical data", "Edge gateway streaming live vibration/temperature/current data"],
+      "procedure_required": "Run PdM inference on live edge data stream; compare prediction vs actual maintenance events over 7-day period",
+      "safety_hold_point": "PdM predictions are advisory only — no automated maintenance actions until validation period complete",
+      "acceptance_criteria": "PdM model precision and recall above threshold on live data; false positive rate within tolerance",
+      "responsible_role": "ML Engineering"
+    },
+    {
+      "activity": "Closed-loop control safe-state fallback validation",
+      "phase": "Phase 6",
+      "prerequisites": ["Closed-loop control model deployed with edge inference", "PLC/DCS integration validated in staging"],
+      "procedure_required": "Inject model failure scenario (bad input, timeout, confidence drop) and verify safe-state fallback to pre-model control logic",
+      "safety_hold_point": "CRITICAL: safe-state fallback timeout must be < 1 control cycle; validated with production safety team before proceeding",
+      "acceptance_criteria": "All failure modes tested; safe-state fallback activates within 1 control cycle; operator notified immediately",
+      "responsible_role": "OT Engineering"
+    },
+    {
+      "activity": "MLOps pipeline validation (training → registry → edge deployment → monitoring)",
+      "phase": "Phase 6",
+      "prerequisites": ["MLOps platform deployed and configured", "At least one production model in registry"],
+      "procedure_required": "Run model retraining → push to registry → deploy new version to edge → verify monitoring catches drift",
+      "safety_hold_point": "Model replacement on edge must not interrupt running inference (blue-green or canary deployment)",
+      "acceptance_criteria": "Full MLOps pipeline executes end-to-end in < 4 hours; model rollback tested; monitoring alerts on drift detected",
+      "responsible_role": "ML Engineering"
+    },
+    {
+      "activity": "Control tower and alerting system UAT with operations",
+      "phase": "Phase 6",
+      "prerequisites": ["All dashboards deployed and data flowing", "Alert rules configured in monitoring system"],
+      "procedure_required": "Operations team walks through all dashboards and alert scenarios; UAT sign-off per role (operator, supervisor, plant manager)",
+      "safety_hold_point": "None",
+      "acceptance_criteria": "UAT signed off by operations team; alert fatigue risk documented and mitigated; escalation path working",
+      "responsible_role": "Solution Architecture"
+    },
+    {
+      "activity": "OT cybersecurity pen test and zone validation",
+      "phase": "Phase 6",
+      "prerequisites": ["Network segmentation implemented per solution architecture", "All edge devices and OT appliances connected"],
+      "procedure_required": "External pen test (production impact must be coordinated and scheduled in a maintenance window)",
+      "safety_hold_point": "Pen test must be approved by OT change control; backout plan prepared",
+      "acceptance_criteria": "No critical or high-severity findings in OT zones; medium/low findings documented with remediation plan",
+      "responsible_role": "Cybersecurity"
+    },
+    {
+      "activity": "Role-based training delivery across all user personas",
+      "phase": "Phase 7",
+      "prerequisites": ["All dashboards and tools deployed", "Training materials (user guides, SOPs, quick reference cards) prepared"],
+      "procedure_required": "Deliver role-based training sessions: operators (dashboard, alerts), supervisors (control tower, reporting), plant managers (KPI review), maintenance (PdM workflow)",
+      "safety_hold_point": "None",
+      "acceptance_criteria": "Training completion register signed per role; post-training confidence survey > 80% positive",
+      "responsible_role": "Change Management"
+    },
+    {
+      "activity": "Operations and maintenance SOP handover",
+      "phase": "Phase 7",
+      "prerequisites": ["All SOPs drafted and reviewed with operations and maintenance teams"],
+      "procedure_required": "Formal handover of SOP binders/digital library to operations and maintenance managers; 2-week shadow support by SI",
+      "safety_hold_point": "None",
+      "acceptance_criteria": "SOPs signed off by operations and maintenance heads; shadow-support schedule agreed",
+      "responsible_role": "Solution Architecture"
+    },
+    {
+      "activity": "Continuous improvement framework and quarterly ROI review cadence establishment",
+      "phase": "Phase 7",
+      "prerequisites": ["Baseline and post-deployment metrics available", "ROI model updated with realized gains"],
+      "procedure_required": "Establish continuous improvement governance: monthly KPI review, quarterly ROI assessment, annual program review",
+      "safety_hold_point": "None",
+      "acceptance_criteria": "CI charter signed; quarterly review dates scheduled; benefits tracker operational",
+      "responsible_role": "PMO"
+    },
+    {
+      "activity": "Scale-out roadmap and replication pattern documentation",
+      "phase": "Phase 7",
+      "prerequisites": ["Pilot complete with validated results", "Lessons learned captured"],
+      "procedure_required": "Document the replication pattern: architecture, procurement specs, deployment procedure, cost template, risk register update, and lessons learned for each remaining line/site",
+      "safety_hold_point": "None",
+      "acceptance_criteria": "Scale-out roadmap approved by steering committee; replication pattern document delivered",
+      "responsible_role": "PMO"
+    }
+  ]
+}

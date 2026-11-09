@@ -1,0 +1,430 @@
+{
+  "pack": "green_methanol_biomass",
+  "rules": [
+    {
+      "rule_id": "M01",
+      "trigger_condition": "Feedstock average moisture > 30% over last 30 days",
+      "severity": "warning",
+      "recommended_action": "Notify feedstock manager; review drying system performance; consider feedstock blend adjustment",
+      "related_phase": [
+        1,
+        6,
+        7
+      ],
+      "related_risks": [
+        "R02"
+      ]
+    },
+    {
+      "rule_id": "M02",
+      "trigger_condition": "Feedstock supply contracts signed for < 70% of annual requirement",
+      "severity": "warning",
+      "recommended_action": "Prioritise remaining feedstock contract negotiation; identify additional suppliers; engage procurement team",
+      "related_phase": [
+        1,
+        2
+      ],
+      "related_risks": [
+        "R01",
+        "R14"
+      ]
+    },
+    {
+      "rule_id": "M03",
+      "trigger_condition": "Gasifier vendor delivery > 30 days past contractual milestone",
+      "severity": "critical",
+      "recommended_action": "Expedite vendor with formal notice; escalate to project director; evaluate liquidated damages application",
+      "related_phase": [
+        4
+      ],
+      "related_risks": [
+        "R05"
+      ]
+    },
+    {
+      "rule_id": "M04",
+      "trigger_condition": "HAZOP study not completed within 3 months of FEED completion",
+      "severity": "critical",
+      "recommended_action": "Mobilise HAZOP team immediately; prioritise HAZOP nodes; extend FEED schedule if needed",
+      "related_phase": [
+        3
+      ],
+      "related_risks": [
+        "R20"
+      ]
+    },
+    {
+      "rule_id": "M05",
+      "trigger_condition": "HAZOP recommendations close-out < 80% 3 months before planned start-up",
+      "severity": "critical",
+      "recommended_action": "Hold weekly HAZOP closure meetings; assign owners to all open recommendations; escalate unresolved items",
+      "related_phase": [
+        3,
+        4,
+        5
+      ],
+      "related_risks": [
+        "R20"
+      ]
+    },
+    {
+      "rule_id": "M06",
+      "trigger_condition": "Syngas cleanup package procurement not ordered within 4 months of EPC award",
+      "severity": "high",
+      "recommended_action": "Expedite purchase order; evaluate standardisation to reduce engineering time; mobilise procurement team",
+      "related_phase": [
+        4
+      ],
+      "related_risks": [
+        "R07"
+      ]
+    },
+    {
+      "rule_id": "M07",
+      "trigger_condition": "Methanol synthesis catalyst order not placed >12 months before planned loading date",
+      "severity": "critical",
+      "recommended_action": "Place catalyst order urgently; negotiate lead time with supplier; evaluate alternative catalyst sources",
+      "related_phase": [
+        3,
+        4
+      ],
+      "related_risks": [
+        "R15"
+      ]
+    },
+    {
+      "rule_id": "M08",
+      "trigger_condition": "H2/CO ratio target (stoichiometric number) not defined or achievable by FEED gate",
+      "severity": "high",
+      "recommended_action": "Require process design team to resolve ratio target; evaluate WGS sizing; consider H2 make-up option",
+      "related_phase": [
+        2,
+        3
+      ],
+      "related_risks": [
+        "R10"
+      ]
+    },
+    {
+      "rule_id": "M09",
+      "trigger_condition": "Methanol synthesis loop design not started by Phase 3 gate",
+      "severity": "high",
+      "recommended_action": "Start methanol loop design immediately; mobilise licensor design support; review critical path impact",
+      "related_phase": [
+        3
+      ],
+      "related_risks": [
+        "R12",
+        "R13"
+      ]
+    },
+    {
+      "rule_id": "M10",
+      "trigger_condition": "EIA not submitted for regulatory review by Phase 2 gate",
+      "severity": "high",
+      "recommended_action": "Accelerate EIA completion; engage regulatory consultant; review submission checklist",
+      "related_phase": [
+        1,
+        2
+      ],
+      "related_risks": [
+        "R17"
+      ]
+    },
+    {
+      "rule_id": "M11",
+      "trigger_condition": "Environmental clearance not received by Phase 3/FID gate",
+      "severity": "critical",
+      "recommended_action": "Engage senior regulatory liaison; prepare supplemental submissions; evaluate concurrent permit applications",
+      "related_phase": [
+        3
+      ],
+      "related_risks": [
+        "R17"
+      ]
+    },
+    {
+      "rule_id": "M12",
+      "trigger_condition": "Commissioning readiness assessment not scheduled at 6 months before target start-up",
+      "severity": "warning",
+      "recommended_action": "Schedule commissioning readiness workshop; review commissioning team staffing; identify procedure gaps",
+      "related_phase": [
+        4,
+        5
+      ],
+      "related_risks": [
+        "R41"
+      ]
+    },
+    {
+      "rule_id": "M13",
+      "trigger_condition": "Commissioning punch list > 10% open at scheduled start date",
+      "severity": "high",
+      "recommended_action": "Hold daily punch list resolution meeting; allocate additional construction workforce; prioritise safety-critical items",
+      "related_phase": [
+        5
+      ],
+      "related_risks": [
+        "R41"
+      ]
+    },
+    {
+      "rule_id": "M14",
+      "trigger_condition": "First methanol product quality fails IMPCA spec",
+      "severity": "high",
+      "recommended_action": "Isolate product to slop tank; adjust distillation parameters; involve licensor support; evaluate catalyst issues",
+      "related_phase": [
+        6
+      ],
+      "related_risks": [
+        "R14",
+        "R51"
+      ]
+    },
+    {
+      "rule_id": "M15",
+      "trigger_condition": "Performance guarantee test not passed within 6 weeks of first methanol production",
+      "severity": "critical",
+      "recommended_action": "Commission root cause analysis; engage licensor for optimisation; negotiate with EPC contractor",
+      "related_phase": [
+        6
+      ],
+      "related_risks": [
+        "R48"
+      ]
+    },
+    {
+      "rule_id": "M16",
+      "trigger_condition": "Syngas tar content after cleanup exceeds 50 mg/Nm\u00b3 during commissioning",
+      "severity": "high",
+      "recommended_action": "Review tar reformer/cracker performance; check catalyst condition; evaluate tar sampling method",
+      "related_phase": [
+        6
+      ],
+      "related_risks": [
+        "R04",
+        "R07"
+      ]
+    },
+    {
+      "rule_id": "M17",
+      "trigger_condition": "Biomass storage capacity < 14 days at nameplate consumption",
+      "severity": "warning",
+      "recommended_action": "Review storage sizing; evaluate covered storage expansion; maintain minimum stockpile level of 30 days during monsoon",
+      "related_phase": [
+        0,
+        1,
+        5
+      ],
+      "related_risks": [
+        "R01",
+        "R54"
+      ]
+    },
+    {
+      "rule_id": "M18",
+      "trigger_condition": "Feedstock logistics transport disruption > 7 days",
+      "severity": "warning",
+      "recommended_action": "Activate alternative transport route; draw from strategic stockpile; contact backup suppliers",
+      "related_phase": [
+        6,
+        7
+      ],
+      "related_risks": [
+        "R54"
+      ]
+    },
+    {
+      "rule_id": "M19",
+      "trigger_condition": "Methanol storage tank permit not applied for by Phase 3 completion",
+      "severity": "high",
+      "recommended_action": "Submit storage tank permit application immediately; engage PESO/explosives expert; expedite fire NOC",
+      "related_phase": [
+        3
+      ],
+      "related_risks": [
+        "R16"
+      ]
+    },
+    {
+      "rule_id": "M20",
+      "trigger_condition": "Oxygen supply (from ASU or third-party) delivery delayed > 30 days",
+      "severity": "critical",
+      "recommended_action": "Expedite ASU delivery; evaluate liquid oxygen backup; consider emergency third-party oxygen supply",
+      "related_phase": [
+        4,
+        6
+      ],
+      "related_risks": [
+        "R37",
+        "R42"
+      ]
+    },
+    {
+      "rule_id": "M21",
+      "trigger_condition": "Water abstraction or groundwater clearance not obtained before Phase 4 start",
+      "severity": "high",
+      "recommended_action": "Expedite water permits; engage consultant for additional studies; evaluate temporary water supply arrangement",
+      "related_phase": [
+        3
+      ],
+      "related_risks": [
+        "R17"
+      ]
+    },
+    {
+      "rule_id": "M22",
+      "trigger_condition": "Capital cost > 110% of approved budget at any gate (excluding approved contingency)",
+      "severity": "critical",
+      "recommended_action": "Initiate cost control review; freeze new change orders; report to project board; evaluate contingency draw-down",
+      "related_phase": [
+        2,
+        3,
+        4
+      ],
+      "related_risks": [
+        "R28"
+      ]
+    },
+    {
+      "rule_id": "M23",
+      "trigger_condition": "Schedule delay > 3 months from latest approved baseline",
+      "severity": "critical",
+      "recommended_action": "Commission schedule recovery plan; identify critical path recovery; evaluate acceleration options (overtime, parallel work, additional shifts)",
+      "related_phase": [
+        3,
+        4,
+        5
+      ],
+      "related_risks": [
+        "R24",
+        "R41"
+      ]
+    },
+    {
+      "rule_id": "M24",
+      "trigger_condition": "EPC contractor monthly progress < 90% of plan for 3 consecutive months",
+      "severity": "high",
+      "recommended_action": "Hold contractor performance review; mobilise additional contractor resources; escalate to contractor senior management",
+      "related_phase": [
+        4
+      ],
+      "related_risks": [
+        "R24"
+      ]
+    },
+    {
+      "rule_id": "M25",
+      "trigger_condition": "Project financing not closed by original FID date",
+      "severity": "critical",
+      "recommended_action": "Lender engagement meeting; address due diligence gaps; consider bridge financing or equity injection",
+      "related_phase": [
+        3
+      ],
+      "related_risks": [
+        "R29"
+      ]
+    },
+    {
+      "rule_id": "M26",
+      "trigger_condition": "Gasifier availability < 90% during first 6 months of operations",
+      "severity": "high",
+      "recommended_action": "Root cause analysis of unplanned shutdowns; review maintenance strategy; warranty claim evaluation",
+      "related_phase": [
+        6,
+        7
+      ],
+      "related_risks": [
+        "R47"
+      ]
+    },
+    {
+      "rule_id": "M27",
+      "trigger_condition": "Health index of project on-track items < 50% (more red items than green)",
+      "severity": "warning",
+      "recommended_action": "Risk review workshop; establish recovery plans for red items; realign resources",
+      "related_phase": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "related_risks": [
+        "R28",
+        "R24"
+      ]
+    },
+    {
+      "rule_id": "M28",
+      "trigger_condition": "ISCC/RSB certification pre-audit not scheduled within 3 months of first production date",
+      "severity": "high",
+      "recommended_action": "Accelerate certification evidence package completion; engage certification consultant; escalate to project sponsor",
+      "related_phase": [
+        3,
+        6
+      ],
+      "related_risks": [
+        "R56"
+      ]
+    },
+    {
+      "rule_id": "M29",
+      "trigger_condition": "Chain-of-custody documentation gaps identified in sustainability audit",
+      "severity": "warning",
+      "recommended_action": "Identify gaps in feedstock mass balance or GHG calculation records; remediate documentation before formal certification audit",
+      "related_phase": [
+        6,
+        7
+      ],
+      "related_risks": [
+        "R56"
+      ]
+    },
+    {
+      "rule_id": "M30",
+      "trigger_condition": "Wastewater discharge quality exceeds 80% of consent limit for any parameter",
+      "severity": "warning",
+      "recommended_action": "Investigate wastewater treatment plant performance; check for process upset or nutrient dosing issues; engage water treatment specialist",
+      "related_phase": [
+        6,
+        7
+      ],
+      "related_risks": [
+        "R57"
+      ]
+    },
+    {
+      "rule_id": "M31",
+      "trigger_condition": "Methanol synthesis catalyst PO not placed at least 10 months before scheduled commissioning",
+      "severity": "high",
+      "recommended_action": "Expedite catalyst procurement; engage alternative suppliers; assess impact on commissioning sequence",
+      "related_phase": [
+        4,
+        5
+      ],
+      "related_risks": [
+        "R58"
+      ]
+    },
+    {
+      "rule_id": "M32",
+      "trigger_condition": "Feedstock average moisture exceeds 28% over a 14-day rolling window",
+      "severity": "warning",
+      "recommended_action": "Notify feedstock manager; increase covered storage utilisation; blend with drier feedstock sources; check drying system performance",
+      "related_phase": [
+        1,
+        6,
+        7
+      ],
+      "related_risks": [
+        "R59"
+      ]
+    }
+  ],
+  "total_rules": 32,
+  "version": "1.1.0"
+}

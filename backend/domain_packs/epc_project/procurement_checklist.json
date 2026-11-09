@@ -1,0 +1,903 @@
+{
+  "pack": "epc_project",
+  "version": "1.0.0",
+  "purpose": "Procurement package checklist for EPC capital projects. Each package requires a full lifecycle: MR -> TBE -> PO -> VDR -> Stage Inspection -> FAT -> Expediting -> Packing -> Logistics -> Site Receipt.",
+  "total_packages": 32,
+  "packages": [
+    {
+      "package_name": "Reactor / Pressure Vessels (custom-fabricated)",
+      "criticality": "Critical",
+      "long_lead": true,
+      "lead_time_months": 12,
+      "vendor_qualification_criteria": "ASME U-stamp certified, 3+ similar reactor references, ISO 9001:2015",
+      "technical_documents_required": [
+        "Vessel GA drawing",
+        "Nozzle schedule",
+        "Material specification",
+        "WPS/PQR",
+        "Radiography map",
+        "Heat treatment chart"
+      ],
+      "inspection_requirements": "Stage-wise: raw material MPI, fit-up, root/layers, PWHT, hydrotest, final dimension check",
+      "documentation_required": [
+        "Material test certificates (MTCs)",
+        "NDT reports",
+        "Hydrotest certificate",
+        "PWHT charts",
+        "Third-party inspection (TPI) certificate"
+      ],
+      "acceptance_tests": "Hydrostatic test at 1.5x design pressure, pneumatic optional per code",
+      "expediting_milestones": [
+        "Raw material release",
+        "Shell rolling",
+        "Welding 25%",
+        "Welding 75%",
+        "NDT complete",
+        "Hydrotest",
+        "Dispatch"
+      ]
+    },
+    {
+      "package_name": "Columns / Towers (distillation, absorption, strippers)",
+      "criticality": "Critical",
+      "long_lead": true,
+      "lead_time_months": 11,
+      "vendor_qualification_criteria": "ASME U-stamp + National Board certified, experience with similar column L/D ratio and tray type",
+      "technical_documents_required": [
+        "Column GA drawing",
+        "Tray layout and manway schedule",
+        "Internal support details",
+        "Material specification",
+        "Wind/seismic calculation"
+      ],
+      "inspection_requirements": "Stage-wise: plate verification, cylindrical shell fit-up, longitudinal/circumferential weld NDT, tray ring flatness, hydrotest",
+      "documentation_required": [
+        "MTCs",
+        "Weld maps and NDT summary",
+        "Hydrotest certificate",
+        "Heat treatment records",
+        "Dimension check report"
+      ],
+      "acceptance_tests": "Hydrostatic test per ASME VIII, internal tray mock-up fit test per tray vendor",
+      "expediting_milestones": [
+        "Plate release",
+        "Shell rolling progress",
+        "Head forming",
+        "Internal fitting",
+        "Hydrotest",
+        "Dispatch"
+      ]
+    },
+    {
+      "package_name": "Centrifugal Compressors (process gas)",
+      "criticality": "Critical",
+      "long_lead": true,
+      "lead_time_months": 14,
+      "vendor_qualification_criteria": "API 617 certified, 5+ references for similar service, proven field reliability data",
+      "technical_documents_required": [
+        "Compressor cross-section",
+        "Performance curves",
+        "Lube/seal oil system P&ID",
+        "Baseplate drawing",
+        "Coupling spec",
+        "Auxiliary piping isometric"
+      ],
+      "inspection_requirements": "Stage-wise: casing hydrotest, rotor balance (low-speed + high-speed), impeller NDT, mechanical run test at vendor",
+      "documentation_required": [
+        "Performance test certificate",
+        "Mechanical run test data",
+        "Rotor balance report",
+        "NDT reports",
+        "Lube oil system test record"
+      ],
+      "acceptance_tests": "API 617 mechanical run test (4-hour full speed), performance test per ASME PTC-10",
+      "expediting_milestones": [
+        "Casting release",
+        "Rotor assembly",
+        "Casing closure",
+        "mechanical run test",
+        "Performance test",
+        "Dispatch"
+      ]
+    },
+    {
+      "package_name": "Steam Turbines (condensing / back-pressure)",
+      "criticality": "Critical",
+      "long_lead": true,
+      "lead_time_months": 13,
+      "vendor_qualification_criteria": "API 611/612 certified, references for similar steam conditions",
+      "technical_documents_required": [
+        "Turbine cross-section and GA",
+        "Steam consumption curves",
+        "Overspeed protection system design",
+        "Lube oil system",
+        "Baseplate drawing"
+      ],
+      "inspection_requirements": "Stage-wise: casing NDT, rotor balance, overspeed trip test, mechanical run test",
+      "documentation_required": [
+        "Mechanical run test report",
+        "Overspeed trip test report",
+        "Steam consumption test data",
+        "NDT reports"
+      ],
+      "acceptance_tests": "API 612 mechanical run test at rated speed, overspeed trip at 110%",
+      "expediting_milestones": [
+        "Casting",
+        "Rotor balancing",
+        "Casing NDT complete",
+        "Mechanical run test",
+        "Dispatch"
+      ]
+    },
+    {
+      "package_name": "Heat Exchangers (shell & tube, air-cooled)",
+      "criticality": "High",
+      "long_lead": true,
+      "lead_time_months": 8,
+      "vendor_qualification_criteria": "ASME U-stamp, TEMA class R or C as applicable, 3+ references",
+      "technical_documents_required": [
+        "Exchanger GA drawing",
+        "Tube sheet layout",
+        "Bundle drawing",
+        "Nozzle schedule",
+        "Material specifications"
+      ],
+      "inspection_requirements": "Stage-wise: tube sheet drilling pattern, baffle alignment, tube-to-tubesheet weld/expansion, shell NDT, hydrotest",
+      "documentation_required": [
+        "MTCs for tubes and shell",
+        "NDT reports",
+        "Hydrotest certificate",
+        "Tube expansion record"
+      ],
+      "acceptance_tests": "Hydrotest 1.5x design pressure on shell side and tube side independently",
+      "expediting_milestones": [
+        "Tube order placed",
+        "Tube sheet drilling",
+        "Bundling complete",
+        "Shell closure",
+        "Hydrotest",
+        "Dispatch"
+      ]
+    },
+    {
+      "package_name": "Process Pumps (centrifugal, API 610 / ISO 13709)",
+      "criticality": "High",
+      "long_lead": true,
+      "lead_time_months": 7,
+      "vendor_qualification_criteria": "API 610 or ISO 13709 for OH/BB pumps, 5+ references for similar process service",
+      "technical_documents_required": [
+        "Pump GA and cross-section",
+        "Performance curve",
+        "NPSH curve",
+        "Baseplate drawing",
+        "Seal system P&ID",
+        "Material specification"
+      ],
+      "inspection_requirements": "Stage-wise: casing hydrotest, impeller dynamic balance, mechanical run test, performance test witness",
+      "documentation_required": [
+        "Performance test certificate",
+        "Mechanical run test data",
+        "NPSH test data",
+        "Material certification"
+      ],
+      "acceptance_tests": "Performance test per API 610: head, capacity, efficiency, NPSH at rated and turndown points",
+      "expediting_milestones": [
+        "Casting release",
+        "Impeller balancing",
+        "Assembled",
+        "Test",
+        "Dispatch"
+      ]
+    },
+    {
+      "package_name": "Fired Heaters / Furnaces",
+      "criticality": "Critical",
+      "long_lead": true,
+      "lead_time_months": 12,
+      "vendor_qualification_criteria": "Licensed design per API 560, experience with similar duty and fuel type",
+      "technical_documents_required": [
+        "Heater GA",
+        "Radiant / convection coil drawings",
+        "Tube support details",
+        "Burner layout",
+        "Refractory design"
+      ],
+      "inspection_requirements": "Stage-wise: coil tube NDT (RT/PMI), weld NDT, coil hydrotest, refractory installation inspection, burner light-off test",
+      "documentation_required": [
+        "Tube MTCs",
+        "NDT reports",
+        "Coil hydrotest record",
+        "Refractory cure schedule",
+        "Burner test certificate"
+      ],
+      "acceptance_tests": "Shop hydrotest of coil assembly, burner flame pattern test per specification",
+      "expediting_milestones": [
+        "Coil material release",
+        "Coil welding 50%",
+        "Refractory installation",
+        "Hydrotest",
+        "Burner test",
+        "Dispatch"
+      ]
+    },
+    {
+      "package_name": "Compressors (reciprocating, process)",
+      "criticality": "Critical",
+      "long_lead": true,
+      "lead_time_months": 10,
+      "vendor_qualification_criteria": "API 618 certified, references for similar gas composition and pressure",
+      "technical_documents_required": [
+        "Compressor GA and cross-section",
+        "Cylinder/valve arrangement",
+        "Pulsation study report",
+        "Lube oil system P&ID",
+        "Baseplate drawing"
+      ],
+      "inspection_requirements": "Stage-wise: cylinder hydrotest, frame/crankshaft NDT, running gear clearance, mechanical run test",
+      "documentation_required": [
+        "Mechanical run test report",
+        "Pulsation study report",
+        "Valve test report",
+        "NDT reports"
+      ],
+      "acceptance_tests": "API 618 mechanical run test at rated speed, pulsation suppression verified",
+      "expediting_milestones": [
+        "Casting release",
+        "Crankshaft machining",
+        "Cylinder assembly",
+        "mechanical run test",
+        "Dispatch"
+      ]
+    },
+    {
+      "package_name": "Process Vessels (horizontal / vertical / knock-out drums)",
+      "criticality": "High",
+      "long_lead": false,
+      "lead_time_months": 5,
+      "vendor_qualification_criteria": "ASME U-stamp, similar vessel experience",
+      "technical_documents_required": [
+        "Vessel GA",
+        "Nozzle schedule",
+        "Support saddle / leg details",
+        "Material specification"
+      ],
+      "inspection_requirements": "Shell fit-up and weld NDT, nozzle reinforcement, hydrotest, internal surface prep",
+      "documentation_required": [
+        "MTCs",
+        "NDT reports",
+        "Hydrotest certificate"
+      ],
+      "acceptance_tests": "Hydrostatic test at 1.5x design pressure",
+      "expediting_milestones": [
+        "Plate release",
+        "Welding complete",
+        "NDT complete",
+        "Hydrotest",
+        "Dispatch"
+      ]
+    },
+    {
+      "package_name": "Tank Farm (storage tanks \u2014 API 650 / API 620)",
+      "criticality": "High",
+      "long_lead": true,
+      "lead_time_months": 8,
+      "vendor_qualification_criteria": "API 650 / 620 certified fabricator, tank construction experience",
+      "technical_documents_required": [
+        "Tank GA and plan view",
+        "Shell plate cutting plan",
+        "Roof structure design",
+        "Bottom annular plate details",
+        "Foundation load data"
+      ],
+      "inspection_requirements": "Stage-wise: bottom plate weld vacuum test, shell plate fit-up/NDT, roof weld, hydrostatic test per API 650",
+      "documentation_required": [
+        "MTCs for all plates",
+        "NDT reports (RT/UT/MT)",
+        "Hydrotest record",
+        "Tank settlement monitoring data"
+      ],
+      "acceptance_tests": "API 650 acceptance: hydrostatic test full height, roof floating test (if FR), vacuum box test for bottom",
+      "expediting_milestones": [
+        "Plate release",
+        "Bottom plate laying",
+        "Shell ring assembly",
+        "Roof assembly",
+        "Hydrotest",
+        "Dispatch"
+      ]
+    },
+    {
+      "package_name": "Packaged Boilers (steam generation)",
+      "criticality": "High",
+      "long_lead": true,
+      "lead_time_months": 9,
+      "vendor_qualification_criteria": "IBR / ASME S-stamp, proven experience for similar capacity/fuel",
+      "technical_documents_required": [
+        "Boiler GA and tube layout",
+        "Steam/water circuit P&ID",
+        "Burner management system logic",
+        "Stack design",
+        "Instrumentation list"
+      ],
+      "inspection_requirements": "Stage-wise: tube NDT, drum weld NDT, boiler hydrotest, refractory installation, burner light-off",
+      "documentation_required": [
+        "IBR / ASME certs",
+        "Hydrotest certificate",
+        "Burner test report",
+        "Refractory certificate"
+      ],
+      "acceptance_tests": "Hydraulic test per code, boiler efficiency test, emission compliance test",
+      "expediting_milestones": [
+        "Drum fabrication",
+        "Tubing 50%",
+        "Hydrotest",
+        "Light-off test",
+        "Dispatch"
+      ]
+    },
+    {
+      "package_name": "Cooling Towers (induced draft / natural draft)",
+      "criticality": "High",
+      "long_lead": true,
+      "lead_time_months": 7,
+      "vendor_qualification_criteria": "CTI (Cooling Technology Institute) certified, references for similar thermal duty",
+      "technical_documents_required": [
+        "Tower GA and fill arrangement",
+        "Fan/drive arrangement drawing",
+        "Water distribution system",
+        "Basin details",
+        "Structural design calcs"
+      ],
+      "inspection_requirements": "Stage-wise: basin water-tightness, fill material inspection, fan assembly and balance, water distribution test",
+      "documentation_required": [
+        "CTI performance test cert",
+        "Fan balance report",
+        "Fill material quality cert",
+        "Motor test report"
+      ],
+      "acceptance_tests": "CTI STD-201 performance test: approach to wet bulb, range, water flow, fan power",
+      "expediting_milestones": [
+        "Basin construction",
+        "Fill installation",
+        "Fan assembly",
+        "Water flow test",
+        "Dispatch"
+      ]
+    },
+    {
+      "package_name": "DCS / SIS / SCADA System",
+      "criticality": "Critical",
+      "long_lead": true,
+      "lead_time_months": 8,
+      "vendor_qualification_criteria": "IEC 61508 / 61511 certified for SIS, proven DCS platform with > 5 references in similar process industry",
+      "technical_documents_required": [
+        "System architecture",
+        "IO list and signal schedule",
+        "Cabinetry / marshalling drawings",
+        "Network topology",
+        "UPS capacity calculation"
+      ],
+      "inspection_requirements": "Stage-wise: cabinet assembly, wiring check, IO module test, integration test (FAT), hardware SAT mockup",
+      "documentation_required": [
+        "FAT procedure and report",
+        "IO mapping database",
+        "System software load and license",
+        "Spare parts list"
+      ],
+      "acceptance_tests": "Factory Acceptance Test (FAT): IO mapping, logic simulation, alarm/ trip testing, HMI display verification, failover testing",
+      "expediting_milestones": [
+        "Hardware BOM confirmed",
+        "Cabinetry assembly",
+        "IO module test",
+        "FAT witness",
+        "Dispatch"
+      ]
+    },
+    {
+      "package_name": "HV Switchgear (11kV / 33kV / 132kV)",
+      "criticality": "Critical",
+      "long_lead": true,
+      "lead_time_months": 6,
+      "vendor_qualification_criteria": "IEC 62271 certified, type-tested panels, references for similar voltage class",
+      "technical_documents_required": [
+        "Panel GA and SLD",
+        "Protection relay scheme",
+        "Busbar design and ampacity",
+        "Cable entry arrangement",
+        "Heating/ventilation design"
+      ],
+      "inspection_requirements": "Stage-wise: busbar NDT, panel assembly, wiring check, high-pot test, primary/secondary injection test",
+      "documentation_required": [
+        "Type test certificates",
+        "High-pot test report",
+        "Relay settings and test data",
+        "Wiring diagram set"
+      ],
+      "acceptance_tests": "IEC 62271-200 routine tests: dielectric, main circuit resistance, mechanical operation, control/auxiliary circuit tests",
+      "expediting_milestones": [
+        "Panel fabrication",
+        "Busbar assembly",
+        "Wiring complete",
+        "Routine test",
+        "Dispatch"
+      ]
+    },
+    {
+      "package_name": "LV / MCC Panels (440V motor control centres)",
+      "criticality": "High",
+      "long_lead": false,
+      "lead_time_months": 4,
+      "vendor_qualification_criteria": "IS/IEC 61439 certified, references for similar industrial MCC",
+      "technical_documents_required": [
+        "MCC GA and SLD",
+        "Feeder schedule",
+        "Busbar rating and layout",
+        "Cable entry detail",
+        "PLC interface schedule"
+      ],
+      "inspection_requirements": "Visual check, mechanical operation of all cubicles, wiring continuity, high-pot test, protection relay test",
+      "documentation_required": [
+        "Panel drawings as-built",
+        "Relay test reports",
+        "MCC busbar temperature rise test report"
+      ],
+      "acceptance_tests": "IS/IEC 61439 routine and type tests, temperature rise test for main busbar",
+      "expediting_milestones": [
+        "Panel frame ready",
+        "Busbar assembly",
+        "Wiring complete",
+        "Test",
+        "Dispatch"
+      ]
+    },
+    {
+      "package_name": "UPS / Battery Systems (critical power)",
+      "criticality": "Critical",
+      "long_lead": true,
+      "lead_time_months": 5,
+      "vendor_qualification_criteria": "IEC 62040 certified, references for similar capacity and autonomy time",
+      "technical_documents_required": [
+        "UPS single-line block diagram",
+        "Battery bank layout and rack design",
+        "Cable schedule",
+        "Thermal ventilation design"
+      ],
+      "inspection_requirements": "Stage-wise: cabinet assembly, battery cell capacity test, UPS inverter / rectifier test, load bank test",
+      "documentation_required": [
+        "FAT report",
+        "Battery capacity test certificate",
+        "UPS performance test data"
+      ],
+      "acceptance_tests": "Load bank test at 100% rated load for 30 min, battery autonomy test per spec, transfer test (static bypass + manual bypass)",
+      "expediting_milestones": [
+        "UPS cabinet assembly",
+        "Battery arrival",
+        "Load bank test",
+        "Dispatch"
+      ]
+    },
+    {
+      "package_name": "Transformers (power and distribution)",
+      "criticality": "High",
+      "long_lead": true,
+      "lead_time_months": 6,
+      "vendor_qualification_criteria": "IEC 60076 / IS 2026 certified, references for similar MVA rating",
+      "technical_documents_required": [
+        "Transformer GA and core/coil drawing",
+        "Cooling system design",
+        "Tap changer details",
+        "Protection / NGR design"
+      ],
+      "inspection_requirements": "Stage-wise: core/coil assembly, insulation resistance, turns ratio, winding resistance, power factor, impulse test, oil dielectric",
+      "documentation_required": [
+        "Type test certificate",
+        "Routine test report",
+        "Oil test certificate",
+        "Pressure/vacuum test record"
+      ],
+      "acceptance_tests": "IEC 60076 routine tests: winding resistance, voltage ratio, short-circuit impedance, load loss, no-load loss, induced voltage, DS, PD, impulse if specified",
+      "expediting_milestones": [
+        "Core/coil assembly",
+        "Tank fabrication",
+        "Oil filling and test",
+        "Routine test",
+        "Dispatch"
+      ]
+    },
+    {
+      "package_name": "Process Analyzers (online GC, IR, O2, pH, density)",
+      "criticality": "High",
+      "long_lead": true,
+      "lead_time_months": 5,
+      "vendor_qualification_criteria": "Proven experience in similar process media, sample conditioning system expertise",
+      "technical_documents_required": [
+        "Analyzer GA and sample flow diagram",
+        "Sample conditioning system design",
+        "Housing / shelter drawing",
+        "DCS interface requirements"
+      ],
+      "inspection_requirements": "Stage-wise: analyzer bench test, sample conditioning test, calibration validation, integration test with DCS simulation",
+      "documentation_required": [
+        "Factory calibration certificate",
+        "Sample conditioning test report",
+        "Analyser performance data",
+        "FAT report"
+      ],
+      "acceptance_tests": "FAT: calibration linearity, repeatability, response time, drift, sample conditioning performance",
+      "expediting_milestones": [
+        "Analyzer assembly",
+        "Calibration test",
+        "FAT witness",
+        "Dispatch"
+      ]
+    },
+    {
+      "package_name": "Control / Isolation Valves (large-bore, critical service)",
+      "criticality": "Critical",
+      "long_lead": true,
+      "lead_time_months": 6,
+      "vendor_qualification_criteria": "IEC 60534 / API 6D certified, references for similar pressure class and media",
+      "technical_documents_required": [
+        "Valve GA and cross-section",
+        "Actuator specification and sizing",
+        "Positioner type",
+        "Material certificate test plan"
+      ],
+      "inspection_requirements": "Stage-wise: body casting NDT, seat leakage test, actuator stroke test, positioner calibration, hydrostatic / closure test",
+      "documentation_required": [
+        "Valve body MTCs",
+        "Seat leakage test certificate",
+        "Actuator test report",
+        "Positioner calibration record"
+      ],
+      "acceptance_tests": "API 598 shell test at 1.5x rating, seat leakage test per class (Class IV/VI per FCI 70-2), actuator full stroke cycle test",
+      "expediting_milestones": [
+        "Casting release",
+        "Machining complete",
+        "Assembly",
+        "Test",
+        "Dispatch"
+      ]
+    },
+    {
+      "package_name": "Pipe / Fittings / Flanges (bulk material from MTO)",
+      "criticality": "High",
+      "long_lead": false,
+      "lead_time_months": 3,
+      "vendor_qualification_criteria": "Approved pipe mill per project AVL, material certs to relevant ASTM/ASME specs",
+      "technical_documents_required": [
+        "Pipe MTO / BOQ (sizes, schedules, material grades)",
+        "Flange rating schedule",
+        "Fitting types and quantities"
+      ],
+      "inspection_requirements": "Mill test certificate (MTC) review, dimensional check per batch, PMI on alloy pipe, hydrotest cert review",
+      "documentation_required": [
+        "MTCs for all lots",
+        "PMI reports (for alloy)",
+        "Dimensional inspection reports"
+      ],
+      "acceptance_tests": "MTC verification + dimensional + PMI (for alloy lines), visual inspection for corrosion and marking",
+      "expediting_milestones": [
+        "Mill production schedule confirmed",
+        "Pipe rolling started",
+        "MTCs issued",
+        "Dispatch from mill"
+      ]
+    },
+    {
+      "package_name": "Structural Steel (columns, beams, pipe racks, platforms)",
+      "criticality": "High",
+      "long_lead": false,
+      "lead_time_months": 4,
+      "vendor_qualification_criteria": "ISO 3834 welding certified, 3+ projects of similar steel tonnage",
+      "technical_documents_required": [
+        "Steel fabrication drawings",
+        "Connection details",
+        "Base plate details",
+        "Bolt schedule",
+        "Paint/coating spec"
+      ],
+      "inspection_requirements": "Stage-wise: material receipt, fit-up and weld NDT (MPI/UT), surface prep and painting, dimensional check",
+      "documentation_required": [
+        "MTCs for plates and sections",
+        "NDT reports",
+        "Paint/coating inspection report",
+        "Fabrication dimensional record"
+      ],
+      "acceptance_tests": "Dimensional verification per fabrication drawings, bolt torque verification on sample, coating thickness measurement",
+      "expediting_milestones": [
+        "Material release",
+        "Cutting and fit-up 50%",
+        "Welding complete",
+        "Coating",
+        "Dispatch"
+      ]
+    },
+    {
+      "package_name": "Instrument Cables / Trays / Conduit (Bulk)",
+      "criticality": "High",
+      "long_lead": false,
+      "lead_time_months": 2,
+      "vendor_qualification_criteria": "IS/IEC 60332 / 60754 certified cable supplier, type test certificates for all cable types",
+      "technical_documents_required": [
+        "Cable schedule with types and lengths",
+        "Cable tray layout (route, fill, support)",
+        "Conduit schedule"
+      ],
+      "inspection_requirements": "Visual check of cable drums, continuity test, insulation resistance test on sample, tray fit check",
+      "documentation_required": [
+        "Cable MTCs",
+        "Tray fabrication MTCs",
+        "Sample test certificate"
+      ],
+      "acceptance_tests": "Continuity + insulation resistance test, flame test cert per specification",
+      "expediting_milestones": [
+        "Cable production run",
+        "Sample test",
+        "Dispatch"
+      ]
+    },
+    {
+      "package_name": "Switchgear / Transformers / UPS Packages",
+      "criticality": "Critical",
+      "long_lead": true,
+      "lead_time_months": 7,
+      "vendor_qualification_criteria": "IEC 62271 / IEC 60076 certified, type-tested assembly, vendor with reference installations in similar process plants",
+      "technical_documents_required": [
+        "SLD for complete electrical distribution",
+        "Switchgear panel GA",
+        "Transformer design and GA",
+        "UPS system block diagram",
+        "Cable schedule interface"
+      ],
+      "inspection_requirements": "Stage-wise: panel fabrication, wiring, HV test, protection relay test, transformer tank and core test",
+      "documentation_required": [
+        "Routine test reports",
+        "Type test certificates",
+        "Relay setting files",
+        "Arrangement and connection drawings"
+      ],
+      "acceptance_tests": "Full switchgear routine test per IEC 62271, transformer per IEC 60076, UPS load bank test",
+      "expediting_milestones": [
+        "Panel fabrication",
+        "Transformer tanking",
+        "UPS assembly",
+        "System integration test",
+        "Dispatch"
+      ]
+    },
+    {
+      "package_name": "DCS / Safety System Software and Integration",
+      "criticality": "Critical",
+      "long_lead": false,
+      "lead_time_months": 3,
+      "vendor_qualification_criteria": "IEC 61508 certified functional safety engineers, experience with system version and platform",
+      "technical_documents_required": [
+        "Configuration database",
+        "Logic / cause & effect matrix",
+        "HMI graphics design spec",
+        "Alarm management philosophy"
+      ],
+      "inspection_requirements": "FAT: IO mapping, logic simulation, alarm and trip test, HMI graphics verification, failover and redundancy test",
+      "documentation_required": [
+        "FAT and SAT procedures",
+        "Software load file",
+        "Configuration backup",
+        "Functional design specification (FDS)"
+      ],
+      "acceptance_tests": "FAT + SAT: full logic simulation against cause & effect, HMI graphics walkthrough, alarm/event logging test, failover test",
+      "expediting_milestones": [
+        "Configuration DB complete",
+        "HMI graphics ready",
+        "FAT execution",
+        "Software load ready for SAT"
+      ]
+    },
+    {
+      "package_name": "Catalysts and Chemicals (initial fill)",
+      "criticality": "High",
+      "long_lead": true,
+      "lead_time_months": 6,
+      "vendor_qualification_criteria": "Proven catalyst supplier with reference plant performance data, ISO certified manufacturing",
+      "technical_documents_required": [
+        "Catalyst data sheet and MSDS",
+        "Loading plan and bulk density calculation",
+        "Chemical consumption rate and storage requirements"
+      ],
+      "inspection_requirements": "Bulk density check per drum, visual inspection, sample analysis per spec, shelf-life verification",
+      "documentation_required": [
+        "Certificate of analysis (CoA)",
+        "MSDS",
+        "Loading procedure from supplier",
+        "Preservation/ storage guidelines"
+      ],
+      "acceptance_tests": "Sample analysis per purchase spec (activity, selectivity, crush strength, attrition loss)",
+      "expediting_milestones": [
+        "Production",
+        "Sample analysis",
+        "Packing",
+        "Dispatch"
+      ]
+    },
+    {
+      "package_name": "HV / LV Power Cables (bulk from route length)",
+      "criticality": "High",
+      "long_lead": false,
+      "lead_time_months": 3,
+      "vendor_qualification_criteria": "IS/IEC certified cable manufacturer, type test certificates for each cable type",
+      "technical_documents_required": [
+        "Cable schedule from cable routing",
+        "Cable sizing and voltage drop calculations",
+        "Cable routing SLDs"
+      ],
+      "inspection_requirements": "Drum visual, conductor resistance, insulation resistance, HV test per cable type sample, sequential length check",
+      "documentation_required": [
+        "Cable MTCs per drum",
+        "HV test certificate",
+        "Flame test certificate"
+      ],
+      "acceptance_tests": "Dielectric test, conductor resistance per IEC 60228, insulation resistance test per IEC 60502",
+      "expediting_milestones": [
+        "Production confirmed",
+        "First-off test",
+        "Dispatch batch 1",
+        "Final dispatch"
+      ]
+    },
+    {
+      "package_name": "Tubing, Fittings and Instrumentation Valves (bulk)",
+      "criticality": "Medium",
+      "long_lead": false,
+      "lead_time_months": 2,
+      "vendor_qualification_criteria": "Approved manufacturer per project AVL, material certs to ASTM A269/A312 (SS) or relevant spec",
+      "technical_documents_required": [
+        "Tubing schedule (size, material, quantity per P&ID)",
+        "Fitting types (compression, bite-type)",
+        "Instrument valve schedule"
+      ],
+      "inspection_requirements": "Visual and dimensional check per lot, MTC verification, pressure test sample",
+      "documentation_required": [
+        "MTCs for tubing and fittings",
+        "Pressure test cert sample"
+      ],
+      "acceptance_tests": "Visual + dimensional + MTC verification per lot",
+      "expediting_milestones": [
+        "Production start",
+        "Sample test",
+        "Dispatch"
+      ]
+    },
+    {
+      "package_name": "Electrical Heat Tracing Systems",
+      "criticality": "Medium",
+      "long_lead": false,
+      "lead_time_months": 3,
+      "vendor_qualification_criteria": "IEC 60079 certified for hazardous area tracing, 3+ reference installations",
+      "technical_documents_required": [
+        "Heat tracing circuit schedule",
+        "Cable layout drawing",
+        "Power distribution SLD",
+        "Temperature control philosophy"
+      ],
+      "inspection_requirements": "Visual check, insulation resistance test per circuit, continuity check, control panel assembly check",
+      "documentation_required": [
+        "Cable test certificates",
+        "Panel test report",
+        "Design heat loss calculations",
+        "Thermostat calibration certs"
+      ],
+      "acceptance_tests": "Insulation resistance test after installation, circuit continuity, temperature controller calibration check",
+      "expediting_milestones": [
+        "Cable production",
+        "Panel assembly",
+        "Test",
+        "Dispatch"
+      ]
+    },
+    {
+      "package_name": "Fire Protection System (pumps, hydrants, spray, foam)",
+      "criticality": "Critical",
+      "long_lead": true,
+      "lead_time_months": 6,
+      "vendor_qualification_criteria": "UL / FM approved for fire pumps and deluge valves, NFPA 20/13/15 compliance",
+      "technical_documents_required": [
+        "Fire water supply P&ID",
+        "Hydraulic calculation report",
+        "Pump curve and GA",
+        "Deluge valve schematic",
+        "Nozzle layout and demand calculation"
+      ],
+      "inspection_requirements": "Stage-wise: fire pump baseplate/foundation, pump mechanical run test, deluge valve function test, spray nozzle pattern test",
+      "documentation_required": [
+        "Pump test certificate (UL/FM)",
+        "Deluge valve test cert",
+        "Hydraulic calculation report",
+        "Nozzle certs"
+      ],
+      "acceptance_tests": "Fire pump: NFPA 20 full performance test (flow, pressure, NPSH). Deluge/sprinkler: full flow test of each zone",
+      "expediting_milestones": [
+        "Pump assembly",
+        "Deluge valve assembly",
+        "Pump test",
+        "Deluge test",
+        "Dispatch"
+      ]
+    },
+    {
+      "package_name": "Material Handling / Packaged Units (conveyors, elevators, feeders)",
+      "criticality": "High",
+      "long_lead": true,
+      "lead_time_months": 6,
+      "vendor_qualification_criteria": "Proven manufacturer for similar bulk material and capacity, conveyor/powder handling design expertise",
+      "technical_documents_required": [
+        "Conveyor GA and profile",
+        "Drive arrangement drawing",
+        "Take-up arrangement",
+        "Chute design",
+        "Support steel drawing"
+      ],
+      "inspection_requirements": "Stage-wise: structure fabrication, roller / idler assembly, belt splice test, drive alignment, run test",
+      "documentation_required": [
+        "Conveyor system design calculations",
+        "Motor and drive test certificates",
+        "Belt splice report",
+        "Structure MTCs"
+      ],
+      "acceptance_tests": "No-load run test (4 hours), load run test at 80% capacity for 1 hour, belt alignment and tracking test",
+      "expediting_milestones": [
+        "Structure fabrication",
+        "Drive assembly",
+        "Belt arrival",
+        "No-load test",
+        "Dispatch"
+      ]
+    },
+    {
+      "package_name": "Specialty Alloy / Clad Piping (stainless steel, duplex, hastelloy)",
+      "criticality": "High",
+      "long_lead": true,
+      "lead_time_months": 5,
+      "vendor_qualification_criteria": "Approved pipe and fitting manufacturer with certified PMI capability and alloy material traceability system",
+      "technical_documents_required": [
+        "Pipe specification (alloy grade, size, schedule)",
+        "PMI inspection requirements",
+        "Weld filler metal selection per WPS",
+        "MTR requirements"
+      ],
+      "inspection_requirements": "100% PMI on all material, dimensional check, ferrite measurement (for duplex), hydrotest per pipe spec",
+      "documentation_required": [
+        "MTCs with full trace",
+        "PMI chemical analysis report for each lot",
+        "Ferrite measurement report (duplex)"
+      ],
+      "acceptance_tests": "100% PMI verification, dimensional check per ASTM, pressure test for applicable sizes",
+      "expediting_milestones": [
+        "Mill production",
+        "PMI inspection",
+        "Dispatch"
+      ]
+    },
+    {
+      "package_name": "E&I Construction Consumables (cable ties, lugs, glands, markers)",
+      "criticality": "Medium",
+      "long_lead": false,
+      "lead_time_months": 1,
+      "vendor_qualification_criteria": "Approved vendor per project AVL for electrical construction consumables",
+      "technical_documents_required": [
+        "Material take-off for termination accessories",
+        "Gland schedule per cable type",
+        "Cable ferrule/marker schedule"
+      ],
+      "inspection_requirements": "Visual check, sample continuity of lugs and glands, marking legibility test",
+      "documentation_required": [
+        "Material test certificate if applicable",
+        "Gland IP rating cert"
+      ],
+      "acceptance_tests": "Sample installation test for glands and lugs on representative cable",
+      "expediting_milestones": [
+        "Order confirmed",
+        "Dispatch"
+      ]
+    }
+  ]
+}

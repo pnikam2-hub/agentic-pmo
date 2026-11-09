@@ -1,0 +1,280 @@
+{
+  "pack": "buildings_realestate",
+  "kpis": [
+    {
+      "kpi_id": "KPI01",
+      "name": "Schedule Performance Index (SPI)",
+      "description": "Measures schedule efficiency of earned value against planned value across the tower programme, detecting early drift in permitting, procurement, and floor-cycle phases.",
+      "unit": "ratio",
+      "frequency": "Weekly",
+      "target": "SPI >= 1.0",
+      "formula": "SPI = EV / PV",
+      "source": "project controls system",
+      "related_phase": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ]
+    },
+    {
+      "kpi_id": "KPI02",
+      "name": "Cost Performance Index (CPI)",
+      "description": "Measures cost efficiency of earned value against actual cost, highlighting erosion from ground conditions, escalation, and claims.",
+      "unit": "ratio",
+      "frequency": "Monthly",
+      "target": "CPI >= 0.98",
+      "formula": "CPI = EV / AC",
+      "source": "project controls system / cost ledger",
+      "related_phase": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ]
+    },
+    {
+      "kpi_id": "KPI03",
+      "name": "Critical Path Float Burn Rate",
+      "description": "Tracks consumption of total float on the critical path (typically through permitting, long-lead procurement, and substructure) week over week.",
+      "unit": "days consumed / week",
+      "frequency": "Weekly",
+      "target": "Float burn <= 0.5 days/week on critical path",
+      "formula": "Float Burn = (Previous Float - Current Float) / Elapsed Weeks",
+      "source": "project controls system",
+      "related_phase": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "kpi_id": "KPI04",
+      "name": "Lost Time Injury Frequency Rate (LTIR)",
+      "description": "Number of lost-time injuries per million hours worked, the headline safety indicator for the high-risk high-rise construction environment.",
+      "unit": "per million hours",
+      "frequency": "Monthly",
+      "target": "LTIR <= 0.2",
+      "formula": "LTIR = (Lost Time Injuries x 1,000,000) / Total Hours Worked",
+      "source": "site HSE records",
+      "related_phase": [
+        5,
+        6,
+        7
+      ]
+    },
+    {
+      "kpi_id": "KPI05",
+      "name": "Near-Miss Reporting Rate",
+      "description": "Volume of near-miss reports per 100,000 hours; a healthy rising rate indicates strong reporting culture, a falling rate signals under-reporting risk.",
+      "unit": "reports per 100k hours",
+      "frequency": "Weekly",
+      "target": ">= 8 reports per 100k hours with upward trend",
+      "formula": "Near-Miss Rate = (Near-Miss Reports x 100,000) / Hours Worked",
+      "source": "site HSE records",
+      "related_phase": [
+        5,
+        6
+      ]
+    },
+    {
+      "kpi_id": "KPI06",
+      "name": "Working-at-Height Compliance Audit Score",
+      "description": "Percentage compliance from weekly audits of edge protection, harness use, and rescue readiness across active tower floors and facade zones.",
+      "unit": "%",
+      "frequency": "Weekly",
+      "target": ">= 95% compliance",
+      "formula": "Compliance Score = (Compliant Audit Items / Total Audit Items) x 100",
+      "source": "site HSE records / audit app",
+      "related_phase": [
+        5,
+        6
+      ]
+    },
+    {
+      "kpi_id": "KPI07",
+      "name": "Non-Conformance Report (NCR) Rate",
+      "description": "NCRs raised per 1,000 installed units or per pour across structural, facade, and MEP scopes; tracks quality system health.",
+      "unit": "NCRs per 1,000 units",
+      "frequency": "Weekly",
+      "target": "<= 5 NCRs per 1,000 units with closure <= 14 days",
+      "formula": "NCR Rate = (NCRs Raised / Units Installed) x 1,000",
+      "source": "quality management system",
+      "related_phase": [
+        5,
+        6,
+        7
+      ]
+    },
+    {
+      "kpi_id": "KPI08",
+      "name": "Punch List Closeout Rate",
+      "description": "Percentage of punch list items closed per week against raising rate during fit-out and handover; detects the snagging snowball before practical completion.",
+      "unit": "%",
+      "frequency": "Weekly",
+      "target": "Closeout rate >= raising rate; >= 90% closed before PC walk",
+      "formula": "Closeout % = (Items Closed / Items Raised) x 100",
+      "source": "snagging platform",
+      "related_phase": [
+        6,
+        7
+      ]
+    },
+    {
+      "kpi_id": "KPI09",
+      "name": "Facade Air/Water Test Pass Rate",
+      "description": "Percentage of tested curtain wall and cladding zones passing air permeability and water spray criteria first time.",
+      "unit": "%",
+      "frequency": "Weekly",
+      "target": ">= 95% first-time pass",
+      "formula": "Pass Rate = (Zones Passed First Time / Zones Tested) x 100",
+      "source": "test house reports / site records",
+      "related_phase": [
+        6
+      ]
+    },
+    {
+      "kpi_id": "KPI10",
+      "name": "Core Jump Cycle Time",
+      "description": "Average elapsed days per self-climbing core formwork jump; the pacing metric for vertical construction of the tower core.",
+      "unit": "days per jump",
+      "frequency": "Weekly",
+      "target": "<= planned cycle (e.g., 3-4 days per jump)",
+      "formula": "Average Jump Time = Total Jump Duration / Number of Jumps Completed",
+      "source": "site records / daily diary",
+      "related_phase": [
+        5,
+        6
+      ]
+    },
+    {
+      "kpi_id": "KPI11",
+      "name": "Slab Cycle Time (Days per Floor)",
+      "description": "Elapsed days per typical post-tensioned floor from form to strip; the dominant productivity driver of superstructure duration.",
+      "unit": "days per floor",
+      "frequency": "Weekly",
+      "target": "<= target floor cycle (e.g., 5-6 days)",
+      "formula": "Slab Cycle = Sum(Floor Completion Durations) / Floors Completed",
+      "source": "site records / project controls system",
+      "related_phase": [
+        5,
+        6
+      ]
+    },
+    {
+      "kpi_id": "KPI12",
+      "name": "Tower Crane Utilization",
+      "description": "Percentage of available crane hook-hours productively used versus idle, weather-stopped, or maintenance time; exposes logistics bottlenecks.",
+      "unit": "%",
+      "frequency": "Daily",
+      "target": ">= 65% productive utilization",
+      "formula": "Utilization % = (Productive Hook Hours / Available Hook Hours) x 100",
+      "source": "crane telemetry / site records",
+      "related_phase": [
+        5,
+        6
+      ]
+    },
+    {
+      "kpi_id": "KPI13",
+      "name": "Concrete Pour Volume vs Plan",
+      "description": "Cumulative cubic metres placed against planned volume curve, validating supply chain reliability and cycle adherence for the concrete frame.",
+      "unit": "m3 (% of plan)",
+      "frequency": "Weekly",
+      "target": "Cumulative actual >= 95% of planned curve",
+      "formula": "Pour Variance % = (Actual Volume Placed / Planned Volume) x 100",
+      "source": "site records / batch tickets",
+      "related_phase": [
+        5,
+        6
+      ]
+    },
+    {
+      "kpi_id": "KPI14",
+      "name": "Change Order Backlog Value",
+      "description": "Total value of submitted-but-unresolved change orders; growing backlog signals commercial instability and unquantified programme risk.",
+      "unit": "currency value",
+      "frequency": "Monthly",
+      "target": "Backlog <= 2% of contract value and falling",
+      "formula": "Backlog = Sum(Unresolved Change Order Values)",
+      "source": "commercial system / change register",
+      "related_phase": [
+        3,
+        4,
+        5,
+        6,
+        7
+      ]
+    },
+    {
+      "kpi_id": "KPI15",
+      "name": "Subcontractor Claims Outstanding",
+      "description": "Count and value of open subcontractor claims awaiting resolution; tracks commercial friction and litigation exposure.",
+      "unit": "count / currency value",
+      "frequency": "Monthly",
+      "target": "Zero claims older than 60 days unresolved",
+      "formula": "Outstanding Claims = Count(Open Claims) and Sum(Open Claim Values)",
+      "source": "commercial system",
+      "related_phase": [
+        4,
+        5,
+        6,
+        7
+      ]
+    },
+    {
+      "kpi_id": "KPI16",
+      "name": "Snagging Closure Rate (Handover Readiness)",
+      "description": "Ratio of closed snags to total open snags in the final quarter, weighted by category severity; predicts practical completion date reliability.",
+      "unit": "%",
+      "frequency": "Weekly",
+      "target": "Closure rate >= 85% with zero open Category A at PC",
+      "formula": "Closure Rate = (Closed Snags / Total Raised Snags) x 100",
+      "source": "snagging platform",
+      "related_phase": [
+        6,
+        7
+      ]
+    },
+    {
+      "kpi_id": "KPI17",
+      "name": "BREEAM/LEED Pre-Assessment Score Tracking",
+      "description": "Current projected certification score against target rating, tracking credit evidence submission and design-stage score erosion.",
+      "unit": "% of target credits",
+      "frequency": "Monthly",
+      "target": "Projected score >= target rating + 5% buffer",
+      "formula": "Score Attainment % = (Secured + Likely Credits / Credits Required for Target) x 100",
+      "source": "sustainability assessor reports",
+      "related_phase": [
+        2,
+        3,
+        6,
+        7
+      ]
+    },
+    {
+      "kpi_id": "KPI18",
+      "name": "Elevator Commissioning Milestones Achieved",
+      "description": "Percentage of elevator/escalator commissioning milestones (installation, functional, safety, witness tests) achieved on schedule; protects the classic end-game bottleneck.",
+      "unit": "%",
+      "frequency": "Weekly",
+      "target": "100% of milestones on or ahead of schedule",
+      "formula": "Milestone Achievement % = (Milestones Achieved On Time / Milestones Due) x 100",
+      "source": "vendor / lift specialist reports",
+      "related_phase": [
+        6,
+        7
+      ]
+    }
+  ],
+  "total_kpis": 18
+}

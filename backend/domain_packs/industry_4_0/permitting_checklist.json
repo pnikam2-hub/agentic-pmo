@@ -1,0 +1,97 @@
+{
+  "pack": "industry_4_0",
+  "version": "1.0.1",
+  "purpose": "Permitting, compliance, and regulatory checklist for Industry 4.0 smart manufacturing engagements. Covers data governance, OT cybersecurity, industrial safety, and IT/OT convergence approvals.",
+  "permits": [
+    {
+      "permit_name": "OT Network Segmentation & Firewall Rule Approval",
+      "why_needed": "Changes to OT network topology (VLAN segmentation, DMZ creation, firewall rules) require formal approval from the OT change control board and plant management to prevent production disruption",
+      "responsible_role": "OT Engineering Manager / Plant Manager",
+      "required_inputs": ["Solution architecture network topology diagram", "Firewall rule set with zone/conduit mapping", "Impact assessment for each affected production line"],
+      "phase": 2,
+      "dependencies": ["Solution architecture design approved by ARB"],
+      "evidence_required": "Signed OT change control board approval; firewall rule set baselined in change management system"
+    },
+    {
+      "permit_name": "Edge Device Installation Permit (Production Area)",
+      "why_needed": "Installation of edge gateways, sensors, cameras, and compute nodes in production areas requires area owner approval and PTW coordination for installation windows",
+      "responsible_role": "Plant Operations Manager / Area Owner",
+      "required_inputs": ["Edge device bill of materials with mounting locations", "Installation schedule with production window requests", "HSE risk assessment for installation work"],
+      "phase": 4,
+      "dependencies": ["Procurement completed; devices received and inspected", "Installation procedure reviewed with operations"],
+      "evidence_required": "Signed area owner approval; PTW issued for each installation window"
+    },
+    {
+      "permit_name": "IIoT Data Collection and Privacy Consent",
+      "why_needed": "Collection of machine, process, and operator data may be subject to data privacy regulations (GDPR, local equivalents), works council agreements, and client data governance policies",
+      "responsible_role": "Data Protection Officer / Legal / HR",
+      "required_inputs": ["Data inventory with classification (machine/process/operator)", "Data flow diagram showing collection, storage, and access", "Privacy impact assessment"],
+      "phase": 3,
+      "dependencies": ["Data governance framework established"],
+      "evidence_required": "Signed data privacy consent; works council agreement (if applicable); data classification register"
+    },
+    {
+      "permit_name": "IT/OT Convergence Security Review (IEC 62443 Assessment)",
+      "why_needed": "Connecting OT and IT networks requires a security risk assessment per IEC 62443-3-2 to define zones, conduits, and target security levels, ensuring the converged architecture meets the client's risk appetite",
+      "responsible_role": "Cybersecurity Lead / CISO",
+      "required_inputs": ["Network architecture diagram with zone/conduit boundaries", "Asset inventory (all connected OT/IT devices)", "Risk appetite statement from client CISO"],
+      "phase": 2,
+      "dependencies": ["OT discovery and asset register completed"],
+      "evidence_required": "IEC 62443-3-2 risk assessment report; zone/conduit diagram signed off; target security levels per zone documented"
+    },
+    {
+      "permit_name": "Remote Access Vendor Approval",
+      "why_needed": "Vendor or SI remote access to OT systems (for support, model updates, or troubleshooting) requires formal approval, access logging, and time-boxed credentials per OT security policy",
+      "responsible_role": "OT Security Manager / Plant IT",
+      "required_inputs": ["Remote access request form with scope and duration", "Vendor security credentials and background check (if required)", "Access logging and monitoring plan"],
+      "phase": 4,
+      "dependencies": ["Remote access solution (VPN/jump box) deployed and tested"],
+      "evidence_required": "Signed remote access approval; access credentials issued with expiry date; logging enabled"
+    },
+    {
+      "permit_name": "Cloud Data Residency and Export Compliance",
+      "why_needed": "Production data sent to cloud platforms may be subject to data residency requirements (data must stay in-country) and export control regulations for sensitive industrial IP",
+      "responsible_role": "Data Protection Officer / Legal",
+      "required_inputs": ["Cloud architecture diagram with data flow across regions", "Data classification (production, quality, IP, personal)", "Cloud provider data residency commitment"],
+      "phase": 3,
+      "dependencies": ["Cloud platform selected and contract terms reviewed"],
+      "evidence_required": "Cloud data residency commitment from provider; legal sign-off on data export compliance; data processing agreement executed"
+    },
+    {
+      "permit_name": "Production Window Approval for Network Changes",
+      "why_needed": "Network changes (cabling, switch configuration, firewall rule updates) in or near production areas require scheduled production windows to avoid unplanned downtime",
+      "responsible_role": "Plant Operations Manager / Production Planner",
+      "required_inputs": ["Detailed change plan with timeline and backout procedure", "Risk assessment for production impact", "Communication plan for affected shifts"],
+      "phase": 4,
+      "dependencies": ["Change plan reviewed by OT change control", "Backout plan tested"],
+      "evidence_required": "Signed production window approval; change record in CAB system; post-change verification report"
+    },
+    {
+      "permit_name": "Model Deployment to Production Approval",
+      "why_needed": "Deploying AI/ML models that influence production (quality predictions, PdM recommendations, closed-loop control) requires formal validation, safety review, and plant management sign-off",
+      "responsible_role": "Plant Manager / Quality Manager / OT Engineering",
+      "required_inputs": ["Model validation report (accuracy, precision, recall, false positive rate)", "Safety assessment for model failure modes", "Monitoring and rollback plan"],
+      "phase": 6,
+      "dependencies": ["Model tested on historical hold-out set", "Edge inference latency validated", "Safe-state fallback tested (if controlling process)"],
+      "evidence_required": "Model deployment approval signed by plant manager; monitoring dashboard operational; rollback procedure documented"
+    },
+    {
+      "permit_name": "OT Patch and Update Approval Process",
+      "why_needed": "Applying firmware/software updates to OT devices (PLC, edge, firewall, historian) requires formal testing and approval to avoid production disruption from incompatible updates",
+      "responsible_role": "OT Engineering / Change Control Board",
+      "required_inputs": ["Vendor patch release notes and CVE details", "Test plan for patch validation on representative device", "Rollback procedure"],
+      "phase": 7,
+      "dependencies": ["Patch test environment available and representative"],
+      "evidence_required": "Patch test results; signed CAB approval for production deployment; backout plan documented"
+    },
+    {
+      "permit_name": "Cybersecurity Incident Response Plan Sign-Off",
+      "why_needed": "Connected OT/IT environments increase the attack surface; a formal incident response plan specific to OT incidents must be established and reviewed by the CISO and plant leadership before commissioning",
+      "responsible_role": "Cybersecurity Lead / CISO / Plant Manager",
+      "required_inputs": ["OT incident response plan document", "RACI for incident response team", "Communication and escalation template"],
+      "phase": 5,
+      "dependencies": ["OT security monitoring (SIEM/EDR) deployed"],
+      "evidence_required": "Incident response plan signed off by CISO and plant manager; tabletop exercise completed with key stakeholders"
+    }
+  ]
+}

@@ -1,0 +1,473 @@
+{
+  "pack": "saf_biomass_ft",
+  "kpis": [
+    {
+      "kpi_id": "KPI01",
+      "name": "Feedstock Moisture (Average)",
+      "description": "Average moisture content of received biomass feedstock. High moisture reduces gasifier thermal efficiency and increases drying energy demand.",
+      "unit": "wt%",
+      "frequency": "Daily",
+      "target": "< 20 wt%",
+      "formula": "Average of all moisture analyses received per batch",
+      "source": "Feedstock quality reports / lab",
+      "related_phase": [
+        1,
+        6,
+        7
+      ]
+    },
+    {
+      "kpi_id": "KPI02",
+      "name": "Feedstock Ash Content",
+      "description": "Ash content of received biomass on a dry basis. High ash causes slagging, fouling, and increased solids disposal cost in the gasifier.",
+      "unit": "wt% db",
+      "frequency": "Daily",
+      "target": "< 5%",
+      "formula": "Weight of ash residue / dry weight of sample \u00d7 100",
+      "source": "Feedstock quality reports / lab",
+      "related_phase": [
+        1,
+        6
+      ]
+    },
+    {
+      "kpi_id": "KPI03",
+      "name": "Feedstock Contract Coverage",
+      "description": "Percentage of annual feedstock requirement covered by signed off-take or supply agreements.",
+      "unit": "%",
+      "frequency": "Monthly",
+      "target": "> 90%",
+      "formula": "(Tonnage under contract / Annual requirement) \u00d7 100",
+      "source": "Procurement / supply chain reports",
+      "related_phase": [
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "kpi_id": "KPI04",
+      "name": "Feedstock Cost Variance",
+      "description": "Variance of actual feedstock delivered cost against budgeted cost, expressed as a percentage.",
+      "unit": "%",
+      "frequency": "Monthly",
+      "target": "< 10%",
+      "formula": "|(Actual cost - Budget cost) / Budget cost| \u00d7 100",
+      "source": "Cost reports / ERP",
+      "related_phase": [
+        1,
+        2,
+        3,
+        7
+      ]
+    },
+    {
+      "kpi_id": "KPI05",
+      "name": "Feedstock Availability Onsite",
+      "description": "Days of feedstock storage available onsite based on current stockpile and daily consumption rate.",
+      "unit": "days",
+      "frequency": "Daily",
+      "target": "> 14 days",
+      "formula": "Current stockpile tonnage / Average daily consumption rate",
+      "source": "Site inventory / weighbridge records",
+      "related_phase": [
+        6,
+        7
+      ]
+    },
+    {
+      "kpi_id": "KPI06",
+      "name": "Feedstock Higher Heating Value (HHV)",
+      "description": "Higher heating value of received biomass on a dry basis, indicating energy content per unit mass.",
+      "unit": "MJ/kg",
+      "frequency": "Weekly",
+      "target": "> 15 MJ/kg",
+      "formula": "Measured by bomb calorimeter per ASTM D5865",
+      "source": "Feedstock quality reports / lab",
+      "related_phase": [
+        1,
+        6
+      ]
+    },
+    {
+      "kpi_id": "KPI07",
+      "name": "Gasifier Availability",
+      "description": "Percentage of scheduled operating time that the gasifier is actually available to produce syngas.",
+      "unit": "%",
+      "frequency": "Daily",
+      "target": "> 92%",
+      "formula": "(Operating hours / Scheduled hours) \u00d7 100",
+      "source": "DCS / plant historian",
+      "related_phase": [
+        6,
+        7
+      ]
+    },
+    {
+      "kpi_id": "KPI08",
+      "name": "Gasifier Cold Gas Efficiency",
+      "description": "Ratio of chemical energy in the product syngas to chemical energy in the feedstock, expressed as a percentage.",
+      "unit": "%",
+      "frequency": "Daily",
+      "target": "> 72%",
+      "formula": "(Syngas HHV \u00d7 Syngas flow) / (Feedstock HHV \u00d7 Feedstock feed rate) \u00d7 100",
+      "source": "DCS / process mass balance",
+      "related_phase": [
+        6,
+        7
+      ]
+    },
+    {
+      "kpi_id": "KPI09",
+      "name": "Carbon Conversion",
+      "description": "Fraction of feedstock carbon converted to gaseous products in the gasifier.",
+      "unit": "%",
+      "frequency": "Daily",
+      "target": "> 96%",
+      "formula": "(Carbon in syngas / Carbon in feedstock) \u00d7 100",
+      "source": "DCS / gas analyser / mass balance",
+      "related_phase": [
+        6,
+        7
+      ]
+    },
+    {
+      "kpi_id": "KPI10",
+      "name": "Syngas H2/CO Ratio",
+      "description": "Molar ratio of hydrogen to carbon monoxide in the cleaned syngas delivered to the FT reactor.",
+      "unit": "ratio",
+      "frequency": "Continuous",
+      "target": "1.8 - 2.2",
+      "formula": "Mole fraction H2 / Mole fraction CO (on dry basis)",
+      "source": "Online gas chromatograph",
+      "related_phase": [
+        6,
+        7
+      ]
+    },
+    {
+      "kpi_id": "KPI11",
+      "name": "Syngas Tar Concentration After Cleanup",
+      "description": "Total tar concentration in syngas downstream of the tar reformer / scrubber train.",
+      "unit": "mg/Nm3",
+      "frequency": "Daily",
+      "target": "< 50 mg/Nm3",
+      "formula": "Gravimetric or GC-FID tar measurement per standard method",
+      "source": "Syngas analysis / lab",
+      "related_phase": [
+        6,
+        7
+      ]
+    },
+    {
+      "kpi_id": "KPI12",
+      "name": "Sulfur Breakthrough in Guard Bed Outlet",
+      "description": "Concentration of sulfur species (H2S + COS) measured at the exit of the sulfur guard bed, immediately upstream of the FT reactor.",
+      "unit": "ppbv",
+      "frequency": "Daily",
+      "target": "< 10 ppbv",
+      "formula": "Measured by online GC or analyser with ppb-level detection",
+      "source": "Online analyser / lab",
+      "related_phase": [
+        6,
+        7
+      ]
+    },
+    {
+      "kpi_id": "KPI13",
+      "name": "Chlorine Breakthrough in Guard Bed Outlet",
+      "description": "Concentration of chlorine species (HCl) measured at the exit of the chloride guard bed, immediately upstream of the FT reactor.",
+      "unit": "ppbv",
+      "frequency": "Daily",
+      "target": "< 10 ppbv",
+      "formula": "Measured by online analyser or impinger sampling with IC detection",
+      "source": "Online analyser / lab",
+      "related_phase": [
+        6,
+        7
+      ]
+    },
+    {
+      "kpi_id": "KPI14",
+      "name": "FT CO Conversion Per Pass",
+      "description": "Fraction of carbon monoxide converted to hydrocarbon products in a single pass through the FT reactor.",
+      "unit": "%",
+      "frequency": "Daily",
+      "target": "> 60%",
+      "formula": "((CO_in - CO_out) / CO_in) \u00d7 100",
+      "source": "DCS / gas analyser on reactor inlet and outlet",
+      "related_phase": [
+        6,
+        7
+      ]
+    },
+    {
+      "kpi_id": "KPI15",
+      "name": "FT C5+ Selectivity",
+      "description": "Selectivity of the FT reactor towards C5+ hydrocarbon products (liquids and waxes), excluding methane and LPG-range gases.",
+      "unit": "%",
+      "frequency": "Daily",
+      "target": "> 85%",
+      "formula": "(Carbon in C5+ products / Total carbon converted) \u00d7 100",
+      "source": "On-line GC / product analysis",
+      "related_phase": [
+        6,
+        7
+      ]
+    },
+    {
+      "kpi_id": "KPI16",
+      "name": "FT Catalyst Productivity",
+      "description": "Mass of total hydrocarbons produced per unit mass of catalyst per hour.",
+      "unit": "g HC/kg cat/hr",
+      "frequency": "Daily",
+      "target": "> 200 g/kg/hr",
+      "formula": "Total hydrocarbon production rate / Catalyst weight in reactor",
+      "source": "DCS / catalyst inventory records",
+      "related_phase": [
+        6,
+        7
+      ]
+    },
+    {
+      "kpi_id": "KPI17",
+      "name": "FT CH4 Selectivity",
+      "description": "Selectivity of the FT reactor towards methane, which represents an undesirable by-product that consumes hydrogen without producing liquid fuels.",
+      "unit": "%",
+      "frequency": "Daily",
+      "target": "< 10%",
+      "formula": "(Carbon in CH4 / Total carbon converted) \u00d7 100",
+      "source": "On-line GC / product analysis",
+      "related_phase": [
+        6,
+        7
+      ]
+    },
+    {
+      "kpi_id": "KPI18",
+      "name": "Hydrocracker Jet Yield",
+      "description": "Yield of jet-range hydrocarbons produced from hydrocracking of FT wax, expressed as a percentage of wax feed.",
+      "unit": "%",
+      "frequency": "Daily",
+      "target": "> 65%",
+      "formula": "(Jet product flow / Wax feed flow to hydrocracker) \u00d7 100",
+      "source": "DCS / product fractionator mass balance",
+      "related_phase": [
+        6,
+        7
+      ]
+    },
+    {
+      "kpi_id": "KPI19",
+      "name": "Hydrocracker H2 Consumption",
+      "description": "Hydrogen consumption per tonne of feed processed in the hydrocracker unit.",
+      "unit": "Nm3/tonne feed",
+      "frequency": "Daily",
+      "target": "< 250 Nm3/t",
+      "formula": "Total H2 consumed (make-up + recycle net) / Total feed processed",
+      "source": "DCS / hydrogen balance",
+      "related_phase": [
+        6,
+        7
+      ]
+    },
+    {
+      "kpi_id": "KPI20",
+      "name": "Jet Fraction Yield of FT Products",
+      "description": "Overall yield of the jet (SAF) fraction as a percentage of total FT liquid products, including hydrocracked wax.",
+      "unit": "%",
+      "frequency": "Daily",
+      "target": "> 40%",
+      "formula": "(Jet fraction production / Total FT liquid product) \u00d7 100",
+      "source": "DCS / product tank farm receipts",
+      "related_phase": [
+        6,
+        7
+      ]
+    },
+    {
+      "kpi_id": "KPI21",
+      "name": "SAF Product Quality Pass Rate",
+      "description": "Percentage of SAF batch samples that meet all ASTM D7566 Annex A2 (FT-SPK) specification tests on first attempt.",
+      "unit": "%",
+      "frequency": "Per batch",
+      "target": "> 98%",
+      "formula": "(Passed batches / Total batches tested) \u00d7 100",
+      "source": "Quality control lab",
+      "related_phase": [
+        6,
+        7
+      ]
+    },
+    {
+      "kpi_id": "KPI22",
+      "name": "ASTM D7566 FT-SPK Qualification Progress",
+      "description": "Progress towards full ASTM D7566 Annex A2 qualification testing for FT-SPK, including all required property tests and any blend testing.",
+      "unit": "%",
+      "frequency": "Monthly",
+      "target": "100% at commissioning",
+      "formula": "(Completed qualification items / Total qualification items) \u00d7 100",
+      "source": "QA/QC project plan / certification body",
+      "related_phase": [
+        2,
+        3,
+        4,
+        5
+      ]
+    },
+    {
+      "kpi_id": "KPI23",
+      "name": "Sustainability Certification Progress",
+      "description": "Progress towards achieving a recognised sustainability certification (e.g., ISCC, RSB) for the SAF production pathway.",
+      "unit": "%",
+      "frequency": "Monthly",
+      "target": "100% at first production",
+      "formula": "(Completed certification milestones / Total milestones) \u00d7 100",
+      "source": "Sustainability team / certification body",
+      "related_phase": [
+        2,
+        3,
+        4,
+        5
+      ]
+    },
+    {
+      "kpi_id": "KPI24",
+      "name": "Carbon Intensity",
+      "description": "Lifecycle greenhouse gas emissions of the produced SAF per unit of energy, calculated according to the relevant certification scheme methodology.",
+      "unit": "gCO2e/MJ",
+      "frequency": "Quarterly",
+      "target": "< 30 gCO2e/MJ",
+      "formula": "Total lifecycle GHG emissions / Total fuel energy output",
+      "source": "Lifecycle analysis / certification body",
+      "related_phase": [
+        2,
+        4,
+        6,
+        7
+      ]
+    },
+    {
+      "kpi_id": "KPI25",
+      "name": "Schedule Performance Index (SPI)",
+      "description": "Ratio of earned schedule to planned schedule, measuring whether the project is on schedule.",
+      "unit": "ratio",
+      "frequency": "Monthly",
+      "target": "> 0.95",
+      "formula": "Earned Progress (physical % complete) / Planned Progress (planned % complete)",
+      "source": "Project controls / schedule baseline",
+      "related_phase": [
+        2,
+        3,
+        4,
+        5
+      ]
+    },
+    {
+      "kpi_id": "KPI26",
+      "name": "Cost Performance Index (CPI)",
+      "description": "Ratio of earned value to actual cost, measuring whether the project is on budget.",
+      "unit": "ratio",
+      "frequency": "Monthly",
+      "target": "> 0.95",
+      "formula": "Earned Value / Actual Cost",
+      "source": "Project controls / cost reports",
+      "related_phase": [
+        2,
+        3,
+        4,
+        5
+      ]
+    },
+    {
+      "kpi_id": "KPI27",
+      "name": "Procurement Progress",
+      "description": "Percentage of major procurement packages that have been awarded (contract signed) against the total planned packages.",
+      "unit": "%",
+      "frequency": "Monthly",
+      "target": "> 90% by EPC mid-point",
+      "formula": "(Packages awarded / Total planned packages) \u00d7 100",
+      "source": "Procurement team / project controls",
+      "related_phase": [
+        3,
+        4
+      ]
+    },
+    {
+      "kpi_id": "KPI28",
+      "name": "HAZOP Recommendation Close-Out Rate",
+      "description": "Percentage of HAZOP / process safety study recommendations that have been closed out (implemented or formally managed) versus total recommendations raised.",
+      "unit": "%",
+      "frequency": "Monthly",
+      "target": "> 90% before construction",
+      "formula": "(Closed recommendations / Total recommendations) \u00d7 100",
+      "source": "Process safety / HSE team",
+      "related_phase": [
+        2,
+        3
+      ]
+    },
+    {
+      "kpi_id": "KPI29",
+      "name": "Commissioning Readiness",
+      "description": "Percentage of pre-commissioning and commissioning systems that have passed their pre-start-up safety review and system handover checks.",
+      "unit": "%",
+      "frequency": "Weekly",
+      "target": "> 80% at start-up gate",
+      "formula": "(Systems passed / Total systems to commission) \u00d7 100",
+      "source": "Commissioning team / system handover tracker",
+      "related_phase": [
+        5
+      ]
+    },
+    {
+      "kpi_id": "KPI30",
+      "name": "Safety Incident Rate",
+      "description": "Total recordable safety incidents (injuries, illnesses, and lost-time events) per 200,000 hours worked.",
+      "unit": "incidents/200k hrs",
+      "frequency": "Monthly",
+      "target": "< 0.5",
+      "formula": "(Recordable incidents \u00d7 200,000) / Total hours worked",
+      "source": "HSE team / incident management system",
+      "related_phase": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ]
+    },
+    {
+      "kpi_id": "KPI31",
+      "name": "Offtake Readiness",
+      "description": "Percentage of planned offtake agreements for SAF (and co-products) that have been signed or are in final negotiation stage.",
+      "unit": "%",
+      "frequency": "Monthly",
+      "target": "> 90% before commissioning",
+      "formula": "(Signed offtake volume / Planned offtake volume) \u00d7 100",
+      "source": "Commercial / business development team",
+      "related_phase": [
+        2,
+        3,
+        4
+      ]
+    },
+    {
+      "kpi_id": "KPI32",
+      "name": "Blending Logistics Readiness",
+      "description": "Percentage of the physical blending and logistics chain (truck/rail offloading, storage, blending equipment, pipeline injection, certification paperwork) that is confirmed operational.",
+      "unit": "%",
+      "frequency": "Monthly",
+      "target": "100% before first production",
+      "formula": "(Confirmed logistics links / Total logistics links) \u00d7 100",
+      "source": "Logistics / supply chain team",
+      "related_phase": [
+        4,
+        5,
+        6
+      ]
+    }
+  ],
+  "total_kpis": 32
+}

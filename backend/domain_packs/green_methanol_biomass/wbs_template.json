@@ -1,0 +1,1541 @@
+{
+  "template_name": "Green Methanol - Biomass Gasification Pathway",
+  "pack": "green_methanol_biomass",
+  "tags": [
+    "green-fuel",
+    "methanol",
+    "biomass",
+    "domain-pack",
+    "domain-pack:green_methanol_biomass"
+  ],
+  "total_tasks": 104,
+  "tasks": [
+    {
+      "id": "T001",
+      "title": "Initial project charter and scope definition",
+      "description": "Define project objectives, boundaries, team structure, and key milestones for the green methanol project",
+      "phase": 0,
+      "discipline": "PMO",
+      "estimated_hours": 40,
+      "priority": "high",
+      "dependencies": [],
+      "deliverables": "Project charter document",
+      "acceptance_criteria": "Charter signed by sponsor"
+    },
+    {
+      "id": "T002",
+      "title": "Green methanol market study and offtake assessment",
+      "description": "Analyse marine fuel, chemical feedstock, and blending markets for green methanol; identify potential offtakers and pricing",
+      "phase": 0,
+      "discipline": "Commercial",
+      "estimated_hours": 80,
+      "priority": "high",
+      "dependencies": [
+        "T001"
+      ],
+      "deliverables": "Market study report",
+      "acceptance_criteria": "Identifies 3+ potential offtakers with volume estimates"
+    },
+    {
+      "id": "T003",
+      "title": "Feedstock availability and supply assessment",
+      "description": "Survey regional agricultural residue, forestry residue, and organic waste availability; assess seasonality, logistics, and pricing",
+      "phase": 0,
+      "discipline": "Feedstock",
+      "estimated_hours": 80,
+      "priority": "high",
+      "dependencies": [
+        "T001"
+      ],
+      "deliverables": "Feedstock availability report",
+      "acceptance_criteria": "Quantifies minimum 3 feedstock sources with 5-year supply curve"
+    },
+    {
+      "id": "T004",
+      "title": "Preliminary mass balance and carbon intensity estimate",
+      "description": "Calculate high-level material flows (biomass \u2192 methanol) and carbon intensity using LCA methodology",
+      "phase": 0,
+      "discipline": "Process",
+      "estimated_hours": 40,
+      "priority": "medium",
+      "dependencies": [
+        "T002",
+        "T003"
+      ],
+      "deliverables": "Mass balance and CI estimate",
+      "acceptance_criteria": "Estimates within \u00b150% of preliminary design"
+    },
+    {
+      "id": "T005",
+      "title": "Technology landscape review",
+      "description": "Survey gasifier vendors (fixed bed, fluidised bed, entrained flow), syngas cleanup licensors, and methanol synthesis licensors",
+      "phase": 0,
+      "discipline": "Process",
+      "estimated_hours": 40,
+      "priority": "medium",
+      "dependencies": [
+        "T001"
+      ],
+      "deliverables": "Technology screening matrix",
+      "acceptance_criteria": "Evaluates 5+ technology options with pros/cons"
+    },
+    {
+      "id": "T006",
+      "title": "Partner and JV strategy",
+      "description": "Identify potential partners for feedstock supply, technology licensing, offtake, and project finance",
+      "phase": 0,
+      "discipline": "Commercial",
+      "estimated_hours": 40,
+      "priority": "medium",
+      "dependencies": [
+        "T002"
+      ],
+      "deliverables": "Partner strategy memo",
+      "acceptance_criteria": "Shortlist of 3+ potential partners"
+    },
+    {
+      "id": "T007",
+      "title": "High-level CAPEX/OPEX estimate (\u00b150%)",
+      "description": "Develop order-of-magnitude cost estimate based on benchmark data from similar biomass-to-methanol projects",
+      "phase": 0,
+      "discipline": "Finance",
+      "estimated_hours": 60,
+      "priority": "high",
+      "dependencies": [
+        "T003",
+        "T005"
+      ],
+      "deliverables": "Cost estimate",
+      "acceptance_criteria": "Estimate within \u00b150% of expected final cost"
+    },
+    {
+      "id": "T008",
+      "title": "Preliminary project schedule",
+      "description": "Develop high-level milestone schedule from Phase 1 through Phase 7",
+      "phase": 0,
+      "discipline": "PMO",
+      "estimated_hours": 20,
+      "priority": "medium",
+      "dependencies": [
+        "T001"
+      ],
+      "deliverables": "Level 1 schedule",
+      "acceptance_criteria": "Schedule covers all 8 phases with gate dates"
+    },
+    {
+      "id": "T009",
+      "title": "Detailed feedstock supply study",
+      "description": "Comprehensive assessment of feedstock sources: type, volume, seasonal variation, logistics route, cost curve, contract structure",
+      "phase": 1,
+      "discipline": "Feedstock",
+      "estimated_hours": 160,
+      "priority": "high",
+      "dependencies": [
+        "T003"
+      ],
+      "deliverables": "Detailed feedstock supply report",
+      "acceptance_criteria": "Covers 5-year supply with monthly granularity"
+    },
+    {
+      "id": "T010",
+      "title": "Biomass characterisation testing",
+      "description": "Ultimate and proximate analysis of candidate feedstocks: moisture, ash, volatiles, C/H/O/N/S, alkali metals, chlorine",
+      "phase": 1,
+      "discipline": "Feedstock",
+      "estimated_hours": 60,
+      "priority": "high",
+      "dependencies": [
+        "T009"
+      ],
+      "deliverables": "Biomass characterisation report",
+      "acceptance_criteria": "All major feedstocks tested per ASTM standards"
+    },
+    {
+      "id": "T011",
+      "title": "Site selection study",
+      "description": "Evaluate 3+ candidate sites against feedstock proximity, water, power, grid, port access, land cost, community impact",
+      "phase": 1,
+      "discipline": "Process",
+      "estimated_hours": 120,
+      "priority": "high",
+      "dependencies": [
+        "T009"
+      ],
+      "deliverables": "Site selection report",
+      "acceptance_criteria": "Ranked shortlist with preferred site recommendation"
+    },
+    {
+      "id": "T012",
+      "title": "Environmental baseline study",
+      "description": "Air quality, water quality, noise, ecology, soil studies at candidate sites to establish pre-project baseline",
+      "phase": 1,
+      "discipline": "HSE",
+      "estimated_hours": 120,
+      "priority": "high",
+      "dependencies": [
+        "T011"
+      ],
+      "deliverables": "Environmental baseline report",
+      "acceptance_criteria": "All baseline parameters measured per regulatory guidelines"
+    },
+    {
+      "id": "T013",
+      "title": "Feedstock handling and storage concept design",
+      "description": "Conceptual design for biomass receiving, covered storage, drying system (if needed), sizing, blending, and conveying to gasifier",
+      "phase": 1,
+      "discipline": "Feedstock",
+      "estimated_hours": 80,
+      "priority": "high",
+      "dependencies": [
+        "T009",
+        "T010"
+      ],
+      "deliverables": "Concept design package",
+      "acceptance_criteria": "Layout selected for at least 7 days storage capacity"
+    },
+    {
+      "id": "T014",
+      "title": "Feedstock supply agreement heads of terms",
+      "description": "Negotiate heads of terms with major feedstock suppliers covering volume, quality, price, duration, force majeure",
+      "phase": 1,
+      "discipline": "Commercial",
+      "estimated_hours": 60,
+      "priority": "high",
+      "dependencies": [
+        "T009"
+      ],
+      "deliverables": "Signed HoT documents",
+      "acceptance_criteria": "Covers 70%+ of annual feedstock requirement"
+    },
+    {
+      "id": "T015",
+      "title": "Technology pre-screening and shortlisting",
+      "description": "Evaluate gasifier, syngas cleanup, and methanol synthesis licensors against project requirements; shortlist 2-3 per technology",
+      "phase": 1,
+      "discipline": "Process",
+      "estimated_hours": 80,
+      "priority": "high",
+      "dependencies": [
+        "T005"
+      ],
+      "deliverables": "Vendor shortlist",
+      "acceptance_criteria": "At least 2 qualified vendors per technology"
+    },
+    {
+      "id": "T016",
+      "title": "Preliminary plot plan and layout",
+      "description": "Develop block plot plan showing gasification island, syngas cleanup, methanol synthesis, distillation, storage, utilities, flare",
+      "phase": 1,
+      "discipline": "Process",
+      "estimated_hours": 60,
+      "priority": "medium",
+      "dependencies": [
+        "T011",
+        "T013"
+      ],
+      "deliverables": "Preliminary plot plan",
+      "acceptance_criteria": "All major process areas located with access and laydown"
+    },
+    {
+      "id": "T017",
+      "title": "Gasifier technology selection",
+      "description": "Select gasifier type (fixed bed, fluidised bed, entrained flow) and oxidant (air, oxygen, steam, oxygen-steam) based on feedstock and scale",
+      "phase": 2,
+      "discipline": "Gasification",
+      "estimated_hours": 120,
+      "priority": "critical",
+      "dependencies": [
+        "T015",
+        "T010"
+      ],
+      "deliverables": "Gasifier selection report",
+      "acceptance_criteria": "Technology selected with licensor LOI"
+    },
+    {
+      "id": "T018",
+      "title": "Oxidant selection and air separation assessment",
+      "description": "Evaluate air-blown vs oxygen-blown configuration; if oxygen selected, assess ASU vs third-party supply options",
+      "phase": 2,
+      "discipline": "Gasification",
+      "estimated_hours": 80,
+      "priority": "high",
+      "dependencies": [
+        "T017"
+      ],
+      "deliverables": "Oxidant selection recommendation",
+      "acceptance_criteria": "Configuration decision and supply route defined"
+    },
+    {
+      "id": "T019",
+      "title": "Syngas cleanup technology selection",
+      "description": "Select tar removal (reformer, scrubber, or catalytic cracker), particulate filter, acid gas removal, and guard bed configuration",
+      "phase": 2,
+      "discipline": "Syngas Cleanup",
+      "estimated_hours": 120,
+      "priority": "critical",
+      "dependencies": [
+        "T017",
+        "T010"
+      ],
+      "deliverables": "Syngas cleanup process description",
+      "acceptance_criteria": "Technology selected with target output specs (tar, S, Cl, metals)"
+    },
+    {
+      "id": "T020",
+      "title": "Methanol synthesis reactor selection",
+      "description": "Select reactor type: boiling water reactor, multi-bed quench, or isothermal; identify preferred licensor",
+      "phase": 2,
+      "discipline": "Methanol Synthesis",
+      "estimated_hours": 100,
+      "priority": "critical",
+      "dependencies": [
+        "T015"
+      ],
+      "deliverables": "Reactor selection report",
+      "acceptance_criteria": "Reactor type and licensor selected"
+    },
+    {
+      "id": "T021",
+      "title": "Distillation configuration study",
+      "description": "Select two-column vs three-column distillation scheme, define product purity targets (IMPCA spec)",
+      "phase": 2,
+      "discipline": "Methanol Synthesis",
+      "estimated_hours": 60,
+      "priority": "high",
+      "dependencies": [
+        "T020"
+      ],
+      "deliverables": "Distillation design basis",
+      "acceptance_criteria": "Configuration selected with heat integration plan"
+    },
+    {
+      "id": "T022",
+      "title": "Process simulation and mass/energy balance",
+      "description": "Develop full process simulation in Aspen Plus or equivalent; calculate material balance, energy balance, and utility requirements",
+      "phase": 2,
+      "discipline": "Process",
+      "estimated_hours": 200,
+      "priority": "critical",
+      "dependencies": [
+        "T017",
+        "T019",
+        "T020"
+      ],
+      "deliverables": "Process simulation model and report",
+      "acceptance_criteria": "Mass balance closure within 1%; energy balance validated"
+    },
+    {
+      "id": "T023",
+      "title": "Preliminary P&IDs and heat integration",
+      "description": "Develop preliminary P&IDs for major process blocks; identify heat integration opportunities (steam generation, preheat trains)",
+      "phase": 2,
+      "discipline": "Process",
+      "estimated_hours": 160,
+      "priority": "high",
+      "dependencies": [
+        "T022"
+      ],
+      "deliverables": "Preliminary P&ID set",
+      "acceptance_criteria": "All major process blocks covered"
+    },
+    {
+      "id": "T024",
+      "title": "Utility requirements study",
+      "description": "Define power, steam, cooling water, nitrogen, instrument air, and demin water requirements for the facility",
+      "phase": 2,
+      "discipline": "Utilities",
+      "estimated_hours": 80,
+      "priority": "high",
+      "dependencies": [
+        "T022"
+      ],
+      "deliverables": "Utility load list",
+      "acceptance_criteria": "All utility demands quantified for FEED basis"
+    },
+    {
+      "id": "T025",
+      "title": "CAPEX estimate \u00b130%",
+      "description": "Develop factored CAPEX estimate based on equipment list from process simulation and vendor budgetary quotes",
+      "phase": 2,
+      "discipline": "Finance",
+      "estimated_hours": 160,
+      "priority": "high",
+      "dependencies": [
+        "T022",
+        "T024"
+      ],
+      "deliverables": "CAPEX estimate (\u00b130%)",
+      "acceptance_criteria": "NCCS Class 3 estimate methodology followed"
+    },
+    {
+      "id": "T026",
+      "title": "OPEX estimate and cost of production model",
+      "description": "Develop OPEX model including feedstock, utilities, catalyst/chemicals, labour, maintenance, and overhead",
+      "phase": 2,
+      "discipline": "Finance",
+      "estimated_hours": 100,
+      "priority": "high",
+      "dependencies": [
+        "T025"
+      ],
+      "deliverables": "OPEX model and CoP estimate",
+      "acceptance_criteria": "CoP estimate per tonne methanol"
+    },
+    {
+      "id": "T027",
+      "title": "Technology licensor negotiation and license agreement",
+      "description": "Negotiate technology license terms, fees, performance guarantees, and support scope with selected licensors",
+      "phase": 2,
+      "discipline": "Procurement",
+      "estimated_hours": 120,
+      "priority": "critical",
+      "dependencies": [
+        "T017",
+        "T019",
+        "T020"
+      ],
+      "deliverables": "License agreements executed",
+      "acceptance_criteria": "All major technology licenses signed"
+    },
+    {
+      "id": "T028",
+      "title": "EPC contracting strategy",
+      "description": "Define EPC contract type (lump-sum turnkey, reimbursable, EPCM), preparation of bid list, and contracting plan",
+      "phase": 2,
+      "discipline": "Procurement",
+      "estimated_hours": 60,
+      "priority": "high",
+      "dependencies": [
+        "T025"
+      ],
+      "deliverables": "Contracting strategy memo",
+      "acceptance_criteria": "Approved by project board"
+    },
+    {
+      "id": "T029",
+      "title": "Feasibility study report",
+      "description": "Compile all Phase 2 work into a comprehensive feasibility study for investment decision",
+      "phase": 2,
+      "discipline": "PMO",
+      "estimated_hours": 120,
+      "priority": "critical",
+      "dependencies": [
+        "T022",
+        "T025",
+        "T026",
+        "T027"
+      ],
+      "deliverables": "Feasibility study report",
+      "acceptance_criteria": "Reviewed and approved by investment committee"
+    },
+    {
+      "id": "T030",
+      "title": "Front-end engineering design (FEED) kick-off",
+      "description": "Mobilise FEED team, issue design basis, develop FEED schedule and budget",
+      "phase": 3,
+      "discipline": "Process",
+      "estimated_hours": 40,
+      "priority": "high",
+      "dependencies": [
+        "T029"
+      ],
+      "deliverables": "FEED execution plan",
+      "acceptance_criteria": "FEED team mobilised"
+    },
+    {
+      "id": "T031",
+      "title": "Detailed P&ID development",
+      "description": "Develop P&IDs to IFD (Issue for Design) level for all process blocks: feedstock handling, gasification, syngas cleanup, methanol synthesis, distillation, utilities",
+      "phase": 3,
+      "discipline": "Process",
+      "estimated_hours": 400,
+      "priority": "critical",
+      "dependencies": [
+        "T030",
+        "T023"
+      ],
+      "deliverables": "FEED P&ID set",
+      "acceptance_criteria": "All P&IDs issued for design review"
+    },
+    {
+      "id": "T032",
+      "title": "Plot plan and 3D model development",
+      "description": "Develop detailed plot plan and initial 3D model for equipment layout, piping routing, and access",
+      "phase": 3,
+      "discipline": "Process",
+      "estimated_hours": 200,
+      "priority": "high",
+      "dependencies": [
+        "T031"
+      ],
+      "deliverables": "3D model milestone 1",
+      "acceptance_criteria": "All major equipment located in model"
+    },
+    {
+      "id": "T033",
+      "title": "HAZID study",
+      "description": "Conduct Hazard Identification study across all process blocks to identify major hazards and risk scenarios",
+      "phase": 3,
+      "discipline": "HSE",
+      "estimated_hours": 80,
+      "priority": "critical",
+      "dependencies": [
+        "T031"
+      ],
+      "deliverables": "HAZID report",
+      "acceptance_criteria": "All hazard scenarios identified and risk-ranked"
+    },
+    {
+      "id": "T034",
+      "title": "HAZOP study",
+      "description": "Conduct Hazard and Operability study on P&IDs for all process blocks; document deviations, causes, consequences, and recommendations",
+      "phase": 3,
+      "discipline": "HSE",
+      "estimated_hours": 200,
+      "priority": "critical",
+      "dependencies": [
+        "T031",
+        "T033"
+      ],
+      "deliverables": "HAZOP report",
+      "acceptance_criteria": "All HAZOP nodes completed; recommendations assigned and tracked"
+    },
+    {
+      "id": "T035",
+      "title": "Quantitative risk assessment (QRA)",
+      "description": "Model major accident scenarios (gasifier rupture, methanol release, syngas leak, hydrogen storage) and quantify risk contours",
+      "phase": 3,
+      "discipline": "HSE",
+      "estimated_hours": 120,
+      "priority": "high",
+      "dependencies": [
+        "T034"
+      ],
+      "deliverables": "QRA report",
+      "acceptance_criteria": "Risk contours within acceptable criteria per regulatory guidance"
+    },
+    {
+      "id": "T036",
+      "title": "Environmental impact assessment (EIA)",
+      "description": "Full EIA covering air emissions, wastewater, solid waste, ecology, socio-economic impact; public consultation if required",
+      "phase": 3,
+      "discipline": "HSE",
+      "estimated_hours": 240,
+      "priority": "critical",
+      "dependencies": [
+        "T012"
+      ],
+      "deliverables": "EIA report",
+      "acceptance_criteria": "Submitted to regulatory authority"
+    },
+    {
+      "id": "T037",
+      "title": "Environmental clearance application",
+      "description": "Prepare and submit environmental clearance application to regulatory authority with EIA report",
+      "phase": 3,
+      "discipline": "Permitting",
+      "estimated_hours": 80,
+      "priority": "critical",
+      "dependencies": [
+        "T036"
+      ],
+      "deliverables": "Environmental clearance application",
+      "acceptance_criteria": "Application acknowledged by regulatory authority"
+    },
+    {
+      "id": "T038",
+      "title": "Hazardous chemicals and methanol storage permits",
+      "description": "Apply for permits related to storage of hazardous chemicals, specifically methanol and syngas, under relevant regulations",
+      "phase": 3,
+      "discipline": "Permitting",
+      "estimated_hours": 60,
+      "priority": "high",
+      "dependencies": [
+        "T034",
+        "T031"
+      ],
+      "deliverables": "Permit applications",
+      "acceptance_criteria": "Applications submitted with all required documentation"
+    },
+    {
+      "id": "T039",
+      "title": "Fire safety approval application",
+      "description": "Prepare and submit fire safety approval application including fire protection philosophy, water demand, and layout compliance",
+      "phase": 3,
+      "discipline": "Permitting",
+      "estimated_hours": 60,
+      "priority": "high",
+      "dependencies": [
+        "T035",
+        "T032"
+      ],
+      "deliverables": "Fire safety application",
+      "acceptance_criteria": "Approved by fire authority"
+    },
+    {
+      "id": "T040",
+      "title": "Factory licence application",
+      "description": "Prepare factory licence application under applicable factory acts",
+      "phase": 3,
+      "discipline": "Permitting",
+      "estimated_hours": 40,
+      "priority": "high",
+      "dependencies": [
+        "T037"
+      ],
+      "deliverables": "Factory licence application",
+      "acceptance_criteria": "Application submitted"
+    },
+    {
+      "id": "T041",
+      "title": "Land acquisition and zoning clearance",
+      "description": "Complete land acquisition, verify zoning compliance, obtain change of land use if needed",
+      "phase": 3,
+      "discipline": "Permitting",
+      "estimated_hours": 160,
+      "priority": "high",
+      "dependencies": [
+        "T011"
+      ],
+      "deliverables": "Land title and zoning clearance",
+      "acceptance_criteria": "Land registered and zoned for industrial use"
+    },
+    {
+      "id": "T042",
+      "title": "EPC tender package preparation",
+      "description": "Prepare EPC tender documents including scope of work, technical specifications, commercial terms, and bid evaluation criteria",
+      "phase": 3,
+      "discipline": "Procurement",
+      "estimated_hours": 200,
+      "priority": "high",
+      "dependencies": [
+        "T031",
+        "T025",
+        "T028"
+      ],
+      "deliverables": "EPC tender package",
+      "acceptance_criteria": "Tender package approved for issue"
+    },
+    {
+      "id": "T043",
+      "title": "Long-lead equipment ordering",
+      "description": "Issue purchase orders for long-lead equipment: gasifier, syngas compressor, methanol reactor, distillation columns",
+      "phase": 3,
+      "discipline": "Procurement",
+      "estimated_hours": 80,
+      "priority": "critical",
+      "dependencies": [
+        "T027",
+        "T042"
+      ],
+      "deliverables": "Purchase orders issued",
+      "acceptance_criteria": "Orders placed with agreed delivery schedule"
+    },
+    {
+      "id": "T044",
+      "title": "Offtake agreement negotiation and execution",
+      "description": "Negotiate and execute binding offtake agreement for green methanol with identified buyers",
+      "phase": 3,
+      "discipline": "Commercial",
+      "estimated_hours": 120,
+      "priority": "high",
+      "dependencies": [
+        "T029"
+      ],
+      "deliverables": "Signed offtake agreement",
+      "acceptance_criteria": "Binding offtake for 50%+ of nameplate capacity"
+    },
+    {
+      "id": "T045",
+      "title": "Financing close",
+      "description": "Finalise project financing including debt facilities, equity commitments, and financial close",
+      "phase": 3,
+      "discipline": "Finance",
+      "estimated_hours": 200,
+      "priority": "critical",
+      "dependencies": [
+        "T029",
+        "T044",
+        "T027"
+      ],
+      "deliverables": "Financial close documentation",
+      "acceptance_criteria": "All financing agreements executed"
+    },
+    {
+      "id": "T046",
+      "title": "Investment decision gate (FID)",
+      "description": "Present project to investment committee with FEED, permits, financing, and offtake; secure final investment decision",
+      "phase": 3,
+      "discipline": "PMO",
+      "estimated_hours": 40,
+      "priority": "critical",
+      "dependencies": [
+        "T037",
+        "T043",
+        "T044",
+        "T045",
+        "T042"
+      ],
+      "deliverables": "FID approval memo",
+      "acceptance_criteria": "Positive investment decision and budget release"
+    },
+    {
+      "id": "T047",
+      "title": "EPC contract award",
+      "description": "Evaluate EPC bids, negotiate contract terms, and award EPC contract",
+      "phase": 4,
+      "discipline": "Procurement",
+      "estimated_hours": 160,
+      "priority": "critical",
+      "dependencies": [
+        "T042",
+        "T046"
+      ],
+      "deliverables": "Signed EPC contract",
+      "acceptance_criteria": "Contract awarded within approved budget"
+    },
+    {
+      "id": "T048",
+      "title": "Detailed engineering (IFC deliverables)",
+      "description": "Develop issue-for-construction drawings including P&IDs, isometrics, structural, electrical, and instrument drawings",
+      "phase": 4,
+      "discipline": "Process",
+      "estimated_hours": 600,
+      "priority": "critical",
+      "dependencies": [
+        "T047",
+        "T031"
+      ],
+      "deliverables": "IFC drawing set",
+      "acceptance_criteria": "All disciplines complete for construction"
+    },
+    {
+      "id": "T049",
+      "title": "Biomass handling system procurement",
+      "description": "Procure biomass receiving, storage, drying, sizing, and conveying equipment",
+      "phase": 4,
+      "discipline": "Procurement",
+      "estimated_hours": 100,
+      "priority": "high",
+      "dependencies": [
+        "T047",
+        "T013"
+      ],
+      "deliverables": "Purchase orders placed",
+      "acceptance_criteria": "All equipment ordered with delivery milestones"
+    },
+    {
+      "id": "T050",
+      "title": "Gasifier and syngashandling equipment procurement",
+      "description": "Procure gasifier, syngas cooler, cyclones, and other gasifier island equipment",
+      "phase": 4,
+      "discipline": "Gasification",
+      "estimated_hours": 120,
+      "priority": "critical",
+      "dependencies": [
+        "T043",
+        "T047"
+      ],
+      "deliverables": "Gasifier purchase orders",
+      "acceptance_criteria": "Gasifier and auxiliaries ordered with delivery schedule"
+    },
+    {
+      "id": "T051",
+      "title": "Syngas cleanup system procurement",
+      "description": "Procure tar reformer/cracker, particulate filter, scrubber, acid gas removal, and guard bed vessels",
+      "phase": 4,
+      "discipline": "Syngas Cleanup",
+      "estimated_hours": 120,
+      "priority": "critical",
+      "dependencies": [
+        "T043",
+        "T047",
+        "T019"
+      ],
+      "deliverables": "Cleanup system orders placed",
+      "acceptance_criteria": "All cleanup equipment ordered with delivery milestones"
+    },
+    {
+      "id": "T052",
+      "title": "Methanol synthesis reactor and distillation procurement",
+      "description": "Procure methanol synthesis reactor, heat exchangers, distillation columns, reboilers, condensers",
+      "phase": 4,
+      "discipline": "Methanol Synthesis",
+      "estimated_hours": 100,
+      "priority": "critical",
+      "dependencies": [
+        "T043",
+        "T047",
+        "T020"
+      ],
+      "deliverables": "Reactor and column orders placed",
+      "acceptance_criteria": "All major process packages under purchase order"
+    },
+    {
+      "id": "T053",
+      "title": "Civil works: foundations and site preparation",
+      "description": "Site grading, piling, concrete foundations for all major equipment, buildings, roads, and drainage",
+      "phase": 4,
+      "discipline": "EPC",
+      "estimated_hours": 800,
+      "priority": "high",
+      "dependencies": [
+        "T047",
+        "T041"
+      ],
+      "deliverables": "Civil works completion report",
+      "acceptance_criteria": "All foundations poured and cured per spec"
+    },
+    {
+      "id": "T054",
+      "title": "Structural steel fabrication and erection",
+      "description": "Fabricate and erect structural steel for pipe racks, equipment platforms, building structures, and flare tower",
+      "phase": 4,
+      "discipline": "EPC",
+      "estimated_hours": 600,
+      "priority": "high",
+      "dependencies": [
+        "T053"
+      ],
+      "deliverables": "Structural steel completion",
+      "acceptance_criteria": "All steel erected and inspected per code"
+    },
+    {
+      "id": "T055",
+      "title": "Equipment setting and alignment",
+      "description": "Receive, set, and align all major equipment: gasifier, vessels, columns, compressors, heat exchangers, pumps",
+      "phase": 4,
+      "discipline": "EPC",
+      "estimated_hours": 400,
+      "priority": "high",
+      "dependencies": [
+        "T053",
+        "T054"
+      ],
+      "deliverables": "Equipment setting report",
+      "acceptance_criteria": "All equipment set and rough-aligned"
+    },
+    {
+      "id": "T056",
+      "title": "Piping fabrication and erection",
+      "description": "Fabricate and erect process, utility, and instrument piping; install valves, fittings, and specialty items",
+      "phase": 4,
+      "discipline": "EPC",
+      "estimated_hours": 1200,
+      "priority": "high",
+      "dependencies": [
+        "T054",
+        "T048"
+      ],
+      "deliverables": "Piping isometric completion",
+      "acceptance_criteria": "All piping installed per IFC drawings"
+    },
+    {
+      "id": "T057",
+      "title": "Electrical and instrumentation installation",
+      "description": "Install cables, panels, motor control centres, VFDs, instruments, analysers, and control system hardware",
+      "phase": 4,
+      "discipline": "EPC",
+      "estimated_hours": 800,
+      "priority": "high",
+      "dependencies": [
+        "T054",
+        "T048"
+      ],
+      "deliverables": "E&I installation complete",
+      "acceptance_criteria": "All cables pulled and terminated"
+    },
+    {
+      "id": "T058",
+      "title": "Catalyst procurement and storage",
+      "description": "Procure methanol synthesis catalyst (Cu/ZnO/Al2O3) and catalyst protection materials; ensure proper storage conditions",
+      "phase": 4,
+      "discipline": "Procurement",
+      "estimated_hours": 60,
+      "priority": "critical",
+      "dependencies": [
+        "T047",
+        "T020"
+      ],
+      "deliverables": "Catalyst purchase order and storage plan",
+      "acceptance_criteria": "Catalyst ordered with delivery 4 weeks before loading"
+    },
+    {
+      "id": "T059",
+      "title": "Pre-commissioning procedure preparation",
+      "description": "Prepare pre-commissioning and commissioning procedures for all process systems",
+      "phase": 4,
+      "discipline": "Commissioning",
+      "estimated_hours": 160,
+      "priority": "high",
+      "dependencies": [
+        "T048"
+      ],
+      "deliverables": "Commissioning procedure manual",
+      "acceptance_criteria": "All procedures reviewed and approved"
+    },
+    {
+      "id": "T060",
+      "title": "Quality assurance inspections",
+      "description": "Conduct QA inspections during fabrication and construction: welding NDT, concrete testing, pressure test witness, coating inspection",
+      "phase": 4,
+      "discipline": "QA/QC",
+      "estimated_hours": 400,
+      "priority": "high",
+      "dependencies": [
+        "T047"
+      ],
+      "deliverables": "QA inspection records",
+      "acceptance_criteria": "All inspection records documented per ITP"
+    },
+    {
+      "id": "T061",
+      "title": "Progress monitoring and reporting",
+      "description": "Develop and maintain project controls: ETC, earned value, S-curves, progress % complete, change log, risk register updates",
+      "phase": 4,
+      "discipline": "PMO",
+      "estimated_hours": 400,
+      "priority": "high",
+      "dependencies": [
+        "T047"
+      ],
+      "deliverables": "Monthly progress reports",
+      "acceptance_criteria": "Reports issued within 5 days of month close"
+    },
+    {
+      "id": "T062",
+      "title": "Change order management",
+      "description": "Process change orders: technical review, cost/schedule impact assessment, approval, implementation tracking",
+      "phase": 4,
+      "discipline": "PMO",
+      "estimated_hours": 200,
+      "priority": "high",
+      "dependencies": [
+        "T047"
+      ],
+      "deliverables": "Change order log",
+      "acceptance_criteria": "All changes processed within 14 days of identification"
+    },
+    {
+      "id": "T063",
+      "title": "Mechanical completion checks per system",
+      "description": "Verify each system is mechanically complete: all equipment installed, piping connected, instruments loop-checked",
+      "phase": 5,
+      "discipline": "Commissioning",
+      "estimated_hours": 400,
+      "priority": "critical",
+      "dependencies": [
+        "T055",
+        "T056",
+        "T057",
+        "T059"
+      ],
+      "deliverables": "Mechanical completion certificates per system",
+      "acceptance_criteria": "All systems signed off by commissioning manager"
+    },
+    {
+      "id": "T064",
+      "title": "Punch list resolution",
+      "description": "Document, prioritise, and resolve construction punch list items before commissioning start",
+      "phase": 5,
+      "discipline": "Commissioning",
+      "estimated_hours": 200,
+      "priority": "high",
+      "dependencies": [
+        "T063"
+      ],
+      "deliverables": "Punch list closure report",
+      "acceptance_criteria": "Open punch items < 10% of total"
+    },
+    {
+      "id": "T065",
+      "title": "Piping hydrotest, flushing, and chemical cleaning",
+      "description": "Hydrostatically test all process piping; flush with water or chemical clean as required per system criticality",
+      "phase": 5,
+      "discipline": "Commissioning",
+      "estimated_hours": 400,
+      "priority": "critical",
+      "dependencies": [
+        "T063"
+      ],
+      "deliverables": "Hydrotest and flushing completion report",
+      "acceptance_criteria": "All systems tested per piping code"
+    },
+    {
+      "id": "T066",
+      "title": "Instrument loop checks",
+      "description": "Verify all instrument loops: sensor \u2192 DCS indication, control valve stroke test, analyser calibration",
+      "phase": 5,
+      "discipline": "Commissioning",
+      "estimated_hours": 200,
+      "priority": "high",
+      "dependencies": [
+        "T057",
+        "T064"
+      ],
+      "deliverables": "Loop check completion report",
+      "acceptance_criteria": "All loops checked and documented"
+    },
+    {
+      "id": "T067",
+      "title": "Electrical megger checks and motor run-in",
+      "description": "Megger all motor feeders, perform motor solo run tests, check rotation direction and vibration",
+      "phase": 5,
+      "discipline": "Commissioning",
+      "estimated_hours": 160,
+      "priority": "high",
+      "dependencies": [
+        "T057",
+        "T064"
+      ],
+      "deliverables": "Motor run-in report",
+      "acceptance_criteria": "All motors operate correctly uncoupled"
+    },
+    {
+      "id": "T068",
+      "title": "Control system (DCS/SCADA) checkout",
+      "description": "Check DCS/SCADA configuration, interlock logic, alarm setpoints, control loop tuning, and operator interface",
+      "phase": 5,
+      "discipline": "Commissioning",
+      "estimated_hours": 240,
+      "priority": "critical",
+      "dependencies": [
+        "T066",
+        "T057"
+      ],
+      "deliverables": "DCS checkout report",
+      "acceptance_criteria": "All interlocks verified, alarms tested"
+    },
+    {
+      "id": "T069",
+      "title": "Refractory dry-out for gasifier",
+      "description": "Perform controlled refractory dry-out per manufacturer specification; monitor temperature gradient and moisture evolution",
+      "phase": 5,
+      "discipline": "Gasification",
+      "estimated_hours": 80,
+      "priority": "critical",
+      "dependencies": [
+        "T063",
+        "T055"
+      ],
+      "deliverables": "Refractory dry-out certificate",
+      "acceptance_criteria": "Refractory cured per manufacturer spec"
+    },
+    {
+      "id": "T070",
+      "title": "Catalyst loading (methanol synthesis reactor)",
+      "description": "Load Cu/ZnO/Al2O3 catalyst into methanol synthesis reactor per licensor procedure; verify bed levels and pressure drop",
+      "phase": 5,
+      "discipline": "Commissioning",
+      "estimated_hours": 80,
+      "priority": "critical",
+      "dependencies": [
+        "T058",
+        "T055",
+        "T068"
+      ],
+      "deliverables": "Catalyst loading certificate",
+      "acceptance_criteria": "Catalyst loaded per licensor procedure"
+    },
+    {
+      "id": "T071",
+      "title": "Dry-run of biomass handling system",
+      "description": "Operate biomass handling system with inert material (sawdust or wood chips) to verify conveyors, screens, magnets, and feeding",
+      "phase": 5,
+      "discipline": "Feedstock",
+      "estimated_hours": 60,
+      "priority": "high",
+      "dependencies": [
+        "T049",
+        "T064"
+      ],
+      "deliverables": "Dry-run completion report",
+      "acceptance_criteria": "Handling system operates at design rate for 4 hours"
+    },
+    {
+      "id": "T072",
+      "title": "Safety system function tests (ESD, fire & gas)",
+      "description": "Test emergency shutdown system, fire and gas detection, deluge/ sprinkler, and alarm system per approved test script",
+      "phase": 5,
+      "discipline": "HSE",
+      "estimated_hours": 120,
+      "priority": "critical",
+      "dependencies": [
+        "T068",
+        "T062"
+      ],
+      "deliverables": "Safety system test report",
+      "acceptance_criteria": "All safety functions verified"
+    },
+    {
+      "id": "T073",
+      "title": "Flare system check and purging",
+      "description": "Verify flare system integrity: KO drum, seal drum, purge gas rate, pilot ignition, and radiation contours",
+      "phase": 5,
+      "discipline": "Commissioning",
+      "estimated_hours": 40,
+      "priority": "high",
+      "dependencies": [
+        "T063",
+        "T065"
+      ],
+      "deliverables": "Flare system certificate",
+      "acceptance_criteria": "Flare operational with reliable pilot"
+    },
+    {
+      "id": "T074",
+      "title": "Pre-start-up safety review (PSSR)",
+      "description": "Conduct PSSR walkthrough per system; verify all HAZOP recommendations resolved, safety systems operational, and procedures in place",
+      "phase": 5,
+      "discipline": "HSE",
+      "estimated_hours": 120,
+      "priority": "critical",
+      "dependencies": [
+        "T072",
+        "T064",
+        "T034"
+      ],
+      "deliverables": "PSSR sign-off",
+      "acceptance_criteria": "All HAZOP recommendations closed; PSSR team recommends start-up"
+    },
+    {
+      "id": "T075",
+      "title": "Operations team training and certification",
+      "description": "Train operations and maintenance teams on plant systems, SOPs, safety procedures, and emergency response",
+      "phase": 5,
+      "discipline": "Operations",
+      "estimated_hours": 240,
+      "priority": "high",
+      "dependencies": [
+        "T059"
+      ],
+      "deliverables": "Training completion records",
+      "acceptance_criteria": "All operators certified for their shift role"
+    },
+    {
+      "id": "T076",
+      "title": "Biomass feeding trials",
+      "description": "Graduated feeding trials from 10% to 100% design rate; monitor feeder reliability, bridging, and material flow",
+      "phase": 6,
+      "discipline": "Commissioning",
+      "estimated_hours": 120,
+      "priority": "critical",
+      "dependencies": [
+        "T071",
+        "T069",
+        "T074"
+      ],
+      "deliverables": "Feeding trial report",
+      "acceptance_criteria": "Sustained feeding at 100% design rate for 4 hours"
+    },
+    {
+      "id": "T077",
+      "title": "Gasifier light-up and refractory heat-up",
+      "description": "Light gasifier pilot burners, gradually increase temperature to gasification range; monitor refractory, heat profile, and emissions",
+      "phase": 6,
+      "discipline": "Gasification",
+      "estimated_hours": 80,
+      "priority": "critical",
+      "dependencies": [
+        "T069",
+        "T076",
+        "T074"
+      ],
+      "deliverables": "Gasifier start-up log",
+      "acceptance_criteria": "Stable gasification temperature achieved"
+    },
+    {
+      "id": "T078",
+      "title": "Syngas production ramping",
+      "description": "Increase biomass feed rate to design condition; monitor syngas composition (CO, H2, CO2, CH4), tar content, and temperature profile",
+      "phase": 6,
+      "discipline": "Gasification",
+      "estimated_hours": 120,
+      "priority": "critical",
+      "dependencies": [
+        "T077"
+      ],
+      "deliverables": "Syngas production report",
+      "acceptance_criteria": "Design syngas flow and composition within spec"
+    },
+    {
+      "id": "T079",
+      "title": "Syngas cleanup system validation",
+      "description": "Verify tar removal, particulate filtration, H2S/COS removal, HCl removal, and guard bed performance at design conditions",
+      "phase": 6,
+      "discipline": "Syngas Cleanup",
+      "estimated_hours": 160,
+      "priority": "critical",
+      "dependencies": [
+        "T078"
+      ],
+      "deliverables": "Syngas cleanup validation report",
+      "acceptance_criteria": "Output syngas meets methanol synthesis inlet spec (tar < 50 mg/Nm3, S < 0.1 ppmv, Cl < 1 ppmv)"
+    },
+    {
+      "id": "T080",
+      "title": "Methanol synthesis loop start-up",
+      "description": "Catalyst reduction, loop pressurisation, syngas introduction, methanol formation, and recycle loop establishment",
+      "phase": 6,
+      "discipline": "Methanol Synthesis",
+      "estimated_hours": 120,
+      "priority": "critical",
+      "dependencies": [
+        "T070",
+        "T079"
+      ],
+      "deliverables": "Methanol synthesis start-up report",
+      "acceptance_criteria": "Stable methanol production at 50%+ design rate"
+    },
+    {
+      "id": "T081",
+      "title": "Crude methanol production and analysis",
+      "description": "Collect crude methanol samples; analyse for water, ethanol, higher alcohols, and impurities",
+      "phase": 6,
+      "discipline": "Methanol Synthesis",
+      "estimated_hours": 40,
+      "priority": "high",
+      "dependencies": [
+        "T080"
+      ],
+      "deliverables": "Crude methanol analysis report",
+      "acceptance_criteria": "Crude composition within expected range for distillation"
+    },
+    {
+      "id": "T082",
+      "title": "Distillation start-up and product quality adjustment",
+      "description": "Start distillation columns, establish reflux, adjust operating parameters to achieve IMPCA-grade methanol",
+      "phase": 6,
+      "discipline": "Methanol Synthesis",
+      "estimated_hours": 80,
+      "priority": "critical",
+      "dependencies": [
+        "T080",
+        "T021"
+      ],
+      "deliverables": "Product methanol batch analysis",
+      "acceptance_criteria": "Product meets IMPCA spec (min 99.85 wt% methanol)"
+    },
+    {
+      "id": "T083",
+      "title": "Product methanol loading to storage",
+      "description": "Transfer on-spec product to methanol storage tanks; verify tank blanketing, level instrumentation, and loading system",
+      "phase": 6,
+      "discipline": "Operations",
+      "estimated_hours": 40,
+      "priority": "high",
+      "dependencies": [
+        "T082"
+      ],
+      "deliverables": "Product transfer report",
+      "acceptance_criteria": "Product accepted into storage"
+    },
+    {
+      "id": "T084",
+      "title": "Performance guarantee test run",
+      "description": "72-100 hour continuous run at nameplate capacity under design conditions; monitor all performance parameters per guarantee",
+      "phase": 6,
+      "discipline": "Commissioning",
+      "estimated_hours": 200,
+      "priority": "critical",
+      "dependencies": [
+        "T082",
+        "T079",
+        "T078"
+      ],
+      "deliverables": "Performance test report",
+      "acceptance_criteria": "All performance guarantees met (capacity, consumption, quality, emissions)"
+    },
+    {
+      "id": "T085",
+      "title": "Emissions compliance testing",
+      "description": "Measure stack emissions, fugitive emissions, wastewater quality, and noise levels; compare with permit conditions",
+      "phase": 6,
+      "discipline": "HSE",
+      "estimated_hours": 80,
+      "priority": "high",
+      "dependencies": [
+        "T084"
+      ],
+      "deliverables": "Emissions compliance report",
+      "acceptance_criteria": "All measured parameters within permit limits"
+    },
+    {
+      "id": "T086",
+      "title": "By-product management verification",
+      "description": "Validate ash/char handling, wastewater treatment, off-gas treatment (flare/thermal oxidiser), and any solid waste streams",
+      "phase": 6,
+      "discipline": "Utilities",
+      "estimated_hours": 60,
+      "priority": "medium",
+      "dependencies": [
+        "T084"
+      ],
+      "deliverables": "By-product management report",
+      "acceptance_criteria": "All waste streams managed per regulatory requirement"
+    },
+    {
+      "id": "T087",
+      "title": "Interim acceptance certificate (IAC)",
+      "description": "Prepare and negotiate interim acceptance certificate with EPC contractor; document exceptions and punch list",
+      "phase": 6,
+      "discipline": "PMO",
+      "estimated_hours": 80,
+      "priority": "critical",
+      "dependencies": [
+        "T084",
+        "T085"
+      ],
+      "deliverables": "Signed IAC",
+      "acceptance_criteria": "Certificate signed by owner and contractor"
+    },
+    {
+      "id": "T088",
+      "title": "Operations and maintenance manual handover",
+      "description": "Compile and hand over O&M manuals, equipment data sheets, vendor manuals, lubrication schedules, and inspection plans",
+      "phase": 7,
+      "discipline": "Operations",
+      "estimated_hours": 120,
+      "priority": "high",
+      "dependencies": [
+        "T087"
+      ],
+      "deliverables": "O&M manual set",
+      "acceptance_criteria": "All manuals reviewed and accepted by operations team"
+    },
+    {
+      "id": "T089",
+      "title": "Spare parts inventory and warehouse transfer",
+      "description": "Inventory all spare parts, consumables, and consumables; transfer to operations warehouse with inventory management system",
+      "phase": 7,
+      "discipline": "Operations",
+      "estimated_hours": 80,
+      "priority": "medium",
+      "dependencies": [
+        "T087"
+      ],
+      "deliverables": "Spare parts inventory report",
+      "acceptance_criteria": "Inventory reconciled with procurement list"
+    },
+    {
+      "id": "T090",
+      "title": "Reliability and availability tracking",
+      "description": "Establish reliability tracking system; begin logging equipment runtime, failures, downtime for guarantee period",
+      "phase": 7,
+      "discipline": "Operations",
+      "estimated_hours": 60,
+      "priority": "high",
+      "dependencies": [
+        "T084",
+        "T088"
+      ],
+      "deliverables": "Reliability tracking setup",
+      "acceptance_criteria": "System operational with baseline data"
+    },
+    {
+      "id": "T091",
+      "title": "Catalyst performance monitoring",
+      "description": "Monitor methanol synthesis catalyst performance: conversion per pass, pressure drop, temperature profile, by-product formation",
+      "phase": 7,
+      "discipline": "Operations",
+      "estimated_hours": 40,
+      "priority": "high",
+      "dependencies": [
+        "T084",
+        "T070"
+      ],
+      "deliverables": "Catalyst performance baseline",
+      "acceptance_criteria": "Baseline established at design conditions"
+    },
+    {
+      "id": "T092",
+      "title": "Feedstock optimisation plan",
+      "description": "Develop feedstock blending and moisture management strategy to optimise gasifier performance and methanol yield",
+      "phase": 7,
+      "discipline": "Feedstock",
+      "estimated_hours": 60,
+      "priority": "medium",
+      "dependencies": [
+        "T088",
+        "T010"
+      ],
+      "deliverables": "Feedstock optimisation plan",
+      "acceptance_criteria": "Plan approved by operations manager"
+    },
+    {
+      "id": "T093",
+      "title": "Syngas ratio fine-tuning",
+      "description": "Optimise H2/CO/CO2 ratio through WGS bypass, CO2 removal/recycle, and/or H2 addition for maximum methanol yield",
+      "phase": 7,
+      "discipline": "Operations",
+      "estimated_hours": 60,
+      "priority": "high",
+      "dependencies": [
+        "T091",
+        "T079"
+      ],
+      "deliverables": "Ratio optimisation report",
+      "acceptance_criteria": "Stoichiometric number (SN) maintained at 2.0 \u00b1 0.1"
+    },
+    {
+      "id": "T094",
+      "title": "Energy efficiency improvement program",
+      "description": "Identify and implement energy-saving measures: heat recovery, steam management, insulation upgrades, process optimisation",
+      "phase": 7,
+      "discipline": "Process",
+      "estimated_hours": 80,
+      "priority": "medium",
+      "dependencies": [
+        "T088"
+      ],
+      "deliverables": "Energy efficiency report",
+      "acceptance_criteria": "Energy consumption within 5% of design target"
+    },
+    {
+      "id": "T095",
+      "title": "Environmental compliance reporting",
+      "description": "Submit first periodic environmental compliance report; establish ongoing monitoring and reporting cadence",
+      "phase": 7,
+      "discipline": "HSE",
+      "estimated_hours": 60,
+      "priority": "high",
+      "dependencies": [
+        "T085"
+      ],
+      "deliverables": "Environmental compliance report",
+      "acceptance_criteria": "Report accepted by regulatory authority"
+    },
+    {
+      "id": "T096",
+      "title": "Operator training completion for steady-state operations",
+      "description": "Complete operator training on normal operations, start-up, shutdown, emergency response, and troubleshooting",
+      "phase": 7,
+      "discipline": "Operations",
+      "estimated_hours": 120,
+      "priority": "high",
+      "dependencies": [
+        "T087",
+        "T075"
+      ],
+      "deliverables": "Operator training certificate",
+      "acceptance_criteria": "All operators assessed as competent"
+    },
+    {
+      "id": "T097",
+      "title": "Final acceptance certificate (FAC)",
+      "description": "Prepare and negotiate final acceptance certificate with EPC contractor; close all exceptions and punch list items",
+      "phase": 7,
+      "discipline": "PMO",
+      "estimated_hours": 80,
+      "priority": "critical",
+      "dependencies": [
+        "T087",
+        "T084",
+        "T090"
+      ],
+      "deliverables": "Signed FAC",
+      "acceptance_criteria": "Certificate signed; warranty period begins"
+    },
+    {
+      "id": "T098",
+      "title": "Lessons learned report",
+      "description": "Compile lessons learned across all phases: technical, commercial, project management, and organisational",
+      "phase": 7,
+      "discipline": "PMO",
+      "estimated_hours": 60,
+      "priority": "medium",
+      "dependencies": [
+        "T097"
+      ],
+      "deliverables": "Lessons learned report",
+      "acceptance_criteria": "Report reviewed with management"
+    },
+    {
+      "id": "T099",
+      "title": "Continuous improvement program launch",
+      "description": "Establish continuous improvement framework with KPIs, targets, review cadence, and improvement project pipeline",
+      "phase": 7,
+      "discipline": "Operations",
+      "estimated_hours": 60,
+      "priority": "medium",
+      "dependencies": [
+        "T097",
+        "T093"
+      ],
+      "deliverables": "CIP charter",
+      "acceptance_criteria": "Program approved and launched"
+    },
+    {
+      "id": "T100",
+      "title": "Define IMPCA Methanol Specification Compliance Targets",
+      "description": "Document the IMPCA (International Methanol Producers and Consumers Association) methanol specification requirements including purity (min 99.85 wt%), water content, ethanol, acetone, and other impurities; map to process design targets",
+      "phase": 2,
+      "discipline": "Process",
+      "estimated_hours": 40,
+      "priority": "high",
+      "dependencies": [
+        "T021"
+      ],
+      "deliverables": "IMPCA spec compliance matrix; process parameter targets for each impurity",
+      "acceptance_criteria": "All IMPCA parameters mapped to process design or distillation specifications"
+    },
+    {
+      "id": "T101",
+      "title": "Establish Methanol Quality Control Lab & Test Procedures",
+      "description": "Set up on-site or contracted quality control laboratory with ASTM/ISO test methods for methanol purity, water content (Karl Fischer), ethanol (GC), acidity, color, and density; define sampling frequency and chain-of-custody",
+      "phase": 3,
+      "discipline": "QA/QC",
+      "estimated_hours": 120,
+      "priority": "high",
+      "dependencies": [
+        "T100"
+      ],
+      "deliverables": "QC lab setup checklist; test procedure manual; sampling schedule; COA template",
+      "acceptance_criteria": "Lab equipped and calibrated; all test methods validated; QC team trained on procedures"
+    },
+    {
+      "id": "T102",
+      "title": "Develop Product Certification & Chain-of-Custody Documentation (ISCC / RSB)",
+      "description": "Prepare documentation for green methanol sustainability certification under ISCC EU or RSB \u2014 including mass balance, greenhouse gas calculation, chain-of-custody audit trail, and feedstock sustainability declaration",
+      "phase": 3,
+      "discipline": "Process",
+      "estimated_hours": 160,
+      "priority": "high",
+      "dependencies": [
+        "T034"
+      ],
+      "deliverables": "Certification evidence package; GHG calculation model; mass balance documentation system",
+      "acceptance_criteria": "Certification body pre-audit passes; evidence package complete for formal audit"
+    },
+    {
+      "id": "T103",
+      "title": "Conduct Methanol Product Quality Validation During Commissioning",
+      "description": "During commissioning runs, sample and test crude and fuel-grade methanol at each distillation stage; verify IMPCA spec compliance across full operating range; document batch certificate of analysis",
+      "phase": 6,
+      "discipline": "QA/QC",
+      "estimated_hours": 120,
+      "priority": "critical",
+      "dependencies": [
+        "T083",
+        "T101"
+      ],
+      "deliverables": "Commissioning COA batch records; spec compliance report for the performance test run",
+      "acceptance_criteria": "First product batch meets all IMPCA specification parameters; COA issued for commercial sales"
+    },
+    {
+      "id": "T104",
+      "title": "Establish Ongoing Product Quality Monitoring & Steady-State Certification",
+      "description": "Set up routine quality monitoring programme \u2014 daily QC checks, weekly full analysis, monthly certification body reporting; maintain chain-of-custody records for sustainability certification renewals",
+      "phase": 7,
+      "discipline": "QA/QC",
+      "estimated_hours": 80,
+      "priority": "medium",
+      "dependencies": [
+        "T103"
+      ],
+      "deliverables": "Quality monitoring SOP; daily/weekly/monthly test schedule; sustainability certification renewal calendar",
+      "acceptance_criteria": "Quality monitoring plan accepted by operations; certification renewal cycle established"
+    }
+  ],
+  "version": "1.1.0"
+}

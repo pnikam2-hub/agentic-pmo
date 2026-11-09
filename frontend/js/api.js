@@ -84,4 +84,11 @@ const api = {
   listTemplates() { return apiRequest('GET', '/templates'); },
   getTemplate(id) { return apiRequest('GET', `/templates/${id}`); },
   applyTemplate(tid, pid) { return apiRequest('POST', `/templates/${tid}/apply`, { project_id: pid }); },
+
+  // Domain packs
+  listPacks() { return apiRequest('GET', '/packs'); },
+  getPack(id) { return apiRequest('GET', `/packs/${id}`); },
+  applyPack(id, payload) { return apiRequest('POST', `/packs/${id}/apply`, payload); },
+  getProjectPack(pid) { return apiRequest('GET', `/projects/${pid}/pack`); },
+  detachPack(pid) { return apiRequest('DELETE', `/projects/${pid}/pack`); },
 };

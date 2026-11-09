@@ -25,6 +25,11 @@ async def run_plan_agent(project_id: int, db: Session, additional_context: str =
 
     context = f"{project.goal}\n{project.description}\n{additional_context}"
 
+    from backend import packs as packlib
+    domain = packlib.agent_context(packlib.for_project(db, project_id), "plan")
+    if domain:
+        context = f"{context}\n\n{domain}"
+
     raw = await llm_service.generate_plan(project.name, project.goal or project.name, context)
     data = parse_json_response(raw)
 

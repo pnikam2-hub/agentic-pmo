@@ -1,0 +1,167 @@
+{
+  "pack": "buildings_realestate",
+  "activities": [
+    {
+      "activity": "Tower crane final dismantle and removal",
+      "phase": "Phase 6",
+      "prerequisites": ["All heavy roof plant lifts completed", "Auxiliary mobile crane positioned and lift plan approved", "Dismantle sequence engineered and checked", "Weather window within wind limits"],
+      "procedure_required": "Engineered top-down dismantle per crane manufacturer sequence with exclusion zone management, component tagging, and make-good of tie and base locations",
+      "safety_hold_point": "Hold before each section lowering — confirm exclusion zone clear and wind below limit; hold before removing final tie to verify crane stability state",
+      "acceptance_criteria": "Crane fully removed without incident; roof and core make-good inspected and waterproofed; dismantle records filed",
+      "responsible_role": "Construction Manager"
+    },
+    {
+      "activity": "Basement/substructure waterproofing certification",
+      "phase": "Phase 7",
+      "prerequisites": ["All membrane works complete", "Electronic leak detection sweeps passed", "Penetration sealing complete", "Observation period after rainfall events"],
+      "procedure_required": "Review of installer QA records, leak detection reports, and visual inspection of accessible areas; compile warranty registration dossier",
+      "safety_hold_point": "Confined space entry permits for basement inspection areas with atmospheric testing",
+      "acceptance_criteria": "Zero active ingress observed; documentation complete; manufacturer warranty registered and issued to client",
+      "responsible_role": "Quality Manager"
+    },
+    {
+      "activity": "Core-to-floor transfer inspection",
+      "phase": "Phase 6",
+      "prerequisites": ["Core walls at handover level cured to design strength", "Floor slab connections complete", "Survey control transferred and verified"],
+      "procedure_required": "Dimensional and plumb survey of core relative to floor grids, verification of bearing surfaces, embedment and sleeve positions against coordinated drawings",
+      "safety_hold_point": "Edge protection verified complete before inspection teams access slab perimeter",
+      "acceptance_criteria": "Tolerances within specification; all embeds match MEP coordinated positions; survey report signed by engineer",
+      "responsible_role": "Site Engineer"
+    },
+    {
+      "activity": "Post-tensioning stress and grout compliance verification",
+      "phase": "Phase 6",
+      "prerequisites": ["Concrete reached specified transfer strength", "Calibrated stressing equipment certificates current", "Grout materials batch-tested"],
+      "procedure_required": "Audit of elongation records against calculations for sampled tendons per floor, grout cube results review, vent return observations, anchorage seating checks",
+      "safety_hold_point": "Exclusion zone behind anchorage during stressing; no personnel in line of strand release path",
+      "acceptance_criteria": "Sampled elongations within +/-7%; grout cubes pass; no unexplained anomalies; compliance dossier complete per floor",
+      "responsible_role": "Structural Engineer"
+    },
+    {
+      "activity": "Curtain wall air/water infiltration test",
+      "phase": "Phase 6",
+      "prerequisites": ["Test zone fully installed and sealed internally", "Internal finishes withheld in zone", "Test chamber rigged", "Ambient conditions suitable"],
+      "procedure_required": "Chambered air permeability test to specified pressure differentials followed by water spray test per ASTM/AAMA-equivalent method with interior observation",
+      "safety_hold_point": "Exterior access suspended beneath test zone during pressurisation; chamber structural attachment verified",
+      "acceptance_criteria": "Air leakage and water penetration within specified limits; any failure diagnosed, rectified, and retested successfully",
+      "responsible_role": "Facade Manager"
+    },
+    {
+      "activity": "Cladding fire performance evidence review",
+      "phase": "Phase 6",
+      "prerequisites": ["All panel and insulation consignments delivered", "Certificates collected per batch", "Cavity barrier installation records complete"],
+      "procedure_required": "Systematic review of fire classification certificates against specification for every installed batch; audit of cavity barrier photographic records per floor; golden-thread compilation",
+      "safety_hold_point": "No zone declared complete until evidence review closes without non-conformance",
+      "acceptance_criteria": "100% batch traceability to compliant certificates; barrier continuity records complete; dossier accepted by building control reviewer",
+      "responsible_role": "Facade Manager"
+    },
+    {
+      "activity": "MEP riser vertical continuity test",
+      "phase": "Phase 7",
+      "prerequisites": ["All riser sections installed floor-to-roof", "Sectional tests passed", "Valve and damper lineups configured"],
+      "procedure_required": "End-to-end pressure/continuity testing of each riser (hydraulic, electrical busbar, ventilation) verifying no cross-connection losses or discontinuities across all levels",
+      "safety_hold_point": "Electrical riser energisation only after insulation resistance verification and permit-to-energise sign-off",
+      "acceptance_criteria": "Each riser holds test parameters end-to-end; records per riser signed by MEP Coordinator",
+      "responsible_role": "MEP Coordinator"
+    },
+    {
+      "activity": "Elevator/escalator commissioning including safe-mode wet test",
+      "phase": "Phase 7",
+      "prerequisites": ["Shafts handed over and plumb", "Power available at machine rooms", "Fire alarm interface ready", "Machine room access controlled"],
+      "procedure_required": "OEM commissioning: dynamic runs at contract speed, levelling, door operations, safety circuits, firefighter recall and evacuation modes, escalator safety device chain, ride quality measurement",
+      "safety_hold_point": "Shaft entry under controlled access only; hoistway doors locked out during rope/counterweight work; no ride tests with unprotected openings",
+      "acceptance_criteria": "All safety tests pass including firefighter mode witnessed; ride quality within specification; handover files complete per unit",
+      "responsible_role": "Lift/Elevator Specialist"
+    },
+    {
+      "activity": "Fire alarm cause and effect test",
+      "phase": "Phase 7",
+      "prerequisites": ["All devices installed and addressed", "Interfaces to smoke control, lifts, access control, and BMS complete", "Matrix frozen and approved"],
+      "procedure_required": "Systematic activation of every detector/manual call point scenario demonstrating the full cause-and-effect matrix responses, witnessed and recorded cell by cell",
+      "safety_hold_point": "Lift homing/recall verified before any lift remains in service during tests; occupants excluded from test floors",
+      "acceptance_criteria": "100% matrix cells demonstrated and witnessed by fire engineer and authority representative; deficiencies rectified and re-demonstrated",
+      "responsible_role": "Commissioning Engineer"
+    },
+    {
+      "activity": "Fire suppression sprinkler hydrostatic test",
+      "phase": "Phase 7",
+      "prerequisites": ["Pipework complete per floor and risers", "All joints accessible for inspection", "Drainage arranged for test water"],
+      "procedure_required": "Hydrostatic test at 1.5x maximum working pressure (min 2-hour hold) floor by floor and on rising mains; fire pump churn, duty, and standby tests with curve recording",
+      "safety_hold_point": "Pressure relief verified before pressurisation; exclusion during pressurised hold at weak points",
+      "acceptance_criteria": "Zero pressure loss over hold period; pump curves meet design duty; certificates issued per zone",
+      "responsible_role": "Commissioning Engineer"
+    },
+    {
+      "activity": "BMS point-to-point commissioning",
+      "phase": "Phase 7",
+      "prerequisites": ["Field devices installed and powered", "Network infrastructure live", "Points list baselined", "Third-party integrations reachable"],
+      "procedure_required": "Verify every input/output end-to-end from field device through controller to head-end graphics; test trends, alarms, and integration handshakes with fire, lifts, and metering",
+      "safety_hold_point": "No control writes to life-safety systems during testing without fire engineer approval",
+      "acceptance_criteria": "100% points verified correct; integration alarms tested; as-tested points list archived",
+      "responsible_role": "Commissioning Engineer"
+    },
+    {
+      "activity": "Smoke control and stair pressurisation system test",
+      "phase": "Phase 7",
+      "prerequisites": ["Fans, dampers, and vents installed", "Fire alarm interface proven", "Doors and pressure relief arrangements complete"],
+      "procedure_required": "Performance testing of smoke extract and stair/lobby pressurisation per design scenarios: measure pressure differentials, airflow rates, and damper sequences floor by floor",
+      "safety_hold_point": "Floors under test evacuated of unrelated trades; fan test areas barricaded",
+      "acceptance_criteria": "Measured values within fire strategy tolerances for every scenario; report accepted by fire engineer",
+      "responsible_role": "Commissioning Engineer"
+    },
+    {
+      "activity": "Facade access cradle load test",
+      "phase": "Phase 6",
+      "prerequisites": ["BMU installed and track aligned", "Power and controls live", "Wire ropes certified and terminated"],
+      "procedure_required": "Static and dynamic load tests at 125% rated load, travel over full track range, emergency lowering drill, and rescue procedure rehearsal",
+      "safety_hold_point": "Exclusion zone below cradle travel path during load testing; no personnel under suspended loads",
+      "acceptance_criteria": "Load tests pass without deformation or malfunction; rescue drill completed within target time; certification issued",
+      "responsible_role": "Facade Manager"
+    },
+    {
+      "activity": "Slab-to-facade void sealing verification",
+      "phase": "Phase 6",
+      "prerequisites": ["Curtain wall installed in zone", "Fire-stopping materials approved", "Services penetrations through perimeter complete"],
+      "procedure_required": "Bay-by-bay inspection of perimeter fire barriers and weather seals: continuity, compression, and support verification with photographic records per floor",
+      "safety_hold_point": "Work at perimeter only with edge protection and harness anchorages verified",
+      "acceptance_criteria": "100% perimeter bays inspected with no gaps in fire barrier continuity; photographic record appended to handover dossier",
+      "responsible_role": "Quality Manager"
+    },
+    {
+      "activity": "Building control final inspection",
+      "phase": "Phase 7",
+      "prerequisites": ["All stage inspections signed off", "Life-safety commissioning complete", "Completion evidence pack assembled"],
+      "procedure_required": "Accompanied inspection by building control body covering structure, fire systems, accessibility, energy compliance evidence, and drainage; respond to observations",
+      "safety_hold_point": "Safe access provided to all inspection areas including roofs and plant; live systems flagged to inspectors",
+      "acceptance_criteria": "Completion certificate issued with no outstanding material contraventions",
+      "responsible_role": "Permitting Lead"
+    },
+    {
+      "activity": "Snagging and handover walkdown",
+      "phase": "Phase 7",
+      "prerequisites": ["Practical completion prerequisites met", "Snagging platform populated", "Client and operator representatives available"],
+      "procedure_required": "Joint room-by-room and plant-room walkdowns recording snags with categories and owners; verify documentation, keys, access devices, and demo of systems to operators",
+      "safety_hold_point": "Live electrical and rotating plant access only with escorts and PPE per area rules",
+      "acceptance_criteria": "Practical completion declared; Category A snags zero; agreed minor items scheduled within defects liability period",
+      "responsible_role": "Project Manager"
+    },
+    {
+      "activity": "Emergency lighting duration test",
+      "phase": "Phase 7",
+      "prerequisites": ["Emergency luminaires installed and charged", "Normal supply stable", "Logbook prepared"],
+      "procedure_required": "Full-rated duration discharge test of emergency lighting circuits across escape routes, stairs, and lift lobbies; verify illumination levels and changeover function",
+      "safety_hold_point": "Test conducted out of hours with temporary lighting arranged; areas with reduced lighting barricaded or escorted",
+      "acceptance_criteria": "All luminaires sustain rated duration at required illuminance; results logged per circuit in emergency lighting logbook",
+      "responsible_role": "Commissioning Engineer"
+    },
+    {
+      "activity": "Cooling/heating plant commissioning",
+      "phase": "Phase 7",
+      "prerequisites": ["Chillers/boilers/heat pumps installed", "Water systems flushed and treated", "Power and controls available", "Seasonal conditions suitable or simulated loads arranged"],
+      "procedure_required": "Performance commissioning of central plant: capacity tests, sequence-of-operation verification, stability tuning, metering validation, and part-load behaviour checks",
+      "safety_hold_point": "Rotating machinery guarding verified; refrigerant handling by certified technicians; isolation locks applied during intervention",
+      "acceptance_criteria": "Plant achieves design capacities and stable control sequences; performance report accepted; seasonal commissioning visits scheduled",
+      "responsible_role": "Commissioning Engineer"
+    }
+  ]
+}

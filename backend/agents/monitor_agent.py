@@ -30,6 +30,12 @@ async def run_monitor_agent(project_id: int, db: Session) -> dict:
         )
 
     tasks_summary = "\n".join(task_lines)
+
+    from backend import packs as packlib
+    domain = packlib.agent_context(packlib.for_project(db, project_id), "monitor")
+    if domain:
+        tasks_summary = f"{tasks_summary}\n\n{domain}"
+
     raw = await llm_service.monitor_tasks(project.name, tasks_summary)
     data = parse_json_response(raw)
 

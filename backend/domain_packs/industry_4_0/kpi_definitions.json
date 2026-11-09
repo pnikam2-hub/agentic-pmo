@@ -1,0 +1,451 @@
+{
+  "pack": "industry_4_0",
+  "version": "1.1.0",
+  "total_kpis": 31,
+  "dimension_counts": {
+    "Operational": 7,
+    "Maintenance": 5,
+    "Data & Visibility": 5,
+    "AI/ML": 5,
+    "Cybersecurity": 4,
+    "Financial & ROI": 5
+  },
+  "kpis": [
+    {
+      "kpi_id": "KPI01",
+      "name": "Overall Equipment Effectiveness (OEE)",
+      "description": "Composite measure of availability, performance, and quality that quantifies how effectively a line produces good product against planned time.",
+      "unit": "%",
+      "frequency": "Shift / Daily",
+      "target": ">= 85 (world class); +5-10 pts vs. baseline",
+      "formula": "OEE = Availability x Performance x Quality = (Run Time / Planned Production Time) x (Ideal Cycle Time / Total Count) x (Good Count / Total Count)",
+      "source": "Historian + MES + context layer",
+      "related_phase": [
+        1,
+        5,
+        6
+      ]
+    },
+    {
+      "kpi_id": "KPI02",
+      "name": "Throughput per Line / Shift",
+      "description": "Number of good units produced per line or shift, indicating productive output over time.",
+      "unit": "units/hour (or units/shift)",
+      "frequency": "Shift / Hourly",
+      "target": "+10-15% vs. baseline",
+      "formula": "Good Count produced / Run Time",
+      "source": "MES + historian",
+      "related_phase": [
+        5,
+        6
+      ]
+    },
+    {
+      "kpi_id": "KPI03",
+      "name": "Cycle Time per Module",
+      "description": "Average time to complete one module through the line, indicating process speed and bottlenecks.",
+      "unit": "seconds/module",
+      "frequency": "Hourly",
+      "target": "Within takt time; -5-10% vs. baseline",
+      "formula": "Total production time / Total modules produced",
+      "source": "Historian (machine timestamps)",
+      "related_phase": [
+        1,
+        5,
+        6
+      ]
+    },
+    {
+      "kpi_id": "KPI04",
+      "name": "First-Pass Yield (FPY)",
+      "description": "Percentage of units that pass all quality checks the first time without rework, a key indicator of process quality.",
+      "unit": "%",
+      "frequency": "Shift / Daily",
+      "target": "+1-3 pts vs. baseline (high-value driver)",
+      "formula": "Units passing first time / Total units started x 100",
+      "source": "QMS + MES + vision system",
+      "related_phase": [
+        5,
+        6
+      ]
+    },
+    {
+      "kpi_id": "KPI05",
+      "name": "Rework Rate",
+      "description": "Proportion of units requiring rework, signaling quality issues and hidden capacity loss.",
+      "unit": "%",
+      "frequency": "Daily",
+      "target": "-20-30% vs. baseline",
+      "formula": "Units reworked / Total units produced x 100",
+      "source": "QMS + MES",
+      "related_phase": [
+        5,
+        6
+      ]
+    },
+    {
+      "kpi_id": "KPI06",
+      "name": "Scrap Rate",
+      "description": "Proportion of units scrapped as unrecoverable, directly tied to material and yield loss.",
+      "unit": "%",
+      "frequency": "Daily",
+      "target": "-15-25% vs. baseline",
+      "formula": "Units scrapped / Total units produced x 100",
+      "source": "QMS + MES",
+      "related_phase": [
+        5,
+        6
+      ]
+    },
+    {
+      "kpi_id": "KPI07",
+      "name": "Changeover Time",
+      "description": "Average time to switch a line from one product/setup to another, a lever for flexibility and OEE.",
+      "unit": "minutes",
+      "frequency": "Per changeover / Weekly avg",
+      "target": "-30-50% vs. baseline (SMED)",
+      "formula": "Time from last good A to first good B",
+      "source": "MES + historian",
+      "related_phase": [
+        5,
+        6
+      ]
+    },
+    {
+      "kpi_id": "KPI08",
+      "name": "Mean Time Between Failures (MTBF)",
+      "description": "Average operating time between unplanned equipment failures, indicating reliability.",
+      "unit": "hours",
+      "frequency": "Monthly",
+      "target": "+20-30% vs. baseline",
+      "formula": "Total operating time / Number of failures",
+      "source": "CMMS + historian",
+      "related_phase": [
+        4,
+        6
+      ]
+    },
+    {
+      "kpi_id": "KPI09",
+      "name": "Mean Time To Repair (MTTR)",
+      "description": "Average time to restore equipment after a failure, indicating maintainability and spares readiness.",
+      "unit": "hours",
+      "frequency": "Monthly",
+      "target": "-20-30% vs. baseline",
+      "formula": "Total repair time / Number of failures",
+      "source": "CMMS",
+      "related_phase": [
+        4,
+        6
+      ]
+    },
+    {
+      "kpi_id": "KPI10",
+      "name": "Unplanned Downtime %",
+      "description": "Share of planned production time lost to unplanned stoppages, a direct OEE and revenue driver.",
+      "unit": "%",
+      "frequency": "Shift / Daily",
+      "target": "-30-50% vs. baseline",
+      "formula": "Unplanned downtime / Planned production time x 100",
+      "source": "Historian + MES",
+      "related_phase": [
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "kpi_id": "KPI11",
+      "name": "Schedule Compliance %",
+      "description": "Extent to which actual production follows the planned schedule, indicating planning and execution discipline.",
+      "unit": "%",
+      "frequency": "Daily / Weekly",
+      "target": ">= 95%",
+      "formula": "Units produced to schedule / Planned units x 100",
+      "source": "MES",
+      "related_phase": [
+        5
+      ]
+    },
+    {
+      "kpi_id": "KPI12",
+      "name": "Planned vs. Emergency Maintenance Ratio",
+      "description": "Ratio of planned to emergency maintenance work, reflecting how predictive the maintenance program is.",
+      "unit": "ratio",
+      "frequency": "Monthly",
+      "target": ">= 80% planned (or 4:1)",
+      "formula": "Planned maintenance work orders / Emergency maintenance work orders",
+      "source": "CMMS + PdM models",
+      "related_phase": [
+        6
+      ]
+    },
+    {
+      "kpi_id": "KPI13",
+      "name": "% Assets Streaming Data",
+      "description": "Share of in-scope critical assets actively streaming data to the platform, measuring instrumentation coverage.",
+      "unit": "%",
+      "frequency": "Weekly",
+      "target": "100% of in-scope critical assets",
+      "formula": "Assets streaming data / Total in-scope critical assets x 100",
+      "source": "Edge gateway registry + historian",
+      "related_phase": [
+        1,
+        4,
+        5
+      ]
+    },
+    {
+      "kpi_id": "KPI14",
+      "name": "Data Completeness %",
+      "description": "Share of expected data points actually received within a period, indicating pipeline and sensor health.",
+      "unit": "%",
+      "frequency": "Daily",
+      "target": ">= 99%",
+      "formula": "Data points received / Data points expected x 100",
+      "source": "Data quality monitoring",
+      "related_phase": [
+        5
+      ]
+    },
+    {
+      "kpi_id": "KPI15",
+      "name": "Data Latency (Machine to Dashboard)",
+      "description": "End-to-end time from a machine event to its appearance on the dashboard, critical for real-time decisions.",
+      "unit": "seconds",
+      "frequency": "Continuous / Daily avg",
+      "target": "< 5 s for control tower; < 1 s for operator HMI",
+      "formula": "Dashboard event timestamp - Machine event timestamp",
+      "source": "Pipeline monitoring",
+      "related_phase": [
+        4,
+        5
+      ]
+    },
+    {
+      "kpi_id": "KPI16",
+      "name": "Edge Compute Uptime",
+      "description": "Availability of edge compute nodes, on which local analytics and control depend.",
+      "unit": "%",
+      "frequency": "Monthly",
+      "target": ">= 99.9%",
+      "formula": "Edge node uptime / Total time x 100",
+      "source": "Edge monitoring",
+      "related_phase": [
+        4,
+        5
+      ]
+    },
+    {
+      "kpi_id": "KPI17",
+      "name": "Time to Instrument New Asset",
+      "description": "Effort/time to bring a new asset online with full data streaming, indicating scalability and repeatability.",
+      "unit": "hours",
+      "frequency": "Per asset / Quarterly avg",
+      "target": "< 8 h per standard asset (down from days)",
+      "formula": "Time from asset ready to data streaming validated",
+      "source": "Deployment records",
+      "related_phase": [
+        4,
+        7
+      ]
+    },
+    {
+      "kpi_id": "KPI18",
+      "name": "Vision QA Precision / Recall",
+      "description": "Precision (trustworthiness of defect flags) and recall (share of true defects caught) of the vision QA model.",
+      "unit": "%",
+      "frequency": "Weekly",
+      "target": "Precision >= 90%; Recall >= 95% (zero-miss on critical defects)",
+      "formula": "Precision = TP/(TP+FP); Recall = TP/(TP+FN)",
+      "source": "Model monitoring + labeled validation set",
+      "related_phase": [
+        6
+      ]
+    },
+    {
+      "kpi_id": "KPI19",
+      "name": "Model Retraining Frequency",
+      "description": "How often models are retrained, indicating responsiveness to drift and process change.",
+      "unit": "times/quarter",
+      "frequency": "Quarterly",
+      "target": ">= 1 per quarter per production model (or drift-triggered)",
+      "formula": "Count of production retraining events / period",
+      "source": "MLOps platform",
+      "related_phase": [
+        6
+      ]
+    },
+    {
+      "kpi_id": "KPI20",
+      "name": "Prediction Accuracy",
+      "description": "Accuracy of predictive models (e.g., PdM failure prediction) against actual outcomes on a validation set.",
+      "unit": "%",
+      "frequency": "Monthly",
+      "target": ">= target per model (e.g., PdM F1 >= 0.85)",
+      "formula": "Correct predictions / Total predictions x 100 (or model-specific metric)",
+      "source": "Model monitoring",
+      "related_phase": [
+        6
+      ]
+    },
+    {
+      "kpi_id": "KPI21",
+      "name": "False Positive / Negative Rate",
+      "description": "Rates of false alarms and missed detections, balancing operator trust against defect escape risk.",
+      "unit": "%",
+      "frequency": "Weekly",
+      "target": "FP < 5%; FN < 0.5% (critical defects)",
+      "formula": "FP = FP/(FP+TN); FN = FN/(FN+TP)",
+      "source": "Model monitoring + labeled validation set",
+      "related_phase": [
+        6
+      ]
+    },
+    {
+      "kpi_id": "KPI22",
+      "name": "Model Deployment Cycle Time",
+      "description": "Time from a validated model ready to production deployment, indicating MLOps maturity and agility.",
+      "unit": "hours/days",
+      "frequency": "Per deployment / Quarterly avg",
+      "target": "< 1 day from approval to production",
+      "formula": "Production deployment time - Approval timestamp",
+      "source": "MLOps platform",
+      "related_phase": [
+        6,
+        7
+      ]
+    },
+    {
+      "kpi_id": "KPI23",
+      "name": "Security Baseline Score",
+      "description": "Composite score of OT cybersecurity posture against IEC 62443 target security levels across zones.",
+      "unit": "score / security level",
+      "frequency": "Quarterly",
+      "target": "Meet target security level per zone (e.g., SL-T 2/3)",
+      "formula": "Weighted conformance score across IEC 62443 requirements",
+      "source": "Security assessment + GRC tool",
+      "related_phase": [
+        1,
+        2,
+        4,
+        7
+      ]
+    },
+    {
+      "kpi_id": "KPI24",
+      "name": "OT Patch Compliance %",
+      "description": "Share of OT systems patched within the defined risk-based patching SLA, indicating vulnerability management.",
+      "unit": "%",
+      "frequency": "Monthly",
+      "target": ">= 95% within SLA for high/critical CVEs",
+      "formula": "Systems patched within SLA / Systems requiring patch x 100",
+      "source": "Vulnerability management / GRC tool",
+      "related_phase": [
+        4,
+        7
+      ]
+    },
+    {
+      "kpi_id": "KPI25",
+      "name": "Vulnerability Remediation Time",
+      "description": "Average time to remediate identified vulnerabilities in OT systems, weighted by severity.",
+      "unit": "days",
+      "frequency": "Monthly",
+      "target": "< 30 days critical; < 90 days high",
+      "formula": "Average (remediation date - discovery date) by severity",
+      "source": "Vulnerability management / GRC tool",
+      "related_phase": [
+        4,
+        7
+      ]
+    },
+    {
+      "kpi_id": "KPI26",
+      "name": "Security Incidents Detected / Blocked",
+      "description": "Count of security events detected and blocked in the OT environment, indicating monitoring effectiveness.",
+      "unit": "count",
+      "frequency": "Monthly",
+      "target": "Trend stable; 0 successful breaches; reduced repeat incidents",
+      "formula": "Count(detected events) and Count(blocked events) by category",
+      "source": "OT monitoring / SIEM",
+      "related_phase": [
+        4,
+        7
+      ]
+    },
+    {
+      "kpi_id": "KPI27",
+      "name": "Program ROI Realization Ratio",
+      "description": "Ratio of actual realized operational benefits (yield uplift, OEE gain, downtime reduction, energy savings) to cumulative program cost-to-date \u2014 tracks whether the investment is generating the projected returns in real operations",
+      "unit": "ratio",
+      "frequency": "Quarterly",
+      "target": ">= 1.0 by end of Phase 7 (investment fully recovered)",
+      "formula": "Sum of verified operational benefits (Rs/year) / Cumulative program cost (Rs)",
+      "source": "Benefits tracker reconciled with plant financial data; PMO ROI model",
+      "related_phase": [
+        6,
+        7
+      ]
+    },
+    {
+      "kpi_id": "KPI28",
+      "name": "Cost per Connected Asset (CPA)",
+      "description": "Average cost to connect one manufacturing asset to the data platform \u2014 including edge hardware, sensors, cabling, installation labour, and platform license allocation. Tracks deployment efficiency and validates scaling economics",
+      "unit": "Rs/asset",
+      "frequency": "Per deployment wave",
+      "target": "<= target from business case (should decline per wave as architecture is reused)",
+      "formula": "Total deployment cost for wave (hardware + labour + licenses) / Number of assets connected in wave",
+      "source": "Program financial tracker; edge device register; deployment cost coding",
+      "related_phase": [
+        4,
+        5
+      ]
+    },
+    {
+      "kpi_id": "KPI29",
+      "name": "Platform License Cost per Data Point per Month",
+      "description": "Monthly cost of IIoT/historian/analytics platform licenses normalized per data point streaming \u2014 essential for validating scalability economics against the business case assumptions",
+      "unit": "Rs/datapoint/month",
+      "frequency": "Monthly",
+      "target": "<= business case assumption",
+      "formula": "Total monthly platform license cost / Total streaming data points",
+      "source": "Platform vendor invoice; tag/point register from data platform",
+      "related_phase": [
+        5,
+        6,
+        7
+      ]
+    },
+    {
+      "kpi_id": "KPI30",
+      "name": "Program Payback Period Tracking",
+      "description": "Running estimate of the time required for cumulative program benefits to equal program costs \u2014 updated quarterly based on actual benefit realization vs plan; triggers governance review if payback extends beyond sponsor threshold",
+      "unit": "months",
+      "frequency": "Quarterly",
+      "target": "<= original payback target from business case (e.g., 18 months)",
+      "formula": "Projected months until cumulative verified benefits >= cumulative program cost (linear interpolation of latest benefit run-rate)",
+      "source": "PMO benefits tracker; program financial reports",
+      "related_phase": [
+        6,
+        7
+      ]
+    },
+    {
+      "kpi_id": "KPI31",
+      "name": "Change Order Cost as % of Baseline Budget",
+      "description": "Total value of approved change orders as percentage of the original baseline program budget \u2014 tracks scope stability and procurement/contract management quality",
+      "unit": "%",
+      "frequency": "Monthly",
+      "target": "< 10% of baseline budget",
+      "formula": "(Sum of approved change order values / Baseline program budget) x 100",
+      "source": "Change log / PMO financial tracker",
+      "related_phase": [
+        3,
+        4,
+        5,
+        6
+      ]
+    }
+  ]
+}

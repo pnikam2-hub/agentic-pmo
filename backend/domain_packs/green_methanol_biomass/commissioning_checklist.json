@@ -1,0 +1,301 @@
+{
+  "pack": "green_methanol_biomass",
+  "activities": [
+    {
+      "activity": "Sub-system mechanical completion verification",
+      "phase": "Phase 5",
+      "prerequisites": [
+        "Construction complete per system",
+        "Punch list items < 10% open per system"
+      ],
+      "procedure_required": "Pre-commissioning procedure per system (MCP-001 to MCP-020)",
+      "safety_hold_point": "LOTO applied; permit-to-work in place; system isolated from live systems",
+      "acceptance_criteria": "Mechanical completion certificate signed by commissioning engineer and EPC contractor",
+      "responsible_role": "Commissioning Engineer"
+    },
+    {
+      "activity": "Piping hydrotest (process and utility)",
+      "phase": "Phase 5",
+      "prerequisites": [
+        "Piping erection complete",
+        "NDT completed",
+        "Supports installed and verified"
+      ],
+      "procedure_required": "Hydrotest procedure per piping class (HT-001 to HT-015)",
+      "safety_hold_point": "Pressure test area barricaded; personnel cleared; test pressure < 110% design",
+      "acceptance_criteria": "No leaks at test pressure held for 30 minutes; test certified per ASME B31.3",
+      "responsible_role": "Commissioning Engineer"
+    },
+    {
+      "activity": "Piping flushing and chemical cleaning",
+      "phase": "Phase 5",
+      "prerequisites": [
+        "Hydrotest completed per system",
+        "Blinding/spool removal for flushing path established"
+      ],
+      "procedure_required": "Flushing procedure (FL-001) and chemical cleaning specification (CC-001)",
+      "safety_hold_point": "Chemical handling PPE; waste collection and neutralisation plan confirmed",
+      "acceptance_criteria": "Flush water clarity within specification; chemical cleaning passivation verified by coupon",
+      "responsible_role": "Commissioning Engineer"
+    },
+    {
+      "activity": "Instrument loop checks",
+      "phase": "Phase 5",
+      "prerequisites": [
+        "Instrument installed and wired",
+        "DCS I/O configuration complete",
+        "Cable continuity tested"
+      ],
+      "procedure_required": "Loop check procedure (LC-001 to LC-050)",
+      "safety_hold_point": "ESD loops verified by independent party before connecting to final elements",
+      "acceptance_criteria": "100% of loops checked; signal range, direction, and accuracy within tolerance",
+      "responsible_role": "I&C Engineer"
+    },
+    {
+      "activity": "Electrical megger check and motor solo run",
+      "phase": "Phase 5",
+      "prerequisites": [
+        "Motor installed and aligned",
+        "Cable terminated",
+        "MCC breaker and protection settings verified"
+      ],
+      "procedure_required": "Motor run-in procedure (MR-001)",
+      "safety_hold_point": "Coupling disconnected; area cleared; emergency stop verified",
+      "acceptance_criteria": "Insulation resistance > 1 M\u03a9/kV; vibration < 4 mm/s; current balanced across phases",
+      "responsible_role": "Electrical Engineer"
+    },
+    {
+      "activity": "Control system (DCS/SCADA/ESD) checkout",
+      "phase": "Phase 5",
+      "prerequisites": [
+        "DCS cabinet installed and powered",
+        "Network cables run and terminated",
+        "SIS logic controller installed"
+      ],
+      "procedure_required": "Control system checkout procedure (CS-001)",
+      "safety_hold_point": "SIS validation witnessed by HSE manager; bypass management in place",
+      "acceptance_criteria": "All control loops, interlock logic, alarm setpoints, and HMI graphics verified per C&E matrix",
+      "responsible_role": "Controls Engineer"
+    },
+    {
+      "activity": "Fire and gas system commissioning",
+      "phase": "Phase 5",
+      "prerequisites": [
+        "Detectors installed and wired",
+        "C&E matrix approved",
+        "Fire water supply available"
+      ],
+      "procedure_required": "F&G system test procedure (FG-001)",
+      "safety_hold_point": "False alarm prevention plan in place during construction",
+      "acceptance_criteria": "All detectors calibrated; cause-and-effect logic verified; release system activated in test",
+      "responsible_role": "HSE Engineer"
+    },
+    {
+      "activity": "Emergency shutdown (ESD) system test",
+      "phase": "Phase 5",
+      "prerequisites": [
+        "ESD logic solver installed",
+        "Final elements (valves, vents, dampers) in place"
+      ],
+      "procedure_required": "ESD test procedure (ES-001)",
+      "safety_hold_point": "Critical ESD functions tested one at a time; all bypasses removed after test",
+      "acceptance_criteria": "All shutdown levels (plant, unit, equipment) functional; response time within specification",
+      "responsible_role": "Controls Engineer"
+    },
+    {
+      "activity": "Refractory dry-out (gasifier)",
+      "phase": "Phase 5",
+      "prerequisites": [
+        "Refractory installation completed and cured minimum 72 hours",
+        "Temporary heating system installed",
+        "Thermocouples embedded per plan"
+      ],
+      "procedure_required": "Refractory dry-out schedule from refractory supplier (RD-001)",
+      "safety_hold_point": "Temperature ramp rate strictly per supplier curve; personnel excluded during heating",
+      "acceptance_criteria": "Temperature profile across all zones within supplier tolerance; no steam observed at vents",
+      "responsible_role": "Gasification Specialist"
+    },
+    {
+      "activity": "Methanol synthesis catalyst loading",
+      "phase": "Phase 5",
+      "prerequisites": [
+        "Reactor internals installed and inspected",
+        "Catalyst delivered and QC accepted",
+        "Loading team trained and equipped"
+      ],
+      "procedure_required": "Catalyst loading procedure from licensor (CL-001)",
+      "safety_hold_point": "Reactor atmosphere inerted; oxygen < 1%; personnel in full PPE; bed-level verification after each fill",
+      "acceptance_criteria": "Catalyst loaded to bed depth within \u00b110 mm; no bridging; pressure drop within spec",
+      "responsible_role": "Process Engineer"
+    },
+    {
+      "activity": "Biomass handling system dry run",
+      "phase": "Phase 5",
+      "prerequisites": [
+        "Conveyors, elevators, feed system mechanically complete",
+        "Motors solo-run",
+        "DCS controls operating"
+      ],
+      "procedure_required": "Biomass system dry run procedure (BH-001)",
+      "safety_hold_point": "Emergency stops tested; guards in place; area cleared of personnel",
+      "acceptance_criteria": "Sustained operation at design rate for 4 hours with surrogate material; no plugging",
+      "responsible_role": "Commissioning Engineer"
+    },
+    {
+      "activity": "Biomass feeding trials (live biomass)",
+      "phase": "Phase 6",
+      "prerequisites": [
+        "Dry-run completed",
+        "Feedstock QC testing established",
+        "Safety systems (CO/H2 detection) operational"
+      ],
+      "procedure_required": "Biomass feeding trial procedure (BF-001)",
+      "safety_hold_point": "Gasifier isolated from syngas path during initial trials",
+      "acceptance_criteria": "Graduated feed rate from 10% to 100% design without plugging or bridging",
+      "responsible_role": "Commissioning Engineer"
+    },
+    {
+      "activity": "Gasifier light-up and heat-up",
+      "phase": "Phase 6",
+      "prerequisites": [
+        "Refractory dry-out completed",
+        "Burner management system checked",
+        "Pilot fuel available"
+      ],
+      "procedure_required": "Gasifier start-up procedure from licensor (GS-001)",
+      "safety_hold_point": "All personnel non-essential cleared from gasifier area; continuous CO/H2 monitoring active",
+      "acceptance_criteria": "Gasifier bed temperature at target range; refractory heat-up ramp rate within spec",
+      "responsible_role": "Commissioning Manager"
+    },
+    {
+      "activity": "Syngas production ramping",
+      "phase": "Phase 6",
+      "prerequisites": [
+        "Gasifier at operating temperature",
+        "Syngas cooler online",
+        "Flare lit and online"
+      ],
+      "procedure_required": "Syngas production ramping procedure (SP-001)",
+      "safety_hold_point": "Flare pilot confirmed lit before syngas diversion; CO/H2 detectors active",
+      "acceptance_criteria": "Syngas flow and composition at design conditions; tar and particulates within expected range",
+      "responsible_role": "Process Engineer"
+    },
+    {
+      "activity": "Syngas cleanup commissioning",
+      "phase": "Phase 6",
+      "prerequisites": [
+        "Syngas available at gasifier outlet",
+        "Cleanup systems mechanically complete",
+        "Analysers (H2S, HCl, tar) calibrated"
+      ],
+      "procedure_required": "Syngas cleanup commissioning procedure (SC-001)",
+      "safety_hold_point": "All acid gas removal solvent filled; guard bed pre-conditioned",
+      "acceptance_criteria": "Outlet gas meets methanol synthesis inlet spec: tar < 50 mg/Nm3, S < 0.1 ppmv, Cl < 1 ppmv",
+      "responsible_role": "Process Engineer"
+    },
+    {
+      "activity": "Methanol synthesis loop start-up and catalyst reduction",
+      "phase": "Phase 6",
+      "prerequisites": [
+        "Catalyst loaded and protected with inert",
+        "Loop pressure test completed",
+        "Recycle compressor ready"
+      ],
+      "procedure_required": "Loops start-up and catalyst reduction procedure from licensor (MS-001)",
+      "safety_hold_point": "Catalyst reduction temperature ramp strictly per licensor curve; hydrogen concentration controlled",
+      "acceptance_criteria": "Catalyst fully reduced (verified by water formation); loop pressurised to operating conditions",
+      "responsible_role": "Process Engineer"
+    },
+    {
+      "activity": "Crude methanol production",
+      "phase": "Phase 6",
+      "prerequisites": [
+        "Catalyst reduction completed",
+        "Loop at operating conditions",
+        "Crude methanol receiver ready"
+      ],
+      "procedure_required": "Methanol loop production procedure (MP-001)",
+      "safety_hold_point": "Methanol detection in area; loading ground bonding verified",
+      "acceptance_criteria": "Stable methanol production at minimum 50% design rate; loop temperature and pressure steady",
+      "responsible_role": "Shift Supervisor"
+    },
+    {
+      "activity": "Distillation start-up",
+      "phase": "Phase 6",
+      "prerequisites": [
+        "Methanol at required pressure and flow",
+        "Distillation columns hydrotested and packed",
+        "Reboiler steam available"
+      ],
+      "procedure_required": "Distillation start-up procedure (DS-001)",
+      "safety_hold_point": "All vents routed to flare/vapour recovery; pressure relief valves verified",
+      "acceptance_criteria": "Column pressure, temperature, and reflux ratio at operating targets",
+      "responsible_role": "Shift Supervisor"
+    },
+    {
+      "activity": "Product methanol quality adjustment",
+      "phase": "Phase 6",
+      "prerequisites": [
+        "Distillation columns at steady state",
+        "Lab GC and Karl Fischer analyser calibrated",
+        "IMPCA specification limits available"
+      ],
+      "procedure_required": "Product quality adjustment procedure (PQ-001)",
+      "safety_hold_point": "Off-spec methanol routed to slop/recycle; on-spec product accepted to storage only after lab clearance",
+      "acceptance_criteria": "Product methanol meets IMPCA spec (min 99.85 wt% methanol, ethanol < 50 ppm, water < 500 ppm)",
+      "responsible_role": "QA/QC Manager"
+    },
+    {
+      "activity": "Performance guarantee test run",
+      "phase": "Phase 6",
+      "prerequisites": [
+        "72-hour test run plan approved",
+        "All instrumentation calibrated",
+        "Feedstock inventory sufficient for test duration"
+      ],
+      "procedure_required": "Performance test procedure per EPC contract (PT-001)",
+      "safety_hold_point": "Test run requires full management approval; standby team ready for intervention",
+      "acceptance_criteria": "Guaranteed parameters met: capacity, biomass consumption, utility consumption, methanol purity, emissions limits",
+      "responsible_role": "Commissioning Manager"
+    },
+    {
+      "activity": "Product loading system certification",
+      "phase": "Phase 6",
+      "prerequisites": [
+        "Performance test completed",
+        "Methanol storage tank at operating level",
+        "Loading area safety systems operational"
+      ],
+      "procedure_required": "Loading system test procedure (LO-001)",
+      "safety_hold_point": "Grounding system verified; emergency stop function tested; vapour recovery confirmed",
+      "acceptance_criteria": "Loading rate within design; vapour recovery efficiency verified; no leak detected",
+      "responsible_role": "Operations Manager"
+    },
+    {
+      "activity": "Emissions compliance testing",
+      "phase": "Phase 6",
+      "prerequisites": [
+        "Plant at steady-state design operation",
+        "Stack testing platform and ports available",
+        "Accredited testing lab engaged"
+      ],
+      "procedure_required": "Emissions monitoring protocol per permit conditions (EM-001)",
+      "safety_hold_point": "Testing at elevated heights; fall protection required; confined space entry for stack if needed",
+      "acceptance_criteria": "All stack emissions within permit limits; fugitive emissions program completed",
+      "responsible_role": "HSE Engineer"
+    },
+    {
+      "activity": "Operator training and competency assessment",
+      "phase": "Phase 5&6",
+      "prerequisites": [
+        "SOPs drafted and reviewed",
+        "Training simulator (if available) ready",
+        "Training materials prepared"
+      ],
+      "procedure_required": "Operator training program per operations manual (TR-001)",
+      "safety_hold_point": "No operator assigned to shift duty without written competency sign-off",
+      "acceptance_criteria": "100% of operations personnel assessed as competent for their role",
+      "responsible_role": "Training Coordinator"
+    }
+  ]
+}

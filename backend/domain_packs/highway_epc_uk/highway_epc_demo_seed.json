@@ -1,0 +1,2090 @@
+{
+  "meta": {
+    "title": "M62 Junction 10\u201312 Smart Motorway Upgrade \u2013 EPC Project (Demo Seed)",
+    "description": "Realistic mid-construction demo instance of the highway_epc_uk domain pack: a large smart-motorway EPC scheme on the UK SRN, currently in Phase 5 (Construction Execution) with consent, land and weather pressures.",
+    "generated": "2026-08-04",
+    "pack": "highway_epc_uk"
+  },
+  "project": {
+    "name": "M62 Junction 10\u201312 Smart Motorway Upgrade \u2013 EPC Project",
+    "description": "All-lane-running smart motorway upgrade of ~20 km of the M62 between Junctions 10 and 12, including overbridge replacement, drainage, pavement and smart-motorway technology, delivered EPC for National Highways.",
+    "goal": "# Highway EPC \u2013 UK Smart Motorway / All-Purpose Trunk Road Upgrade\n\nPMO/domain reference \u2014 must be reviewed by qualified highway/structural engineers.\n\n## Purpose\n\nThis domain pack equips the Agentic PMO Plan, Monitor and Alert agents with a UK-specific reference for delivering a large highway EPC scheme in England (for example an M62 Junction 10\u201312 Smart Motorway Upgrade, or an A14-class all-purpose trunk road improvement under a DBFO/DPR-type arrangement with National Highways). The goal of such a scheme is to deliver additional capacity and improved journey reliability on the Strategic Road Network (SRN) through an engineered, consenting-compliant and safety-led EPC delivery: all-lane-running smart motorway technology (or trunk road widening), structures renewals, drainage, pavement and technology systems, handed over to the maintainer with a complete as-built and O&M record, on programme and within funding envelope.",
+    "status": "active",
+    "priority": "high",
+    "tags": [
+      "highway",
+      "epc",
+      "construction",
+      "uk-roads",
+      "smart-motorway",
+      "domain-pack",
+      "domain-pack:highway_epc_uk"
+    ],
+    "start_date": "2025-04-01",
+    "end_date": "2028-09-30"
+  },
+  "milestones": [
+    {
+      "title": "Strategic need & funding endorsed",
+      "description": "Strategic need case and funding envelope endorsed by the sponsor; delivery model framed.",
+      "due_date": "2025-07-31",
+      "required_task_ids": [
+        1,
+        2
+      ]
+    },
+    {
+      "title": "DMRB Stage 2 preferred option",
+      "description": "DMRB Stage 2 option assessment complete and preferred option recommended.",
+      "due_date": "2026-02-28",
+      "required_task_ids": [
+        14
+      ]
+    },
+    {
+      "title": "DMRB Stage 3 scheme assessment",
+      "description": "Stage 3 scheme assessment accepted and preliminary alignment frozen.",
+      "due_date": "2026-04-15",
+      "required_task_ids": [
+        15
+      ]
+    },
+    {
+      "title": "Statutory consultation & Design Fix 1",
+      "description": "Statutory consultation completed and Design Fix 1 issued.",
+      "due_date": "2026-10-15",
+      "required_task_ids": [
+        33
+      ]
+    },
+    {
+      "title": "DCO Draft Order published",
+      "description": "Draft Order published and statutory notices issued.",
+      "due_date": "2027-02-28",
+      "required_task_ids": [
+        32
+      ]
+    },
+    {
+      "title": "Public Inquiry / Examination complete",
+      "description": "Public Inquiry and examination completed.",
+      "due_date": "2027-09-30",
+      "required_task_ids": [
+        34,
+        35
+      ]
+    },
+    {
+      "title": "DCO determined & land possession",
+      "description": "DCO determined and land possession secured for main works.",
+      "due_date": "2027-09-30",
+      "required_task_ids": [
+        35,
+        36
+      ]
+    },
+    {
+      "title": "Main works contract award",
+      "description": "Main works contract awarded and mobilisation commenced.",
+      "due_date": "2027-06-15",
+      "required_task_ids": [
+        42
+      ]
+    },
+    {
+      "title": "Earthworks & piling complete",
+      "description": "Bulk earthworks and structures piling complete.",
+      "due_date": "2028-02-28",
+      "required_task_ids": [
+        50,
+        53
+      ]
+    },
+    {
+      "title": "Structures & bridge works complete",
+      "description": "Concrete and steel bridge works complete and Cat 3 verified.",
+      "due_date": "2028-05-30",
+      "required_task_ids": [
+        54
+      ]
+    },
+    {
+      "title": "Smart motorway technology live",
+      "description": "Smart motorway technology installed and integration-tested.",
+      "due_date": "2028-09-15",
+      "required_task_ids": [
+        70,
+        74
+      ]
+    },
+    {
+      "title": "Completion certificate & handover",
+      "description": "Completion certificate issued and scheme handed over to the maintainer.",
+      "due_date": "2028-09-30",
+      "required_task_ids": [
+        78
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "title": "Scheme identification & strategic need case",
+      "description": "Define the transport problem, strategic need and scheme objectives; draft the Strategic Outline Statement.",
+      "status": "done",
+      "priority": "high",
+      "assignee": "Sarah Whitmore (Project Director)",
+      "estimated_hours": 80,
+      "actual_hours": 92,
+      "due_date": "2025-05-15",
+      "dependencies": [],
+      "ref": "T001"
+    },
+    {
+      "title": "Outline funding envelope & initial business case",
+      "description": "Prepare the initial outline business case and funding envelope aligned to the Project Control Framework.",
+      "status": "done",
+      "priority": "high",
+      "assignee": "Michael Finch (Commercial)",
+      "estimated_hours": 160,
+      "actual_hours": 180,
+      "due_date": "2025-06-30",
+      "dependencies": [
+        1
+      ],
+      "ref": "T002"
+    },
+    {
+      "title": "Route corridor definition & study area",
+      "description": "Define the route corridor and environmental/traffic study area and confirm scheme extents.",
+      "status": "done",
+      "priority": "medium",
+      "assignee": "Priya Nair (Structures Lead)",
+      "estimated_hours": 100,
+      "actual_hours": 95,
+      "due_date": "2025-06-15",
+      "dependencies": [
+        1
+      ],
+      "ref": "T003"
+    },
+    {
+      "title": "EPC contract & delivery model framing",
+      "description": "Frame the delivery model (DBFO/DPR/EPC) and outline contractual and risk-allocation approach.",
+      "status": "done",
+      "priority": "high",
+      "assignee": "Tom Bradley (Procurement Manager)",
+      "estimated_hours": 140,
+      "actual_hours": 156,
+      "due_date": "2025-07-31",
+      "dependencies": [
+        1
+      ],
+      "ref": "T004"
+    },
+    {
+      "title": "CDM 2015 duty-holder appointments",
+      "description": "Make CDM 2015 appointments (Client, Principal Designer, Principal Contractor) and record them.",
+      "status": "done",
+      "priority": "high",
+      "assignee": "Daniel Cohen (Safety/HSE)",
+      "estimated_hours": 60,
+      "actual_hours": 54,
+      "due_date": "2025-05-30",
+      "dependencies": [
+        1
+      ],
+      "ref": "T005"
+    },
+    {
+      "title": "Initial programme master schedule outline",
+      "description": "Develop the high-level master schedule with phase milestones and logic.",
+      "status": "done",
+      "priority": "medium",
+      "assignee": "Michael Finch (Commercial)",
+      "estimated_hours": 120,
+      "actual_hours": 128,
+      "due_date": "2025-08-15",
+      "dependencies": [
+        1
+      ],
+      "ref": "T006"
+    },
+    {
+      "title": "Traffic data collection & baseline surveys",
+      "description": "Execute baseline traffic-data collection (counts, journey times, origin-destination) and validate the dataset.",
+      "status": "done",
+      "priority": "high",
+      "assignee": "Sarah Whitmore (Project Director)",
+      "estimated_hours": 200,
+      "actual_hours": 230,
+      "due_date": "2025-08-30",
+      "dependencies": [
+        1
+      ],
+      "ref": "T007"
+    },
+    {
+      "title": "Option assessment (DMRB Stage 2)",
+      "description": "Carry out DMRB Stage 2 option assessment across transport, environmental, engineering and cost criteria.",
+      "status": "done",
+      "priority": "high",
+      "assignee": "Priya Nair (Structures Lead)",
+      "estimated_hours": 320,
+      "actual_hours": 300,
+      "due_date": "2025-10-31",
+      "dependencies": [
+        3
+      ],
+      "ref": "T008"
+    },
+    {
+      "title": "Route options development (online/offline)",
+      "description": "Develop route options (online widening, offline, junction layouts) for assessment.",
+      "status": "done",
+      "priority": "high",
+      "assignee": "Priya Nair (Structures Lead)",
+      "estimated_hours": 280,
+      "actual_hours": 310,
+      "due_date": "2025-11-30",
+      "dependencies": [
+        8
+      ],
+      "ref": "T009"
+    },
+    {
+      "title": "Preliminary traffic forecasting & economic appraisal",
+      "description": "Build the traffic model and produce the economic appraisal and benefit-cost ratio.",
+      "status": "done",
+      "priority": "medium",
+      "assignee": "Michael Finch (Commercial)",
+      "estimated_hours": 240,
+      "actual_hours": 220,
+      "due_date": "2025-12-15",
+      "dependencies": [
+        7
+      ],
+      "ref": "T010"
+    },
+    {
+      "title": "Ground investigation (GI) scope & desk study",
+      "description": "Define the GI scope and complete the geotechnical desk study to de-risk ground conditions. In technical review of scope.",
+      "status": "review",
+      "priority": "high",
+      "assignee": "Priya Nair (Structures Lead)",
+      "estimated_hours": 180,
+      "actual_hours": null,
+      "due_date": "2025-12-20",
+      "dependencies": [
+        3
+      ],
+      "ref": "T011"
+    },
+    {
+      "title": "Environmental scoping report (EIA screening)",
+      "description": "Prepare the EIA scoping report and obtain the scoping opinion.",
+      "status": "done",
+      "priority": "high",
+      "assignee": "Amelia Hart (Environmental Lead)",
+      "estimated_hours": 160,
+      "actual_hours": 150,
+      "due_date": "2026-01-15",
+      "dependencies": [
+        3
+      ],
+      "ref": "T012"
+    },
+    {
+      "title": "Sustainability & carbon assessment outline",
+      "description": "Establish the carbon baseline and sustainability targets for the scheme.",
+      "status": "done",
+      "priority": "medium",
+      "assignee": "Amelia Hart (Environmental Lead)",
+      "estimated_hours": 120,
+      "actual_hours": 108,
+      "due_date": "2026-02-10",
+      "dependencies": [
+        3
+      ],
+      "ref": "T013"
+    },
+    {
+      "title": "Stage 2 report & preferred option recommendation",
+      "description": "Consolidate the DMRB Stage 2 report and recommend the preferred option for endorsement.",
+      "status": "done",
+      "priority": "high",
+      "assignee": "Michael Finch (Commercial)",
+      "estimated_hours": 160,
+      "actual_hours": 175,
+      "due_date": "2026-02-28",
+      "dependencies": [
+        8,
+        10,
+        9
+      ],
+      "ref": "T014"
+    },
+    {
+      "title": "DMRB Stage 3 scheme assessment",
+      "description": "Complete the DMRB Stage 3 scheme assessment to support the fixed preliminary design.",
+      "status": "done",
+      "priority": "high",
+      "assignee": "Priya Nair (Structures Lead)",
+      "estimated_hours": 360,
+      "actual_hours": 400,
+      "due_date": "2026-04-15",
+      "dependencies": [
+        14
+      ],
+      "ref": "T015"
+    },
+    {
+      "title": "Preliminary design \u2013 horizontal & vertical alignment",
+      "description": "Develop the preliminary horizontal and vertical alignment and fix the design for consent.",
+      "status": "done",
+      "priority": "high",
+      "assignee": "Priya Nair (Structures Lead)",
+      "estimated_hours": 400,
+      "actual_hours": 420,
+      "due_date": "2026-05-30",
+      "dependencies": [
+        15
+      ],
+      "ref": "T016"
+    },
+    {
+      "title": "Pavement assessment & outline pavement design",
+      "description": "Assess pavement options and prepare the outline pavement design. In design review.",
+      "status": "review",
+      "priority": "medium",
+      "assignee": "Priya Nair (Structures Lead)",
+      "estimated_hours": 200,
+      "actual_hours": null,
+      "due_date": "2026-06-15",
+      "dependencies": [
+        15
+      ],
+      "ref": "T017"
+    },
+    {
+      "title": "Structures feasibility \u2013 overbridge replacement",
+      "description": "Assess structures (overbridges, underbridges, retaining walls) and select feasible structural forms.",
+      "status": "done",
+      "priority": "high",
+      "assignee": "Priya Nair (Structures Lead)",
+      "estimated_hours": 320,
+      "actual_hours": 360,
+      "due_date": "2026-06-30",
+      "dependencies": [
+        15
+      ],
+      "ref": "T018"
+    },
+    {
+      "title": "Drainage strategy compliant with CD 527",
+      "description": "Develop the drainage strategy and SuDS approach compliant with CD 527. In LLFA review.",
+      "status": "review",
+      "priority": "high",
+      "assignee": "Priya Nair (Structures Lead)",
+      "estimated_hours": 200,
+      "actual_hours": null,
+      "due_date": "2026-07-15",
+      "dependencies": [
+        15
+      ],
+      "ref": "T019"
+    },
+    {
+      "title": "Geotechnical design basis & ground model",
+      "description": "Develop the geotechnical ground model and design basis from GI and desk study.",
+      "status": "done",
+      "priority": "high",
+      "assignee": "Priya Nair (Structures Lead)",
+      "estimated_hours": 240,
+      "actual_hours": 230,
+      "due_date": "2026-07-30",
+      "dependencies": [
+        11
+      ],
+      "ref": "T020"
+    },
+    {
+      "title": "Environmental Impact Assessment (EIA) chapters",
+      "description": "Draft the EIA chapters (air, noise, ecology, landscape, water, heritage, socio-economics). In client review.",
+      "status": "review",
+      "priority": "high",
+      "assignee": "Amelia Hart (Environmental Lead)",
+      "estimated_hours": 400,
+      "actual_hours": null,
+      "due_date": "2026-09-15",
+      "dependencies": [
+        12
+      ],
+      "ref": "T021"
+    },
+    {
+      "title": "Ecology surveys (bats, badgers, great crested newts)",
+      "description": "Complete season-critical ecology surveys (bats, badgers, GCN, breeding birds).",
+      "status": "done",
+      "priority": "high",
+      "assignee": "Amelia Hart (Environmental Lead)",
+      "estimated_hours": 280,
+      "actual_hours": 300,
+      "due_date": "2026-08-30",
+      "dependencies": [
+        3
+      ],
+      "ref": "T022"
+    },
+    {
+      "title": "Archaeology & cultural heritage survey",
+      "description": "Carry out archaeological and cultural-heritage desk-based assessment and evaluation.",
+      "status": "done",
+      "priority": "medium",
+      "assignee": "Amelia Hart (Environmental Lead)",
+      "estimated_hours": 160,
+      "actual_hours": 150,
+      "due_date": "2026-09-15",
+      "dependencies": [
+        3
+      ],
+      "ref": "T023"
+    },
+    {
+      "title": "Stage 1 Road Safety Audit",
+      "description": "Conduct the Stage 1 Road Safety Audit on the preliminary design.",
+      "status": "in_progress",
+      "priority": "high",
+      "assignee": "Daniel Cohen (Safety/HSE)",
+      "estimated_hours": 80,
+      "actual_hours": 30,
+      "due_date": "2026-10-15",
+      "dependencies": [
+        16
+      ],
+      "ref": "T024"
+    },
+    {
+      "title": "Pavement design to CD 236",
+      "description": "Complete the detailed pavement design compliant with CD 236.",
+      "status": "in_progress",
+      "priority": "high",
+      "assignee": "Priya Nair (Structures Lead)",
+      "estimated_hours": 400,
+      "actual_hours": 160,
+      "due_date": "2027-01-30",
+      "dependencies": [
+        17
+      ],
+      "ref": "T025"
+    },
+    {
+      "title": "Structures design \u2013 overbridge replacement",
+      "description": "Complete detailed structures design (overbridge replacement) with independent Category 3 check.",
+      "status": "in_progress",
+      "priority": "high",
+      "assignee": "Priya Nair (Structures Lead)",
+      "estimated_hours": 600,
+      "actual_hours": 280,
+      "due_date": "2027-02-28",
+      "dependencies": [
+        18
+      ],
+      "ref": "T026"
+    },
+    {
+      "title": "Drainage design compliant with CD 527",
+      "description": "Complete detailed drainage and SuDS design compliant with CD 527. In LLFA review.",
+      "status": "review",
+      "priority": "high",
+      "assignee": "Priya Nair (Structures Lead)",
+      "estimated_hours": 320,
+      "actual_hours": null,
+      "due_date": "2027-02-15",
+      "dependencies": [
+        19
+      ],
+      "ref": "T027"
+    },
+    {
+      "title": "Smart motorway technology design (MIDAS, ERF, HSR)",
+      "description": "Design the all-lane-running smart motorway technology (MIDAS, ERF, HSR) and systems architecture.",
+      "status": "in_progress",
+      "priority": "high",
+      "assignee": "Sophie Lambert (ITS/Controls Lead)",
+      "estimated_hours": 400,
+      "actual_hours": 180,
+      "due_date": "2027-03-15",
+      "dependencies": [
+        16
+      ],
+      "ref": "T028"
+    },
+    {
+      "title": "Lighting & electrical design to BS 5489",
+      "description": "Complete lighting and electrical design compliant with BS 5489. In client review.",
+      "status": "review",
+      "priority": "medium",
+      "assignee": "David Khan (Electrical Lead)",
+      "estimated_hours": 240,
+      "actual_hours": null,
+      "due_date": "2027-03-30",
+      "dependencies": [
+        16
+      ],
+      "ref": "T029"
+    },
+    {
+      "title": "Signs, gantries & VMS design",
+      "description": "Design signs, gantries and variable message signs (VMS) and their foundations. In client review.",
+      "status": "review",
+      "priority": "high",
+      "assignee": "David Khan (Electrical Lead)",
+      "estimated_hours": 280,
+      "actual_hours": null,
+      "due_date": "2027-04-15",
+      "dependencies": [
+        16
+      ],
+      "ref": "T030"
+    },
+    {
+      "title": "EIA submission (DCO)",
+      "description": "Finalise the EIA and Environmental Statement for DCO submission.",
+      "status": "in_progress",
+      "priority": "high",
+      "assignee": "Amelia Hart (Environmental Lead)",
+      "estimated_hours": 360,
+      "actual_hours": 150,
+      "due_date": "2027-01-15",
+      "dependencies": [
+        21
+      ],
+      "ref": "T031"
+    },
+    {
+      "title": "Draft Order Publication (DCO/TWAO)",
+      "description": "Prepare and publish the Draft Order and statutory notices.",
+      "status": "done",
+      "priority": "high",
+      "assignee": "Amelia Hart (Environmental Lead)",
+      "estimated_hours": 200,
+      "actual_hours": 210,
+      "due_date": "2027-02-28",
+      "dependencies": [
+        31
+      ],
+      "ref": "T032"
+    },
+    {
+      "title": "Public consultation events (statutory)",
+      "description": "Run statutory public consultation events following Draft Order publication.",
+      "status": "done",
+      "priority": "medium",
+      "assignee": "Sarah Whitmore (Project Director)",
+      "estimated_hours": 160,
+      "actual_hours": 170,
+      "due_date": "2027-03-30",
+      "dependencies": [
+        32
+      ],
+      "ref": "T033"
+    },
+    {
+      "title": "Public Inquiry / Examination preparation",
+      "description": "Prepare for the Public Inquiry / Examination in Public. BLOCKED: the Public Inquiry was ADJOURNED; Statement of Common Ground and proofs held pending rescheduled dates.",
+      "status": "blocked",
+      "priority": "high",
+      "assignee": "Amelia Hart (Environmental Lead)",
+      "estimated_hours": 400,
+      "actual_hours": null,
+      "due_date": "2027-06-30",
+      "dependencies": [
+        32
+      ],
+      "ref": "T034"
+    },
+    {
+      "title": "Development Consent Order (DCO) determination",
+      "description": "Support the examination and obtain the DCO determination. BLOCKED: awaiting the rescheduled Public Inquiry outcome; downstream consent and construction at risk.",
+      "status": "blocked",
+      "priority": "critical",
+      "assignee": "Amelia Hart (Environmental Lead)",
+      "estimated_hours": 200,
+      "actual_hours": null,
+      "due_date": "2027-09-30",
+      "dependencies": [
+        34
+      ],
+      "ref": "T035"
+    },
+    {
+      "title": "Land acquisition / CPO negotiation",
+      "description": "Negotiate and acquire land and complete CPO/vesting for the scheme extents. A CPO objection on Plot 17 is delaying vesting.",
+      "status": "in_progress",
+      "priority": "high",
+      "assignee": "Tom Bradley (Procurement Manager)",
+      "estimated_hours": 600,
+      "actual_hours": 240,
+      "due_date": "2027-08-30",
+      "dependencies": [
+        32
+      ],
+      "ref": "T036"
+    },
+    {
+      "title": "Utility diversions (gas, water, telecoms, HV)",
+      "description": "Design and agree utility diversions (gas, water, telecoms, HV) with the undertakers. Critical-path slippage of >2 weeks on HV diversion.",
+      "status": "in_progress",
+      "priority": "high",
+      "assignee": "Priya Nair (Structures Lead)",
+      "estimated_hours": 360,
+      "actual_hours": 160,
+      "due_date": "2027-05-30",
+      "dependencies": [
+        27
+      ],
+      "ref": "T037"
+    },
+    {
+      "title": "Section 278 / street works agreements",
+      "description": "Agree Section 278 and street-works agreements with the relevant highway authorities. In local-authority review.",
+      "status": "review",
+      "priority": "medium",
+      "assignee": "Amelia Hart (Environmental Lead)",
+      "estimated_hours": 160,
+      "actual_hours": null,
+      "due_date": "2027-06-15",
+      "dependencies": [
+        27
+      ],
+      "ref": "T038"
+    },
+    {
+      "title": "Procurement strategy & package schedule",
+      "description": "Develop the procurement strategy and package schedule, identifying long-lead items.",
+      "status": "done",
+      "priority": "high",
+      "assignee": "Tom Bradley (Procurement Manager)",
+      "estimated_hours": 160,
+      "actual_hours": 150,
+      "due_date": "2027-03-15",
+      "dependencies": [
+        25
+      ],
+      "ref": "T039"
+    },
+    {
+      "title": "Tender & contractor prequalification",
+      "description": "Run prequalification and tender for the main works and key packages.",
+      "status": "done",
+      "priority": "high",
+      "assignee": "Tom Bradley (Procurement Manager)",
+      "estimated_hours": 240,
+      "actual_hours": 260,
+      "due_date": "2027-04-30",
+      "dependencies": [
+        39
+      ],
+      "ref": "T040"
+    },
+    {
+      "title": "Long-lead procurement (structural steel, precast)",
+      "description": "Place long-lead orders for structural steel, precast beams, gantries and smart-motorway technology.",
+      "status": "in_progress",
+      "priority": "critical",
+      "assignee": "Tom Bradley (Procurement Manager)",
+      "estimated_hours": 320,
+      "actual_hours": 200,
+      "due_date": "2027-06-30",
+      "dependencies": [
+        26
+      ],
+      "ref": "T041"
+    },
+    {
+      "title": "Main works contract award & mobilisation",
+      "description": "Award the main works contract and mobilise the delivery team.",
+      "status": "done",
+      "priority": "critical",
+      "assignee": "Tom Bradley (Procurement Manager)",
+      "estimated_hours": 200,
+      "actual_hours": 210,
+      "due_date": "2027-06-15",
+      "dependencies": [
+        40
+      ],
+      "ref": "T042"
+    },
+    {
+      "title": "Site establishment & compound set-up",
+      "description": "Establish site compounds, access and welfare in readiness for main works.",
+      "status": "done",
+      "priority": "high",
+      "assignee": "James Okafor (Construction Manager)",
+      "estimated_hours": 280,
+      "actual_hours": 320,
+      "due_date": "2027-07-15",
+      "dependencies": [
+        36
+      ],
+      "ref": "T043"
+    },
+    {
+      "title": "Traffic management (TM) staging plans",
+      "description": "Design TM staging plans reconciling programme, safety and road-user delay. Lane 3 closure plan flagged for diverge-taper risk; under review.",
+      "status": "in_progress",
+      "priority": "high",
+      "assignee": "James Okafor (Construction Manager)",
+      "estimated_hours": 360,
+      "actual_hours": 180,
+      "due_date": "2027-08-15",
+      "dependencies": [
+        24
+      ],
+      "ref": "T044"
+    },
+    {
+      "title": "Construction Sequence & Method Statements",
+      "description": "Develop the construction sequence and method statements, including temporary works. In client review.",
+      "status": "review",
+      "priority": "high",
+      "assignee": "James Okafor (Construction Manager)",
+      "estimated_hours": 240,
+      "actual_hours": null,
+      "due_date": "2027-09-30",
+      "dependencies": [
+        44
+      ],
+      "ref": "T045"
+    },
+    {
+      "title": "Health & safety plan & CDM construction phase plan",
+      "description": "Prepare and have accepted the CDM construction-phase plan and health and safety plan.",
+      "status": "done",
+      "priority": "critical",
+      "assignee": "Daniel Cohen (Safety/HSE)",
+      "estimated_hours": 200,
+      "actual_hours": 190,
+      "due_date": "2027-08-30",
+      "dependencies": [
+        43
+      ],
+      "ref": "T046"
+    },
+    {
+      "title": "Permits to dig & street works permits",
+      "description": "Obtain permits to dig and street-works permits for the works. BLOCKED: pending S278 agreement signature with the local authority.",
+      "status": "blocked",
+      "priority": "high",
+      "assignee": "Amelia Hart (Environmental Lead)",
+      "estimated_hours": 120,
+      "actual_hours": null,
+      "due_date": "2027-08-30",
+      "dependencies": [
+        38
+      ],
+      "ref": "T047"
+    },
+    {
+      "title": "Night closures planning & lane rental",
+      "description": "Plan night closures and agree the lane-rental scheme.",
+      "status": "in_progress",
+      "priority": "high",
+      "assignee": "James Okafor (Construction Manager)",
+      "estimated_hours": 200,
+      "actual_hours": 90,
+      "due_date": "2027-09-15",
+      "dependencies": [
+        44
+      ],
+      "ref": "T048"
+    },
+    {
+      "title": "Construction-phase GI across corridor",
+      "description": "Carry out construction-phase GI across the corridor to confirm design assumptions.",
+      "status": "done",
+      "priority": "high",
+      "assignee": "Priya Nair (Structures Lead)",
+      "estimated_hours": 200,
+      "actual_hours": 220,
+      "due_date": "2027-10-15",
+      "dependencies": [
+        43
+      ],
+      "ref": "T049"
+    },
+    {
+      "title": "Earthworks bulk excavation & import balance",
+      "description": "Execute bulk earthworks excavation and manage the import/export balance.",
+      "status": "in_progress",
+      "priority": "high",
+      "assignee": "James Okafor (Construction Manager)",
+      "estimated_hours": 1200,
+      "actual_hours": 480,
+      "due_date": "2028-01-30",
+      "dependencies": [
+        49
+      ],
+      "ref": "T050"
+    },
+    {
+      "title": "Earthworks compaction & acceptability testing",
+      "description": "Test earthworks compaction and acceptability against specification.",
+      "status": "in_progress",
+      "priority": "high",
+      "assignee": "Rachel Evans (Quality Manager)",
+      "estimated_hours": 240,
+      "actual_hours": 120,
+      "due_date": "2028-02-15",
+      "dependencies": [
+        50
+      ],
+      "ref": "T051"
+    },
+    {
+      "title": "Pavement layers (sub-base to surfacing)",
+      "description": "Construct pavement layers from sub-base to binder course.",
+      "status": "in_progress",
+      "priority": "high",
+      "assignee": "James Okafor (Construction Manager)",
+      "estimated_hours": 1800,
+      "actual_hours": 240,
+      "due_date": "2028-03-15",
+      "dependencies": [
+        51
+      ],
+      "ref": "T052"
+    },
+    {
+      "title": "Structures \u2013 foundations & piling",
+      "description": "Construct structures foundations and piling to the accepted design.",
+      "status": "in_progress",
+      "priority": "high",
+      "assignee": "James Okafor (Construction Manager)",
+      "estimated_hours": 900,
+      "actual_hours": 360,
+      "due_date": "2028-02-28",
+      "dependencies": [
+        49,
+        26
+      ],
+      "ref": "T053"
+    },
+    {
+      "title": "Concrete & steel bridge works",
+      "description": "Construct concrete and structural-steel bridge works for the overbridge replacement. Bridge 4 steel erection at 62% vs 78% plan.",
+      "status": "in_progress",
+      "priority": "critical",
+      "assignee": "James Okafor (Construction Manager)",
+      "estimated_hours": 1600,
+      "actual_hours": 640,
+      "due_date": "2028-05-30",
+      "dependencies": [
+        53,
+        41
+      ],
+      "ref": "T054"
+    },
+    {
+      "title": "Drainage installation (pipes, culverts, attenuation)",
+      "description": "Install drainage pipes, culverts and attenuation to the accepted design.",
+      "status": "in_progress",
+      "priority": "high",
+      "assignee": "James Okafor (Construction Manager)",
+      "estimated_hours": 700,
+      "actual_hours": 210,
+      "due_date": "2028-03-30",
+      "dependencies": [
+        27
+      ],
+      "ref": "T055"
+    },
+    {
+      "title": "Road restraint systems (VRS) installation",
+      "description": "Install road restraint systems (VRS) to the certified system specification. BLOCKED: VRS supply-chain delay on certified containment system.",
+      "status": "blocked",
+      "priority": "high",
+      "assignee": "James Okafor (Construction Manager)",
+      "estimated_hours": 400,
+      "actual_hours": null,
+      "due_date": "2028-05-15",
+      "dependencies": [
+        52
+      ],
+      "ref": "T056"
+    },
+    {
+      "title": "Gantry foundations & erect gantries",
+      "description": "Construct gantry foundations and erect gantries to drawing. In inspection review.",
+      "status": "review",
+      "priority": "high",
+      "assignee": "James Okafor (Construction Manager)",
+      "estimated_hours": 360,
+      "actual_hours": null,
+      "due_date": "2028-05-30",
+      "dependencies": [
+        53,
+        41
+      ],
+      "ref": "T057"
+    },
+    {
+      "title": "Smart motorway technology (MIDAS, ERF, HSR) installation",
+      "description": "Install smart-motorway technology (MIDAS, ERF, HSR) and supporting cabling.",
+      "status": "todo",
+      "priority": "high",
+      "assignee": "Sophie Lambert (ITS/Controls Lead)",
+      "estimated_hours": 500,
+      "actual_hours": null,
+      "due_date": "2028-06-30",
+      "dependencies": [
+        57
+      ],
+      "ref": "T058"
+    },
+    {
+      "title": "Signs, gantries & VMS installation",
+      "description": "Install signs and variable message signs on the erected gantries.",
+      "status": "todo",
+      "priority": "high",
+      "assignee": "David Khan (Electrical Lead)",
+      "estimated_hours": 360,
+      "actual_hours": null,
+      "due_date": "2028-06-30",
+      "dependencies": [
+        57
+      ],
+      "ref": "T059"
+    },
+    {
+      "title": "Lighting & electrical installation to BS 5489",
+      "description": "Install lighting columns, ducting and electrical infrastructure to BS 5489.",
+      "status": "todo",
+      "priority": "medium",
+      "assignee": "David Khan (Electrical Lead)",
+      "estimated_hours": 400,
+      "actual_hours": null,
+      "due_date": "2028-07-15",
+      "dependencies": [
+        56
+      ],
+      "ref": "T060"
+    },
+    {
+      "title": "Final surfacing & white lining",
+      "description": "Lay the surface course and apply white lining within the weather window. BLOCKED: surfacing weather window missed (2.4 days lost); re-sequenced to next window.",
+      "status": "blocked",
+      "priority": "high",
+      "assignee": "James Okafor (Construction Manager)",
+      "estimated_hours": 600,
+      "actual_hours": null,
+      "due_date": "2028-07-30",
+      "dependencies": [
+        52
+      ],
+      "ref": "T061"
+    },
+    {
+      "title": "Landscaping & environmental planting",
+      "description": "Carry out landscaping and environmental planting to deliver BNG and landscape mitigation.",
+      "status": "todo",
+      "priority": "low",
+      "assignee": "James Okafor (Construction Manager)",
+      "estimated_hours": 240,
+      "actual_hours": null,
+      "due_date": "2028-08-15",
+      "dependencies": [
+        55
+      ],
+      "ref": "T062"
+    },
+    {
+      "title": "Traffic management (TM) execution & lane closures",
+      "description": "Execute TM operations and lane closures safely under live traffic.",
+      "status": "in_progress",
+      "priority": "high",
+      "assignee": "James Okafor (Construction Manager)",
+      "estimated_hours": 1000,
+      "actual_hours": 400,
+      "due_date": "2028-07-30",
+      "dependencies": [
+        44
+      ],
+      "ref": "T063"
+    },
+    {
+      "title": "Night closures execution & lane rental",
+      "description": "Execute night closures and manage lane-rental budget.",
+      "status": "in_progress",
+      "priority": "high",
+      "assignee": "James Okafor (Construction Manager)",
+      "estimated_hours": 600,
+      "actual_hours": 220,
+      "due_date": "2028-08-15",
+      "dependencies": [
+        48
+      ],
+      "ref": "T064"
+    },
+    {
+      "title": "Winter weather / seasonal works management",
+      "description": "Manage winter weather and seasonal constraints during construction.",
+      "status": "todo",
+      "priority": "medium",
+      "assignee": "James Okafor (Construction Manager)",
+      "estimated_hours": 200,
+      "actual_hours": null,
+      "due_date": "2028-08-30",
+      "dependencies": [
+        63
+      ],
+      "ref": "T065"
+    },
+    {
+      "title": "Structural bearings & joints commissioning",
+      "description": "Commission and verify structural bearings and expansion joints.",
+      "status": "todo",
+      "priority": "high",
+      "assignee": "Hannah Reed (Commissioning Lead)",
+      "estimated_hours": 200,
+      "actual_hours": null,
+      "due_date": "2028-07-15",
+      "dependencies": [
+        54
+      ],
+      "ref": "T066"
+    },
+    {
+      "title": "Drainage outfall proving",
+      "description": "Prove drainage outfalls are free-flowing and connect as designed.",
+      "status": "todo",
+      "priority": "medium",
+      "assignee": "Hannah Reed (Commissioning Lead)",
+      "estimated_hours": 120,
+      "actual_hours": null,
+      "due_date": "2028-07-30",
+      "dependencies": [
+        55
+      ],
+      "ref": "T067"
+    },
+    {
+      "title": "Asphalt compaction validation",
+      "description": "Validate asphalt compaction against the design and specification on completed sections.",
+      "status": "in_progress",
+      "priority": "medium",
+      "assignee": "Rachel Evans (Quality Manager)",
+      "estimated_hours": 160,
+      "actual_hours": 50,
+      "due_date": "2028-08-15",
+      "dependencies": [
+        52
+      ],
+      "ref": "T068"
+    },
+    {
+      "title": "Electrical lighting energisation",
+      "description": "Energise lighting and electrical systems into operation.",
+      "status": "todo",
+      "priority": "high",
+      "assignee": "David Khan (Electrical Lead)",
+      "estimated_hours": 200,
+      "actual_hours": null,
+      "due_date": "2028-08-30",
+      "dependencies": [
+        60
+      ],
+      "ref": "T069"
+    },
+    {
+      "title": "Smart motorway technology integration test",
+      "description": "Carry out the smart-motorway technology integration test (MIDAS, ERF, HSR).",
+      "status": "todo",
+      "priority": "high",
+      "assignee": "Sophie Lambert (ITS/Controls Lead)",
+      "estimated_hours": 240,
+      "actual_hours": null,
+      "due_date": "2028-09-15",
+      "dependencies": [
+        58,
+        59
+      ],
+      "ref": "T070"
+    },
+    {
+      "title": "VRS impact certification & acceptance",
+      "description": "Confirm VRS impact certification and acceptance of the installed system.",
+      "status": "todo",
+      "priority": "high",
+      "assignee": "Rachel Evans (Quality Manager)",
+      "estimated_hours": 120,
+      "actual_hours": null,
+      "due_date": "2028-09-15",
+      "dependencies": [
+        56
+      ],
+      "ref": "T071"
+    },
+    {
+      "title": "Traffic trial load & loading check",
+      "description": "Carry out the traffic trial load and structural loading check on the new structures.",
+      "status": "todo",
+      "priority": "high",
+      "assignee": "Hannah Reed (Commissioning Lead)",
+      "estimated_hours": 160,
+      "actual_hours": null,
+      "due_date": "2028-09-15",
+      "dependencies": [
+        54
+      ],
+      "ref": "T072"
+    },
+    {
+      "title": "Stage 3 safety audit (DMRB CD 377)",
+      "description": "Conduct the Stage 3 Road Safety Audit (DMRB CD 377) on the completed works.",
+      "status": "todo",
+      "priority": "critical",
+      "assignee": "Daniel Cohen (Safety/HSE)",
+      "estimated_hours": 120,
+      "actual_hours": null,
+      "due_date": "2028-09-30",
+      "dependencies": [
+        61,
+        70
+      ],
+      "ref": "T073"
+    },
+    {
+      "title": "Systems integration & communications test",
+      "description": "Test end-to-end systems integration and communications.",
+      "status": "todo",
+      "priority": "high",
+      "assignee": "Sophie Lambert (ITS/Controls Lead)",
+      "estimated_hours": 200,
+      "actual_hours": null,
+      "due_date": "2028-09-30",
+      "dependencies": [
+        70
+      ],
+      "ref": "T074"
+    },
+    {
+      "title": "Category 3 corrections / snagging",
+      "description": "Complete Category 3 corrections and snagging.",
+      "status": "todo",
+      "priority": "medium",
+      "assignee": "Rachel Evans (Quality Manager)",
+      "estimated_hours": 200,
+      "actual_hours": null,
+      "due_date": "2028-09-15",
+      "dependencies": [
+        73
+      ],
+      "ref": "T075"
+    },
+    {
+      "title": "Final snagging walkdown with National Highways",
+      "description": "Conduct the final snagging walkdown with National Highways.",
+      "status": "todo",
+      "priority": "high",
+      "assignee": "Hannah Reed (Commissioning Lead)",
+      "estimated_hours": 120,
+      "actual_hours": null,
+      "due_date": "2028-09-30",
+      "dependencies": [
+        75
+      ],
+      "ref": "T076"
+    },
+    {
+      "title": "Spatial safety audit",
+      "description": "Carry out the spatial safety audit of the completed works.",
+      "status": "todo",
+      "priority": "medium",
+      "assignee": "Daniel Cohen (Safety/HSE)",
+      "estimated_hours": 80,
+      "actual_hours": null,
+      "due_date": "2028-09-30",
+      "dependencies": [
+        76
+      ],
+      "ref": "T077"
+    },
+    {
+      "title": "Completion certificate & as-built handover",
+      "description": "Issue the completion certificate and hand over the as-built record.",
+      "status": "todo",
+      "priority": "high",
+      "assignee": "Greg Murphy (Document Control)",
+      "estimated_hours": 160,
+      "actual_hours": null,
+      "due_date": "2028-09-30",
+      "dependencies": [
+        76
+      ],
+      "ref": "T078"
+    },
+    {
+      "title": "Operations & maintenance manuals",
+      "description": "Compile and hand over the operations and maintenance manuals.",
+      "status": "todo",
+      "priority": "high",
+      "assignee": "Greg Murphy (Document Control)",
+      "estimated_hours": 200,
+      "actual_hours": null,
+      "due_date": "2028-09-30",
+      "dependencies": [
+        78
+      ],
+      "ref": "T079"
+    },
+    {
+      "title": "Post-opening project evaluation (POPE)",
+      "description": "Carry out the post-opening project evaluation and submit the report.",
+      "status": "todo",
+      "priority": "medium",
+      "assignee": "Sarah Whitmore (Project Director)",
+      "estimated_hours": 160,
+      "actual_hours": null,
+      "due_date": "2028-10-30",
+      "dependencies": [
+        78
+      ],
+      "ref": "T080"
+    }
+  ],
+  "risks": [
+    {
+      "risk_id": "R01",
+      "title": "Utility discovery clashes with TM phasing",
+      "description": "Live apparatus discovered during excavation clashes with planned TM phasing, forcing re-sequencing.",
+      "category": "Construction",
+      "probability": "High",
+      "impact": "High",
+      "status": "open",
+      "owner": "James Okafor (Construction Manager)",
+      "mitigation": "Early utility surveys, trial pits and joint planning with undertakers before TM fixation."
+    },
+    {
+      "risk_id": "R02",
+      "title": "Unforeseen ground conditions / contaminated land",
+      "description": "Ground conditions differ from design assumptions, including contamination or soft ground.",
+      "category": "Construction",
+      "probability": "Medium",
+      "impact": "High",
+      "status": "mitigating",
+      "owner": "Aisha Rahman (Geotechnical Engineer)",
+      "mitigation": "Adequate GI coverage, geotechnical risk register and contingency in earthworks method."
+    },
+    {
+      "risk_id": "R03",
+      "title": "Ground settlement affects adjacent structures",
+      "description": "Dewatering, excavation or piling causes settlement affecting adjacent buildings or services.",
+      "category": "Engineering & Design",
+      "probability": "Medium",
+      "impact": "High",
+      "status": "mitigating",
+      "owner": "Priya Nair (Structures Lead)",
+      "mitigation": "Condition surveys, movement monitoring and settlement control in temporary works."
+    },
+    {
+      "risk_id": "R04",
+      "title": "Ecology season constraints delay GCN works",
+      "description": "Great crested newt, bat and breeding-bird mitigation is season-constrained and works are late.",
+      "category": "Ecology & Environment",
+      "probability": "High",
+      "impact": "High",
+      "status": "open",
+      "owner": "Amelia Hart (Environmental Lead)",
+      "mitigation": "Early surveys and Natural England licence applications; mitigation sequenced to season windows."
+    },
+    {
+      "risk_id": "R05",
+      "title": "CPO objections delay land access",
+      "description": "Objections to compulsory purchase delay vesting and possession of land required for construction.",
+      "category": "Permitting & Land",
+      "probability": "High",
+      "impact": "Critical",
+      "status": "open",
+      "owner": "Michael Finch (Commercial)",
+      "mitigation": "Early engagement with landowners, negotiated acquisition first, robust CPO strategy."
+    },
+    {
+      "risk_id": "R06",
+      "title": "Night closure lane rental cost overrun",
+      "description": "Overrun on night closures under lane-rental incurs charges and erodes contingency.",
+      "category": "Commercial",
+      "probability": "High",
+      "impact": "High",
+      "status": "open",
+      "owner": "James Okafor (Construction Manager)",
+      "mitigation": "Realistic closure planning, readiness checks, conservative scope per closure."
+    },
+    {
+      "risk_id": "R07",
+      "title": "Surfacing weather windows missed",
+      "description": "The surface course cannot be laid within suitable weather windows.",
+      "category": "Construction",
+      "probability": "High",
+      "impact": "High",
+      "status": "mitigating",
+      "owner": "James Okafor (Construction Manager)",
+      "mitigation": "Programme surfacing into season, weather-watch and contingency days."
+    },
+    {
+      "risk_id": "R08",
+      "title": "Public Inquiry prolongation / DCO delay",
+      "description": "A Public Inquiry or examination extends the consenting timetable.",
+      "category": "Permitting & Land",
+      "probability": "High",
+      "impact": "Critical",
+      "status": "open",
+      "owner": "Amelia Hart (Environmental Lead)",
+      "mitigation": "Strong pre-application engagement and proactive inquiry preparation."
+    },
+    {
+      "risk_id": "R09",
+      "title": "BIM/DMRB compliance gaps",
+      "description": "Designs or the information model fail to meet DMRB or BIM Level 2 requirements.",
+      "category": "Engineering & Design",
+      "probability": "Medium",
+      "impact": "High",
+      "status": "mitigating",
+      "owner": "Priya Nair (Structures Lead)",
+      "mitigation": "Compliance checking at design gates, EIR clarity and BIM management."
+    },
+    {
+      "risk_id": "R10",
+      "title": "Traffic diverge/merge safety near site works",
+      "description": "Diverge/merge layouts near live works create collision risk.",
+      "category": "Traffic Management & Road Safety",
+      "probability": "Medium",
+      "impact": "High",
+      "status": "mitigating",
+      "owner": "James Okafor (Construction Manager)",
+      "mitigation": "TM designed to standard, safety inspections and RSA at gates."
+    },
+    {
+      "risk_id": "R11",
+      "title": "Steel price escalation on structures",
+      "description": "Structural steel price escalation increases structures cost above estimate.",
+      "category": "Procurement & Supply Chain",
+      "probability": "High",
+      "impact": "High",
+      "status": "open",
+      "owner": "Tom Bradley (Procurement Manager)",
+      "mitigation": "Early ordering, fixed-price agreements and value engineering."
+    },
+    {
+      "risk_id": "R12",
+      "title": "As-built survey data incomplete",
+      "description": "As-built survey information is incomplete at handover.",
+      "category": "Quality",
+      "probability": "Medium",
+      "impact": "Medium",
+      "status": "mitigating",
+      "owner": "Greg Murphy (Document Control)",
+      "mitigation": "Survey-as-you-go, CDE enforcement and milestone checks."
+    },
+    {
+      "risk_id": "R13",
+      "title": "Long-lead gantry/VMS delivery delay",
+      "description": "Gantries and VMS arrive late, deferring technology installation and commissioning.",
+      "category": "Procurement & Supply Chain",
+      "probability": "Medium",
+      "impact": "High",
+      "status": "open",
+      "owner": "Tom Bradley (Procurement Manager)",
+      "mitigation": "Early orders, factory acceptance tests and supplier surveillance."
+    },
+    {
+      "risk_id": "R14",
+      "title": "MIDAS/HSR integration software defects",
+      "description": "Smart-motorway integration reveals software defects delaying commissioning.",
+      "category": "Commissioning",
+      "probability": "Medium",
+      "impact": "High",
+      "status": "mitigating",
+      "owner": "Sophie Lambert (ITS/Controls Lead)",
+      "mitigation": "Early interface definition, factory testing and staged integration."
+    },
+    {
+      "risk_id": "R15",
+      "title": "Asphalt plant capacity / bitumen supply",
+      "description": "Asphalt plant capacity or bitumen supply constrains the surfacing programme.",
+      "category": "Procurement & Supply Chain",
+      "probability": "Medium",
+      "impact": "Medium",
+      "status": "mitigating",
+      "owner": "Tom Bradley (Procurement Manager)",
+      "mitigation": "Secure plant allocation, alternate suppliers and tonnage scheduling."
+    },
+    {
+      "risk_id": "R16",
+      "title": "Piling refusal / obstructions",
+      "description": "Piling encounters refusal or obstructions not anticipated in design.",
+      "category": "Construction",
+      "probability": "Medium",
+      "impact": "Medium",
+      "status": "closed",
+      "owner": "James Okafor (Construction Manager)",
+      "mitigation": "Adequate GI, pile trial and obstructions protocol."
+    },
+    {
+      "risk_id": "R17",
+      "title": "Drainage outfall flooding / discharge consent",
+      "description": "Outfall capacity or discharge-consent conditions constrain drainage.",
+      "category": "Permitting & Land",
+      "probability": "Medium",
+      "impact": "Medium",
+      "status": "mitigating",
+      "owner": "Priya Nair (Structures Lead)",
+      "mitigation": "Early engagement with LLFA and Environment Agency."
+    },
+    {
+      "risk_id": "R18",
+      "title": "HV cable strike during excavation",
+      "description": "Striking an HV cable during excavation causes serious injury or outage.",
+      "category": "HSE",
+      "probability": "Low",
+      "impact": "Critical",
+      "status": "closed",
+      "owner": "Daniel Cohen (Safety/HSE)",
+      "mitigation": "Permit to dig, CAT/GPR scanning, hand-dig zones, cable-avoidance training."
+    },
+    {
+      "risk_id": "R19",
+      "title": "Night-time working fatigue / incident",
+      "description": "Fatigue from repeated night shifts increases incident likelihood.",
+      "category": "HSE",
+      "probability": "Medium",
+      "impact": "High",
+      "status": "mitigating",
+      "owner": "Daniel Cohen (Safety/HSE)",
+      "mitigation": "Roster controls, fatigue management and welfare provision."
+    },
+    {
+      "risk_id": "R20",
+      "title": "VRS non-conformance / wrong system spec",
+      "description": "An installed VRS does not match the certified system or containment required.",
+      "category": "Quality",
+      "probability": "Medium",
+      "impact": "High",
+      "status": "open",
+      "owner": "Rachel Evans (Quality Manager)",
+      "mitigation": "Certified product procurement, installation inspection, impact-certification checks."
+    },
+    {
+      "risk_id": "R21",
+      "title": "Late design change (scope creep)",
+      "description": "Late design changes in construction cause rework, delay and cost growth.",
+      "category": "Engineering & Design",
+      "probability": "Medium",
+      "impact": "High",
+      "status": "mitigating",
+      "owner": "Priya Nair (Structures Lead)",
+      "mitigation": "Robust change control, design freeze at gates, early client decisions."
+    },
+    {
+      "risk_id": "R22",
+      "title": "Inflation / interest rate impact on funding",
+      "description": "Construction inflation and interest-rate movements erode the funding envelope.",
+      "category": "Funding & Finance",
+      "probability": "High",
+      "impact": "High",
+      "status": "open",
+      "owner": "Michael Finch (Commercial)",
+      "mitigation": "Forecast monitoring, hedging where applicable, value engineering."
+    },
+    {
+      "risk_id": "R23",
+      "title": "Stakeholder objection / political delay",
+      "description": "Political or stakeholder opposition delays consents or approvals.",
+      "category": "Permitting & Land",
+      "probability": "Medium",
+      "impact": "High",
+      "status": "mitigating",
+      "owner": "Sarah Whitmore (Project Director)",
+      "mitigation": "Proactive stakeholder engagement and clear communications."
+    },
+    {
+      "risk_id": "R24",
+      "title": "Archaeology finds causing delays",
+      "description": "Significant archaeological finds during works halt progress in an area.",
+      "category": "Ecology & Environment",
+      "probability": "Medium",
+      "impact": "Medium",
+      "status": "closed",
+      "owner": "Amelia Hart (Environmental Lead)",
+      "mitigation": "Desk-based assessment, evaluation trenching and agreed mitigation in advance."
+    },
+    {
+      "risk_id": "R25",
+      "title": "Weather disruption days exceeding allowance",
+      "description": "Weather disruption days exceed the programme allowance.",
+      "category": "Construction",
+      "probability": "High",
+      "impact": "Medium",
+      "status": "open",
+      "owner": "James Okafor (Construction Manager)",
+      "mitigation": "Seasonal planning, weather-watch and resilient methods."
+    },
+    {
+      "risk_id": "R26",
+      "title": "Subcontractor insolvency / capacity",
+      "description": "A key subcontractor becomes insolvent or lacks capacity.",
+      "category": "Procurement & Supply Chain",
+      "probability": "Low",
+      "impact": "High",
+      "status": "closed",
+      "owner": "Tom Bradley (Procurement Manager)",
+      "mitigation": "Prequalification, financial checks and dual-sourcing critical packages."
+    },
+    {
+      "risk_id": "R27",
+      "title": "Pavement quality non-conformance / rework",
+      "description": "Pavement layers fail compaction or materials testing, requiring rework.",
+      "category": "Quality",
+      "probability": "Medium",
+      "impact": "Medium",
+      "status": "mitigating",
+      "owner": "Rachel Evans (Quality Manager)",
+      "mitigation": "Method statements, plant calibration and in-situ testing."
+    },
+    {
+      "risk_id": "R28",
+      "title": "Concrete curing delays (cold weather)",
+      "description": "Cold-weather concreting causes curing delays.",
+      "category": "Construction",
+      "probability": "Medium",
+      "impact": "Medium",
+      "status": "mitigating",
+      "owner": "James Okafor (Construction Manager)",
+      "mitigation": "Cold-weather method, insulation and accelerated mixes."
+    },
+    {
+      "risk_id": "R29",
+      "title": "Lighting electrical energisation delay",
+      "description": "Lighting energisation slips due to supply or electrical-completion issues.",
+      "category": "Commissioning",
+      "probability": "Medium",
+      "impact": "Medium",
+      "status": "open",
+      "owner": "David Khan (Electrical Lead)",
+      "mitigation": "Early cable/equipment procurement and commissioning tracking."
+    },
+    {
+      "risk_id": "R30",
+      "title": "Traffic modelling underestimate",
+      "description": "Traffic modelling underestimates demand, prompting late design change.",
+      "category": "Engineering & Design",
+      "probability": "Low",
+      "impact": "High",
+      "status": "mitigating",
+      "owner": "Sarah Whitmore (Project Director)",
+      "mitigation": "Robust model validation and independent assurance."
+    },
+    {
+      "risk_id": "R31",
+      "title": "Land compensation cost escalation",
+      "description": "Land compensation and disturbance costs exceed provision.",
+      "category": "Commercial",
+      "probability": "Medium",
+      "impact": "Medium",
+      "status": "open",
+      "owner": "Michael Finch (Commercial)",
+      "mitigation": "Early valuation, negotiated settlement and expert support."
+    },
+    {
+      "risk_id": "R32",
+      "title": "Section 278 agreement delay with local authority",
+      "description": "S278 agreement negotiation with a local authority slips, affecting programme.",
+      "category": "Permitting & Land",
+      "probability": "Medium",
+      "impact": "Medium",
+      "status": "mitigating",
+      "owner": "Amelia Hart (Environmental Lead)",
+      "mitigation": "Early engagement and pre-agreed technical basis."
+    }
+  ],
+  "monitoring_alerts": [
+    {
+      "alert_id": "A01",
+      "rule_id": "M04",
+      "triggered_at": "2027-07-30",
+      "severity": "critical",
+      "message": "Public Inquiry milestone slipped > 30 days; consent critical path at risk.",
+      "status": "open"
+    },
+    {
+      "alert_id": "A02",
+      "rule_id": "M05",
+      "triggered_at": "2027-08-18",
+      "severity": "critical",
+      "message": "GCN mitigation season window closing; Natural England licence application late.",
+      "status": "open"
+    },
+    {
+      "alert_id": "A03",
+      "rule_id": "M06",
+      "triggered_at": "2027-09-05",
+      "severity": "high",
+      "message": "Critical-path HV utility diversion slippage exceeds 14 days.",
+      "status": "open"
+    },
+    {
+      "alert_id": "A04",
+      "rule_id": "M07",
+      "triggered_at": "2027-08-25",
+      "severity": "high",
+      "message": "Steel erection on Bridge 4 behind plan by > 10% (62% vs 78%).",
+      "status": "open"
+    },
+    {
+      "alert_id": "A05",
+      "rule_id": "M08",
+      "triggered_at": "2027-09-20",
+      "severity": "high",
+      "message": "Lane-rental budget consumed above 80% before completion of TM.",
+      "status": "open"
+    },
+    {
+      "alert_id": "A06",
+      "rule_id": "M09",
+      "triggered_at": "2027-10-05",
+      "severity": "high",
+      "message": "Surfacing weather window missed; final surfacing re-sequenced.",
+      "status": "mitigating"
+    },
+    {
+      "alert_id": "A07",
+      "rule_id": "M11",
+      "triggered_at": "2027-09-12",
+      "severity": "warning",
+      "message": "Pavement compaction test failure rate above 5% on lot 12.",
+      "status": "mitigating"
+    },
+    {
+      "alert_id": "A08",
+      "rule_id": "M13",
+      "triggered_at": "2027-09-01",
+      "severity": "critical",
+      "message": "CPO land not fully vested before Phase 5 works on plot 17.",
+      "status": "open"
+    },
+    {
+      "alert_id": "A09",
+      "rule_id": "M16",
+      "triggered_at": "2027-08-30",
+      "severity": "high",
+      "message": "Smart motorway MIDAS integration test failures recorded.",
+      "status": "open"
+    },
+    {
+      "alert_id": "A10",
+      "rule_id": "M02",
+      "triggered_at": "2027-09-15",
+      "severity": "high",
+      "message": "CPI below 0.94 for two periods; cost pressure flagged.",
+      "status": "mitigating"
+    },
+    {
+      "alert_id": "A11",
+      "rule_id": "M15",
+      "triggered_at": "2027-09-28",
+      "severity": "high",
+      "message": "Near-miss frequency rising on night shifts; fatigue review launched.",
+      "status": "open"
+    },
+    {
+      "alert_id": "A12",
+      "rule_id": "M27",
+      "triggered_at": "2027-09-22",
+      "severity": "warning",
+      "message": "Snagging closure rate 55%, below 60% approaching Stage 3 audit.",
+      "status": "open"
+    }
+  ],
+  "agent_actions": [
+    {
+      "action_id": "AA01",
+      "agent_type": "plan",
+      "action_type": "plan_review",
+      "summary": "Stage 2 schedule baselined; 12 months float identified on consent path.",
+      "details": {
+        "phase": 2,
+        "related_tasks": [
+          "T024"
+        ]
+      },
+      "severity": "info",
+      "resolved": 1,
+      "timestamp": "2025-11-10T09:30:00Z",
+      "created_at": "2025-05-15T10:30:00"
+    },
+    {
+      "action_id": "AA02",
+      "agent_type": "monitor",
+      "action_type": "status_report",
+      "summary": "EIA scoping opinion received; design feed initiated.",
+      "details": {
+        "phase": 2,
+        "related_tasks": [
+          "T018"
+        ]
+      },
+      "severity": "info",
+      "resolved": 1,
+      "timestamp": "2026-01-20T14:05:00Z",
+      "created_at": "2025-07-10T10:30:00"
+    },
+    {
+      "action_id": "AA03",
+      "agent_type": "alert",
+      "action_type": "risk_flag",
+      "summary": "Lane 3 closure TM plan flagged for risk: diverge taper non-compliant.",
+      "details": {
+        "phase": 4,
+        "related_tasks": [
+          "T058"
+        ],
+        "related_rule": "M25"
+      },
+      "severity": "warning",
+      "resolved": 0,
+      "timestamp": "2027-09-02T07:45:00Z",
+      "created_at": "2025-09-22T10:30:00"
+    },
+    {
+      "action_id": "AA04",
+      "agent_type": "monitor",
+      "action_type": "progress",
+      "summary": "Bridge 4 steel erection at 62% vs 78% plan; recovery plan requested.",
+      "details": {
+        "phase": 5,
+        "related_tasks": [
+          "T070"
+        ],
+        "related_rule": "M07"
+      },
+      "severity": "warning",
+      "resolved": 0,
+      "timestamp": "2027-08-25T16:20:00Z",
+      "created_at": "2026-03-18T10:30:00"
+    },
+    {
+      "action_id": "AA05",
+      "agent_type": "alert",
+      "action_type": "risk_flag",
+      "summary": "Critical: GCN ecology season window closing \u2013 mitigation late.",
+      "details": {
+        "phase": 3,
+        "related_tasks": [
+          "T052"
+        ],
+        "related_rule": "M05"
+      },
+      "severity": "critical",
+      "resolved": 0,
+      "timestamp": "2027-08-18T08:10:00Z",
+      "created_at": "2026-06-30T10:30:00"
+    },
+    {
+      "action_id": "AA06",
+      "agent_type": "alert",
+      "action_type": "delay",
+      "summary": "Public Inquiry ADJOURNED \u2013 reschedule risk to DCO determination.",
+      "details": {
+        "phase": 3,
+        "related_tasks": [
+          "T046",
+          "T047"
+        ],
+        "related_rule": "M04"
+      },
+      "severity": "critical",
+      "resolved": 0,
+      "timestamp": "2027-07-30T11:00:00Z",
+      "created_at": "2027-02-12T10:30:00"
+    },
+    {
+      "action_id": "AA07",
+      "agent_type": "monitor",
+      "action_type": "weather",
+      "summary": "Pavement surfacing weather window missed (2.4 days lost); final surfacing re-sequenced.",
+      "details": {
+        "phase": 5,
+        "related_tasks": [
+          "T080"
+        ],
+        "related_rule": "M09",
+        "days_lost": 2.4
+      },
+      "severity": "warning",
+      "resolved": 1,
+      "timestamp": "2027-10-05T17:30:00Z",
+      "created_at": "2027-04-08T10:30:00"
+    },
+    {
+      "action_id": "AA08",
+      "agent_type": "plan",
+      "action_type": "decision",
+      "summary": "Long-lead structural steel ordered early to protect critical path.",
+      "details": {
+        "phase": 4,
+        "related_tasks": [
+          "T055"
+        ]
+      },
+      "severity": "info",
+      "resolved": 1,
+      "timestamp": "2027-06-05T10:15:00Z",
+      "created_at": "2026-08-05T10:30:00"
+    },
+    {
+      "action_id": "AA09",
+      "agent_type": "monitor",
+      "action_type": "cost",
+      "summary": "CPI tracking 0.94; steel and bitumen escalation noted.",
+      "details": {
+        "phase": 5,
+        "related_rule": "M02",
+        "cpi": 0.94
+      },
+      "severity": "warning",
+      "resolved": 1,
+      "timestamp": "2027-09-15T13:40:00Z",
+      "created_at": "2027-05-21T10:30:00"
+    },
+    {
+      "action_id": "AA10",
+      "agent_type": "alert",
+      "action_type": "quality",
+      "summary": "VRS non-conformance raised; batch quarantined pending certification.",
+      "details": {
+        "phase": 5,
+        "related_tasks": [
+          "T073"
+        ],
+        "related_rule": "M10"
+      },
+      "severity": "warning",
+      "resolved": 1,
+      "timestamp": "2027-09-20T09:00:00Z",
+      "created_at": "2027-06-15T10:30:00"
+    },
+    {
+      "action_id": "AA11",
+      "agent_type": "plan",
+      "action_type": "risk_update",
+      "summary": "CPO objection received on plot 17; vesting route assessed.",
+      "details": {
+        "phase": 3,
+        "related_tasks": [
+          "T048"
+        ],
+        "related_rule": "M13"
+      },
+      "severity": "info",
+      "resolved": 1,
+      "timestamp": "2027-05-12T15:25:00Z",
+      "created_at": "2027-07-02T10:30:00"
+    },
+    {
+      "action_id": "AA12",
+      "agent_type": "monitor",
+      "action_type": "hse",
+      "summary": "Near-miss frequency rising on night shifts; fatigue review launched and closed.",
+      "details": {
+        "phase": 5,
+        "related_rule": "M15"
+      },
+      "severity": "warning",
+      "resolved": 1,
+      "timestamp": "2027-09-28T18:50:00Z",
+      "created_at": "2027-07-28T10:30:00"
+    }
+  ],
+  "kpi_values": [
+    {
+      "kpi_id": "KPI03",
+      "period": "2027-09",
+      "value": 0.97,
+      "target": 0.95
+    },
+    {
+      "kpi_id": "KPI04",
+      "period": "2027-09",
+      "value": 0.94,
+      "target": 0.95
+    },
+    {
+      "kpi_id": "KPI01",
+      "period": "2027-09",
+      "value": -4.2,
+      "target": ">= -5%"
+    },
+    {
+      "kpi_id": "KPI06",
+      "period": "2027-09",
+      "value": 18,
+      "target": "on programme"
+    },
+    {
+      "kpi_id": "KPI10",
+      "period": "2027-09",
+      "value": 0.0,
+      "target": 0.0
+    },
+    {
+      "kpi_id": "KPI11",
+      "period": "2027-09",
+      "value": 14,
+      "target": "trending up"
+    },
+    {
+      "kpi_id": "KPI12",
+      "period": "2027-09",
+      "value": 4.6,
+      "target": "< 5%"
+    },
+    {
+      "kpi_id": "KPI16",
+      "period": "2027-09",
+      "value": 55,
+      "target": ">= 90%"
+    },
+    {
+      "kpi_id": "KPI08",
+      "period": "2027-09",
+      "value": 3120,
+      "target": "within envelope"
+    },
+    {
+      "kpi_id": "KPI14",
+      "period": "2027-09",
+      "value": 78,
+      "target": ">= 90%"
+    },
+    {
+      "kpi_id": "KPI18",
+      "period": "2027-09",
+      "value": 2.4,
+      "target": "<= allowance"
+    },
+    {
+      "kpi_id": "KPI19",
+      "period": "2027-09",
+      "value": 7,
+      "target": "< 10"
+    },
+    {
+      "kpi_id": "KPI15",
+      "period": "2027-09",
+      "value": 88,
+      "target": ">= 95%"
+    },
+    {
+      "kpi_id": "KPI07",
+      "period": "2027-09",
+      "value": 96,
+      "target": 100
+    },
+    {
+      "kpi_id": "KPI05",
+      "period": "2027-09",
+      "value": "amber",
+      "target": "green or amber"
+    },
+    {
+      "kpi_id": "KPI13",
+      "period": "2027-09",
+      "value": 92,
+      "target": ">= 95%"
+    }
+  ],
+  "resources": [
+    {
+      "name": "Sarah Whitmore",
+      "role": "Project Director",
+      "availability": 40
+    },
+    {
+      "name": "James Okafor",
+      "role": "Construction Manager",
+      "availability": 45
+    },
+    {
+      "name": "Priya Nair",
+      "role": "Structures Lead",
+      "availability": 40
+    },
+    {
+      "name": "Tom Bradley",
+      "role": "Procurement Manager",
+      "availability": 40
+    },
+    {
+      "name": "Amelia Hart",
+      "role": "Environmental Lead",
+      "availability": 40
+    },
+    {
+      "name": "Daniel Cohen",
+      "role": "Safety/HSE",
+      "availability": 40
+    },
+    {
+      "name": "Michael Finch",
+      "role": "Commercial",
+      "availability": 40
+    },
+    {
+      "name": "Rachel Evans",
+      "role": "Quality Manager",
+      "availability": 40
+    },
+    {
+      "name": "David Khan",
+      "role": "Electrical Lead",
+      "availability": 40
+    },
+    {
+      "name": "Sophie Lambert",
+      "role": "ITS/Controls Lead",
+      "availability": 38
+    },
+    {
+      "name": "Greg Murphy",
+      "role": "Document Control",
+      "availability": 36
+    },
+    {
+      "name": "Hannah Reed",
+      "role": "Commissioning Lead",
+      "availability": 32
+    },
+    {
+      "name": "Mark Sullivan",
+      "role": "Site Agent",
+      "availability": 45
+    },
+    {
+      "name": "Aisha Rahman",
+      "role": "Geotechnical Engineer",
+      "availability": 38
+    }
+  ],
+  "summary": {
+    "task_counts": {
+      "done": 27,
+      "in_progress": 19,
+      "review": 10,
+      "todo": 19,
+      "blocked": 5,
+      "total": 80
+    },
+    "actual_hours_total": 10198,
+    "percent_done": 33.75
+  }
+}

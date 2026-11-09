@@ -14,7 +14,9 @@ const ProjectsView = {
         const project = await api.getProject(params.id);
         const tasks = await api.listTasks(params.id);
         const actions = await api.listAgentActions(params.id);
-        this._renderDetail(container, project, tasks, actions);
+        let pack = { attached: false };
+        try { pack = await api.getProjectPack(params.id); } catch (e) { /* no pack */ }
+        this._renderDetail(container, project, tasks, actions, pack);
       } else {
         const projects = await api.listProjects();
         this._renderList(container, projects);
@@ -65,7 +67,7 @@ const ProjectsView = {
   },
 
   // ── Detail View ──────────────────────────────────
-  _renderDetail(container, project, tasks, actions) {
+  _renderDetail(container, project, tasks, actions, pack = { attached: false }) {
     const pct = project.task_count > 0 ? Math.round((project.done_count / project.task_count) * 100) : 0;
     const todo = tasks.filter(t => t.status === 'todo');
     const inProgress = tasks.filter(t => t.status === 'in_progress');
@@ -95,6 +97,35 @@ const ProjectsView = {
         </div>
 
         ${project.goal ? `<div class="card" style="margin-bottom:20px"><div style="font-size:13px;color:var(--text-secondary);margin-bottom:4px">Goal / Brief</div><div>${esc(project.goal)}</div></div>` : ''}
+
+        ${pack?.attached ? `
+          <div class="card" style="margin-bottom:20px">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:10px">
+              <div>
+                <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted)">Domain pack</div>
+                <div style="font-size:15px;font-weight:700">${esc(pack.name)}</div>
+              </div>
+              <div style="display:flex;gap:6px;flex-wrap:wrap;font-size:11px">
+                <span class="badge badge-info">${pack.risk_count} risks</span>
+                <span class="badge badge-success">${pack.kpi_count} KPIs</span>
+                <span class="badge badge-warning">${pack.rule_count} rules</span>
+              </div>
+            </div>
+            <div style="font-size:12px;color:var(--text-muted);margin-bottom:6px">Risks the agents are watching</div>
+            ${(pack.top_risks || []).slice(0, 5).map(r => `
+              <div style="font-size:12px;padding:3px 0;border-top:1px solid var(--border)">
+                ${esc(r.title)}
+                <span style="color:var(--text-muted)"> — ${esc(r.probability || '')} / ${esc(r.impact || '')}</span>
+              </div>
+            `).join('')}
+          </div>
+        ` : `
+          <div class="card" style="margin-bottom:20px;font-size:13px;color:var(--text-secondary)">
+            No domain pack attached.
+            <a href="#packs" style="color:var(--accent)">Attach one</a> so the plan, monitor and alert
+            agents work with this domain's risk register, KPIs and monitoring rules.
+          </div>
+        `}
 
         <div class="section-header"><h2 class="section-title">Tasks</h2></div>
         ${tasks.length === 0

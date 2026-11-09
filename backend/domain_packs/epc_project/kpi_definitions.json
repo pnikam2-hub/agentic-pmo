@@ -1,0 +1,626 @@
+{
+  "pack": "epc_project",
+  "version": "1.1.0",
+  "total_kpis": 40,
+  "dimension_counts": {
+    "Schedule & Progress": 8,
+    "Cost & Commercial": 6,
+    "Quality": 6,
+    "HSE": 5,
+    "Construction Productivity": 4,
+    "Commissioning & Handover": 3,
+    "Sustainability & Environment": 8
+  },
+  "kpis": [
+    {
+      "kpi_id": "KPI01",
+      "name": "Schedule Performance Index (SPI)",
+      "description": "Ratio of earned value to planned value, measuring schedule efficiency against baseline",
+      "unit": "ratio",
+      "frequency": "Weekly",
+      "target": ">= 0.95",
+      "formula": "SPI = EV / PV",
+      "source": "Project controls system / EVM",
+      "related_phase": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "kpi_id": "KPI02",
+      "name": "Cost Performance Index (CPI)",
+      "description": "Ratio of earned value to actual cost, measuring cost efficiency",
+      "unit": "ratio",
+      "frequency": "Monthly",
+      "target": ">= 0.95",
+      "formula": "CPI = EV / AC",
+      "source": "Project controls system / EVM",
+      "related_phase": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ]
+    },
+    {
+      "kpi_id": "KPI03",
+      "name": "Critical Path Float Consumption",
+      "description": "Remaining float on the longest path; negative float indicates behind-schedule",
+      "unit": "days",
+      "frequency": "Weekly",
+      "target": "> 10 days positive float",
+      "formula": "LF - EF on critical path tasks",
+      "source": "Project schedule (Primavera P6 / MS Project)",
+      "related_phase": [
+        4,
+        5,
+        6,
+        7
+      ]
+    },
+    {
+      "kpi_id": "KPI04",
+      "name": "Engineering Progress (% IFC drawings issued)",
+      "description": "Percentage of IFC drawings issued vs planned for the current phase",
+      "unit": "%",
+      "frequency": "Weekly",
+      "target": ">= 95% of planned",
+      "formula": "(IFC drawings issued / total planned) x 100",
+      "source": "Engineering document register",
+      "related_phase": [
+        1,
+        2
+      ]
+    },
+    {
+      "kpi_id": "KPI05",
+      "name": "VDR Cycle Time (critical packages)",
+      "description": "Average time from vendor document submission to engineering approval for critical equipment packages",
+      "unit": "days",
+      "frequency": "Weekly",
+      "target": "<= 30 days",
+      "formula": "Average(TBE issue date - vendor submission date) for critical packages",
+      "source": "Vendor document register / EDMS",
+      "related_phase": [
+        4
+      ]
+    },
+    {
+      "kpi_id": "KPI06",
+      "name": "Construction Progress (S-Curve compliance)",
+      "description": "Actual progress vs planned S-curve, measured in installed quantities or earned hours",
+      "unit": "%",
+      "frequency": "Weekly",
+      "target": "Within +/- 5% of plan",
+      "formula": "Actual % complete - Planned % complete at reporting date",
+      "source": "Construction daily reports / progress measurement system",
+      "related_phase": [
+        5,
+        6
+      ]
+    },
+    {
+      "kpi_id": "KPI07",
+      "name": "Lookahead Plan Compliance (3-week)",
+      "description": "Percentage of planned lookahead activities completed per schedule",
+      "unit": "%",
+      "frequency": "Weekly",
+      "target": ">= 85%",
+      "formula": "(Activities completed / Activities planned in 3-week lookahead) x 100",
+      "source": "Construction planning / Last Planner System",
+      "related_phase": [
+        5,
+        6
+      ]
+    },
+    {
+      "kpi_id": "KPI08",
+      "name": "Milestone Achievement Rate",
+      "description": "Percentage of project milestones achieved on the scheduled date or earlier",
+      "unit": "%",
+      "frequency": "Monthly",
+      "target": ">= 90%",
+      "formula": "(Milestones achieved on time / Total milestones due) x 100",
+      "source": "Project schedule milestone list",
+      "related_phase": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ]
+    },
+    {
+      "kpi_id": "KPI09",
+      "name": "Cost Commitment vs Budget",
+      "description": "Total committed spend (POs placed plus incurred costs) as percentage of total budget",
+      "unit": "%",
+      "frequency": "Monthly",
+      "target": "Within +/- 5% of planned commitment curve",
+      "formula": "(Actual committed + actual spend) / Total budget x 100",
+      "source": "ERP / cost management system",
+      "related_phase": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ]
+    },
+    {
+      "kpi_id": "KPI10",
+      "name": "Change Order Volume (count)",
+      "description": "Total number of change orders raised during the project, indicating scope stability",
+      "unit": "count",
+      "frequency": "Monthly",
+      "target": "<= budgeted number per contract",
+      "formula": "Cumulative change orders raised",
+      "source": "Contract administration / change log",
+      "related_phase": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ]
+    },
+    {
+      "kpi_id": "KPI11",
+      "name": "Change Order Value Impact",
+      "description": "Net cost impact of approved and pending change orders as percentage of original budget",
+      "unit": "%",
+      "frequency": "Monthly",
+      "target": "< 5% of original budget",
+      "formula": "(Sum of approved & pending change order values / Original budget) x 100",
+      "source": "Contract administration / change log",
+      "related_phase": [
+        4,
+        5,
+        6,
+        7
+      ]
+    },
+    {
+      "kpi_id": "KPI12",
+      "name": "Contract Claim Value at Risk",
+      "description": "Total value of disputed claims (owner vs contractor) that may result in settlement costs",
+      "unit": "$ or % budget",
+      "frequency": "Monthly",
+      "target": "< 2% of contract value",
+      "formula": "Sum of all disputed claim values",
+      "source": "Commercial / contract management team",
+      "related_phase": [
+        5,
+        6,
+        7
+      ]
+    },
+    {
+      "kpi_id": "KPI13",
+      "name": "Engineering Cost Performance (budget vs actual hours)",
+      "description": "Engineering man-hours spent vs budgeted for current phase",
+      "unit": "% variance",
+      "frequency": "Monthly",
+      "target": "Within +/- 10%",
+      "formula": "(Actual hours / Budgeted hours - 1) x 100",
+      "source": "Time-sheet / engineering management system",
+      "related_phase": [
+        1,
+        2
+      ]
+    },
+    {
+      "kpi_id": "KPI14",
+      "name": "S-Curve Variance",
+      "description": "Planned vs actual cumulative progress S-curve deviation at reporting period",
+      "unit": "%",
+      "frequency": "Weekly",
+      "target": "Within +/- 5%",
+      "formula": "Absolute(Actual S-curve % - Planned S-curve %)",
+      "source": "Progress measurement system / P6",
+      "related_phase": [
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "kpi_id": "KPI15",
+      "name": "Weld NDT Rejection Rate",
+      "description": "Percentage of production welds failing NDT (RT/UT/PAUT) on first inspection",
+      "unit": "%",
+      "frequency": "Weekly",
+      "target": "< 3%",
+      "formula": "(Failed welds / Total welds tested) x 100",
+      "source": "NDT reports / weld database",
+      "related_phase": [
+        5,
+        6
+      ]
+    },
+    {
+      "kpi_id": "KPI16",
+      "name": "NCR Closure Time (average)",
+      "description": "Average time from NCR issue to close-out (verification completed)",
+      "unit": "days",
+      "frequency": "Weekly",
+      "target": "<= 30 days",
+      "formula": "Average(Close-out date - Issue date) for NCRs closed this period",
+      "source": "Quality management system / NCR log",
+      "related_phase": [
+        5,
+        6
+      ]
+    },
+    {
+      "kpi_id": "KPI17",
+      "name": "Open NCR Count",
+      "description": "Total number of open NCRs, trending direction indicates quality health",
+      "unit": "count",
+      "frequency": "Weekly",
+      "target": "Decreasing trend",
+      "formula": "Total open NCRs at reporting date",
+      "source": "Quality management system",
+      "related_phase": [
+        5,
+        6,
+        7
+      ]
+    },
+    {
+      "kpi_id": "KPI18",
+      "name": "Hydrotest Package Completion Rate",
+      "description": "Percentage of piping hydrotest packages completed and certified",
+      "unit": "%",
+      "frequency": "Weekly",
+      "target": "Target: 100% before MC",
+      "formula": "(Packages completed / total packages) x 100",
+      "source": "Hydrotest package register / piping completion system",
+      "related_phase": [
+        6,
+        7
+      ]
+    },
+    {
+      "kpi_id": "KPI19",
+      "name": "Punch List Item Count (open)",
+      "description": "Total open punch list items \u2014 should decrease as project approaches mechanical completion",
+      "unit": "count",
+      "frequency": "Weekly",
+      "target": "Decreasing trend, < 50 items at MC",
+      "formula": "Total open punch list items at reporting date",
+      "source": "Punch list / completion management system",
+      "related_phase": [
+        6,
+        7
+      ]
+    },
+    {
+      "kpi_id": "KPI20",
+      "name": "ITP Compliance Rate",
+      "description": "Percentage of inspection and test plan hold points witnessed/completed per schedule",
+      "unit": "%",
+      "frequency": "Monthly",
+      "target": ">= 95%",
+      "formula": "(ITP hold points completed / ITP hold points scheduled) x 100",
+      "source": "Quality plan / ITP register",
+      "related_phase": [
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "kpi_id": "KPI21",
+      "name": "Lost Time Incident (LTI) Rate",
+      "description": "Number of lost-time injuries per 200,000 man-hours worked",
+      "unit": "LTI rate",
+      "frequency": "Monthly",
+      "target": "0 (zero LTI target)",
+      "formula": "(Number of LTIs x 200,000) / Total man-hours worked",
+      "source": "HSE incident reports",
+      "related_phase": [
+        3,
+        4,
+        5,
+        6,
+        7
+      ]
+    },
+    {
+      "kpi_id": "KPI22",
+      "name": "Total Recordable Incident Rate (TRIR)",
+      "description": "Total recordable injuries (LTI + restricted work + medical treatment) per 200,000 man-hours",
+      "unit": "TRIR",
+      "frequency": "Monthly",
+      "target": "< 1.0",
+      "formula": "(Total recordable incidents x 200,000) / Total man-hours",
+      "source": "HSE incident reports",
+      "related_phase": [
+        3,
+        4,
+        5,
+        6,
+        7
+      ]
+    },
+    {
+      "kpi_id": "KPI23",
+      "name": "Near-Miss Reporting Rate",
+      "description": "Number of near-miss reports per 200,000 man-hours (leading indicator)",
+      "unit": "reports / 200k hrs",
+      "frequency": "Monthly",
+      "target": ">= 5 (indicates active reporting culture)",
+      "formula": "(Near-miss reports x 200,000) / Total man-hours",
+      "source": "HSE near-miss register",
+      "related_phase": [
+        4,
+        5,
+        6,
+        7
+      ]
+    },
+    {
+      "kpi_id": "KPI24",
+      "name": "Safety Observation / Intervention Rate",
+      "description": "Number of safety observations / interventions conducted per month",
+      "unit": "observations/month",
+      "frequency": "Monthly",
+      "target": ">= 20 per supervisor per month",
+      "formula": "Total safety observations recorded in period",
+      "source": "Safety observation cards / app",
+      "related_phase": [
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "kpi_id": "KPI25",
+      "name": "PTW Compliance / Non-Compliance Rate",
+      "description": "Percentage of permits audited that are fully compliant with PTW procedure",
+      "unit": "%",
+      "frequency": "Weekly",
+      "target": ">= 98%",
+      "formula": "(Compliant permits audited / Total permits audited) x 100",
+      "source": "PTW audit reports",
+      "related_phase": [
+        4,
+        5,
+        6,
+        7
+      ]
+    },
+    {
+      "kpi_id": "KPI26",
+      "name": "Rework Cost as % of Construction Cost",
+      "description": "Cost of rework (correcting defective or incomplete work) as percentage of total construction cost",
+      "unit": "%",
+      "frequency": "Monthly",
+      "target": "< 3%",
+      "formula": "(Rework cost / Total construction cost) x 100",
+      "source": "Quality system / cost coding for rework",
+      "related_phase": [
+        5,
+        6
+      ]
+    },
+    {
+      "kpi_id": "KPI27",
+      "name": "Mechanical Completion (MC) Certificates Issued",
+      "description": "Percentage of systems for which MC certificates have been issued (system-by-system turnover)",
+      "unit": "%",
+      "frequency": "Weekly",
+      "target": "100% before commissioning start",
+      "formula": "(Systems with MC issued / Total systems) x 100",
+      "source": "Completion management system (CMS)",
+      "related_phase": [
+        6,
+        7
+      ]
+    },
+    {
+      "kpi_id": "KPI28",
+      "name": "Equipment Setting & Alignment Accuracy",
+      "description": "Percentage of critical rotating equipment setting/alignment checks within OEM tolerances on first check",
+      "unit": "%",
+      "frequency": "Per equipment item",
+      "target": "100% within OEM tolerances",
+      "formula": "(Items within tolerance / Total items set) x 100",
+      "source": "Construction quality / alignment reports",
+      "related_phase": [
+        5
+      ]
+    },
+    {
+      "kpi_id": "KPI29",
+      "name": "Concrete / Foundation Quality (% defective pours)",
+      "description": "Percentage of concrete pours that need remedial work (honeycombing, low strength, incorrect level)",
+      "unit": "%",
+      "frequency": "Weekly",
+      "target": "< 2%",
+      "formula": "(Defective pours / Total pours) x 100",
+      "source": "Civil quality / concrete test reports",
+      "related_phase": [
+        5
+      ]
+    },
+    {
+      "kpi_id": "KPI30",
+      "name": "Performance Test Achievement (key guarantees)",
+      "description": "Percentage of contractual performance guarantees met during commissioning / performance test",
+      "unit": "%",
+      "frequency": "One-time during commissioning",
+      "target": "100% of signed guarantees",
+      "formula": "(Guarantees met / Total guarantees in contract) x 100",
+      "source": "Performance test protocol / EPC contract",
+      "related_phase": [
+        7
+      ]
+    },
+    {
+      "kpi_id": "KPI31",
+      "name": "Commissioning Schedule Variance",
+      "description": "Days ahead or behind the commissioning schedule per system",
+      "unit": "days",
+      "frequency": "Weekly",
+      "target": "0 (on schedule) or positive (ahead)",
+      "formula": "Actual system commission date - Planned system commission date",
+      "source": "Commissioning schedule / CMS",
+      "related_phase": [
+        7
+      ]
+    },
+    {
+      "kpi_id": "KPI32",
+      "name": "Document / Deliverable Submission Compliance",
+      "description": "Percentage of contractually required deliverables submitted on time",
+      "unit": "%",
+      "frequency": "Monthly",
+      "target": ">= 95%",
+      "formula": "(Deliverables submitted on time / Total deliverables due) x 100",
+      "source": "Document control register / EDMS",
+      "related_phase": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        7
+      ]
+    },
+    {
+      "kpi_id": "KPI33",
+      "name": "Construction Carbon Footprint (Scope 1 & 2)",
+      "description": "Total CO2e emissions from on-site construction activities including diesel generators, construction vehicles, and grid electricity consumption during the construction phase",
+      "unit": "tCO2e",
+      "frequency": "Monthly",
+      "target": "<= budgeted carbon budget per PEP",
+      "formula": "Sum(Diesel consumed x EF_diesel + Electricity consumed x EF_grid + Gas consumed x EF_gas)",
+      "source": "Site fuel/electricity consumption logs; emission factor database",
+      "related_phase": [
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "kpi_id": "KPI34",
+      "name": "Design Carbon Intensity (kgCO2e/kg product)",
+      "description": "Process design carbon intensity \u2014 CO2e per unit of product output, tracking the impact of design decisions (material selection, energy efficiency, heat integration) on operational carbon footprint",
+      "unit": "kgCO2e/kg product",
+      "frequency": "One-time at FEED close; verified at performance test",
+      "target": "<= FEED basis target",
+      "formula": "Total annual Scope 1+2 emissions / Annual production capacity (from H&MB)",
+      "source": "Process simulation / H&MB; ESG consultant report",
+      "related_phase": [
+        1,
+        2,
+        7
+      ]
+    },
+    {
+      "kpi_id": "KPI35",
+      "name": "Waste Diversion Rate (Construction)",
+      "description": "Percentage of construction and demolition waste diverted from landfill through recycling, reuse, or recovery",
+      "unit": "%",
+      "frequency": "Monthly",
+      "target": ">= 80%",
+      "formula": "(Waste recycled/reused / Total construction waste generated) x 100",
+      "source": "Waste manifest / weighbridge tickets / contractor monthly report",
+      "related_phase": [
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "kpi_id": "KPI36",
+      "name": "Water Consumption During Construction",
+      "description": "Total fresh water consumed for construction activities (dust suppression, concrete curing, washing, site facilities)",
+      "unit": "kL",
+      "frequency": "Monthly",
+      "target": "<= budgeted water consumption per CEMP",
+      "formula": "Sum of meter readings at all construction water take-off points",
+      "source": "Water meter readings / water truck logs",
+      "related_phase": [
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "kpi_id": "KPI37",
+      "name": "Sustainable Material Procurement (%)",
+      "description": "Percentage of procured materials (by value) with third-party sustainability certification or recycled content",
+      "unit": "%",
+      "frequency": "Monthly",
+      "target": ">= target % per project sustainability charter",
+      "formula": "(Value of certified/recycled-content materials / Total material procurement value) x 100",
+      "source": "Procurement system / supplier sustainability declarations",
+      "related_phase": [
+        3,
+        4
+      ]
+    },
+    {
+      "kpi_id": "KPI38",
+      "name": "Flaring & Fugitive Emissions Design Target",
+      "description": "Estimated annual flaring and fugitive emissions from the designed facility (flare system, valve/compressor leaks) per the FEED basis of design",
+      "unit": "tCO2e/year",
+      "frequency": "One-time at FEED completion",
+      "target": "<= regulatory limit and project charter target",
+      "formula": "Flare load (H&MB) x flare efficiency x GWP + fugitive estimate per protocol (EPA/OGMP)",
+      "source": "Process simulation / flare load summary; LDAR design basis",
+      "related_phase": [
+        1,
+        2
+      ]
+    },
+    {
+      "kpi_id": "KPI39",
+      "name": "Noise & Dust Compliance Rate (Construction)",
+      "description": "Percentage of ambient noise and particulate monitoring measurements that fall within statutory limits during construction",
+      "unit": "%",
+      "frequency": "Weekly during construction",
+      "target": "100% within statutory limits",
+      "formula": "(Compliant measurements / Total measurements) x 100",
+      "source": "Environmental monitoring reports / third-party lab results",
+      "related_phase": [
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "kpi_id": "KPI40",
+      "name": "Biodiversity Offset / Restoration Progress",
+      "description": "Progress against the biodiversity offset or restoration plan committed in the EIA approval conditions (e.g., hectares restored, trees planted)",
+      "unit": "% of plan",
+      "frequency": "Quarterly",
+      "target": "100% on schedule per biodiversity management plan",
+      "formula": "(Hectares restored or offset credits purchased / Total committed) x 100",
+      "source": "Biodiversity management plan / restoration contractor reports",
+      "related_phase": [
+        4,
+        7
+      ]
+    }
+  ]
+}

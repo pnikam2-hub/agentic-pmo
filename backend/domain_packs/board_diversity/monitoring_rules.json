@@ -1,0 +1,213 @@
+{
+  "pack": "board_diversity",
+  "rules": [
+    {
+      "rule_id": "M01",
+      "trigger_condition": "No board evaluation data shared by end of Phase 1 (approximately 8 weeks from kick-off)",
+      "severity": "high",
+      "recommended_action": "Escalate to engagement sponsor; offer an alternative aggregated assessment approach; document the data gap as a risk to diagnostic quality.",
+      "related_phase": [1, 2],
+      "related_risks": ["R07", "R11"]
+    },
+    {
+      "rule_id": "M02",
+      "trigger_condition": "Diversity baseline data remains incomplete after Phase 1 discovery (missing director attributes or stale data)",
+      "severity": "high",
+      "recommended_action": "Trigger the two-source validation; extend discovery; flag low-confidence metrics in the benchmark report.",
+      "related_phase": [1, 2],
+      "related_risks": ["R08", "R11"]
+    },
+    {
+      "rule_id": "M03",
+      "trigger_condition": "Board chair or nomination committee chair unavailable for the scheduled elite interview",
+      "severity": "high",
+      "recommended_action": "Re-prioritise access with the sponsor; offer alternative senior informants; record the access risk if it persists.",
+      "related_phase": [1, 4],
+      "related_risks": ["R04", "R28"]
+    },
+    {
+      "rule_id": "M04",
+      "trigger_condition": "The diversity policy document has not been updated within the last 12 months",
+      "severity": "medium",
+      "recommended_action": "Flag policy staleness in the diagnostic; prioritise a policy refresh in Phase 3; confirm reporting implications.",
+      "related_phase": [1, 3],
+      "related_risks": ["R35"]
+    },
+    {
+      "rule_id": "M05",
+      "trigger_condition": "A FTSE 350/250 diversity target date (e.g. Parker, FTSE Women Leaders) is approaching with a quantified gap still open",
+      "severity": "high",
+      "recommended_action": "Model the trajectory required to close the gap; raise with the nomination committee; prepare a comply-or-explain narrative.",
+      "related_phase": [2, 6],
+      "related_risks": ["R21"]
+    },
+    {
+      "rule_id": "M06",
+      "trigger_condition": "Board diversity metrics show no measurable improvement over two consecutive reporting periods (~6 months)",
+      "severity": "high",
+      "recommended_action": "Diagnose causes (pipeline, process, vacancies); re-baseline targets or accelerate refresh; report variance to sponsor.",
+      "related_phase": [6],
+      "related_risks": ["R21", "R20"]
+    },
+    {
+      "rule_id": "M07",
+      "trigger_condition": "Glass cliff indicators detected (diverse appointment into crisis, shrinking board, elevated turnover, recent profit warning)",
+      "severity": "high",
+      "recommended_action": "Review appointment context; ensure support structures; prepare honest messaging; consider postponing or restructuring the role.",
+      "related_phase": [5, 6],
+      "related_risks": ["R23", "R37"]
+    },
+    {
+      "rule_id": "M08",
+      "trigger_condition": "A nomination committee meeting is skipped, postponed, or held without the agreed process/documentation",
+      "severity": "high",
+      "recommended_action": "Confirm process compliance; require criteria documentation; escalate to chair if the pattern repeats.",
+      "related_phase": [5, 6],
+      "related_risks": ["R02"]
+    },
+    {
+      "rule_id": "M09",
+      "trigger_condition": "Candidate pipeline diversity ratio falls below the agreed target threshold for two consecutive cycles",
+      "severity": "high",
+      "recommended_action": "Review search firm sourcing; widen channels; assess pipeline breadth; adjust target timeframe if structural.",
+      "related_phase": [5, 6],
+      "related_risks": ["R20", "R24"]
+    },
+    {
+      "rule_id": "M10",
+      "trigger_condition": "Board effectiveness score declines over consecutive evaluation periods",
+      "severity": "high",
+      "recommended_action": "Investigate drivers (dynamics, information quality); link remediation to roadmap; brief the chair.",
+      "related_phase": [6, 7],
+      "related_risks": ["R06", "R36"]
+    },
+    {
+      "rule_id": "M11",
+      "trigger_condition": "Client decides not to publish diversity data in the annual report against recommendation",
+      "severity": "high",
+      "recommended_action": "Reiterate disclosure obligations and investor expectations; document the decision and rationale; warn of comply-or-explain and reputational exposure.",
+      "related_phase": [5, 6],
+      "related_risks": ["R17", "R40"]
+    },
+    {
+      "rule_id": "M12",
+      "trigger_condition": "A regulatory change is announced mid-engagement that affects targets or disclosure",
+      "severity": "medium",
+      "recommended_action": "Run a regulatory impact assessment; re-sequence the roadmap; communicate implications to the board and sponsor.",
+      "related_phase": [3, 6, 7],
+      "related_risks": ["R13", "R18"]
+    },
+    {
+      "rule_id": "M13",
+      "trigger_condition": "Key board sponsor departs the board or disengages during the engagement",
+      "severity": "high",
+      "recommended_action": "Re-confirm mandate with successor within one cycle; identify a co-sponsor; re-scope if commitment has changed.",
+      "related_phase": [0, 4, 5],
+      "related_risks": ["R04"]
+    },
+    {
+      "rule_id": "M14",
+      "trigger_condition": "Board refresh rate is below the level needed to build diversity (insufficient vacancies over the horizon)",
+      "severity": "medium",
+      "recommended_action": "Model required vacancies vs planned retirements; stagger tenure; align refresh with succession framework.",
+      "related_phase": [2, 5],
+      "related_risks": ["R03", "R05"]
+    },
+    {
+      "rule_id": "M15",
+      "trigger_condition": "Policy adoption deadline is approaching (within one board cycle of the AGM) without board action",
+      "severity": "high",
+      "recommended_action": "Front-load legal review; secure a board slot; prepare an interim resolution; warn of a one-year disclosure slip.",
+      "related_phase": [4, 5],
+      "related_risks": ["R35"]
+    },
+    {
+      "rule_id": "M16",
+      "trigger_condition": "Baseline data validation reveals a discrepancy rate greater than 5% across sources",
+      "severity": "medium",
+      "recommended_action": "Hold for clarification before benchmarking; resolve discrepancies; re-baseline if material.",
+      "related_phase": [1, 2],
+      "related_risks": ["R11"]
+    },
+    {
+      "rule_id": "M17",
+      "trigger_condition": "A draft external disclosure contradicts or overstates validated internal diversity data (greenwashing signal)",
+      "severity": "high",
+      "recommended_action": "Reconcile disclosure to internal data; route through legal review; correct before lodgement.",
+      "related_phase": [5, 6],
+      "related_risks": ["R40", "R17"]
+    },
+    {
+      "rule_id": "M18",
+      "trigger_condition": "A diversity target miss occurs with no comply-or-explain narrative prepared",
+      "severity": "high",
+      "recommended_action": "Draft a transparent explanation with remediation plan and revised trajectory before publication.",
+      "related_phase": [6, 7],
+      "related_risks": ["R21"]
+    },
+    {
+      "rule_id": "M19",
+      "trigger_condition": "Intersectional (gender x ethnicity) data is still unavailable by the start of Phase 2 benchmarking",
+      "severity": "medium",
+      "recommended_action": "Report available dimensions with explicit caveats; add a data-improvement plan into Phase 5 infrastructure.",
+      "related_phase": [2, 5],
+      "related_risks": ["R09"]
+    },
+    {
+      "rule_id": "M20",
+      "trigger_condition": "Executive search shortlists return homogeneous candidates (no diverse slate) for two consecutive vacancies",
+      "severity": "high",
+      "recommended_action": "Review search firm sourcing; require diverse slates; supplement with additional firms or direct sourcing.",
+      "related_phase": [5, 6],
+      "related_risks": ["R20", "R24"]
+    },
+    {
+      "rule_id": "M21",
+      "trigger_condition": "KPI dashboard is not live by the end of Phase 6",
+      "severity": "medium",
+      "recommended_action": "Prioritise dashboard deployment; use interim manual reporting; resolve data infrastructure blockers.",
+      "related_phase": [6],
+      "related_risks": ["R48"]
+    },
+    {
+      "rule_id": "M22",
+      "trigger_condition": "Annual report lodgement deadline is approaching with the diversity disclosure incomplete",
+      "severity": "high",
+      "recommended_action": "Prioritise mandatory disclosure; automate data packs; de-scope non-essential content; brief auditors.",
+      "related_phase": [5, 6],
+      "related_risks": ["R47", "R17"]
+    },
+    {
+      "rule_id": "M23",
+      "trigger_condition": "Director tenure clusters above the 9-year independence threshold with no refresh or re-assessment plan",
+      "severity": "medium",
+      "recommended_action": "Trigger independence reassessment; integrate into succession and refresh planning; disclose treatment.",
+      "related_phase": [2, 5],
+      "related_risks": ["R03"]
+    },
+    {
+      "rule_id": "M24",
+      "trigger_condition": "Mentorship or sponsorship programme participation falls below the agreed participation threshold",
+      "severity": "low",
+      "recommended_action": "Recruit senior champions; reduce friction to join; nudge participants; review programme design.",
+      "related_phase": [5, 6],
+      "related_risks": ["R32", "R33"]
+    },
+    {
+      "rule_id": "M25",
+      "trigger_condition": "A proxy advisor issues or signals an adverse voting recommendation on board composition or diversity",
+      "severity": "medium",
+      "recommended_action": "Engage the advisor; check thresholds and disclosure; align commitments ahead of the AGM.",
+      "related_phase": [4, 6],
+      "related_risks": ["R30", "R26"]
+    },
+    {
+      "rule_id": "M26",
+      "trigger_condition": "A woman is appointed to the Chair role during a profit warning, board shrinkage, or elevated turnover (specific glass-cliff pattern)",
+      "severity": "high",
+      "recommended_action": "Review the appointment context; ensure strong support and mentorship; prepare honest external messaging.",
+      "related_phase": [5, 6],
+      "related_risks": ["R23", "R37"]
+    }
+  ]
+}

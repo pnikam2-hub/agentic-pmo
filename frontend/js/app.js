@@ -51,6 +51,7 @@ const App = {
       case 'dashboard': DashboardView.render(); break;
       case 'projects': ProjectsView.render(parts[1] ? params : {}); break;
       case 'templates': TemplatesView.render(); break;
+      case 'packs': PacksView.render(); break;
       case 'project-detail': ProjectsView.render({ id: parseInt(parts[1]) }); break;
       case 'agents': AgentsView.render(); break;
       default: DashboardView.render();

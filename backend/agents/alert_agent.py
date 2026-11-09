@@ -21,6 +21,11 @@ async def run_alert_agent(
     if not anomaly_description:
         anomaly_description = await _auto_detect_anomalies(project_id, db)
 
+    from backend import packs as packlib
+    domain = packlib.agent_context(packlib.for_project(db, project_id), "alert")
+    if domain:
+        anomaly_description = f"{anomaly_description}\n\n{domain}"
+
     raw = await llm_service.alert_on_anomaly(project.name, anomaly_description)
     data = parse_json_response(raw)
 

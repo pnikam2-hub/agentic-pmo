@@ -1,0 +1,506 @@
+{
+  "pack": "epc_project",
+  "version": "1.0.0",
+  "purpose": "Commissioning checklist covering pre-commissioning through mechanical completion, energisation, loop checks, flushing, leak testing, start-up, performance test, and handover.",
+  "total_activities": 38,
+  "checkpoints": [
+    "Pre-Commissioning Preparation",
+    "Mechanical Completion (MC) Dossiers",
+    "System Cleaning and Flushing",
+    "Leak Testing (Hydrostatic / Pneumatic)",
+    "Electrical Pre-Commissioning",
+    "Instrumentation and Loop Checks",
+    "Equipment Run-In and Testing",
+    "Utilities Commissioning",
+    "Start-Up Preparation",
+    "Performance Test",
+    "Handover and Close-Out"
+  ],
+  "activities": [
+    {
+      "activity": "Commissioning team mobilisation and systems familiarisation",
+      "phase": "Phase 7 (Pre-Commissioning)",
+      "prerequisites": [
+        "Commissioning manager appointed",
+        "Commissioning team kick-off meeting held",
+        "Commissioning philosophy document issued"
+      ],
+      "procedure_required": "Commissioning philosophy / execution plan (CMP-001)",
+      "safety_hold_point": "All team members must have site-specific HSE induction before mobilisation",
+      "acceptance_criteria": "Full commissioning team on site, kick-off meeting minutes issued, roles and responsibilities clear",
+      "responsible_role": "Commissioning Manager"
+    },
+    {
+      "activity": "Pre-commissioning procedure review and system boundary definition",
+      "phase": "Phase 7 (Pre-Commissioning)",
+      "prerequisites": [
+        "P&IDs at IFC status",
+        "System/sub-system matrix defined by engineering"
+      ],
+      "procedure_required": "System boundary / sub-system demarcation schedule (SYS-001)",
+      "safety_hold_point": "System boundaries reviewed and agreed with construction and operations",
+      "acceptance_criteria": "Complete system demarcation schedule approved, each system tagged with P&ID reference",
+      "responsible_role": "Commissioning Lead / Process Engineer"
+    },
+    {
+      "activity": "Mechanical Completion (MC) dossier compilation per system",
+      "phase": "Phase 7 (Mechanical Completion)",
+      "prerequisites": [
+        "Construction complete per system",
+        "Punch list items identified",
+        "All ITP hold points signed off"
+      ],
+      "procedure_required": "MC dossier content checklist (MC template)",
+      "safety_hold_point": "Construction supervisor must confirm system is physically complete and safe for pre-comm",
+      "acceptance_criteria": "MC dossier includes: design docs, as-builts, MTCs, NDT reports, hydrotest records, NCR close-out, weld maps",
+      "responsible_role": "Quality Engineer / Construction Lead"
+    },
+    {
+      "activity": "MC dossier review and approval by commissioning team",
+      "phase": "Phase 7 (Mechanical Completion)",
+      "prerequisites": [
+        "MC dossier submitted by construction",
+        "All required documents present"
+      ],
+      "procedure_required": "MC dossier review checklist",
+      "safety_hold_point": "Any open NCRs must be risk-assessed and approved by commissioning manager",
+      "acceptance_criteria": "MC certificate signed by construction, quality, and commissioning \u2014 system formally released for pre-comm",
+      "responsible_role": "Commissioning Manager / Quality Manager"
+    },
+    {
+      "activity": "Pre-commissioning: piping system cleaning and flushing (water flush / chemical clean)",
+      "phase": "Phase 7 (Pre-Commissioning)",
+      "prerequisites": [
+        "System MC certificate issued",
+        "Temporary strainers installed at equipment inlets"
+      ],
+      "procedure_required": "Flushing / cleaning procedure (FL-001)",
+      "safety_hold_point": "Chemical cleaning requires PTW and confined space assessment",
+      "acceptance_criteria": "Flush water clarity, mesh strainer inspection clean, chemical passivation validated per procedure",
+      "responsible_role": "Commissioning Engineer / Piping Lead"
+    },
+    {
+      "activity": "Pre-commissioning: pipeline and loop chemical cleaning (if required for critical services)",
+      "phase": "Phase 7 (Pre-Commissioning)",
+      "prerequisites": [
+        "Water flush completed",
+        "Chemical cleaning solution and circulation system ready"
+      ],
+      "procedure_required": "Chemical cleaning procedure (CC-001)",
+      "safety_hold_point": "Chemical handling PPE, MSDS review, PTW for hazardous substance use",
+      "acceptance_criteria": "Sample analysis confirms residual contamination within spec (e.g. Fe < 100 ppm, oil/grease < 20 ppm)",
+      "responsible_role": "Commissioning Engineer / Chemist"
+    },
+    {
+      "activity": "Pre-commissioning: hot oil / thermal fluid circulation (if applicable)",
+      "phase": "Phase 7 (Pre-Commissioning)",
+      "prerequisites": [
+        "System flushed and dried",
+        "Thermal fluid filled, expansion tank level confirmed"
+      ],
+      "procedure_required": "Hot oil circulation and dehydration procedure (HO-001)",
+      "safety_hold_point": "Heating rate per procedure, thermal fluid high-temperature alarms tested",
+      "acceptance_criteria": "Thermal fluid dehydrated to manufacturer spec (< 200 ppm water), circulation temperature profile stable",
+      "responsible_role": "Commissioning Engineer"
+    },
+    {
+      "activity": "Pre-commissioning: drying and inerting (nitrogen sweep) of process systems",
+      "phase": "Phase 7 (Pre-Commissioning)",
+      "prerequisites": [
+        "System cleaned and flushed",
+        "Temporary connections for nitrogen supply ready",
+        "Oxygen analyser calibrated"
+      ],
+      "procedure_required": "Drying and inerting procedure (DI-001)",
+      "safety_hold_point": "Nitrogen atmosphere \u2014 confined space entry prohibited until O2 verified > 19.5%",
+      "acceptance_criteria": "Oxygen content below 2% in system (for fuel gas/hydrocarbon service), dew point within spec",
+      "responsible_role": "Commissioning Engineer"
+    },
+    {
+      "activity": "Hydrostatic leak test of piping systems (per hydrotest package)",
+      "phase": "Phase 7 (Pre-Commissioning)",
+      "prerequisites": [
+        "Hydrotest package boundary defined",
+        "Test pressure calculated per code",
+        "All joints exposed and accessible"
+      ],
+      "procedure_required": "Hydrostatic test procedure per ASME B31.3",
+      "safety_hold_point": "Pneumatic test must have separate risk assessment \u2014 hydrostatic is preferred",
+      "acceptance_criteria": "Holds test pressure for minimum hold time per code, no visible leaks, no pressure drop beyond accepted tolerance",
+      "responsible_role": "Quality Engineer / Piping Engineer"
+    },
+    {
+      "activity": "Pneumatic leak test (if hydrostatic not feasible)",
+      "phase": "Phase 7 (Pre-Commissioning)",
+      "prerequisites": [
+        "Hydrostatic not possible (dry gas service, lined pipe, etc)",
+        "Risk assessment approved"
+      ],
+      "procedure_required": "Pneumatic test procedure + risk assessment (PT-001)",
+      "safety_hold_point": "All personnel excluded from test area, remote pressurisation, continuous monitoring",
+      "acceptance_criteria": "Holds test pressure per procedure, soap bubble test shows no leaks",
+      "responsible_role": "Piping Engineer / HSE Engineer"
+    },
+    {
+      "activity": "Leak tightness test (LT) of flanges and joints after bolt-up",
+      "phase": "Phase 7 (Pre-Commissioning)",
+      "prerequisites": [
+        "Hydrotest complete, flanges re-torqued per joint integrity procedure"
+      ],
+      "procedure_required": "Joint integrity / leak tightness procedure (JI-001)",
+      "safety_hold_point": "Pressure staged in increments, no live-loading of bolts at full test pressure",
+      "acceptance_criteria": "Zero visible leakage at all flanges, gaskets, threaded connections, instrument take-offs",
+      "responsible_role": "Piping Engineer / Commissioning Technician"
+    },
+    {
+      "activity": "Electrical pre-commissioning: meggar testing of all cables and motors",
+      "phase": "Phase 7 (Electrical Pre-Commissioning)",
+      "prerequisites": [
+        "All cables terminated and glanded",
+        "Motor terminals open",
+        "MCC incomer isolated and locked"
+      ],
+      "procedure_required": "Meggar / IR test procedure (IR-001)",
+      "safety_hold_point": "LOTO applied to all sources, discharged after test, PTW for high-voltage testing",
+      "acceptance_criteria": "IR values per cable type and voltage class: HV > 1000 M\u03a9, LV > 10 M\u03a9 minimum",
+      "responsible_role": "Electrical Engineer"
+    },
+    {
+      "activity": "Electrical pre-commissioning: HV/LV switchgear primary injection testing",
+      "phase": "Phase 7 (Electrical Pre-Commissioning)",
+      "prerequisites": [
+        "Switchgear installed and wired",
+        "Busbars torqued and cleaned"
+      ],
+      "procedure_required": "Primary injection test procedure (PI-001)",
+      "safety_hold_point": "High-energy test \u2014 exclusion zone, only authorised test personnel",
+      "acceptance_criteria": "CT ratio, polarity, and saturation verified per protection scheme, relay operates at calculated values",
+      "responsible_role": "Electrical Engineer / Protection Engineer"
+    },
+    {
+      "activity": "Electrical pre-commissioning: secondary injection (relay calibration) testing",
+      "phase": "Phase 7 (Electrical Pre-Commissioning)",
+      "prerequisites": [
+        "Primary injection passed",
+        "Relay settings loaded"
+      ],
+      "procedure_required": "Secondary injection test procedure per protection coordinator scheme (SI-001)",
+      "safety_hold_point": "Relay trip outputs verified; ensure no unintended equipment start",
+      "acceptance_criteria": "All protection relays operate at 90-110% of set point, time curves match coordination study within 5%",
+      "responsible_role": "Electrical / Protection Engineer"
+    },
+    {
+      "activity": "Electrical energisation: HV switchgear incomer and bus-section",
+      "phase": "Phase 7 (Electrical Pre-Commissioning)",
+      "prerequisites": [
+        "Primary and secondary injection passed",
+        "Busbar PD test passed",
+        "Cable IR test passed",
+        "Authority approvals received"
+      ],
+      "procedure_required": "HV energisation procedure (HV-001)",
+      "safety_hold_point": "PTW and energisation permit from utility. Only authorised personnel in switchroom. Emergency stop tested.",
+      "acceptance_criteria": "HV incomer energised, bus voltage stable within \u00b15%, bus-section auto-changeover tested, voltage presence confirmed on all outgoing breakers",
+      "responsible_role": "Electrical Engineer / Utility Representative"
+    },
+    {
+      "activity": "Electrical energisation: LV switchgear, MCC, and UPS",
+      "phase": "Phase 7 (Electrical Pre-Commissioning)",
+      "prerequisites": [
+        "HV switchgear energised",
+        "LV transformer tested and energised",
+        "MCC cables IR tested"
+      ],
+      "procedure_required": "LV energisation procedure (LV-001)",
+      "safety_hold_point": "LOTO on all downstream motor starters until run-in",
+      "acceptance_criteria": "All MCCs energised, voltage present at each starter, UPS in bypass then inverter mode, battery charger float voltage within spec",
+      "responsible_role": "Electrical Engineer / Commissioning Engineer"
+    },
+    {
+      "activity": "Instrumentation: loop continuity and IO mapping check",
+      "phase": "Phase 7 (Instrumentation)",
+      "prerequisites": [
+        "DCS/SIS/PLC cabling complete",
+        "Marshalling cabinets wired",
+        "Field junction boxes terminated"
+      ],
+      "procedure_required": "Loop check procedure (LC-001)",
+      "safety_hold_point": "SIS loops must have separate calibration check before normal loop test",
+      "acceptance_criteria": "100% of loops checked: signal source at field \u2192 DCS input value matches within spec, output command from DCS \u2192 field actuator responds correctly",
+      "responsible_role": "Instrumentation Engineer"
+    },
+    {
+      "activity": "Instrumentation: impulse line and tubing pressure test",
+      "phase": "Phase 7 (Instrumentation)",
+      "prerequisites": [
+        "All instrument tubing run and connected",
+        "Tubing fittings tightened"
+      ],
+      "procedure_required": "Instrument tubing leak test procedure (IT-001)",
+      "safety_hold_point": "Maximum test pressure not to exceed component rating",
+      "acceptance_criteria": "No leakage at all compression fittings and connections at 1.5x maximum service pressure",
+      "responsible_role": "Instrumentation Engineer / Technician"
+    },
+    {
+      "activity": "Instrumentation: DCS/SIS/PLC software load and configuration check",
+      "phase": "Phase 7 (Instrumentation)",
+      "prerequisites": [
+        "DCS cabinet energised",
+        "Network communication established",
+        "IO modules tested"
+      ],
+      "procedure_required": "DCS software load procedure / SAT procedure per vendor",
+      "safety_hold_point": "SIS configuration must be validated against safety requirements specification (SRS)",
+      "acceptance_criteria": "Software load without errors, all IO mapped to correct tags, graphics functional, alarm list aligns with alarm philosophy",
+      "responsible_role": "DCS Engineer / Instrumentation Lead"
+    },
+    {
+      "activity": "Equipment run-in: pump run test (water batching)",
+      "phase": "Phase 7 (Equipment Run-In)",
+      "prerequisites": [
+        "Pump aligned and grouted",
+        "Motor meggar passed",
+        "MCC starter tested",
+        "Suction and discharge piping complete"
+      ],
+      "procedure_required": "Pump commissioning run-in procedure (PU-001)",
+      "safety_hold_point": "Coupling guard installed, suction valve open, minimum flow recirculation line open",
+      "acceptance_criteria": "Run 1 hour at rated speed: bearing temperature stable < 75\u00b0C, vibration within ISO 10816 limits, no abnormal noise, seal leak within spec",
+      "responsible_role": "Mechanical Engineer / Commissioning Engineer"
+    },
+    {
+      "activity": "Equipment run-in: compressor run-in (oil circulation, seal gas, start sequence)",
+      "phase": "Phase 7 (Equipment Run-In)",
+      "prerequisites": [
+        "Lube oil system flushed and filled",
+        "Seal gas supply connected",
+        "Coupling aligned",
+        "Vibration probes calibrated"
+      ],
+      "procedure_required": "Compressor commissioning procedure per OEM (CP-001)",
+      "safety_hold_point": "Surge line open to atmosphere during initial run, relief valves verified",
+      "acceptance_criteria": "Mechanical run 4 hours at rated speed: bearing/seal temperatures stable, vibration within API limits, lube oil pressure and temperature correct",
+      "responsible_role": "Rotating Equipment Engineer / OEM Service Rep"
+    },
+    {
+      "activity": "Equipment run-in: motor no-load run and direction check",
+      "phase": "Phase 7 (Equipment Run-In)",
+      "prerequisites": [
+        "Motor meggar passed",
+        "Coupled or uncoupled per procedure",
+        "Motor starter protection settings loaded"
+      ],
+      "procedure_required": "Motor no-load run procedure (MO-001)",
+      "safety_hold_point": "PTW for high voltage test, LOTO on source before termination adjustment",
+      "acceptance_criteria": "Motor runs to rated speed in correct direction (phase rotation verified), current draw at no-load within specification",
+      "responsible_role": "Electrical Engineer"
+    },
+    {
+      "activity": "Utilities commission: instrument air system",
+      "phase": "Phase 7 (Utilities Commissioning)",
+      "prerequisites": [
+        "Air compressors run-in",
+        "Dryers tested",
+        "Air receiver certified",
+        "Distribution piping leak-tested"
+      ],
+      "procedure_required": "Instrument air commissioning procedure (IA-001)",
+      "safety_hold_point": "Pressure in steps, moisture trap draining in procedure",
+      "acceptance_criteria": "Dew point < -40\u00b0C, pressure maintained at minimum header pressure, oil carry-over < 0.1 ppm, backup compressor auto-start tested",
+      "responsible_role": "Utilities Engineer"
+    },
+    {
+      "activity": "Utilities commission: cooling water system",
+      "phase": "Phase 7 (Utilities Commissioning)",
+      "prerequisites": [
+        "Cooling towers / cooling water pumps run-in",
+        "Chemical dosing system ready",
+        "Water quality tested"
+      ],
+      "procedure_required": "Cooling water commissioning procedure (CW-001)",
+      "safety_hold_point": "Chemical dosing (biocides/corrosion inhibitor) \u2014 COSHH assessment required",
+      "acceptance_criteria": "Flow and pressure at each user point per spec, return temperature rise within design, water quality within chemical treatment limits",
+      "responsible_role": "Utilities Engineer / Chemist"
+    },
+    {
+      "activity": "Utilities commission: nitrogen / inert gas system",
+      "phase": "Phase 7 (Utilities Commissioning)",
+      "prerequisites": [
+        "Nitrogen generator / evaporator installed",
+        "Distribution piping leak-tested",
+        "Oxygen analyser calibrated"
+      ],
+      "procedure_required": "Nitrogen system commissioning procedure (N2-001)",
+      "safety_hold_point": "Nitrogen \u2014 asphyxiation risk, O2 monitoring in enclosed spaces",
+      "acceptance_criteria": "Nitrogen purity > 99.9% (or specified), distribution pressure maintained at header setting, no leaks on distribution system",
+      "responsible_role": "Utilities Engineer"
+    },
+    {
+      "activity": "Utilities commission: steam system (if applicable)",
+      "phase": "Phase 7 (Utilities Commissioning)",
+      "prerequisites": [
+        "Boiler registered and inspected",
+        "Steam piping hydro-tested",
+        "Warm-up / steam blowing procedure ready"
+      ],
+      "procedure_required": "Steam commissioning procedure (ST-001)",
+      "safety_hold_point": "Warm-up rate per procedure to avoid thermal shock, all traps open during warm-up",
+      "acceptance_criteria": "Steam quality (dryness fraction) per spec, steam blowing completed to target (erosion target clean), supply pressure and temperature stable",
+      "responsible_role": "Utilities Engineer / Boiler Engineer"
+    },
+    {
+      "activity": "Catalyst loading (if applicable \u2014 reactor or adsorber beds)",
+      "phase": "Phase 7 (Start-Up Preparation)",
+      "prerequisites": [
+        "Reactor internals clean and inspected",
+        "Catalyst quantified and battery tested",
+        "Loading plan approved"
+      ],
+      "procedure_required": "Catalyst loading procedure per supplier (CL-001)",
+      "safety_hold_point": "Confined space entry during loading \u2014 continuous O2 and LEL monitoring. Loading density checked per bed height.",
+      "acceptance_criteria": "Catalyst loaded to target density (\u00b12% variation), settling tap applied, bed height recorded, closure inspection passed",
+      "responsible_role": "Process Engineer / Catalyst Supplier Rep"
+    },
+    {
+      "activity": "Refractory dry-out (fired heaters, reformers, furnaces, incinerators)",
+      "phase": "Phase 7 (Start-Up Preparation)",
+      "prerequisites": [
+        "Refractory installed and cured",
+        "Temporary burner / heater system ready",
+        "Dry-out curve from supplier received"
+      ],
+      "procedure_required": "Refractory dry-out schedule per supplier (RD-001)",
+      "safety_hold_point": "Ramp rate strictly per curve \u2014 thermal shock will destroy refractory",
+      "acceptance_criteria": "Temperature profile matches dry-out curve, moisture content in refractory < 1%, no spalling or cracking observed",
+      "responsible_role": "Furnace / Mechanical Engineer / Supplier Rep"
+    },
+    {
+      "activity": "Ready for Start-Up (RFSU) review and sign-off",
+      "phase": "Phase 7 (Start-Up Preparation)",
+      "prerequisites": [
+        "All systems MC certified",
+        "Pre-comm complete per system",
+        "Punch list closed or risk-accepted",
+        "Operations team ready on shift"
+      ],
+      "procedure_required": "RFSU checklist and sign-off sheet (RFSU-001)",
+      "safety_hold_point": "All safety systems verified functional: fire and gas detection, ESD, depressurisation, blowdown",
+      "acceptance_criteria": "RFSU certificate signed by commissioning manager, operations manager, and HSE manager. Plant declared ready for first feed.",
+      "responsible_role": "Commissioning Manager / Plant Manager"
+    },
+    {
+      "activity": "Start-up: safety system functional verification (ESD, F&G, depressurisation)",
+      "phase": "Phase 7 (Start-Up)",
+      "prerequisites": [
+        "RFSU signed",
+        "SIS loop checks complete",
+        "ESD valve stroked and tested"
+      ],
+      "procedure_required": "Safety system pre-start verification (SS-001)",
+      "safety_hold_point": "Failure of any safety system during test = NO-GO for start-up",
+      "acceptance_criteria": "All ESD pushbuttons initiate correct shutdown level, F&G detection actuates alarms and tripping per logic, blowdown valves open within spec time",
+      "responsible_role": "Process Safety Engineer / Instrumentation Engineer"
+    },
+    {
+      "activity": "Start-up: first feed introduction and initial process stabilisation",
+      "phase": "Phase 7 (Start-Up)",
+      "prerequisites": [
+        "Safety system functional check passed",
+        "Utilities stable",
+        "Operations team at full manning"
+      ],
+      "procedure_required": "Start-up sequence procedure per operations manual (SU-001)",
+      "safety_hold_point": "First feed ramp rate per procedure \u2014 immediate hold if any abnormal parameter",
+      "acceptance_criteria": "Process stabilised at steady-state conditions: temperature, pressure, level, flow within operating window for 4 hours continuous",
+      "responsible_role": "Commissioning Manager / Operations Shift Team"
+    },
+    {
+      "activity": "Start-up: ramp-up to nameplate capacity (staged approach)",
+      "phase": "Phase 7 (Start-Up)",
+      "prerequisites": [
+        "Initial stabilisation completed",
+        "All utility systems at spec",
+        "Product to intermediate storage route confirmed"
+      ],
+      "procedure_required": "Ramp-up procedure per operations manual (RU-001)",
+      "safety_hold_point": "Ramp rate not to exceed +10% of rate per hour unless procedure permits faster",
+      "acceptance_criteria": "Plant operating at 100% nameplate capacity with all key parameters within design range, product quality within spec",
+      "responsible_role": "Commissioning Manager / Process Engineer"
+    },
+    {
+      "activity": "Performance guarantee test: throughput and capacity",
+      "phase": "Phase 7 (Performance Test)",
+      "prerequisites": [
+        "Plant at steady state at nameplate capacity",
+        "All utilities and feed streams verified at guarantee conditions"
+      ],
+      "procedure_required": "Performance test protocol per EPC contract (PT-001)",
+      "safety_hold_point": "Performance test duration agreed: typically 72 consecutive hours at > 95% capacity",
+      "acceptance_criteria": "Average throughput over test period >= 100% of guaranteed capacity, sustained without extraordinary intervention",
+      "responsible_role": "Project Manager / EPC Contractor Rep"
+    },
+    {
+      "activity": "Performance guarantee test: product quality and yield",
+      "phase": "Phase 7 (Performance Test)",
+      "prerequisites": [
+        "On-stream at capacity during test",
+        "Laboratory at readiness for all quality parameters"
+      ],
+      "procedure_required": "Product quality test protocol per contract (PQ-001)",
+      "safety_hold_point": "Sample frequency per protocol \u2014 if quality drifts outside spec, test clock resets",
+      "acceptance_criteria": "All product quality parameters within contractual limits across test duration, yield meets or exceeds guarantee value",
+      "responsible_role": "Process Engineer / Quality Manager"
+    },
+    {
+      "activity": "Performance guarantee test: utility consumption and emissions",
+      "phase": "Phase 7 (Performance Test)",
+      "prerequisites": [
+        "Utilities steady throughout test period",
+        "Emission monitoring instruments calibrated"
+      ],
+      "procedure_required": "Utility / emissions measurement protocol per contract (UE-001)",
+      "safety_hold_point": "Emission breaches during test = test failure \u2014 regulatory notification required if beyond consented limits",
+      "acceptance_criteria": "Normalised utility consumption within guarantee envelope, all emissions below statutory limit and guarantee value",
+      "responsible_role": "Utilities Engineer / HSE Manager"
+    },
+    {
+      "activity": "Provisional Acceptance Certificate (PAC) issuance",
+      "phase": "Phase 7 (Handover)",
+      "prerequisites": [
+        "All performance guarantee tests passed",
+        "Final test report issued and agreed",
+        "Outstanding minor items listed in log"
+      ],
+      "procedure_required": "PAC certificate template per EPC contract",
+      "safety_hold_point": "All safety-critical guarantees must be met before PAC can be signed",
+      "acceptance_criteria": "PAC signed by owner and EPC contractor, effective date established, retention percentage agreed per contract",
+      "responsible_role": "Project Manager / Owner's Representative"
+    },
+    {
+      "activity": "Operator training completion and competency verification",
+      "phase": "Phase 7 (Handover)",
+      "prerequisites": [
+        "Operations team in place",
+        "Training manuals delivered",
+        "Train-the-trainer completed"
+      ],
+      "procedure_required": "Operator training record and competency assessment checklist",
+      "safety_hold_point": "Each operator must pass written and practical competency assessment before independent duty",
+      "acceptance_criteria": "100% of operations and maintenance staff trained, competency assessment passed, refresher schedule agreed",
+      "responsible_role": "Operations Manager / Training Coordinator"
+    },
+    {
+      "activity": "As-built documentation handover and project close-out",
+      "phase": "Phase 7 (Handover)",
+      "prerequisites": [
+        "All as-built drawings collected from site and vendor",
+        "MC dossiers complete per system",
+        "Final cost account closed"
+      ],
+      "procedure_required": "Document handover checklist per contract / project close-out procedure",
+      "safety_hold_point": "Statutory documents (pressure vessel certs, boiler certs) must be physically handed over",
+      "acceptance_criteria": "As-built document set complete per contract deliverable list, operating manuals transferred, spare parts and special tools handed over, warranty period start date agreed",
+      "responsible_role": "Document Control / Project Manager"
+    }
+  ]
+}

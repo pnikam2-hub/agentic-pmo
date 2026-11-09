@@ -1,0 +1,165 @@
+{
+  "pack": "buildings_realestate",
+  "permits": [
+    {
+      "permit_name": "Outline Planning Consent",
+      "why_needed": "Establishes in-principle acceptance of tower height, massing, and use mix with the local authority / municipal planning authority before detailed design investment.",
+      "responsible_role": "Permitting Lead",
+      "required_inputs": ["Indicative massing study", "Planning pre-application advice", "Townscape and height context analysis", "Development brief"],
+      "phase": 1,
+      "dependencies": ["Planning pre-application consultation completed"],
+      "estimated_lead_time_months": 6,
+      "evidence_required": "Outline consent decision notice with reserved matters list"
+    },
+    {
+      "permit_name": "Full / Detailed Planning Permission",
+      "why_needed": "Grants legal permission to construct the tower as designed; all pre-commencement conditions must be discharged before site start.",
+      "responsible_role": "Permitting Lead",
+      "required_inputs": ["Full architectural drawing set", "Daylight/sunlight and wind microclimate reports", "Environmental statement (if required)", "Transport statement and CTMP", "Materials and cladding intent schedule"],
+      "phase": 3,
+      "dependencies": ["Outline planning consent", "EIA screening/scoping outcome"],
+      "estimated_lead_time_months": 9,
+      "evidence_required": "Decision notice granting permission plus condition discharge approvals"
+    },
+    {
+      "permit_name": "Building Regulations / Building Control Approval",
+      "why_needed": "Demonstrates compliance of structure, fire safety, drainage, accessibility, and energy design with national building codes; required before and during construction stages.",
+      "responsible_role": "Permitting Lead",
+      "required_inputs": ["Structural calculation packs", "Detailed fire strategy", "Energy/SAP or equivalent compliance report", "Drainage design", "Accessibility statement"],
+      "phase": 3,
+      "dependencies": ["Detailed design stage gate sign-off"],
+      "estimated_lead_time_months": 4,
+      "evidence_required": "Full plans approval notice; staged inspection sign-offs during construction"
+    },
+    {
+      "permit_name": "Environmental Impact Assessment / Screening Opinion",
+      "why_needed": "Determines whether the tower requires a full environmental statement and frames assessment topics (wind, daylight, noise, ecology) for the planning submission.",
+      "responsible_role": "Permitting Lead",
+      "required_inputs": ["Project description", "Baseline survey scope", "Preliminary technical assessments"],
+      "phase": 2,
+      "dependencies": ["Site acquisition completed"],
+      "estimated_lead_time_months": 3,
+      "evidence_required": "Screening opinion letter; scoping report and consultee responses if EIA required"
+    },
+    {
+      "permit_name": "Contaminated Land / Remediation Strategy Approval",
+      "why_needed": "Regulatory endorsement of the land remediation strategy ensuring safe redevelopment of contaminated ground and compliant disposal of soils.",
+      "responsible_role": "Permitting Lead",
+      "required_inputs": ["Phase 1/2 contamination assessment", "Remediation options appraisal", "Verification plan", "Waste disposal routes"],
+      "phase": 2,
+      "dependencies": ["Ground investigation completed"],
+      "estimated_lead_time_months": 3,
+      "evidence_required": "Regulator approval letter; remediation verification report at completion"
+    },
+    {
+      "permit_name": "Deep Excavation / Basement Structure Permit",
+      "why_needed": "Some authorities require specific consent for deep excavation adjacent to highways and neighbouring structures, reviewing excavation support and monitoring regimes.",
+      "responsible_role": "Permitting Lead",
+      "required_inputs": ["Temporary works design", "Movement monitoring plan", "Neighbour impact assessment", "Dewatering proposal"],
+      "phase": 3,
+      "dependencies": ["Party-wall agreements progressing", "Temporary works design certified"],
+      "estimated_lead_time_months": 3,
+      "evidence_required": "Permit letter with monitoring conditions attached"
+    },
+    {
+      "permit_name": "Party Wall Agreement(s)",
+      "why_needed": "Statutory agreement with neighbouring owners whose buildings adjoin or are affected by excavation, piling, and crane tie-ins; required before works at the boundary.",
+      "responsible_role": "Legal Counsel",
+      "required_inputs": ["Party-wall notices", "Schedule of condition surveys", "Proposed works drawings", "Surveyor appointments"],
+      "phase": 3,
+      "dependencies": ["Neighbour condition surveys completed"],
+      "estimated_lead_time_months": 4,
+      "evidence_required": "Executed party-wall awards for all affected boundaries"
+    },
+    {
+      "permit_name": "Hoarding and Road/Footpath Closure Permit",
+      "why_needed": "Authorises site enclosure and temporary closure of footpaths/lanes for crane erection, deliveries, and hoarding on the constrained urban street network.",
+      "responsible_role": "Permitting Lead",
+      "required_inputs": ["Traffic management plan", "Hoarding drawings", "Pedestrian diversion design", "Public liability insurance"],
+      "phase": 4,
+      "dependencies": ["Full planning permission granted"],
+      "estimated_lead_time_months": 2,
+      "evidence_required": "Permit with approved TM plan displayed on site"
+    },
+    {
+      "permit_name": "Crane Oversail / Lifting Operation Notification to Authority",
+      "why_needed": "Licences crane jibs slewing over public highway and notifies the authority of major lifting operations; includes indemnity insurance over third parties.",
+      "responsible_role": "Permitting Lead",
+      "required_inputs": ["Crane layout and reach drawings", "Oversail areas plan", "Indemnity insurance certificate", "Lift schedule summary"],
+      "phase": 4,
+      "dependencies": ["Tower crane strategy approved"],
+      "estimated_lead_time_months": 2,
+      "evidence_required": "Oversail licence and notification acknowledgements"
+    },
+    {
+      "permit_name": "Street Works / Public Highway Licence",
+      "why_needed": "Permits opening or occupying the public highway for utility connections, vehicle crossovers, and reinstatement works.",
+      "responsible_role": "Permitting Lead",
+      "required_inputs": ["Street works drawings", "Reinstatement specification", "Traffic management proposals", "Qualified operative registrations"],
+      "phase": 4,
+      "dependencies": ["Utilities connection designs agreed"],
+      "estimated_lead_time_months": 2,
+      "evidence_required": "Street works licence with reinstatement categories"
+    },
+    {
+      "permit_name": "Scaffold Licence Over Public Footway",
+      "why_needed": "Authorises scaffolding and fan decks erected over or adjacent to the public footway protecting pedestrians from falling objects.",
+      "responsible_role": "Permitting Lead",
+      "required_inputs": ["Scaffold design and loading drawings", "Protection fan details", "Inspection regime", "Public liability insurance"],
+      "phase": 4,
+      "dependencies": ["Hoarding permit granted"],
+      "estimated_lead_time_months": 2,
+      "evidence_required": "Scaffold licence with weekly inspection tags maintained"
+    },
+    {
+      "permit_name": "Dewatering Abstraction and Discharge Permit",
+      "why_needed": "Consent to abstract groundwater for basement dewatering and discharge treated water to sewer or watercourse within quality limits.",
+      "responsible_role": "Permitting Lead",
+      "required_inputs": ["Hydrogeological assessment", "Dewatering design and rates", "Water treatment proposal", "Discharge quality predictions"],
+      "phase": 3,
+      "dependencies": ["Ground investigation data available"],
+      "estimated_lead_time_months": 4,
+      "evidence_required": "Abstraction/discharge permit with monitoring conditions"
+    },
+    {
+      "permit_name": "Utilities Connection Approvals (Electricity, Water, Gas, Telecom)",
+      "why_needed": "Formal connection agreements and capacity confirmations from utility providers for the tower's permanent supplies; long-lead items for energisation.",
+      "responsible_role": "Permitting Lead",
+      "required_inputs": ["Load/capacity schedules", "Metering arrangements", "Substation/plant room layouts", "Connection application forms"],
+      "phase": 3,
+      "dependencies": ["MEP detailed design sufficiently advanced"],
+      "estimated_lead_time_months": 8,
+      "evidence_required": "Signed connection agreements with dated energisation commitments"
+    },
+    {
+      "permit_name": "Fire Safety / Fire Strategy Approval",
+      "why_needed": "Approval of the detailed fire strategy — evacuation, smoke control, firefighting provisions, facade fire performance — by the authority having jurisdiction.",
+      "responsible_role": "Permitting Lead",
+      "required_inputs": ["Detailed fire strategy report", "Smoke control design", "Evacuation modelling", "Cladding fire test evidence"],
+      "phase": 3,
+      "dependencies": ["Building control submission lodged"],
+      "estimated_lead_time_months": 4,
+      "evidence_required": "Written fire strategy approval correspondence"
+    },
+    {
+      "permit_name": "Temporary Works Design Certification",
+      "why_needed": "Independent certification that temporary works (excavation support, crane ties, facade mast clamps) are adequately designed and checked before loading.",
+      "responsible_role": "Structural Engineer",
+      "required_inputs": ["Temporary works designs", "Design check certificates", "TW register", "Monitoring trigger values"],
+      "phase": 4,
+      "dependencies": ["Permanent works design frozen"],
+      "estimated_lead_time_months": 2,
+      "evidence_required": "Signed design check certificates per TW element"
+    },
+    {
+      "permit_name": "Heritage / Conservation Consent or Neighbour Approvals",
+      "why_needed": "Consent where the tower affects protected views, conservation areas, or listed settings; may include negotiated agreements with neighbouring institutions.",
+      "responsible_role": "Permitting Lead",
+      "required_inputs": ["Heritage impact assessment", "Verified view studies", "Design mitigation proposals"],
+      "phase": 2,
+      "dependencies": ["Massing options developed"],
+      "estimated_lead_time_months": 5,
+      "evidence_required": "Consent letters or recorded no-objection determinations"
+    }
+  ]
+}
