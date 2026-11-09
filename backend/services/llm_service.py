@@ -58,6 +58,16 @@ async def chat_completion(
         "max_tokens": max_tokens,
     }
 
+    # DeepSeek enables chain-of-thought by default, and with thinking on, the
+    # reasoning tokens can consume the whole max_tokens budget leaving
+    # choices[0].message.content empty. Disable it unless asked otherwise.
+    # Other providers are left untouched (they reject unknown fields).
+    thinking = os.getenv("LLM_THINKING", "").strip().lower()
+    if thinking in ("enabled", "disabled"):
+        payload["thinking"] = {"type": thinking}
+    elif "deepseek" in base.lower():
+        payload["thinking"] = {"type": "disabled"}
+
     try:
         async with httpx.AsyncClient(timeout=120.0) as client:
             resp = await client.post(
@@ -69,6 +79,7 @@ async def chat_completion(
             data = resp.json()
             return data["choices"][0]["message"]["content"]
     except Exception as exc:
+        print(f"[llm] {model} at {base} failed: {exc}", flush=True)
         return _fallback_plan(messages, error=str(exc))
 
 
