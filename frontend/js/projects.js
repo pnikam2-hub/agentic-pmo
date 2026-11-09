@@ -33,6 +33,7 @@ const ProjectsView = {
           <p class="page-subtitle">${projects.length} project${projects.length !== 1 ? 's' : ''}</p>
         </div>
         <button class="btn btn-primary" onclick="App.navigate('projects', {action:'new'})">+ New Project</button>
+        <button class="btn btn-secondary" onclick="App.navigate('templates')">📦 From template</button>
       </div>
       ${projects.length === 0
         ? '<div class="empty-state"><div class="empty-state-icon">📁</div><div class="empty-state-title">No projects</div><div class="empty-state-text">Create your first project.</div></div>'

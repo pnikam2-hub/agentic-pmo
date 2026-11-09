@@ -50,6 +50,7 @@ const App = {
     switch (view) {
       case 'dashboard': DashboardView.render(); break;
       case 'projects': ProjectsView.render(parts[1] ? params : {}); break;
+      case 'templates': TemplatesView.render(); break;
       case 'project-detail': ProjectsView.render({ id: parseInt(parts[1]) }); break;
       case 'agents': AgentsView.render(); break;
       default: DashboardView.render();
@@ -91,9 +92,6 @@ const App = {
             <input class="form-input" id="login-password" type="password" placeholder="••••••••" autocomplete="current-password" />
           </div>
           <button class="btn btn-primary" style="width:100%;justify-content:center;padding:12px" onclick="App._doLogin()">Sign In</button>
-          <p style="font-size:11px;color:var(--text-muted);text-align:center;margin-top:16px">
-            Default credentials configured in .env
-          </p>
         </div>
       </div>
     `;
