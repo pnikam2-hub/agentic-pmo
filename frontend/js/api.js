@@ -4,7 +4,32 @@ const API_BASE = '/api';
 function getToken() { return localStorage.getItem('agentic_pmo_token'); }
 function setToken(t) { localStorage.setItem('agentic_pmo_token', t); }
 function clearToken() { localStorage.removeItem('agentic_pmo_token'); }
-function isLoggedIn() { return !!getToken(); }
+
+// A stored token is only a session if it has not expired. Without this check the
+// SPA renders the dashboard shell for any leftover string and only bounces to the
+// login page after the first API call returns 401.
+function tokenIsExpired(token) {
+  try {
+    const part = token.split('.')[1];
+    if (!part) return true;
+    const json = atob(part.replace(/-/g, '+').replace(/_/g, '/').padEnd(
+      part.length + (4 - (part.length % 4)) % 4, '='));
+    const payload = JSON.parse(json);
+    return payload.exp ? Date.now() >= payload.exp * 1000 : true;
+  } catch (e) {
+    return true;
+  }
+}
+
+function isLoggedIn() {
+  const t = getToken();
+  if (!t || tokenIsExpired(t)) {
+    if (t) clearToken();
+    return false;
+  }
+  return true;
+}
+
 
 async function apiRequest(method, path, body = null) {
   const token = getToken();

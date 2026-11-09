@@ -57,6 +57,8 @@ class Project(Base):
     milestones = relationship("Milestone", back_populates="project", cascade="all, delete-orphan")
     agent_actions = relationship("AgentAction", back_populates="project", cascade="all, delete-orphan",
                                   order_by="AgentAction.created_at.desc()")
+    project_pack = relationship("ProjectPack", back_populates="project",
+                                uselist=False, cascade="all, delete-orphan")
 
 
 # ── Task ─────────────────────────────────────────────────────────────────────
@@ -143,4 +145,6 @@ class ProjectPack(Base):
     # snapshot of what was applied, so the project keeps its domain context even
     # if the pack definition changes later
     snapshot = Column(JSON, default=dict)
+
+    project = relationship("Project", back_populates="project_pack")
 
