@@ -63,7 +63,16 @@ app.include_router(plane_webhook.router)
 # Health check
 @app.get("/api/health")
 def health():
-    return {"status": "ok", "version": "0.1.0"}
+    """Liveness plus what the scheduler is actually holding — a job that never registered is invisible
+    otherwise, and this is the cheapest place to make it visible."""
+    from backend.scheduler import scheduler
+    jobs = []
+    if getattr(scheduler, "running", False):
+        jobs = [
+            {"id": j.id, "next_run": j.next_run_time.isoformat() if j.next_run_time else None}
+            for j in scheduler.get_jobs()
+        ]
+    return {"status": "ok", "version": "0.1.0", "scheduler_running": bool(jobs), "jobs": jobs}
 
 
 # Serve frontend static files
@@ -73,7 +82,9 @@ if os.path.isdir(FRONTEND_DIR):
 
 
 @app.on_event("startup")
-def on_startup():
+async def on_startup():
+    # async on purpose: AsyncIOScheduler.start() calls asyncio.get_running_loop(), which fails when
+    # the hook runs in Starlette's threadpool. A sync hook would start the app but not the scheduler.
     _check_env()
     enforce_auth_config()  # fail closed on default admin password / JWT secret
     init_db()
