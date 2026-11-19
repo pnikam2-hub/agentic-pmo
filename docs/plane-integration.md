@@ -1,7 +1,7 @@
 # Plane integration — what exists, what it does, and how to run it
 
-Status: infrastructure live **and Phase 1 (read-only pull) shipped**, 19 November 2026.
-Write-back and inbound webhooks are phases 2–3 — see section 6.
+Status: infrastructure live, **Phase 1 (read-only pull)** and **Phase 4 (schedule-aware Monitor)**
+shipped, 19 November 2026. Write-back and inbound webhooks are phases 2–3 — see section 6.
 Audience: whoever operates Agentic PMO, and whoever builds the rest of the adapter.
 
 ## 1. Why Plane, and where the boundary sits
@@ -147,10 +147,25 @@ Idempotent on `plane_links`, behind a flag, as a background job.
 verification, dedupe table, and a nightly reconciliation that compares `content_hash` per link and
 reports divergence instead of silently overwriting.
 
-**Phase 4 — agent feed (≈1–2 days).** Feed `start_date`, `target_date`, state transitions, blocker
-relations and comment activity into the Monitor prompt. Today the pull puts dependencies in the
-database but the agent still sees only status, priority, estimate and due date — it cannot yet say
-"this task is late because its predecessor slipped".
+**Phase 4 — agent feed (DONE, 19 Nov 2026).** `backend/agents/schedule.py` computes, deterministically,
+what the Monitor agent could not see: days late per task, and every task waiting on an unfinished
+predecessor, sorted worst-chain-first. `monitor_agent` sends a `SCHEDULE SIGNALS` block ahead of the
+task list and records the counts on the agent action; the system prompt tells the model to reason over
+chains — name the predecessor and the consequence — rather than restate the numbers.
+
+On the pilot board the monitor went from "no recorded progress, **dependencies** or resource loading"
+about a project with 211 edges, to:
+
+    … all 165 tasks in todo and 162 blocked on unfinished predecessors — a fully serialized,
+    front-loaded dependency graph with no float visible. The dominant risk is the convergence of
+    three chains: (1) engineering (P&IDs → FEED Design Review → FEED Final Report → 30% Model
+    Review → IFC Register), (2) procurement (POs → VDR → Packing → Logistics → Site Receipt) …
+
+Two things to keep in mind about this layer. The task list is capped at 180 lines and dependency
+chains at 12 — the *counts* are computed before truncation, because reporting the size of the sample
+as the total understated a fully-blocked plan as "12 tasks". And `health_score` moves between runs
+(38–45 on identical data) because it is the model's judgement, not the arithmetic; the counts are the
+stable part, which is why they are also written to the agent action.
 
 Schema as built (two tables; `Base.metadata.create_all()` creates them, there is no migration tooling):
 
@@ -259,8 +274,9 @@ place to add features — if a change is needed, it belongs in the adapter or up
 5. **The write half does not exist.** Phase 1 mirrors Plane into the PMO; nothing pushes yet, so a plan
    generated in the PMO still reaches Plane by the one-off script in `/root/plane-pilot/push.py` rather
    than through the product. Phase 2 replaces that script.
-6. **The Monitor agent cannot see dependencies yet.** They are in the database (162 tasks, 211 edges)
-   but not in its prompt; that is Phase 4 and it is the change that makes a predecessor slip visible.
+6. **The Alert agent has not been given the same feed.** It still auto-detects only overdue, `blocked`
+   status and missing estimates on a schedule; the Monitor is the agent that reasons over chains.
+   Until they share `schedule.analyse`, the scheduled alerting is weaker than the on-demand monitor.
 7. **The guard covers task writes only.** Deleting a linked PMO project removes its mirrored tasks
    locally without touching Plane — intended, but anyone reading the PMO alone would see a plan
    disappear while the board still shows it.
