@@ -3,6 +3,7 @@ import json
 import datetime
 from sqlalchemy.orm import Session
 from backend.models import Project, Task, AgentAction, TaskStatus
+from backend.agents import schedule
 from backend.agents.base import create_agent_action, parse_json_response
 from backend.services import llm_service
 
@@ -20,16 +21,25 @@ async def run_monitor_agent(project_id: int, db: Session) -> dict:
     # Build a summary for the LLM
     now = datetime.datetime.utcnow()
     task_lines = []
-    for t in tasks:
+    for t in tasks[:180]:
         overdue = ""
         if t.due_date and t.due_date < now and t.status not in ("done", "review"):
             overdue = " [OVERDUE]"
+        deps = ""
+        if t.dependencies:
+            deps = f", waits on {len(t.dependencies)} task(s)"
         task_lines.append(
             f"- [{t.status}] {t.title} (priority: {t.priority}, est: {t.estimated_hours}h"
-            f"{', due: ' + t.due_date.strftime('%Y-%m-%d') if t.due_date else ''}){overdue}"
+            f"{', due: ' + t.due_date.strftime('%Y-%m-%d') if t.due_date else ''}{deps}){overdue}"
         )
+    if len(tasks) > 180:
+        task_lines.append(f"- … {len(tasks) - 180} further tasks omitted")
 
     tasks_summary = "\n".join(task_lines)
+
+    # Schedule signals: dates, lateness and dependency chains, computed rather than inferred
+    signals = schedule.analyse(tasks, now=now)
+    tasks_summary = f"{schedule.render(signals)}\n\nTASK LIST:\n{tasks_summary}"
 
     from backend import packs as packlib
     domain = packlib.agent_context(packlib.for_project(db, project_id), "monitor")
@@ -55,8 +65,11 @@ async def run_monitor_agent(project_id: int, db: Session) -> dict:
                 "recommendations": recommendations,
                 "blocked_dependencies": data.get("blocked_dependencies", []),
                 "task_count": len(tasks),
-                "overdue_count": sum(1 for t in tasks if t.due_date and t.due_date < now
-                                     and t.status not in ("done", "review")),
+                "overdue_count": signals["overdue_count"],
+                "worst_late_days": signals["worst_late_days"],
+                "waiting_on_predecessor": signals["blocked_count"],
+                "total_hours": signals["total_hours"],
+                "percent_done": signals["percent_done"],
             },
             severity=severity,
         )

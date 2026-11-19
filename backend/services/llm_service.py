@@ -143,6 +143,11 @@ async def monitor_tasks(project_name: str, tasks_summary: str) -> str:
                 "3. Resource bottlenecks\n"
                 "4. Overdue items\n"
                 "5. Recommended actions\n\n"
+                "The summary opens with SCHEDULE SIGNALS: lateness in days and dependency chains "
+                "computed from the data. Treat them as facts, do not recompute them, and do not "
+                "restate them as findings. Use them to reason about consequence: when a task waits on "
+                "an unfinished predecessor, name that predecessor and say what slips if it does not "
+                "move, and which tasks it unblocks when it does.\n\n"
                 "Return JSON with keys: 'risks' (list), 'blocked_dependencies' (list), "
                 "'recommendations' (list), 'health_score' (0-100), 'summary'."
             ),
