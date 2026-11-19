@@ -40,6 +40,9 @@ policy, and a merge policy is where this kind of integration usually dies.
 | Signup | **closed** (`enable_signup: false`) — users are invited from inside the instance |
 | Login | email + password, and magic link (both enabled); no SSO |
 | Mail | Google Workspace SMTP (`smtp.gmail.com:587`) sending as `AI Native PMO <ashwin@ainativeorganisations.com>` |
+| Integration in | `POST https://agenticpmo.tech/api/integrations/plane/webhook` — HMAC-verified, delivery-deduped |
+| Reconcile | nightly at 02:30 UTC (in-process scheduler); `next_run` visible at `/api/health` |
+| Backups | `.104` 02:15 UTC dump → `.153` 02:45 UTC pull, 30-day retention |
 
 Workspace `ai-native` holds one pilot project, **EPC Project — AI Native PMO pilot**, which is the
 `epc_project` domain pack rendered in Plane: 165 work items in 8 phase modules, with 162 typed
@@ -56,8 +59,8 @@ Everything is HTTP. No code is shared, no database is shared, and Plane is never
 - Cursor pagination: `per_page` max 100, `next_cursor` / `next_page_results` in the envelope.
 - **Rate limit: 60 requests/minute per token.** A 165-item WBS push takes ~4 minutes at 1.05 s pacing.
   Any push must therefore be a background job with progress, never an inline request.
-- Endpoints used: `projects/`, `work-items/`, `work-items/{id}/relations/`, `states/`, `modules/`,
-  `modules/{id}/module-issues/`, `comments/`.
+- Endpoints used: `projects/`, `work-items/` (read and create), `work-items/{id}/relations/`, `states/`,
+  `modules/`, `modules/{id}/module-issues/`, `comments/`.
 - There is no hours field on a work item; `estimated_hours`, discipline, deliverables and acceptance
   criteria go into `description_html` with the pack reference (`epc_project/T014`).
 
@@ -66,32 +69,39 @@ Everything is HTTP. No code is shared, no database is shared, and Plane is never
 FS/SS/FF/SF taxonomy the PMO's `Task.dependencies` JSON list cannot express. Posting `blocked_by` from
 the successor also creates the reciprocal `blocking` row, so the sync must never write both directions.
 
-**Webhooks** — inbound to the PMO, when the adapter lands
+**Webhooks** — from Plane into the PMO, live since 19 Nov 2026
 
-- HMAC-SHA256 over the raw body in `X-Plane-Signature`; verify before parsing.
-- Deliveries carry `delivery_id` and `event_id` — dedupe on them, because Plane retries with backoff.
-- Return 2xx immediately and queue. A 4xx is treated as a permanent rejection; five non-2xx in a row
-  silently disables the webhook and emails its creator.
+- `POST /api/integrations/plane/webhook` on `agenticpmo.tech`; mounted without the JWT dependency,
+  because Plane has no user session — the signature is the authentication.
+- **Plane signs a different byte string than it sends**: HMAC-SHA256 over `json.dumps(payload)` with
+  default separators, while the body is serialised by httpx. A strict raw-body check fails, so the
+  receiver tries five canonicalisations and records which matched (`plane_webhook_events.signature_scheme`).
+- Deliveries carry `X-Plane-Delivery` → dedupe on it; Plane retries with backoff and fires one event
+  per changed field, so a two-field edit arrives as two deliveries.
+- **Return 2xx even when processing fails.** A 4xx is a permanent rejection and five non-2xx in a row
+  silently disables the hook and emails its creator. Failures land in `plane_webhook_events` with
+  `status=error` and are repaired by the nightly reconcile.
+- No secret configured → `503`. Invalid signature → `401`, no row written. It fails closed.
 - Rejected target URLs: `localhost`, `127.0.0.1`, private ranges (unless allowlisted via
-  `WEBHOOK_ALLOWED_IPS` / `WEBHOOK_ALLOWED_HOSTS`). The PMO's public host satisfies this.
-- Webhooks are workspace-level only, and their CRUD is **not** in the key-authenticated v1 API — they
-  are created once in the Plane UI at Workspace settings → Webhooks.
+  `WEBHOOK_ALLOWED_IPS` / `WEBHOOK_ALLOWED_HOSTS`).
+- Webhooks are workspace-level only, and their CRUD is **not** in the key-authenticated v1 API. The
+  hook here was created as a `Webhook` row on the Plane host (`issue`, `issue_comment`, `module`).
 
 ## 4. Field mapping (validated on the pilot board)
 
-| Agentic PMO | Plane | Notes |
-|---|---|---|
-| Project | Project (+ `identifier`) | identifier is uppercase, ≤12 chars |
-| Domain pack | — | survives as text in each work item's description and in the PMO's `project_packs` |
-| Pack phase (`phases[].name`) | Module | phases in `wbs_template.json` are dicts `{id, name, weeks}` |
-| Task | Work item | `sequence_id` is Plane's per-project number |
-| `status` | State | todo→Backlog, in_progress→In Progress, review→In Review, done→Done, blocked→Blocked |
-| `priority` | Priority | low/medium/high/critical → low/medium/high/urgent |
-| `dependencies` (task-id list) | typed relation | always `blocked_by` on the successor |
-| `estimated_hours` | — | no equivalent; goes in the description |
-| `due_date` | `target_date` | Plane also has `start_date`, which the PMO does not |
-| Milestone | Module (or work item type, in newer lines) | the AGPL tree has no Milestone model |
-| `agent_actions` | — | stays in the PMO; surfaced by linking back to the PMO project |
+| Agentic PMO | Plane | Direction | Notes |
+|---|---|---|---|
+| Project | Project (+ `identifier`) | both | identifier is uppercase, ≤12 chars; the link is explicit, never inferred by name |
+| Domain pack | — | — | survives as text in each work item's description and in the PMO's `project_packs` |
+| Pack phase (`phases[].name`) | Module | pull only | phases are dicts `{id, name, weeks}`; a PMO task has no phase field, so **push does not create modules** |
+| Task | Work item | both | `sequence_id` is Plane's per-project number; push creates only, never updates |
+| `status` | State | both | pull: group → PMO status with `blocked`/`review` winning on state name. push: todo→Todo, in_progress→In Progress, done→Done; review/blocked fall back to In Progress because this board has no such states |
+| `priority` | Priority | both | low/medium/high/critical ↔ low/medium/high/urgent |
+| `dependencies` (task-id list) | typed relation | both | always `blocked_by` on the successor; posting one direction creates the reciprocal |
+| `estimated_hours` | — | both | no field; written as `Estimate: 80 h` in the description and parsed back out on pull |
+| `due_date` | `target_date` | pull | Plane also has `start_date`, which the PMO does not |
+| Milestone | Module (or work item type, in newer lines) | — | the AGPL tree has no Milestone model |
+| `agent_actions` | — | — | stays in the PMO; surfaced by linking back to the PMO project |
 
 ## 5. Secrets and where they live
 
@@ -107,7 +117,7 @@ None of these belong in the repo, in a document, or in a chat message.
 
 ## 6. The adapter
 
-Phasing, in the order that carries least risk. **Phase 1 is built and running.**
+Four phases, built in the order that carried least risk. **All four are live.**
 
 **Phase 1 — read-only pull (DONE, 19 Nov 2026).** `backend/integrations/plane/` plus
 `backend/routers/plane.py`: a throttled, paginated client; `plane_project_links` and `plane_links`;
@@ -317,6 +327,46 @@ by the character-class ticks shown in the form — four unrelated words pass, `N
 - Modules and cycles are per-project feature flags. Creating a module 400s until the project is
   PATCHed with `module_view: true`.
 
+### 7.6 Endpoint map, and running a push
+
+Every path below is under `/api/integrations/plane` except the health check.
+
+| Method | Path | Auth | Purpose |
+|---|---|---|---|
+| POST | `/webhook` | HMAC signature | Plane → PMO, per-event refresh |
+| GET | `/status` | JWT | configuration + link counts |
+| GET | `/plane-projects` | JWT | boards available to link |
+| POST | `/link` | JWT | link a PMO project to a Plane project |
+| GET / DELETE | `/link/{id}` | JWT | link detail / unlink |
+| POST | `/sync/{id}` | JWT | pull (`?include_relations=true`) |
+| POST | `/reconcile/{id}` | JWT | full pull with relations |
+| POST | `/push/{id}` | JWT | **dry run by default**; writes only with `?dry_run=false` |
+| GET | `/push/runs/{id}` | JWT | push audit rows |
+| GET | `/events` | JWT | webhook deliveries and their outcomes |
+| GET | `/api/health` | none | liveness + scheduler jobs and their next run |
+
+Running a push (server-side; never paste the admin password into a shell history):
+
+    TOKEN=$(curl -s -X POST localhost:8000/api/auth/login -H 'Content-Type: application/json' \
+      -d "{\"username\":\"$ADMIN_USERNAME\",\"password\":\"$ADMIN_PASSWORD\"}" | python3 -c \
+      'import sys,json;print(json.load(sys.stdin)["token"])')
+
+    # 1. always dry run first — reports counts and duration, calls nothing
+    curl -s -H "Authorization: Bearer $TOKEN" \
+      -X POST "localhost:8000/api/integrations/plane/push/3?dry_run=true"
+
+    # 2. the real thing: 202 + run id, executes in the background
+    curl -s -H "Authorization: Bearer $TOKEN" \
+      -X POST "localhost:8000/api/integrations/plane/push/3?dry_run=false"
+
+    # 3. read the run, not the HTTP response, for the outcome
+    curl -s -H "Authorization: Bearer $TOKEN" \
+      "localhost:8000/api/integrations/plane/push/runs/3"
+
+Turning the write path off is one env change and a restart: `PLANE_PUSH_ENABLED=0` in
+`/var/www/agentic-pmo/app/.env`, then `systemctl restart agentic-pmo`. The pull, webhook and reconcile
+paths are unaffected.
+
 ## 8. Licence position
 
 Plane is AGPL-3.0-only. It runs here unmodified, as a separate service, reached over HTTP. The PMO is
@@ -345,3 +395,30 @@ place to add features — if a change is needed, it belongs in the adapter or up
 7. **The guard covers task writes only.** Deleting a linked PMO project removes its mirrored tasks
    locally without touching Plane — intended, but anyone reading the PMO alone would see a plan
    disappear while the board still shows it.
+
+## 10. Build record — 19 November 2026
+
+What exists, against what it was measured on. No estimate in this table: every number came from a run.
+
+| Piece | Evidence |
+|---|---|
+| Plane v1.5.0 self-hosted on `.104` | 12 containers, ~1.2 GB RSS, HTTPS hostname with a Let's Encrypt certificate |
+| Mail | Google Workspace SMTP; one real message delivered from Plane's own mailer (`sent = 1`) |
+| Pull | 165 tasks, 162 dependency sets, 211 edges; 34,910 hours recovered; re-pull 165 unchanged |
+| Push | throwaway 6-task chain: 6 created, 5 relations, 12 calls, 0 errors; re-push created 0; reconcile after push 6 unchanged |
+| Webhooks | two deliveries within ~5 s of an edit; first applied, second correctly reported unchanged |
+| Reconcile | nightly job registered, next run visible at `/api/health`; 0 diverged |
+| Boundary | `409` on PATCH/DELETE of a mirrored task; local tasks still editable (`200`) |
+| Monitor agent | reports 162 tasks waiting on an unfinished predecessor and names the chains |
+| Backups | nightly dump 845 KB + uploads + `.env`, pulled to the other box, 30-day retention |
+| Monitoring | external check every 15 min: endpoint, certificate, backup age; alert path tested |
+| Tests | 106 passing (11 webhook, 10 pull/mapping/guard, 8 push, 9 schedule, plus the existing suite) |
+| Licence | Plane AGPL-3.0 unmodified behind HTTP; PMO Apache-2.0 with no shared code |
+
+Deliberate non-goals, so they are not mistaken for gaps: no forked Plane, no shared database, no
+automatic update of a linked work item, no modules on push. Each of those would break either the licence
+position or the single-owner boundary described in section 1.
+
+This document is generated from `docs/plane-integration.md` by `docs/build_note.py`, which applies the
+page setup and table styling pandoc leaves to Word defaults; the PDF is that docx converted by
+LibreOffice. Edit the markdown, not the docx, or the next build will overwrite it.
