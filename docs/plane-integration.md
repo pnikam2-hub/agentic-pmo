@@ -1,9 +1,8 @@
 # Plane integration — what exists, what it does, and how to run it
 
-Status: infrastructure live; **Phase 1 (read-only pull)**, **Phase 3 (inbound webhooks + nightly
-reconcile)** and **Phase 4 (schedule-aware Monitor)** shipped, 19 November 2026. Phase 2 — the write
-half — is the only phase left; see section 6.
-Audience: whoever operates Agentic PMO, and whoever builds the rest of the adapter.
+Status: infrastructure live; **all four phases shipped** 19 November 2026 — read-only pull,
+PMO→Plane push, inbound webhooks with nightly reconcile, and the schedule-aware Monitor.
+Audience: whoever operates Agentic PMO, and whoever extends the integration.
 
 ## 1. Why Plane, and where the boundary sits
 
@@ -142,8 +141,38 @@ return **409** with the work item reference and where to make the change instead
 
 Tasks the PMO owns are unaffected. The frontend now shows that sentence rather than a raw HTTP dump.
 
-**Phase 2 — push plans (≈3 days).** Plan agent output → Plane project, modules, work items, relations.
-Idempotent on `plane_links`, behind a flag, as a background job.
+**Phase 2 — push plans (DONE, 19 Nov 2026).** `backend/integrations/plane/push.py`, gated by
+`PLANE_PUSH_ENABLED` and defaulting to a dry run:
+
+    POST /api/integrations/plane/push/{id}?dry_run=true    what would be created — no writes, no calls
+    POST /api/integrations/plane/push/{id}?dry_run=false   background job, returns 202 + run id
+    GET  /api/integrations/plane/push/runs/{id}            audit rows: running | ok | partial | error
+
+Four rules, and they are what make it safe to point at a client's board:
+
+- **Create only.** A task that already has a `plane_links` row is skipped, never updated. Plane owns the
+  work item once it exists; overwriting it from here is precisely the divergence the boundary forbids.
+  The consequence is deliberate: renaming a task in the PMO after it has been pushed does *not* change
+  Plane.
+- **Idempotent on `plane_links`**, so a push that fails halfway finishes on the next run instead of
+  duplicating the board.
+- **Dry run is the default.** It reads the database, calls nothing, and reports counts, a sample of
+  titles and the estimated duration at the 60 req/min pacing.
+- **One push per project at a time** (`409` while another is in flight), and every run leaves a
+  `plane_push_runs` row, because a job that writes to a live board must be answerable afterwards.
+
+Modules are not created: a PMO task has no phase field (the pack's phases live only in its WBS file), so
+there is nothing to group by. Work items and typed relations are what the push sends, with the estimate
+written into the description so the pull can read the hours back.
+
+Measured end to end on a throwaway project (6 tasks, a 5-link chain), then deleted:
+
+    dry run           6 to create, 5 relations, ~0.2 min
+    push              created 6, relations_created 5, 12 API calls, 0 errors — run status ok
+    Plane             6 work items, first item reports blocked_by: 1
+    re-push           dry run now says 0 to create (idempotent)
+    reconcile         6 unchanged, 0 updated — the pushed content round-trips through the pull
+    pilot board       dry run reports 0 to create / 165 already linked: a push there is a no-op
 
 **Phase 3 — inbound webhooks + reconcile (DONE, 19 Nov 2026).** `POST
 /api/integrations/plane/webhook`, mounted *without* the JWT dependency because Plane has no user
@@ -306,9 +335,10 @@ place to add features — if a change is needed, it belongs in the adapter or up
    a couple of weeks.
 4. **Host horizon.** `.104` has a finite renewal date. The backup routine exists so that a move is a
    restore, not a rebuild — but the move has to be planned, not discovered.
-5. **The write half does not exist.** Phase 1 mirrors Plane into the PMO; nothing pushes yet, so a plan
-   generated in the PMO still reaches Plane by the one-off script in `/root/plane-pilot/push.py` rather
-   than through the product. Phase 2 replaces that script.
+5. **The push is create-only.** A task renamed, re-estimated or re-prioritised in the PMO after it has
+   been pushed keeps its old values in Plane, because updating a linked work item is exactly the
+   divergence the boundary forbids. If PMO-side edits should propagate, that is a deliberate new
+   decision — a staged "propose change in Plane" flow — not a bug to patch.
 6. **The Alert agent has not been given the same feed.** It still auto-detects only overdue, `blocked`
    status and missing estimates on a schedule; the Monitor is the agent that reasons over chains.
    Until they share `schedule.analyse`, the scheduled alerting is weaker than the on-demand monitor.

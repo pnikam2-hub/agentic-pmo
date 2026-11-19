@@ -96,8 +96,8 @@ A domain pack WBS is pushed into Plane as modules and work items with typed depe
 - Instance: https://plane.agenticpmo.tech (self-hosted, v1.5.0, AGPL-3.0, unmodified)
 - API: `/api/v1/workspaces/{slug}/…`, `X-API-Key` auth, cursor pagination, 60 requests/minute
 - Boundary: Plane owns execution state; the PMO never writes to a linked task again
-- Phase 1 **live**: read-only pull into `plane_project_links` / `plane_links`, exposed at
-  `/api/integrations/plane/*`; write-back and inbound HMAC webhooks are phases 2–3
+- All four phases **live**: pull (`/sync`), push (`/push`, create-only, dry run by default), inbound HMAC
+  webhooks (`/webhook`) plus a nightly reconcile, and typed dependencies feeding the Monitor agent
 
 Full contract, field mapping, backup/restore and runbook: [docs/plane-integration.md](docs/plane-integration.md).
 
