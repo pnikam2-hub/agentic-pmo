@@ -1,7 +1,8 @@
 """Agentic PMO — SQLAlchemy ORM models."""
 import datetime
 from sqlalchemy import (
-    Column, Integer, String, Text, Float, DateTime, ForeignKey, JSON, Enum as SAEnum
+    Column, Integer, String, Text, Float, DateTime, ForeignKey, JSON, Enum as SAEnum,
+    UniqueConstraint,
 )
 from sqlalchemy.orm import relationship
 from backend.database import Base
@@ -59,6 +60,10 @@ class Project(Base):
                                   order_by="AgentAction.created_at.desc()")
     project_pack = relationship("ProjectPack", back_populates="project",
                                 uselist=False, cascade="all, delete-orphan")
+    plane_project_link = relationship("PlaneProjectLink", back_populates="project",
+                                      uselist=False, cascade="all, delete-orphan")
+    plane_links = relationship("PlaneLink", back_populates="project",
+                               cascade="all, delete-orphan")
 
 
 # ── Task ─────────────────────────────────────────────────────────────────────
@@ -80,6 +85,8 @@ class Task(Base):
     updated_at = Column(DateTime, default=datetime.datetime.utcnow, onupdate=datetime.datetime.utcnow)
 
     project = relationship("Project", back_populates="tasks")
+    plane_link = relationship("PlaneLink", back_populates="task", uselist=False,
+                              cascade="all, delete-orphan")
 
 
 # ── Milestone ────────────────────────────────────────────────────────────────
@@ -147,4 +154,48 @@ class ProjectPack(Base):
     snapshot = Column(JSON, default=dict)
 
     project = relationship("Project", back_populates="project_pack")
+
+
+# ── Plane ↔ PMO links ────────────────────────────────────────────────────────
+# One Plane project per PMO project, and one row per mirrored work item. These tables are the
+# join key the two systems lacked: without them a pull either duplicates tasks or cannot tell
+# which local task a Plane work item already owns.
+class PlaneProjectLink(Base):
+    __tablename__ = "plane_project_links"
+    id = Column(Integer, primary_key=True, index=True)
+    project_id = Column(Integer, ForeignKey("projects.id"), nullable=False, unique=True)
+    workspace_slug = Column(String(80), nullable=False)
+    plane_project_id = Column(String(64), nullable=False)
+    plane_project_name = Column(String(200), default="")
+    plane_identifier = Column(String(20), default="")
+    last_synced_at = Column(DateTime, nullable=True)
+    last_sync_stats = Column(JSON, default=dict)
+    created_at = Column(DateTime, default=datetime.datetime.utcnow)
+
+    __table_args__ = (
+        UniqueConstraint("workspace_slug", "plane_project_id", name="uq_plane_project"),
+    )
+
+    project = relationship("Project", back_populates="plane_project_link")
+
+
+class PlaneLink(Base):
+    __tablename__ = "plane_links"
+    id = Column(Integer, primary_key=True, index=True)
+    project_id = Column(Integer, ForeignKey("projects.id"), nullable=False)
+    task_id = Column(Integer, ForeignKey("tasks.id"), nullable=False, unique=True)
+    plane_work_item_id = Column(String(64), nullable=False)
+    plane_sequence_id = Column(Integer, nullable=True)
+    plane_state_name = Column(String(80), default="")
+    plane_module = Column(String(200), default="")
+    content_hash = Column(String(64), default="")
+    last_pulled_at = Column(DateTime, nullable=True)
+    created_at = Column(DateTime, default=datetime.datetime.utcnow)
+
+    __table_args__ = (
+        UniqueConstraint("project_id", "plane_work_item_id", name="uq_plane_work_item"),
+    )
+
+    project = relationship("Project", back_populates="plane_links")
+    task = relationship("Task", back_populates="plane_link")
 
