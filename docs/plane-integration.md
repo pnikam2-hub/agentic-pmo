@@ -1,7 +1,8 @@
 # Plane integration — what exists, what it does, and how to run it
 
-Status: infrastructure live, **Phase 1 (read-only pull)** and **Phase 4 (schedule-aware Monitor)**
-shipped, 19 November 2026. Write-back and inbound webhooks are phases 2–3 — see section 6.
+Status: infrastructure live; **Phase 1 (read-only pull)**, **Phase 3 (inbound webhooks + nightly
+reconcile)** and **Phase 4 (schedule-aware Monitor)** shipped, 19 November 2026. Phase 2 — the write
+half — is the only phase left; see section 6.
 Audience: whoever operates Agentic PMO, and whoever builds the rest of the adapter.
 
 ## 1. Why Plane, and where the boundary sits
@@ -97,7 +98,8 @@ the successor also creates the reciprocal `blocking` row, so the sync must never
 
 | Secret | Location | Notes |
 |---|---|---|
-| Plane API token | `.153:/root/.config/plane/api_key` (600) | bot token, workspace-scoped |
+| Plane API token | `.153:/root/.config/plane/api_key` (600) and `/etc/agentic-pmo/plane_api_key` (640 root:www-data) | bot token, workspace-scoped |
+| Plane webhook secret | `.153:/etc/agentic-pmo/plane_webhook_secret` (640 root:www-data), `.104:/root/plane-webhook-secret.txt` (600) | HMAC key; Plane shows it only at creation |
 | Plane `.env` (SECRET_KEY, DB/RabbitMQ/MinIO passwords) | `.104:/opt/plane/.env` (600) | backed up nightly, see §7 |
 | Google app password | `.104:/root/.config/google/app_password`, `.153:/root/.config/google/app_password` (600) | used by Plane's mailer and by the health-check alerter |
 | Plane admin password | in the admin's head, not on disk | reset path in §7.4 |
@@ -143,9 +145,39 @@ Tasks the PMO owns are unaffected. The frontend now shows that sentence rather t
 **Phase 2 — push plans (≈3 days).** Plan agent output → Plane project, modules, work items, relations.
 Idempotent on `plane_links`, behind a flag, as a background job.
 
-**Phase 3 — inbound webhooks + reconcile (≈3 days).** `/api/integrations/plane/webhook` with HMAC
-verification, dedupe table, and a nightly reconciliation that compares `content_hash` per link and
-reports divergence instead of silently overwriting.
+**Phase 3 — inbound webhooks + reconcile (DONE, 19 Nov 2026).** `POST
+/api/integrations/plane/webhook`, mounted *without* the JWT dependency because Plane has no user
+session — the HMAC signature is the authentication. `plane_webhook_events` records every delivery
+(`delivery_id`, event, action, entity, matched signature scheme, status), `GET /events` lists them and
+`POST /reconcile/{id}` runs the full pull on demand. The scheduler adds a nightly reconcile at
+`PLANE_RECONCILE_TIME` (default 02:30 UTC).
+
+Rules this layer follows, each from observed behaviour:
+
+- **Verify before parsing anything.** A delivery without a valid signature gets `401` and no row.
+  With no secret configured the endpoint answers `503` — fail closed, never fall open.
+- **Plane signs a different byte string than it sends.** The signature is HMAC over
+  `json.dumps(payload)` with default separators; the body is serialised by httpx. The receiver tries
+  five canonicalisations (raw, default, compact, and both sorted) and records which matched — in
+  practice `raw` matches, but a strict raw-only check is a truck-sized failure waiting to happen.
+- **Dedupe on `delivery_id`.** Plane retries with backoff; the same event arrives more than once.
+- **Return 2xx even when processing fails.** Plane treats 4xx as permanent rejection and disables a
+  webhook after five non-2xx in a row; a disabled hook is silently dead, whereas a recorded `error`
+  is repaired by the nightly reconcile.
+- **A deletion in Plane never deletes a task here** — it leaves a stale link to be reported.
+- Known work items cost 2–3 API calls to refresh; an unknown one triggers a project pull only when the
+  payload names a linked project.
+
+Measured against the pilot board: a priority + state change in Plane produced two deliveries
+(one `issue.updated` per changed field) **within 5 seconds**, the first applying both changes and the
+second correctly reporting `unchanged`. An immediate reconcile then showed `165 unchanged, 0 diverged`,
+with all 211 relation edges re-verified in 169 calls.
+
+One defect this phase exposed, worth knowing because it would have been invisible: `AsyncIOScheduler`
+must be started from an **async** startup hook. A sync `@app.on_event("startup")` runs in Starlette's
+threadpool, where `asyncio.get_running_loop()` raises — the app starts cleanly and the scheduler simply
+never attaches, so a nightly job looks scheduled and never runs. `/api/health` now reports
+`scheduler_running` and each job's next run, which is how this was caught.
 
 **Phase 4 — agent feed (DONE, 19 Nov 2026).** `backend/agents/schedule.py` computes, deterministically,
 what the Monitor agent could not see: days late per task, and every task waiting on an unfinished
@@ -222,6 +254,9 @@ certificate has more than 14 days left, and the newest backup is under 26 hours 
 emails the owner through the same Google SMTP path, at most once an hour. Log:
 `/var/log/plane-health.log`. It runs from `.153` deliberately — a monitor on the box it watches only
 reports the box is up when it can no longer tell you anything.
+
+`GET /api/health` also reports `scheduler_running` and each scheduled job's next run. Check it after any
+restart: a job that never registered is otherwise indistinguishable from a job that is waiting.
 
 ### 7.4 Lost admin password
 
