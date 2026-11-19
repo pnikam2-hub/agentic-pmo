@@ -63,11 +63,14 @@ STATES = [
 ]
 
 
-def item(wid, name, state="s-backlog", priority="medium", seq=1, target=None):
+def item(wid, name, state="s-backlog", priority="medium", seq=1, target=None, hours=80):
     return {
         "id": wid, "name": name, "state": state, "priority": priority,
         "sequence_id": seq, "target_date": target, "assignees": [],
-        "description_stripped": f"desc for {name}",
+        "description_html": (
+            f"<div><p>desc for {name}</p>"
+            f"<p><b>Discipline:</b> PMO<br><b>Estimate:</b> {hours} h</p></div>"
+        ),
     }
 
 
@@ -185,3 +188,28 @@ def test_date_mapping(db):
     pull(db, link, client)
     task = db.query(Task).filter(Task.title == "Charter").one()
     assert task.due_date is not None and task.due_date.year == 2026
+
+
+def test_description_html_is_stripped_and_estimate_recovered(db):
+    """Plane has no hours field; the estimate comes back out of the description text."""
+    _project, link = make_link(db)
+    client = StubClient(items=[item("w1", "Charter", hours=80),
+                               item("w2", "Governance", seq=2, hours=0)], states=STATES)
+    pull(db, link, client)
+
+    charter = db.query(Task).filter(Task.title == "Charter").one()
+    assert "<b>" not in charter.description and "<div>" not in charter.description
+    assert "desc for Charter" in charter.description
+    assert charter.estimated_hours == 80.0
+
+    # an item with no estimate must come through as zero, not as a parse failure
+    gov = db.query(Task).filter(Task.title == "Governance").one()
+    assert gov.estimated_hours == 0.0
+
+
+def test_estimate_not_confused_by_other_numbers(db):
+    _project, link = make_link(db)
+    raw = item("w1", "Charter")
+    raw["description_html"] = "<p>Phase 2 of 5. Estimate: 120.5 h. Budget 4000.</p>"
+    pull(db, link, StubClient(items=[raw], states=STATES))
+    assert db.query(Task).filter(Task.title == "Charter").one().estimated_hours == 120.5

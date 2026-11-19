@@ -9,7 +9,9 @@ applied locally: a transient API error must never delete a client's plan.
 """
 import datetime
 import hashlib
+import html as html_lib
 import json
+import re
 
 from sqlalchemy.orm import Session
 
@@ -35,7 +37,36 @@ PRIORITY_TO_PMO = {
     "none": "medium",
 }
 
-HASH_FIELDS = ("name", "priority", "state", "target_date", "start_date", "archived_at")
+HASH_FIELDS = ("name", "priority", "state", "target_date", "start_date", "archived_at",
+               "description_html")
+
+_TAG_RE = re.compile(r"<[^>]+>")
+_ESTIMATE_RE = re.compile(r"estimate:\s*([0-9]+(?:\.[0-9]+)?)\s*h", re.IGNORECASE)
+
+
+def _strip_html(value) -> str:
+    """Plane returns description_html, not description_stripped, on the v1 work-item read."""
+    if not value:
+        return ""
+    text = _TAG_RE.sub(" ", str(value))
+    text = html_lib.unescape(text)
+    return re.sub(r"\s+", " ", text).strip()
+
+
+def _estimate_hours(text: str) -> float:
+    """Pull the pack's estimate back out of the description.
+
+    Plane has no hours field, so when the PMO pushes a pack it writes "Estimate: 80 h" into the
+    description. Reading that back keeps the PMO's health and capacity maths meaningful instead of
+    scoring every task as zero hours.
+    """
+    match = _ESTIMATE_RE.search(text or "")
+    if not match:
+        return 0.0
+    try:
+        return float(match.group(1))
+    except ValueError:
+        return 0.0
 
 
 def _parse_date(value):
@@ -108,13 +139,15 @@ def pull(db: Session, link: PlaneProjectLink, client: PlaneClient,
         wid = item["id"]
         seen.add(wid)
         digest = _content_hash(item)
+        plain = _strip_html(item.get("description_html"))
         fields = {
             "title": (item.get("name") or "Untitled")[:300],
             "status": _status_for(item, states),
             "priority": PRIORITY_TO_PMO.get((item.get("priority") or "medium").lower(), "medium"),
             "assignee": _assignee_label(item, members),
             "due_date": _parse_date(item.get("target_date")),
-            "description": (item.get("description_stripped") or "")[:2000],
+            "description": plain[:2000],
+            "estimated_hours": _estimate_hours(plain),
         }
 
         record = existing.get(wid)
