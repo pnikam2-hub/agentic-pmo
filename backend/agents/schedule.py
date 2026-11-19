@@ -81,7 +81,8 @@ def analyse(tasks, now: datetime.datetime | None = None, chain_limit: int = 12) 
     overdue.sort(key=lambda r: -r["days_late"])
     # most-blocked first: a task waiting on three predecessors is a worse signal than one waiting on one
     blocked.sort(key=lambda r: (-len(r["blockers"]), r["title"]))
-    blocked = blocked[:chain_limit]
+    blocked_total = len(blocked)
+    blocked_sample = blocked[:chain_limit]
 
     return {
         "task_count": len(tasks),
@@ -91,8 +92,9 @@ def analyse(tasks, now: datetime.datetime | None = None, chain_limit: int = 12) 
         "overdue": overdue,
         "overdue_count": len(overdue),
         "worst_late_days": overdue[0]["days_late"] if overdue else 0,
-        "blocked": blocked,
-        "blocked_count": len(blocked),
+        "blocked": blocked_sample,
+        "blocked_count": blocked_total,
+        "blocked_shown": len(blocked_sample),
         "dangling_edges": dangling,
     }
 
@@ -116,9 +118,12 @@ def render(signals: dict) -> str:
         lines.append("- overdue: none")
 
     if signals["blocked_count"]:
+        shown = signals.get("blocked_shown", signals["blocked_count"])
+        extra = (f" — the {shown} worst chains are listed below; the rest follow the same pattern"
+                 if signals["blocked_count"] > shown else "")
         lines.append(
             f"- waiting on an unfinished predecessor: {signals['blocked_count']} task(s) "
-            "(these cannot complete until the named predecessor does)"
+            f"(these cannot complete until the named predecessor does){extra}"
         )
         for rec in signals["blocked"]:
             blockers = "; ".join(f"{b['title']} [{b['status']}]" for b in rec["blockers"])

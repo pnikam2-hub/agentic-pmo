@@ -85,6 +85,9 @@ def test_most_blocked_sorted_first_and_chain_limit_applies():
     s = analyse(tasks, now=NOW, chain_limit=3)
     assert len(s["blocked"]) == 3
     assert s["blocked"][0]["title"] == "Wide"     # three blockers, so worst
+    # the count is the truth, the list is a sample — reporting the sample as the count understates
+    assert s["blocked_count"] == 6
+    assert s["blocked_shown"] == 3
 
 
 def test_totals_and_resilience_to_missing_hours():
