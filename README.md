@@ -85,6 +85,23 @@ open http://localhost:8000
 
 ---
 
+## Integrations
+
+### Plane (work surface)
+
+Plane is the human-facing task board; the PMO keeps the plan, the domain knowledge and the judgement.
+A domain pack WBS is pushed into Plane as modules and work items with typed dependency relations
+(`blocked_by` / `blocking`), and Plane stays the only place a work item is edited after that.
+
+- Instance: https://plane.agenticpmo.tech (self-hosted, v1.5.0, AGPL-3.0, unmodified)
+- API: `/api/v1/workspaces/{slug}/…`, `X-API-Key` auth, cursor pagination, 60 requests/minute
+- Boundary: Plane owns execution state; the PMO never writes to a linked task again
+- Adapter (`plane_links`, throttled client, inbound HMAC webhook, reconciliation) is **not built yet**
+
+Full contract, field mapping, backup/restore and runbook: [docs/plane-integration.md](docs/plane-integration.md).
+
+---
+
 ## Deployment Options
 
 ### Option A: Docker Compose (recommended — persistence + restart)
