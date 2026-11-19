@@ -1,7 +1,8 @@
 # Plane integration — what exists, what it does, and how to run it
 
-Status: infrastructure live 19 November 2026. Adapter **not yet built** — see section 6.
-Audience: whoever operates Agentic PMO, and whoever builds the adapter.
+Status: infrastructure live **and Phase 1 (read-only pull) shipped**, 19 November 2026.
+Write-back and inbound webhooks are phases 2–3 — see section 6.
+Audience: whoever operates Agentic PMO, and whoever builds the rest of the adapter.
 
 ## 1. Why Plane, and where the boundary sits
 
@@ -103,13 +104,33 @@ the successor also creates the reciprocal `blocking` row, so the sync must never
 
 None of these belong in the repo, in a document, or in a chat message.
 
-## 6. The adapter — to be built
+## 6. The adapter
 
-Phasing, in the order that carries least risk:
+Phasing, in the order that carries least risk. **Phase 1 is built and running.**
 
-**Phase 1 — read-only pull (≈2 days).** A throttled client plus `plane_links`, pulling work items,
-states and relations into the PMO's health computation. Nothing is written to Plane, so nothing can be
-corrupted. This is what makes the Monitor agent able to see dates, blockers and real status.
+**Phase 1 — read-only pull (DONE, 19 Nov 2026).** `backend/integrations/plane/` plus
+`backend/routers/plane.py`: a throttled, paginated client; `plane_project_links` and `plane_links`;
+a pull that creates or updates the PMO tasks a linked Plane project owns. Nothing is written to
+Plane, so nothing can be corrupted, and deletions on the Plane side surface as `stale_links` instead
+of deleting a client's plan.
+
+    GET    /api/integrations/plane/status           configured? linked projects, mirrored items
+    GET    /api/integrations/plane/plane-projects   Plane projects available to link
+    POST   /api/integrations/plane/link             {project_id, plane_project_id}
+    GET    /api/integrations/plane/link/{id}        link detail + last sync stats
+    DELETE /api/integrations/plane/link/{id}        unlink (optionally delete mirrored tasks)
+    POST   /api/integrations/plane/sync/{id}        pull; ?include_relations=true adds dependencies
+
+Measured against the pilot board: first pull created 165 tasks in 4 API calls / 4.1 s; the relations
+pass took 169 calls / 189 s (≈53 req/min, inside the 60/min limit) and produced 211 dependency edges
+across 162 tasks; a second pull reported 165 unchanged and created nothing.
+
+One finding worth keeping: the v1 read returns `description_html` and leaves `description_stripped`
+empty, and Plane has no hours field — so the first mirror arrived with blank descriptions and zero
+hours, and the Monitor agent scored a fully estimated EPC plan as unestimated work (health 12). The
+pull now strips the HTML and recovers `Estimate: 80 h` into `estimated_hours`; after the backfill the
+same project totals 34,910 hours and scores 38. **Any field the PMO needs from Plane has to survive
+that round trip deliberately.**
 
 **Phase 2 — push plans (≈3 days).** Plan agent output → Plane project, modules, work items, relations.
 Idempotent on `plane_links`, behind a flag, as a background job.
@@ -119,15 +140,23 @@ verification, dedupe table, and a nightly reconciliation that compares `content_
 reports divergence instead of silently overwriting.
 
 **Phase 4 — agent feed (≈1–2 days).** Feed `start_date`, `target_date`, state transitions, blocker
-relations and comment activity into the Monitor prompt; today it sees only status, priority, estimate
-and due date, which is why it cannot detect a predecessor breach.
+relations and comment activity into the Monitor prompt. Today the pull puts dependencies in the
+database but the agent still sees only status, priority, estimate and due date — it cannot yet say
+"this task is late because its predecessor slipped".
 
-Schema for `plane_links` (new table; `Base.metadata.create_all()` creates it, no migration tooling):
+Schema as built (two tables; `Base.metadata.create_all()` creates them, there is no migration tooling):
 
-    id, project_id, task_id, plane_workspace_slug, plane_project_id,
-    plane_work_item_id, plane_sequence_id, content_hash,
-    last_pushed_at, last_pulled_at, direction
-    UNIQUE (plane_workspace_slug, plane_work_item_id)
+    plane_project_links   id, project_id (unique), workspace_slug, plane_project_id,
+                          plane_project_name, plane_identifier, last_synced_at, last_sync_stats
+                          UNIQUE (workspace_slug, plane_project_id)
+
+    plane_links           id, project_id, task_id (unique, FK tasks), plane_work_item_id,
+                          plane_sequence_id, plane_state_name, plane_module, content_hash,
+                          last_pulled_at
+                          UNIQUE (project_id, plane_work_item_id)
+
+Both cascade from `Project` — deleting a project removes its links and mirrored tasks, which is
+verified by a test rather than assumed (the first version of `project_packs` left orphans behind).
 
 ## 7. Operations
 
@@ -219,5 +248,10 @@ place to add features — if a change is needed, it belongs in the adapter or up
    a couple of weeks.
 4. **Host horizon.** `.104` has a finite renewal date. The backup routine exists so that a move is a
    restore, not a rebuild — but the move has to be planned, not discovered.
-5. **`plane_links` does not exist yet.** Until Phase 1 lands, the pilot board and the PMO are two
-   separate datasets with no join key beyond the pack reference written into descriptions.
+5. **The write half does not exist.** Phase 1 mirrors Plane into the PMO; nothing pushes yet, so a plan
+   generated in the PMO still reaches Plane by the one-off script in `/root/plane-pilot/push.py` rather
+   than through the product. Phase 2 replaces that script.
+6. **The Monitor agent cannot see dependencies yet.** They are in the database (162 tasks, 211 edges)
+   but not in its prompt; that is Phase 4 and it is the change that makes a predecessor slip visible.
+7. **Mirrored tasks are editable in the PMO UI.** Until the write half lands, nothing stops a human
+   editing a mirrored task here and creating the exact divergence the boundary is meant to prevent.
