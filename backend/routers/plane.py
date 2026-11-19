@@ -9,7 +9,7 @@ from backend.database import get_db
 from backend.integrations.plane import config as plane_config
 from backend.integrations.plane.client import PlaneError
 from backend.integrations.plane.sync import make_client, sync_project
-from backend.models import PlaneLink, PlaneProjectLink, Project, Task
+from backend.models import PlaneLink, PlaneProjectLink, PlaneWebhookEvent, Project, Task
 
 router = APIRouter(prefix="/api/integrations/plane", tags=["plane"])
 
@@ -123,6 +123,40 @@ def unlink_project(project_id: int, delete_mirrored_tasks: bool = False,
     db.delete(link)
     db.commit()
     return {"ok": True, "unlinked": project_id, "tasks_deleted": removed}
+
+
+@router.post("/reconcile/{project_id}")
+def reconcile(project_id: int, db: Session = Depends(get_db)):
+    """Full pull with relations — the nightly safety net under the webhook stream."""
+    from backend.integrations.plane.sync import reconcile_for_project
+
+    try:
+        return reconcile_for_project(db, project_id)
+    except ValueError as exc:
+        raise HTTPException(404, str(exc)) from exc
+    except PlaneError as exc:
+        raise HTTPException(502, str(exc)) from exc
+
+
+@router.get("/events")
+def recent_events(limit: int = 25, db: Session = Depends(get_db)):
+    rows = (db.query(PlaneWebhookEvent)
+            .order_by(PlaneWebhookEvent.id.desc()).limit(min(limit, 200)).all())
+    return [
+        {
+            "id": r.id,
+            "delivery_id": r.delivery_id,
+            "event": r.event,
+            "action": r.action,
+            "entity_id": r.entity_id,
+            "status": r.status,
+            "signature_scheme": r.signature_scheme,
+            "detail": r.detail,
+            "received_at": r.received_at,
+            "processed_at": r.processed_at,
+        }
+        for r in rows
+    ]
 
 
 @router.post("/sync/{project_id}")

@@ -199,3 +199,18 @@ class PlaneLink(Base):
     project = relationship("Project", back_populates="plane_links")
     task = relationship("Task", back_populates="plane_link")
 
+
+class PlaneWebhookEvent(Base):
+    __tablename__ = "plane_webhook_events"
+    id = Column(Integer, primary_key=True, index=True)
+    delivery_id = Column(String(80), nullable=True, unique=True)
+    event = Column(String(60), default="")
+    action = Column(String(30), default="")
+    entity_id = Column(String(64), nullable=True)
+    workspace_slug = Column(String(80), default="")
+    signature_scheme = Column(String(30), default="")
+    status = Column(String(20), default="received")   # ok | ignored | error | duplicate
+    detail = Column(JSON, default=dict)
+    received_at = Column(DateTime, default=datetime.datetime.utcnow)
+    processed_at = Column(DateTime, nullable=True)
+

@@ -102,6 +102,54 @@ def _assignee_label(item: dict, members: dict) -> str:
     return ", ".join(labels)[:100]
 
 
+def _apply_item(db: Session, link: PlaneProjectLink, states: dict, members: dict,
+                item: dict, existing_map: dict, next_sort: int) -> tuple[str, int]:
+    """Create or update the PMO task a single work item owns. Returns (outcome, next_sort)."""
+    wid = item["id"]
+    digest = _content_hash(item)
+    plain = _strip_html(item.get("description_html"))
+    fields = {
+        "title": (item.get("name") or "Untitled")[:300],
+        "status": _status_for(item, states),
+        "priority": PRIORITY_TO_PMO.get((item.get("priority") or "medium").lower(), "medium"),
+        "assignee": _assignee_label(item, members),
+        "due_date": _parse_date(item.get("target_date")),
+        "description": plain[:2000],
+        "estimated_hours": _estimate_hours(plain),
+    }
+    state_name = states.get(item.get("state"), {}).get("name", "")[:80]
+
+    record = existing_map.get(wid)
+    if record is None:
+        task = Task(project_id=link.project_id, sort_order=next_sort, **fields)
+        db.add(task)
+        db.flush()
+        db.add(PlaneLink(
+            project_id=link.project_id, task_id=task.id,
+            plane_work_item_id=wid, plane_sequence_id=item.get("sequence_id"),
+            plane_state_name=state_name,
+            content_hash=digest, last_pulled_at=datetime.datetime.utcnow(),
+        ))
+        return "created", next_sort + 1
+
+    if record.content_hash == digest:
+        record.last_pulled_at = datetime.datetime.utcnow()
+        return "unchanged", next_sort
+
+    task = db.query(Task).filter(Task.id == record.task_id).first()
+    if task is None:
+        return "stale_links", next_sort
+
+    for key, value in fields.items():
+        setattr(task, key, value)
+    task.updated_at = datetime.datetime.utcnow()
+    record.content_hash = digest
+    record.last_pulled_at = datetime.datetime.utcnow()
+    record.plane_state_name = state_name
+    record.plane_sequence_id = item.get("sequence_id")
+    return "updated", next_sort
+
+
 def pull(db: Session, link: PlaneProjectLink, client: PlaneClient,
          include_relations: bool = False) -> dict:
     planes_pid = link.plane_project_id
@@ -138,50 +186,8 @@ def pull(db: Session, link: PlaneProjectLink, client: PlaneClient,
     for item in items:
         wid = item["id"]
         seen.add(wid)
-        digest = _content_hash(item)
-        plain = _strip_html(item.get("description_html"))
-        fields = {
-            "title": (item.get("name") or "Untitled")[:300],
-            "status": _status_for(item, states),
-            "priority": PRIORITY_TO_PMO.get((item.get("priority") or "medium").lower(), "medium"),
-            "assignee": _assignee_label(item, members),
-            "due_date": _parse_date(item.get("target_date")),
-            "description": plain[:2000],
-            "estimated_hours": _estimate_hours(plain),
-        }
-
-        record = existing.get(wid)
-        if record is None:
-            task = Task(project_id=link.project_id, sort_order=next_sort, **fields)
-            next_sort += 1
-            db.add(task)
-            db.flush()
-            db.add(PlaneLink(
-                project_id=link.project_id, task_id=task.id,
-                plane_work_item_id=wid, plane_sequence_id=item.get("sequence_id"),
-                plane_state_name=states.get(item.get("state"), {}).get("name", "")[:80],
-                content_hash=digest, last_pulled_at=datetime.datetime.utcnow(),
-            ))
-            stats["created"] += 1
-            continue
-
-        if record.content_hash == digest:
-            stats["unchanged"] += 1
-            record.last_pulled_at = datetime.datetime.utcnow()
-            continue
-
-        task = db.query(Task).filter(Task.id == record.task_id).first()
-        if task is None:
-            stats["stale_links"] += 1
-            continue
-        for key, value in fields.items():
-            setattr(task, key, value)
-        task.updated_at = datetime.datetime.utcnow()
-        record.content_hash = digest
-        record.last_pulled_at = datetime.datetime.utcnow()
-        record.plane_state_name = states.get(item.get("state"), {}).get("name", "")[:80]
-        record.plane_sequence_id = item.get("sequence_id")
-        stats["updated"] += 1
+        outcome, next_sort = _apply_item(db, link, states, members, item, existing, next_sort)
+        stats[outcome] = stats.get(outcome, 0) + 1
 
     db.flush()
 
@@ -225,6 +231,57 @@ def make_client() -> PlaneClient:
         workspace=plane_config.workspace(),
         api_key=plane_config.api_key(),
     )
+
+
+def pull_work_item(db: Session, link: PlaneProjectLink, client: PlaneClient,
+                   work_item_id: str) -> dict:
+    """Refresh exactly one work item — the webhook path, where a full pull would be wasteful.
+
+    Costs 2–3 API calls instead of ~4 for a whole project, and it is the only way an edit made in
+    Plane reaches the PMO in seconds rather than at the next scheduled reconcile.
+    """
+    before = client.calls
+    item = client.work_item(link.plane_project_id, work_item_id)
+    states = {s["id"]: {"name": s.get("name", ""), "group": s.get("group", "")}
+              for s in client.states(link.plane_project_id)}
+    members = {}
+    try:
+        for m in client.paginate("/members/"):
+            members[m.get("member")] = m.get("display_name") or m.get("email") or m.get("member")
+    except Exception:
+        members = {}
+
+    existing = {l.plane_work_item_id: l for l in
+                db.query(PlaneLink).filter(PlaneLink.project_id == link.project_id).all()}
+    next_sort = (
+        db.query(Task.sort_order).filter(Task.project_id == link.project_id)
+        .order_by(Task.sort_order.desc()).first()
+    )
+    next_sort = (next_sort[0] + 1) if next_sort else 0
+
+    outcome, _ = _apply_item(db, link, states, members, item, existing, next_sort)
+    db.commit()
+    return {
+        "work_item_id": work_item_id,
+        "outcome": outcome,
+        "api_calls": client.calls - before,
+    }
+
+
+def reconcile_for_project(db: Session, project_id: int, client: PlaneClient | None = None) -> dict:
+    """Full pull with relations: the nightly safety net under the webhooks.
+
+    Webhooks can be missed — Plane disables a hook after five failed deliveries, and any event
+    delivered while the PMO was restarting is simply gone. This compares every linked work item
+    against Plane and reports how many had diverged, rather than trusting the event stream.
+    """
+    link = db.query(PlaneProjectLink).filter(PlaneProjectLink.project_id == project_id).first()
+    if link is None:
+        raise ValueError(f"project {project_id} is not linked to a Plane project")
+    stats = pull(db, link, make_client() if client is None else client, include_relations=True)
+    stats["project_id"] = project_id
+    stats["diverged"] = stats.get("updated", 0)
+    return stats
 
 
 def sync_project(db: Session, project_id: int, include_relations: bool = False,

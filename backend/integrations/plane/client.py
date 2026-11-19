@@ -106,3 +106,6 @@ class PlaneClient:
 
     def relations(self, plane_project_id: str, work_item_id: str) -> dict:
         return self.get(f"/projects/{plane_project_id}/work-items/{work_item_id}/relations/")
+
+    def work_item(self, plane_project_id: str, work_item_id: str) -> dict:
+        return self.get(f"/projects/{plane_project_id}/work-items/{work_item_id}/")

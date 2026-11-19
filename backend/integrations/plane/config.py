@@ -5,6 +5,7 @@ The API key is read from the environment or from a file — never from the repo,
 import os
 
 DEFAULT_KEY_FILE = "/root/.config/plane/api_key"
+DEFAULT_WEBHOOK_SECRET_FILE = "/etc/agentic-pmo/plane_webhook_secret"
 
 
 def api_key() -> str:
@@ -43,4 +44,18 @@ def status() -> dict:
         "api_key_source": "env" if os.getenv("PLANE_API_KEY") else (
             os.getenv("PLANE_API_KEY_FILE", DEFAULT_KEY_FILE)
         ),
+        "webhook_secret_present": bool(webhook_secret()),
+        "webhook_secret_length": len(webhook_secret()),
     }
+
+
+def webhook_secret() -> str:
+    direct = os.getenv("PLANE_WEBHOOK_SECRET", "").strip()
+    if direct:
+        return direct
+    path = os.getenv("PLANE_WEBHOOK_SECRET_FILE", DEFAULT_WEBHOOK_SECRET_FILE)
+    try:
+        with open(path) as fh:
+            return fh.read().strip()
+    except OSError:
+        return ""
