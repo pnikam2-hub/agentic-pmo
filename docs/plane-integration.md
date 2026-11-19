@@ -132,6 +132,14 @@ pull now strips the HTML and recovers `Estimate: 80 h` into `estimated_hours`; a
 same project totals 34,910 hours and scores 38. **Any field the PMO needs from Plane has to survive
 that round trip deliberately.**
 
+The boundary is enforced, not merely stated: `PATCH` and `DELETE` on any task with a `plane_links` row
+return **409** with the work item reference and where to make the change instead —
+
+    This task is owned by Plane — work item #165 in "EPC Project — AI Native PMO pilot".
+    Change it in Plane; the PMO picks the change up on the next sync.
+
+Tasks the PMO owns are unaffected. The frontend now shows that sentence rather than a raw HTTP dump.
+
 **Phase 2 — push plans (≈3 days).** Plan agent output → Plane project, modules, work items, relations.
 Idempotent on `plane_links`, behind a flag, as a background job.
 
@@ -253,5 +261,6 @@ place to add features — if a change is needed, it belongs in the adapter or up
    than through the product. Phase 2 replaces that script.
 6. **The Monitor agent cannot see dependencies yet.** They are in the database (162 tasks, 211 edges)
    but not in its prompt; that is Phase 4 and it is the change that makes a predecessor slip visible.
-7. **Mirrored tasks are editable in the PMO UI.** Until the write half lands, nothing stops a human
-   editing a mirrored task here and creating the exact divergence the boundary is meant to prevent.
+7. **The guard covers task writes only.** Deleting a linked PMO project removes its mirrored tasks
+   locally without touching Plane — intended, but anyone reading the PMO alone would see a plan
+   disappear while the board still shows it.
