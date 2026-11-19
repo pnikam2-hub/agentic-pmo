@@ -214,3 +214,19 @@ class PlaneWebhookEvent(Base):
     received_at = Column(DateTime, default=datetime.datetime.utcnow)
     processed_at = Column(DateTime, nullable=True)
 
+
+class PlanePushRun(Base):
+    """Audit trail for PMO → Plane pushes.
+
+    A push writes to a live client board and takes minutes, so it runs as a background job. Without a
+    row per run there is no way to answer "what did we send, and did it finish".
+    """
+    __tablename__ = "plane_push_runs"
+    id = Column(Integer, primary_key=True, index=True)
+    project_id = Column(Integer, ForeignKey("projects.id"), nullable=False)
+    status = Column(String(20), default="running")   # running | ok | partial | error
+    stats = Column(JSON, default=dict)
+    error = Column(Text, default="")
+    started_at = Column(DateTime, default=datetime.datetime.utcnow)
+    finished_at = Column(DateTime, nullable=True)
+

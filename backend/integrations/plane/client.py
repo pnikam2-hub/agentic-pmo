@@ -40,15 +40,25 @@ class PlaneClient:
             time.sleep(gap)
 
     def get(self, path: str, params: dict | None = None) -> dict:
+        return self._request("GET", path, params=params)
+
+    def post(self, path: str, body: dict) -> dict:
+        """Write operation. Only `push.py` uses this, and only when the push flag is enabled."""
+        return self._request("POST", path, body=body)
+
+    def _request(self, method: str, path: str, params: dict | None = None,
+                 body: dict | None = None) -> dict:
         url = self.api_root + path
         if params:
             url += "?" + urllib.parse.urlencode(params)
+        payload = json.dumps(body).encode() if body is not None else None
         last_err = None
         for attempt in range(self.max_retries):
             self._pace()
             req = urllib.request.Request(
-                url, method="GET",
-                headers={"X-API-Key": self.api_key, "Accept": "application/json"},
+                url, method=method, data=payload,
+                headers={"X-API-Key": self.api_key, "Accept": "application/json",
+                         "Content-Type": "application/json"},
             )
             try:
                 with urllib.request.urlopen(req, timeout=self.timeout) as resp:
@@ -58,14 +68,14 @@ class PlaneClient:
                     return json.loads(raw)
             except urllib.error.HTTPError as exc:
                 self._last = time.time()
-                body = exc.read().decode()[:300]
+                err_body = exc.read().decode()[:300]
                 if exc.code == 429:
                     retry_after = exc.headers.get("Retry-After")
                     wait = float(retry_after) if retry_after else 5.0 * (attempt + 1)
                     time.sleep(min(wait, 60))
                     last_err = f"429 throttled, retried {attempt + 1}x"
                     continue
-                raise PlaneError(f"GET {path} -> {exc.code}: {body}") from exc
+                raise PlaneError(f"{method} {path} -> {exc.code}: {err_body}") from exc
             except urllib.error.URLError as exc:
                 self._last = time.time()
                 last_err = str(exc.reason)

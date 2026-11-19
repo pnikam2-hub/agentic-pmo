@@ -59,3 +59,8 @@ def webhook_secret() -> str:
             return fh.read().strip()
     except OSError:
         return ""
+
+
+def push_enabled() -> bool:
+    """Phase 2 writes to a live board, so it is off unless explicitly switched on."""
+    return os.getenv("PLANE_PUSH_ENABLED", "").strip().lower() in ("1", "true", "yes", "on")
