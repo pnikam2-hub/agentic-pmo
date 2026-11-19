@@ -3,6 +3,7 @@ import datetime
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from backend.database import get_db
+from backend.integrations.plane.guard import plane_ownership
 from backend.models import Task
 from backend.schemas import TaskCreate, TaskUpdate, TaskOut
 
@@ -59,6 +60,9 @@ def update_task(project_id: int, task_id: int, body: TaskUpdate, db: Session = D
     t = db.query(Task).filter(Task.id == task_id, Task.project_id == project_id).first()
     if not t:
         raise HTTPException(404, "Task not found")
+    owned = plane_ownership(db, t)
+    if owned:
+        raise HTTPException(409, owned)
     update_data = body.model_dump(exclude_unset=True)
     for key, val in update_data.items():
         setattr(t, key, val)
@@ -73,6 +77,9 @@ def delete_task(project_id: int, task_id: int, db: Session = Depends(get_db)):
     t = db.query(Task).filter(Task.id == task_id, Task.project_id == project_id).first()
     if not t:
         raise HTTPException(404, "Task not found")
+    owned = plane_ownership(db, t)
+    if owned:
+        raise HTTPException(409, owned)
     db.delete(t)
     db.commit()
     return {"ok": True}

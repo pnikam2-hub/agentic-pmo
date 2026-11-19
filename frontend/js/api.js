@@ -50,8 +50,21 @@ async function apiRequest(method, path, body = null) {
   }
 
   if (!res.ok) {
-    const err = await res.text().catch(() => res.statusText);
-    throw new Error(`API ${method} ${path}: ${res.status} ${err}`);
+    // Surface FastAPI's `detail` rather than the raw body — a 409 boundary message in the PMO
+    // should read as guidance, not as an HTTP dump.
+    let message = `${res.status} ${res.statusText}`;
+    try {
+      const text = await res.text();
+      try {
+        const parsed = JSON.parse(text);
+        message = parsed.detail || parsed.error || text || message;
+      } catch {
+        message = text || message;
+      }
+    } catch {
+      /* body unreadable — keep the status line */
+    }
+    throw new Error(message);
   }
 
   const ct = res.headers.get('content-type') || '';
