@@ -12,6 +12,7 @@ through the very guards this suite exists to prove, so the fixture below removes
 the stand-ins (and restores them afterwards) rather than overriding anything.
 """
 import json
+import os
 
 import jwt as pyjwt
 import pytest
@@ -28,6 +29,11 @@ from backend.models import User
 from backend.routers import admin as admin_router
 from backend.tests.test_plane_webhook import post as webhook_post
 
+# An in-memory database shared through StaticPool. Every session in this module therefore uses one
+# connection, which is fast and works, but means a session of the fixture's own and the app's request
+# sessions are not isolated from each other. A rare 401 on a token issued seconds earlier was seen about
+# three times in thirty full-suite runs and never reproduced on demand; the diagnostic below exists so the
+# next occurrence names its cause instead of costing another investigation.
 ENGINE = create_engine(
     "sqlite://",
     connect_args={"check_same_thread": False},
@@ -90,6 +96,8 @@ def _real_deps():
             app.dependency_overrides[dep] = impl
 
 
+
+
 ROLE_USERS = [
     ("viewer", "viewer@example.com", "viewer-password"),
     ("contributor", "contributor@example.com", "contributor-password"),
@@ -121,7 +129,31 @@ def roles():
             "role": username,
             "password": password,
         }, headers=admin_headers)
-        assert_status(created, 200)
+        if created.status_code != 200:
+            # A 401 here is the suite's known intermittent failure. Capture what
+            # actually differs — the admin row, its version, and the version the
+            # token carries — so the next occurrence explains itself.
+            import jwt as pyjwt
+            from backend.auth import JWT_SECRET
+            with SessionLocal() as s:
+                row = s.query(User).filter(User.username == "admin").first()
+                diag = {
+                    "users": s.query(User).count(),
+                    "admin_id": row.id if row else None,
+                    "admin_ver": row.token_version if row else None,
+                    "admin_active": row.is_active if row else None,
+                }
+            try:
+                claims = pyjwt.decode(admin_headers["Authorization"].split()[1], JWT_SECRET,
+                                      algorithms=["HS256"])
+                diag["token_sub"] = claims.get("sub")
+                diag["token_ver"] = claims.get("ver")
+                diag["token_role"] = claims.get("role")
+            except Exception as exc:  # noqa: BLE001 - diagnostics only
+                diag["token_error"] = str(exc)[:80]
+            raise AssertionError(
+                f"creating {username} failed: {created.status_code} {created.text[:120]} | diag={diag}"
+            )
         resp = login(username, password)
         assert_status(resp, 200)
         identities[username] = {
