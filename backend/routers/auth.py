@@ -1,8 +1,10 @@
 """Auth router — login, token verification, own-account, SSO endpoints."""
 import datetime
+import functools
 import hmac
 from hashlib import sha256
 from typing import Optional
+from urllib.parse import quote
 from fastapi import APIRouter, Depends, HTTPException, Query, Request
 from fastapi.responses import RedirectResponse
 from pydantic import BaseModel
@@ -159,6 +161,37 @@ EXTERNAL_ID_CONFLICT_MESSAGE = (
 )
 
 
+def _sso_html_errors(func):
+    """Render an SSO failure as a redirect for a browser, JSON for the rest.
+
+    The three SSO endpoints are full-page navigations: a browser that follows
+    /sso/start or lands on /sso/callback must never be shown a raw JSON body
+    (``{"detail": "..."}``) as text. When a request's Accept header asks for
+    HTML, any HTTPException becomes a 302 to ``/#sso-error=<detail>`` with
+    ``Cache-Control: no-store``; otherwise the exception is re-raised so FastAPI
+    keeps rendering the same status and body it always has — the SPA's fetch,
+    curl and the tests (Accept: */*) are unaffected. functools.wraps keeps the
+    wrapped signature and name, so FastAPI still resolves the handler's
+    dependencies and the rate limiter still registers it under sso_*.
+    """
+    @functools.wraps(func)
+    def wrapper(*args, **kwargs):
+        try:
+            return func(*args, **kwargs)
+        except HTTPException as exc:
+            request = kwargs.get("request")
+            if request is None:
+                request = next((a for a in args if isinstance(a, Request)), None)
+            if request is None or "text/html" not in request.headers.get("accept", "").lower():
+                raise
+            response = RedirectResponse(
+                f"/#sso-error={quote(str(exc.detail))}", status_code=302
+            )
+            response.headers["Cache-Control"] = "no-store"
+            return response
+    return wrapper
+
+
 def _sso_fail(db: Session, request: Request, reason: str, extra: dict = None):
     """One audit row per failed SSO attempt, with a short reason code only.
 
@@ -238,6 +271,7 @@ def sso_enabled():
 
 @router.get("/sso/start")
 @limiter.limit(LOGIN_RATE_LIMIT)
+@_sso_html_errors
 def sso_start(request: Request):
     """Redirect to the IdP, stashing state+nonce+verifier in a signed cookie.
 
@@ -270,6 +304,7 @@ def sso_start(request: Request):
 
 @router.get("/sso/callback")
 @limiter.limit(LOGIN_RATE_LIMIT)
+@_sso_html_errors
 def sso_callback(
     request: Request,
     code: str = Query(default=None),
@@ -492,6 +527,7 @@ class HandoffRequest(BaseModel):
 
 @router.post("/sso/exchange", response_model=LoginResponse)
 @limiter.limit(LOGIN_RATE_LIMIT)
+@_sso_html_errors
 def sso_exchange(request: Request, body: HandoffRequest, db: Session = Depends(get_db)):
     """Redeem a single-use handoff JWT for the normal login response.
 

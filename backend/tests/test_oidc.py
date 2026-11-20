@@ -14,7 +14,7 @@ import base64
 import datetime
 import hashlib
 import time
-from urllib.parse import parse_qs, urlparse
+from urllib.parse import parse_qs, unquote, urlparse
 
 import httpx
 import jwt as pyjwt
@@ -933,3 +933,30 @@ def test_session_cookie_requires_exp(idp):
     }
     token = pyjwt.encode(payload, auth_module.JWT_SECRET, algorithm="HS256")
     assert oidc.decode_session_cookie(token) is None
+
+
+# ── 30. B2: a browser is redirected to /#sso-error=, not shown raw JSON ──
+def test_browser_gets_redirect_not_json_on_failure(idp):
+    session = start_flow()
+
+    as_html = client.get("/api/auth/sso/callback",
+                         params={"code": "c", "state": "not-the-state"},
+                         headers={"Accept": "text/html"},
+                         follow_redirects=False)
+    assert as_html.status_code == 302
+    assert "no-store" in as_html.headers["cache-control"].lower()
+
+    location = as_html.headers["location"]
+    assert location.startswith("/#sso-error=")
+    assert "#sso=" not in location          # no handoff token in the URL
+
+    message = unquote(location.split("#sso-error=", 1)[1])
+    assert "does not match" in message
+    assert "." not in message               # not a JWT: no token, no claim
+
+    # Without the Accept header the behaviour is unchanged: a 400 JSON body.
+    as_api = client.get("/api/auth/sso/callback",
+                        params={"code": "c", "state": "not-the-state"},
+                        follow_redirects=False)
+    assert as_api.status_code == 400
+    assert "detail" in as_api.json()

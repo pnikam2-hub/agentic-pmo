@@ -159,6 +159,51 @@ async function loginRequest(username, password) {
   return res.json();
 }
 
+// SSO availability. A 503 means "not configured", which is a normal state to
+// render quietly, not an error to show; a genuine network failure still throws
+// so the caller knows the check could not complete.
+async function ssoEnabled() {
+  const res = await fetch(`${API_BASE}/auth/sso/enabled`);
+  if (res.status === 503) return { enabled: false };
+  if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);
+  return res.json();
+}
+
+// A full-page navigation, not a fetch: the browser must follow the provider's
+// redirects and carry the signed SSO cookie, so this is an href to hand to an
+// anchor rather than a request to issue.
+function ssoStartUrl() {
+  return `${API_BASE}/auth/sso/start`;
+}
+
+// Redeem a single-use handoff for the normal login response. Deliberately not
+// routed through apiRequest, which would attach an expired bearer token and
+// clear the session on a 401 that is really about the handoff. Surfaces the
+// server's `detail` on failure, the way loginRequest does.
+async function exchangeHandoff(handoff) {
+  const res = await fetch(`${API_BASE}/auth/sso/exchange`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ handoff }),
+  });
+  if (!res.ok) {
+    let message = `${res.status} ${res.statusText}`;
+    try {
+      const text = await res.text();
+      try {
+        const parsed = JSON.parse(text);
+        message = parsed.detail || parsed.error || text || message;
+      } catch {
+        message = text || message;
+      }
+    } catch {
+      /* body unreadable — keep the status line */
+    }
+    throw new Error(message);
+  }
+  return res.json();
+}
+
 const api = {
   // Dashboard
   getDashboard() { return apiRequest('GET', '/dashboard'); },
