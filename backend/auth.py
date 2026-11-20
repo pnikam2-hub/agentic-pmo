@@ -261,6 +261,31 @@ def client_ip(request: Request) -> Optional[str]:
     return host
 
 
+def is_https(request: Request) -> bool:
+    """Is this request HTTPS, honouring a TLS-terminating reverse proxy?
+
+    ``request.url.scheme`` is "http" behind the documented single reverse proxy
+    (the proxy terminates TLS and forwards plaintext), so it cannot decide the
+    cookie's Secure flag on its own. Trust ``X-Forwarded-Proto: https`` only
+    when the direct peer is loopback or private — the same trusted-proxy rule
+    ``client_ip`` applies — so a remote caller cannot set the header and trick
+    us into marking a plaintext cookie Secure (which would both lie about the
+    protection and drop the cookie for the legitimate proxy).
+    """
+    if request.url.scheme == "https":
+        return True
+    host = request.client.host if request.client else None
+    proto = request.headers.get("X-Forwarded-Proto", "")
+    if host and proto:
+        try:
+            addr = ipaddress.ip_address(host)
+        except ValueError:
+            addr = None
+        if addr is not None and (addr.is_loopback or addr.is_private):
+            return proto.split(",")[0].strip().lower() == "https"
+    return False
+
+
 security = HTTPBearer(auto_error=False)
 
 

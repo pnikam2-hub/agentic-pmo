@@ -85,13 +85,17 @@ SSO_COOKIE_TTL = 600  # seconds; mirrors the cookie's max_age
 
 # ── HTTP client and caches ──────────────────────────────────────────────
 _client = None
-_discovery_cache = {}   # issuer -> discovery document
+# issuer -> (monotonic fetch time, discovery document). Stamped like the JWKS
+# cache so a provider that rotates its endpoints (or migrates tenants) is picked
+# up after the TTL instead of pinning token/jwks endpoints until a restart.
+_discovery_cache = {}
 # jwks_uri -> (monotonic fetch time, {kid: RSA public key}). Per-issuer with a
 # timestamp so a refresh replaces that issuer's key set wholesale once it is
 # stale — a key the provider has retired must stop being trusted, which is the
 # whole point of rotation.
 _jwks_cache = {}
 JWKS_TTL = 3600         # seconds a fetched key set stays fresh before a refetch
+DISCOVERY_TTL = 3600    # seconds a cached discovery document stays fresh
 
 
 def _resolve_client(client=None):
@@ -120,8 +124,43 @@ def _request(client, method, url, **kwargs):
 
 
 def configured() -> bool:
-    """SSO is on only when the two values that identify us to an IdP are set."""
-    return bool(OIDC_ISSUER and OIDC_CLIENT_ID)
+    """SSO is on only when every value the confidential-client flow needs is set.
+
+    The redirect URI and client secret are required even though ``sso_enabled``
+    never reveals them: without the redirect URI the provider sends the code
+    somewhere else, and without the client secret the token exchange fails, so
+    reporting "configured" while either is missing would half-enable a flow that
+    can only ever 502 or 401.
+    """
+    return bool(
+        OIDC_ISSUER and OIDC_CLIENT_ID and OIDC_REDIRECT_URI and OIDC_CLIENT_SECRET
+    )
+
+
+# The OAuth error codes a provider may legitimately send back to the callback.
+# Anything else is attacker-controlled text and must not be written verbatim
+# into the audit trail.
+OAUTH_ERROR_CODES = {
+    "invalid_request",
+    "unauthorized_client",
+    "access_denied",
+    "unsupported_response_type",
+    "invalid_scope",
+    "server_error",
+    "temporarily_unavailable",
+}
+
+
+def sanitise_oauth_error(value):
+    """Return the error code if it is a recognised OAuth error, else a constant.
+
+    The raw query value is unauthenticated input; storing it verbatim would let
+    a caller plant arbitrary strings in the audit trail, so only allow-listed
+    codes survive.
+    """
+    if value in OAUTH_ERROR_CODES:
+        return value
+    return "unrecognised"
 
 
 # ── Discovery ───────────────────────────────────────────────────────────
@@ -135,7 +174,9 @@ def discover(client=None):
     issuer = OIDC_ISSUER
     cached = _discovery_cache.get(issuer)
     if cached is not None:
-        return cached
+        fetched_at, doc = cached
+        if time.monotonic() - fetched_at < DISCOVERY_TTL:
+            return doc
 
     url = f"{issuer.rstrip('/')}/.well-known/openid-configuration"
     resp = _request(c, "GET", url)
@@ -154,7 +195,7 @@ def discover(client=None):
     if doc["issuer"] != issuer:
         raise OIDCError("discovery document issuer does not match the configured issuer")
 
-    _discovery_cache[issuer] = doc
+    _discovery_cache[issuer] = (time.monotonic(), doc)
     return doc
 
 
@@ -319,6 +360,13 @@ def verify_id_token(id_token, nonce, client=None):
     except pyjwt.PyJWTError as exc:
         raise OIDCError("id_token verification failed") from exc
 
+    aud = claims.get("aud")
+    if isinstance(aud, list) and len(aud) > 1 and claims.get("azp") != OIDC_CLIENT_ID:
+        # OIDC Core: a token whose aud names several parties must name the
+        # authorised party, or it may have been minted for a different client of
+        # the same issuer (Entra ID multi-tenant tokens are the classic case).
+        raise OIDCError("id_token multi-audience token is missing a matching azp")
+
     token_nonce = claims.get("nonce")
     if not isinstance(token_nonce, str) or not hmac.compare_digest(token_nonce, nonce):
         raise OIDCError("id_token nonce mismatch")
@@ -386,24 +434,122 @@ def identity_from_claims(claims):
     return sub, email.strip().lower(), name, OIDC_ISSUER
 
 
+# ── SSO handoff ─────────────────────────────────────────────────────────
+SSO_HANDOFF_TTL = 120    # seconds a handoff stays redeemable — short by design
+
+# The one piece of state this flow keeps between requests: the jti values that
+# have been redeemed, so a handoff is single-use. In-process only — a
+# multi-worker deployment must replace this with a shared store (redis) keyed by
+# jti, because a handoff redeemed on one worker would still be redeemable on
+# another.
+_consumed_handoffs = {}   # jti -> monotonic expiry time
+
+
+def encode_handoff(user_id, token_version):
+    """Mint a short-lived, single-use handoff JWT for the callback redirect.
+
+    ``purpose`` discriminates it from a session bearer token; ``jti`` makes it
+    single-use at the exchange endpoint; ``ver`` binds it to the user's token
+    version so a role change between the redirect and the exchange invalidates
+    it.
+    """
+    now = datetime.datetime.now(datetime.UTC)
+    payload = {
+        "purpose": "sso-handoff",
+        "jti": secrets.token_urlsafe(16),
+        "sub": str(user_id),
+        "ver": token_version,
+        "iss": "agentic-pmo",
+        "iat": now,
+        "exp": now + datetime.timedelta(seconds=SSO_HANDOFF_TTL),
+    }
+    return pyjwt.encode(payload, JWT_SECRET, algorithm="HS256")
+
+
+def decode_handoff(token):
+    """Verify a handoff JWT and return its payload, or None.
+
+    Requires the sso-handoff purpose, our issuer, a numeric subject, a jti, a
+    version and an exp. Single-use and version-matching are enforced by the
+    router, which owns the consumed-jti set and the user lookup.
+    """
+    try:
+        payload = pyjwt.decode(
+            token,
+            JWT_SECRET,
+            algorithms=["HS256"],
+            issuer="agentic-pmo",
+            options={"require": ["exp", "purpose", "jti", "sub", "ver"]},
+        )
+    except pyjwt.PyJWTError:
+        return None
+    if payload.get("purpose") != "sso-handoff":
+        return None
+    if not isinstance(payload.get("sub"), str) or not payload["sub"].isdigit():
+        return None
+    if not isinstance(payload.get("jti"), str) or not payload["jti"]:
+        return None
+    if not isinstance(payload.get("ver"), int):
+        return None
+    return payload
+
+
+def _sweep_handoffs():
+    """Drop expired entries so the consumed-jti set cannot grow without bound."""
+    now = time.monotonic()
+    for jti in [j for j, exp in _consumed_handoffs.items() if exp < now]:
+        _consumed_handoffs.pop(jti, None)
+
+
+def consume_handoff(jti):
+    """Atomically claim a handoff jti; returns True if it had not been used.
+
+    Sweeps expired entries lazily as a side effect.
+    """
+    _sweep_handoffs()
+    if jti in _consumed_handoffs:
+        return False
+    _consumed_handoffs[jti] = time.monotonic() + SSO_HANDOFF_TTL
+    return True
+
+
 # ── Session cookie ──────────────────────────────────────────────────────
 def encode_session_cookie(session_state):
     """Sign the state/nonce/verifier into a short-lived JWT cookie.
 
     Signed with JWT_SECRET (HS256) so a tampered cookie fails signature
     verification instead of being trusted; its exp mirrors the cookie's max_age
-    so the browser and the server agree on the lifetime.
+    so the browser and the server agree on the lifetime. ``iss`` stamps the
+    token's purpose — session *state*, not a session *token* — so the two can
+    never be confused even though both are signed with the same key.
     """
     now = datetime.datetime.now(datetime.UTC)
     payload = dict(session_state)
+    payload["iss"] = "agentic-pmo-sso-state"
     payload["iat"] = now
     payload["exp"] = now + datetime.timedelta(seconds=SSO_COOKIE_TTL)
     return pyjwt.encode(payload, JWT_SECRET, algorithm="HS256")
 
 
 def decode_session_cookie(token):
-    """Return the signed session dict, or None if invalid, expired or tampered."""
+    """Return the signed session dict, or None if invalid, expired or tampered.
+
+    Requires the session-state issuer and a non-optional exp/iat, and asserts
+    the payload actually carries the three string fields the flow needs — a
+    session bearer token (same key, different issuer, no state/nonce/verifier)
+    must not pass as a cookie, and neither may a cookie minted without exp.
+    """
     try:
-        return pyjwt.decode(token, JWT_SECRET, algorithms=["HS256"])
+        payload = pyjwt.decode(
+            token,
+            JWT_SECRET,
+            algorithms=["HS256"],
+            issuer="agentic-pmo-sso-state",
+            options={"require": ["exp", "iat"]},
+        )
     except pyjwt.PyJWTError:
         return None
+    for field in ("state", "nonce", "verifier"):
+        if not isinstance(payload.get(field), str):
+            return None
+    return payload

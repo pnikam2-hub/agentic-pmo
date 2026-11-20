@@ -11,6 +11,7 @@ because the happy path must prove that ``/#sso=<token>`` is a *real* working JWT
 accepted by ``/api/auth/me`` through the real token chain.
 """
 import base64
+import datetime
 import hashlib
 import time
 from urllib.parse import parse_qs, urlparse
@@ -28,8 +29,9 @@ from backend import auth as auth_module
 from backend.auth import current_user, require_auth
 from backend.database import Base, get_db
 from backend.integrations import oidc
-from backend.main import app
+from backend.main import app, enforce_sso_config
 from backend.models import AuditLog, User
+from backend.rate_limit import limiter
 from backend.routers import auth as auth_router
 
 ENGINE = create_engine(
@@ -70,6 +72,7 @@ def _real_deps():
     previous_db = app.dependency_overrides.get(get_db)
     app.dependency_overrides[get_db] = override_get_db
     Base.metadata.create_all(bind=ENGINE)
+    oidc._consumed_handoffs.clear()
     yield
     Base.metadata.drop_all(bind=ENGINE)
     app.dependency_overrides.pop(get_db, None)
@@ -163,6 +166,8 @@ class MockIdP:
         }
         if "groups" in p:
             claims["groups"] = p["groups"]
+        if "azp" in p:
+            claims["azp"] = p["azp"]
         key = p.get("signing_key", self.signing_key)
         kid = p.get("kid", self.jwk["kid"])
         return pyjwt.encode(claims, key, algorithm="RS256", headers={"kid": kid, "alg": "RS256"})
@@ -215,13 +220,16 @@ def sso_token(resp):
 
 
 def login_token(idp, **pending):
-    """Run a full SSO login and return the minted JWT."""
+    """Run a full SSO login through the handoff exchange, return the session JWT."""
     session = start_flow()
     idp.pending = {"nonce": session["nonce"], **pending}
     resp = client.get("/api/auth/sso/callback",
                       params={"code": "test-code", "state": session["state"]},
                       follow_redirects=False)
-    return sso_token(resp)
+    handoff = sso_token(resp)
+    exchange = client.post("/api/auth/sso/exchange", json={"handoff": handoff})
+    assert exchange.status_code == 200, exchange.text
+    return exchange.json()["token"]
 
 
 # ── 1. disabled without configuration ───────────────────────────────────
@@ -237,6 +245,7 @@ def test_disabled_without_configuration():
 def test_start_sets_cookie_and_redirects(idp):
     resp = client.get("/api/auth/sso/start", follow_redirects=False)
     assert resp.status_code == 302
+    assert "no-store" in resp.headers["cache-control"].lower()
 
     set_cookie = resp.headers["set-cookie"].lower()
     assert "pmo_sso=" in set_cookie
@@ -622,3 +631,305 @@ def test_future_iat_within_leeway_verifies(idp):
                       params={"code": "c", "state": session["state"]},
                       follow_redirects=False)
     assert resp.status_code == 302
+
+
+# ── 19. B1: SSO-only must be impossible unless SSO actually works ────────
+def test_startup_guard_refuses_sso_only_without_config(monkeypatch):
+    monkeypatch.setattr(oidc, "LOCAL_LOGIN_ENABLED", False)
+    monkeypatch.setattr(oidc, "OIDC_ISSUER", "")
+    monkeypatch.setattr(oidc, "OIDC_CLIENT_ID", "")
+    monkeypatch.setattr(oidc, "OIDC_REDIRECT_URI", "")
+    monkeypatch.setattr(oidc, "OIDC_CLIENT_SECRET", "")
+    with pytest.raises(RuntimeError):
+        enforce_sso_config()
+
+
+def test_startup_guard_allows_configured_sso_only(monkeypatch):
+    monkeypatch.setattr(oidc, "LOCAL_LOGIN_ENABLED", False)
+    monkeypatch.setattr(oidc, "OIDC_ISSUER", ISSUER)
+    monkeypatch.setattr(oidc, "OIDC_CLIENT_ID", CLIENT_ID)
+    monkeypatch.setattr(oidc, "OIDC_REDIRECT_URI", "http://testserver/api/auth/sso/callback")
+    monkeypatch.setattr(oidc, "OIDC_CLIENT_SECRET", "test-client-secret")
+    enforce_sso_config()   # must not raise
+
+
+def test_configured_requires_redirect_uri(monkeypatch):
+    monkeypatch.setattr(oidc, "OIDC_ISSUER", ISSUER)
+    monkeypatch.setattr(oidc, "OIDC_CLIENT_ID", CLIENT_ID)
+    monkeypatch.setattr(oidc, "OIDC_CLIENT_SECRET", "test-client-secret")
+    monkeypatch.setattr(oidc, "OIDC_REDIRECT_URI", "")
+    assert oidc.configured() is False
+
+
+def test_configured_requires_client_secret(monkeypatch):
+    monkeypatch.setattr(oidc, "OIDC_ISSUER", ISSUER)
+    monkeypatch.setattr(oidc, "OIDC_CLIENT_ID", CLIENT_ID)
+    monkeypatch.setattr(oidc, "OIDC_REDIRECT_URI", "http://testserver/api/auth/sso/callback")
+    monkeypatch.setattr(oidc, "OIDC_CLIENT_SECRET", "")
+    assert oidc.configured() is False
+
+
+# ── 20. B2: the SSO last-admin guard re-checks after the mutation ────────
+def test_sso_demotion_rechecks_last_admin_after_mutation(idp, monkeypatch):
+    # A lone oidc admin whose mapping resolves downward. The pre-check wrapper is
+    # monkeypatched to lie (report one other active admin) so the pre-check
+    # passes; the post-write recheck uses the real other_active_admins, which
+    # sees the true count of zero and must refuse — leaving the role unchanged.
+    with SessionLocal() as s:
+        s.add(User(username="ssoadmin", email="alice@example.com",
+                   display_name="SSO Admin", password_hash=None,
+                   role="admin", source="oidc",
+                   external_id=f"{ISSUER}#alice-123"))
+        s.commit()
+
+    monkeypatch.setattr(auth_router, "_other_active_admins", lambda db, user: 1)
+
+    session = start_flow()
+    idp.pending = {"nonce": session["nonce"], "sub": "alice-123",
+                   "email": "alice@example.com", "groups": []}   # maps to viewer
+    resp = client.get("/api/auth/sso/callback",
+                      params={"code": "c", "state": session["state"]},
+                      follow_redirects=False)
+    assert resp.status_code == 403
+
+    with SessionLocal() as s:
+        user = s.query(User).filter(User.username == "ssoadmin").one()
+        assert user.role == "admin"
+        assert user.token_version == 0
+
+    with SessionLocal() as s:
+        rows = s.query(AuditLog).filter(AuditLog.action == "sso_login_failed").all()
+        assert rows and rows[0].detail["reason"] == "last_admin"
+
+
+# ── 21. B3: a deactivated local account must not be linked on refusal ────
+def test_deactivated_local_user_is_not_linked_on_refusal(idp):
+    with SessionLocal() as s:
+        s.add(User(username="alice", email="alice@example.com", display_name="Alice",
+                   password_hash=auth_module.hash_password("local-password-123"),
+                   role="viewer", source="local", is_active=0))
+        s.commit()
+
+    session = start_flow()
+    idp.pending = {"nonce": session["nonce"], "sub": "alice-123",
+                   "email": "alice@example.com", "groups": ["pmo-admins"]}
+    resp = client.get("/api/auth/sso/callback",
+                      params={"code": "c", "state": session["state"]},
+                      follow_redirects=False)
+    assert resp.status_code == 403
+    assert "deactivated" in resp.json()["detail"].lower()
+
+    with SessionLocal() as s:
+        user = s.query(User).filter(User.email == "alice@example.com").one()
+        assert user.external_id is None
+
+
+# ── 22. B4: the cookie's Secure flag follows the trusted proxy ───────────
+def test_cookie_secure_follows_trusted_proxy(idp):
+    # Behind the documented TLS-terminating proxy, request.url.scheme is "http"
+    # but the direct peer is loopback — so X-Forwarded-Proto: https is honoured.
+    proxied = TestClient(app, client=("127.0.0.1", 50000))
+    resp = proxied.get("/api/auth/sso/start",
+                       headers={"X-Forwarded-Proto": "https"},
+                       follow_redirects=False)
+    assert resp.status_code == 302
+    assert "secure" in resp.headers["set-cookie"].lower()
+
+    # Plain http (no forwarded proto) must not mark the cookie Secure.
+    plain = TestClient(app, client=("127.0.0.1", 50000))
+    resp2 = plain.get("/api/auth/sso/start", follow_redirects=False)
+    assert "secure" not in resp2.headers["set-cookie"].lower()
+
+    # A remote (non-loopback/private) peer must not be trusted to set the flag.
+    spoofed = TestClient(app, client=("8.8.8.8", 50000))
+    resp3 = spoofed.get("/api/auth/sso/start",
+                        headers={"X-Forwarded-Proto": "https"},
+                        follow_redirects=False)
+    assert "secure" not in resp3.headers["set-cookie"].lower()
+
+
+# ── 23. B5: multi-audience id tokens need the azp check ─────────────────
+def test_multi_audience_without_azp_is_401(idp):
+    session = start_flow()
+    idp.pending = {"nonce": session["nonce"],
+                   "aud": ["other-client", CLIENT_ID]}
+    resp = client.get("/api/auth/sso/callback",
+                      params={"code": "c", "state": session["state"]},
+                      follow_redirects=False)
+    assert resp.status_code == 401
+
+
+def test_multi_audience_with_matching_azp_is_accepted(idp):
+    session = start_flow()
+    idp.pending = {"nonce": session["nonce"],
+                   "aud": ["other-client", CLIENT_ID], "azp": CLIENT_ID,
+                   "groups": ["pmo-admins"]}
+    resp = client.get("/api/auth/sso/callback",
+                      params={"code": "c", "state": session["state"]},
+                      follow_redirects=False)
+    assert resp.status_code == 302
+
+
+# ── 24. B6: the SSO endpoints are rate limited ──────────────────────────
+def test_sso_endpoints_are_rate_limited():
+    limited = set(limiter._route_limits) | set(limiter._dynamic_route_limits)
+    for name in ("backend.routers.auth.sso_start",
+                 "backend.routers.auth.sso_callback",
+                 "backend.routers.auth.sso_exchange"):
+        assert name in limited
+
+
+# ── 25. B7: never store the raw error query value ───────────────────────
+def test_unrecognised_provider_error_is_sanitised(idp):
+    resp = client.get("/api/auth/sso/callback",
+                      params={"error": "<script>", "state": "whatever"},
+                      follow_redirects=False)
+    assert resp.status_code == 400
+
+    with SessionLocal() as s:
+        rows = s.query(AuditLog).filter(AuditLog.action == "sso_login_failed").all()
+        assert rows and rows[0].detail["error"] == "unrecognised"
+
+
+# ── 26. B8: do not silently re-bind an external_id ──────────────────────
+def test_external_id_conflict_is_refused(idp):
+    with SessionLocal() as s:
+        s.add(User(username="alice", email="alice@example.com", display_name="Alice",
+                   password_hash=auth_module.hash_password("local-password-123"),
+                   role="viewer", source="local",
+                   external_id=f"{ISSUER}#someone-else"))
+        s.commit()
+
+    session = start_flow()
+    idp.pending = {"nonce": session["nonce"], "sub": "alice-123",
+                   "email": "alice@example.com", "groups": ["pmo-admins"]}
+    resp = client.get("/api/auth/sso/callback",
+                      params={"code": "c", "state": session["state"]},
+                      follow_redirects=False)
+    assert resp.status_code == 403
+    assert "different identity provider" in resp.json()["detail"]
+
+    with SessionLocal() as s:
+        user = s.query(User).filter(User.email == "alice@example.com").one()
+        assert user.external_id == f"{ISSUER}#someone-else"   # unchanged
+
+    with SessionLocal() as s:
+        rows = s.query(AuditLog).filter(AuditLog.action == "sso_login_failed").all()
+        assert rows and rows[0].detail["reason"] == "external_id_conflict"
+
+
+# ── 27. B9: discovery caching has a TTL ─────────────────────────────────
+def test_discovery_cache_refetches_after_ttl(idp):
+    assert oidc.discover()["jwks_uri"] == f"{ISSUER}/jwks"
+
+    # The provider rotates its jwks_uri; the mock transport serves whatever
+    # self.discovery now says, so a fresh read returns the new URI — but only
+    # once the cached document is stale.
+    idp.discovery["jwks_uri"] = f"{ISSUER}/jwks-v2"
+    assert oidc.discover()["jwks_uri"] == f"{ISSUER}/jwks"
+
+    fetched_at, doc = oidc._discovery_cache[ISSUER]
+    oidc._discovery_cache[ISSUER] = (fetched_at - oidc.DISCOVERY_TTL - 1, doc)
+    assert oidc.discover()["jwks_uri"] == f"{ISSUER}/jwks-v2"
+
+
+# ── 28. B10: the fragment handoff is single-use, not a session token ─────
+def test_callback_redirects_to_handoff_not_session_token(idp):
+    session = start_flow()
+    idp.pending = {"nonce": session["nonce"], "groups": ["pmo-admins"]}
+    resp = client.get("/api/auth/sso/callback",
+                      params={"code": "c", "state": session["state"]},
+                      follow_redirects=False)
+    assert resp.status_code == 302
+    assert "no-store" in resp.headers["cache-control"].lower()
+
+    handoff = sso_token(resp)
+    payload = pyjwt.decode(handoff, auth_module.JWT_SECRET, algorithms=["HS256"],
+                           issuer="agentic-pmo")
+    assert payload["purpose"] == "sso-handoff"
+    assert "jti" in payload
+    assert "usr" not in payload   # not the long-lived session bearer token
+
+
+def test_exchange_returns_working_token_and_is_single_use(idp):
+    session = start_flow()
+    idp.pending = {"nonce": session["nonce"], "groups": ["pmo-admins"]}
+    resp = client.get("/api/auth/sso/callback",
+                      params={"code": "c", "state": session["state"]},
+                      follow_redirects=False)
+    handoff = sso_token(resp)
+
+    ex = client.post("/api/auth/sso/exchange", json={"handoff": handoff})
+    assert ex.status_code == 200
+    body = ex.json()
+    assert body["token_type"] == "bearer"
+    assert body["role"] == "admin"
+    assert body["display_name"] == "Alice Example"
+    assert "expires_at" in body
+
+    me = client.get("/api/auth/me", headers=auth(body["token"]))
+    assert me.status_code == 200
+    assert me.json()["email"] == "alice@example.com"
+
+    again = client.post("/api/auth/sso/exchange", json={"handoff": handoff})
+    assert again.status_code == 401
+
+
+def test_expired_handoff_is_401(idp):
+    now = datetime.datetime.now(datetime.UTC)
+    payload = {
+        "purpose": "sso-handoff",
+        "jti": "expired-jti",
+        "sub": "1",
+        "ver": 0,
+        "iss": "agentic-pmo",
+        "iat": now - datetime.timedelta(seconds=300),
+        "exp": now - datetime.timedelta(seconds=60),
+    }
+    handoff = pyjwt.encode(payload, auth_module.JWT_SECRET, algorithm="HS256")
+    assert client.post("/api/auth/sso/exchange", json={"handoff": handoff}).status_code == 401
+
+
+def test_stale_version_handoff_is_401(idp):
+    with SessionLocal() as s:
+        s.add(User(username="alice", email="alice@example.com", display_name="Alice",
+                   password_hash=None, role="viewer", source="oidc",
+                   external_id=f"{ISSUER}#alice-123"))
+        s.commit()
+        uid = s.query(User).filter(User.username == "alice").one().id
+
+    handoff = oidc.encode_handoff(uid, 0)
+
+    # Bump the version after the handoff was minted (as a role change would).
+    with SessionLocal() as s:
+        user = s.query(User).filter(User.id == uid).one()
+        user.token_version = 1
+        s.commit()
+
+    assert client.post("/api/auth/sso/exchange", json={"handoff": handoff}).status_code == 401
+
+
+# ── 29. B11: the session cookie has a purpose and a required exp ─────────
+def test_session_cookie_rejects_bearer_token(idp):
+    with SessionLocal() as s:
+        s.add(User(username="alice", email="alice@example.com", display_name="Alice",
+                   password_hash=None, role="viewer", source="oidc",
+                   external_id=f"{ISSUER}#alice-123"))
+        s.commit()
+        user = s.query(User).filter(User.username == "alice").one()
+
+    bearer = auth_module.create_token(user)
+    assert oidc.decode_session_cookie(bearer) is None
+
+
+def test_session_cookie_requires_exp(idp):
+    now = datetime.datetime.now(datetime.UTC)
+    payload = {
+        "iss": "agentic-pmo-sso-state",
+        "iat": now,
+        "state": "s",
+        "nonce": "n",
+        "verifier": "v",
+    }
+    token = pyjwt.encode(payload, auth_module.JWT_SECRET, algorithm="HS256")
+    assert oidc.decode_session_cookie(token) is None

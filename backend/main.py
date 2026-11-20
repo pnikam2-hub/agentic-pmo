@@ -7,6 +7,7 @@ from fastapi.staticfiles import StaticFiles
 from backend.database import init_db, SessionLocal
 from backend.routers import projects, tasks, agents, dashboard, auth, alerts, templates, packs, plane, plane_webhook, admin
 from backend.auth import any_role, bootstrap_admin, check_auth_config, enforce_auth_config
+from backend.integrations import oidc
 from backend.rate_limit import limiter
 
 # Bumped whenever the API surface changes: the health endpoint is how a deploy is proved to have landed.
@@ -28,6 +29,24 @@ def _check_env():
 
     for warn in check_auth_config():
         print(f"⚠️  {warn}")
+
+
+def enforce_sso_config():
+    """Fail closed: SSO-only is only possible when SSO is actually configured.
+
+    LOCAL_LOGIN_ENABLED=0 closes the password front door, so the deployment
+    must not start unless the OIDC flow that replaces it is fully configured —
+    otherwise nobody, including the owner, can sign in and recovery is a
+    restart. Mirrors enforce_auth_config()'s fail-closed stance for insecure
+    defaults.
+    """
+    if not oidc.LOCAL_LOGIN_ENABLED and not oidc.configured():
+        raise RuntimeError(
+            "LOCAL_LOGIN_ENABLED=0 disables password sign-in, but single sign-on "
+            "is not configured (OIDC_ISSUER, OIDC_CLIENT_ID, OIDC_REDIRECT_URI "
+            "and OIDC_CLIENT_SECRET must all be set). A deployment that cannot "
+            "sign anyone in must not start."
+        )
 
 app = FastAPI(
     title="Agentic PMO",
@@ -95,6 +114,7 @@ async def on_startup():
     # the hook runs in Starlette's threadpool. A sync hook would start the app but not the scheduler.
     _check_env()
     enforce_auth_config()  # fail closed on default admin password / JWT secret
+    enforce_sso_config()   # fail closed if SSO-only is on without a working SSO config
     init_db()
     # After init_db: the users table must exist before anything can be put in it.
     # The .env admin is only ever created against an empty table, so a restart

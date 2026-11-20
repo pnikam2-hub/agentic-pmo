@@ -12,7 +12,7 @@ from sqlalchemy.orm import Session
 from backend.audit import audit
 from backend.auth import (
     JWT_EXPIRY_HOURS, authenticate, client_ip, create_token, current_user,
-    hash_password, other_active_admins, require_auth, validate_password,
+    hash_password, is_https, other_active_admins, require_auth, validate_password,
     verify_password,
 )
 from backend.database import get_db
@@ -153,6 +153,10 @@ def change_password(
 
 # ── SSO (Phase B) ───────────────────────────────────────────────────────
 SSO_NOT_CONFIGURED = "Single sign-on is not configured"
+DEACTIVATED_MESSAGE = "Your account has been deactivated. Contact an administrator."
+EXTERNAL_ID_CONFLICT_MESSAGE = (
+    "This account is already linked to a different identity provider account"
+)
 
 
 def _sso_fail(db: Session, request: Request, reason: str, extra: dict = None):
@@ -163,6 +167,7 @@ def _sso_fail(db: Session, request: Request, reason: str, extra: dict = None):
     attacker how to refine their attempt. ``extra`` carries non-secret context
     (for example an OAuth error code) that is safe to record.
     """
+    db.rollback()   # discard any pending mutation so a refusal never persists state
     detail = {"issuer": oidc.OIDC_ISSUER, "reason": reason}
     if extra:
         detail.update(extra)
@@ -189,6 +194,40 @@ def _unique_username(db: Session, email: str, sub: str) -> str:
     return candidate
 
 
+def _other_active_admins(db: Session, user: User) -> int:
+    """Thin wrapper over backend.auth.other_active_admins for the SSO pre-check.
+
+    The post-write recheck below calls other_active_admins directly, so a test
+    can monkeypatch this wrapper to simulate a stale pre-check read (report one
+    other admin while the true count is zero) and prove the recheck catches it —
+    the same split the admin router uses.
+    """
+    return other_active_admins(db, user)
+
+
+def _refuse_inactive(db: Session, request: Request, user: User):
+    """403 if the account is deactivated, before any mutation is made."""
+    if not user.is_active:
+        _sso_fail(db, request, "inactive")
+        raise HTTPException(403, DEACTIVATED_MESSAGE)
+
+
+def _refuse_conflicting_link(db: Session, request: Request, user: User, external_id: str):
+    """403 if the account already carries a different external_id.
+
+    Linking by verified email must not silently sever an existing binding: a
+    second IdP subject sharing the email would otherwise inherit the account's
+    role and de-link the owner's own subject. Record a short hash of each side
+    (never the raw subject) so a defender can correlate without leaking it.
+    """
+    if user.external_id and user.external_id != external_id:
+        _sso_fail(db, request, "external_id_conflict", extra={
+            "external_id_sha256": sha256(external_id.encode("utf-8")).hexdigest()[:12],
+            "existing_sha256": sha256(user.external_id.encode("utf-8")).hexdigest()[:12],
+        })
+        raise HTTPException(403, EXTERNAL_ID_CONFLICT_MESSAGE)
+
+
 @router.get("/sso/enabled")
 def sso_enabled():
     """Report whether SSO is configured, and to which issuer. Never the secret."""
@@ -198,12 +237,14 @@ def sso_enabled():
 
 
 @router.get("/sso/start")
+@limiter.limit(LOGIN_RATE_LIMIT)
 def sso_start(request: Request):
     """Redirect to the IdP, stashing state+nonce+verifier in a signed cookie.
 
     The cookie is HttpOnly so the SPA cannot read the verifier, SameSite=Lax
-    so it is sent only on the top-level callback navigation, Secure on https,
-    and scoped to /api/auth/sso so it never rides along on unrelated requests.
+    so it is sent only on the top-level callback navigation, Secure following
+    the trusted proxy, and scoped to /api/auth/sso so it never rides along on
+    unrelated requests.
     """
     if not oidc.configured():
         raise HTTPException(503, SSO_NOT_CONFIGURED)
@@ -214,6 +255,7 @@ def sso_start(request: Request):
         # not a client mistake, so it is a 502 rather than a 400 or a 500.
         raise HTTPException(502, "The identity provider is not reachable right now")
     response = RedirectResponse(authorize_url, status_code=302)
+    response.headers["Cache-Control"] = "no-store"
     response.set_cookie(
         key=oidc.SSO_COOKIE_NAME,
         value=oidc.encode_session_cookie(session_state),
@@ -221,12 +263,13 @@ def sso_start(request: Request):
         path="/api/auth/sso",
         httponly=True,
         samesite="lax",
-        secure=request.url.scheme == "https",
+        secure=is_https(request),
     )
     return response
 
 
 @router.get("/sso/callback")
+@limiter.limit(LOGIN_RATE_LIMIT)
 def sso_callback(
     request: Request,
     code: str = Query(default=None),
@@ -236,10 +279,10 @@ def sso_callback(
 ):
     """Complete the SSO flow: verify, map the role, resolve or create the user.
 
-    The redirect lands on /#sso=<token> because the fragment is never sent to a
-    server — round B2 reads and clears it in the browser, so our own token is
-    handed to the SPA without ever being echoed into a URL that could be
-    logged.
+    The redirect lands on /#sso=<handoff> because the fragment is never sent to
+    a server — the SPA reads it and clears it from the URL, so a short-lived
+    single-use handoff is handed over without the session token ever being
+    echoed into a URL that could be logged or retained in history.
     """
     if not oidc.configured():
         raise HTTPException(503, SSO_NOT_CONFIGURED)
@@ -247,9 +290,11 @@ def sso_callback(
     if error:
         # The provider refused the sign-in (cancelled, consent denied, etc.) and
         # sent us back with an OAuth error code instead of an authorisation
-        # code. The code is a coarse, public category — not a secret — so it is
-        # safe to record in the audit detail.
-        _sso_fail(db, request, "provider_error", extra={"error": error})
+        # code. The raw query value is unauthenticated input, so it is allow-
+        # listed: only recognised OAuth codes are recorded, everything else is
+        # stored as "unrecognised" — never the caller's own text.
+        _sso_fail(db, request, "provider_error",
+                  extra={"error": oidc.sanitise_oauth_error(error)})
         raise HTTPException(400, "Sign-in was cancelled at the identity provider")
 
     cookie = request.cookies.get(oidc.SSO_COOKIE_NAME)
@@ -296,7 +341,12 @@ def sso_callback(
     user = db.query(User).filter(User.external_id == external_id).first()
     provisioned = False
     linked = False
-    if user is None:
+    if user is not None:
+        # A deactivated account must not complete SSO. Refuse immediately, and
+        # before any mutation: the external_id match makes no link, but the
+        # refusal still has to precede last_login_at below.
+        _refuse_inactive(db, request, user)
+    else:
         user = db.query(User).filter(User.email == email).first()
         if user is not None:
             # An account already holds this verified email. Linking proves
@@ -305,6 +355,13 @@ def sso_callback(
             # match an IdP identity with no role groups) is never silently
             # promoted or demoted by its first SSO login. The divergence is
             # recorded below so it can be resolved deliberately in Users & Audit.
+            #
+            # Both refusals below run before user.external_id is assigned: a
+            # deactivated account must not be bound to the claimant's subject on
+            # a sign-in that returns 403, and a second IdP subject must not
+            # silently re-bind an account already linked elsewhere.
+            _refuse_inactive(db, request, user)
+            _refuse_conflicting_link(db, request, user, external_id)
             user.external_id = external_id
             linked = True
         elif not oidc.OIDC_AUTO_PROVISION:
@@ -344,21 +401,13 @@ def sso_callback(
                         409, "Could not create your account — please try again"
                     )
                 provisioned = False
+                _refuse_inactive(db, request, user)
                 if user.source != "oidc":
                     # The winning row is a local account that shares the email;
                     # link it (keeping its role) rather than applying the map.
+                    _refuse_conflicting_link(db, request, user, external_id)
                     user.external_id = external_id
                     linked = True
-
-    # A deactivated account must not complete SSO: minting a token for it would
-    # hand the SPA a JWT that every later request rejects with 401 anyway.
-    # Refuse here — before any mutation is committed — so the failed row is the
-    # only trace and the account keeps its pre-login state.
-    if not user.is_active:
-        _sso_fail(db, request, "inactive")
-        raise HTTPException(
-            403, "Your account has been deactivated. Contact an administrator."
-        )
 
     # Role sync applies only to oidc accounts, which have no local authority to
     # preserve. A linked local account keeps its role (link proves identity, not
@@ -368,8 +417,8 @@ def sso_callback(
     role_changed = False
     if not linked:
         role_changed = user.role != role
-        if role_changed and user.role == "admin" and user.is_active == 1 \
-                and other_active_admins(db, user) == 0:
+        demoting_admin = role_changed and user.role == "admin" and user.is_active == 1
+        if demoting_admin and _other_active_admins(db, user) == 0:
             _sso_fail(db, request, "last_admin")
             raise HTTPException(
                 403,
@@ -381,6 +430,17 @@ def sso_callback(
             # token_version so tokens minted under the old role stop working.
             user.role = role
             user.token_version += 1
+            # Post-write recheck, mirroring the admin router: the pre-check can
+            # read a stale count (two concurrent demotions each see the other
+            # admin), so re-count after the mutation and before commit. If the
+            # true count is now zero, roll back and refuse.
+            if demoting_admin and other_active_admins(db, user) == 0:
+                _sso_fail(db, request, "last_admin")
+                raise HTTPException(
+                    403,
+                    "Refusing this sign-in: it would demote the last active admin "
+                    "and leave this deployment with no administrator",
+                )
     user.last_login_at = datetime.datetime.utcnow()
     db.commit()
 
@@ -416,5 +476,45 @@ def sso_callback(
               ip=client_ip(request))
     db.commit()
 
-    token = create_token(user)
-    return RedirectResponse(f"/#sso={token}", status_code=302)
+    # Hand the SPA a short-lived, single-use handoff instead of the 8-hour
+    # session token, and mark the redirect no-store so the handoff is not
+    # retained by caches or replayed from history. The SPA posts it to
+    # /sso/exchange to receive the normal login response.
+    handoff = oidc.encode_handoff(user.id, user.token_version)
+    response = RedirectResponse(f"/#sso={handoff}", status_code=302)
+    response.headers["Cache-Control"] = "no-store"
+    return response
+
+
+class HandoffRequest(BaseModel):
+    handoff: str
+
+
+@router.post("/sso/exchange", response_model=LoginResponse)
+@limiter.limit(LOGIN_RATE_LIMIT)
+def sso_exchange(request: Request, body: HandoffRequest, db: Session = Depends(get_db)):
+    """Redeem a single-use handoff JWT for the normal login response.
+
+    The callback redirect carries a 120 s, single-use handoff in the fragment,
+    not the session token itself; the SPA posts it here and receives the token,
+    role, display name and expiry it expects from a login. A handoff that is
+    malformed, expired, already consumed, or whose token version no longer
+    matches the user is refused.
+    """
+    payload = oidc.decode_handoff(body.handoff)
+    if payload is None:
+        raise HTTPException(401, "Sign-in handoff is invalid or expired")
+    if not oidc.consume_handoff(payload["jti"]):
+        raise HTTPException(401, "Sign-in handoff has already been used")
+    user = db.query(User).filter(User.id == int(payload["sub"])).first()
+    if user is None or not user.is_active:
+        raise HTTPException(401, "Sign-in handoff is invalid or expired")
+    if payload["ver"] != user.token_version:
+        raise HTTPException(401, "Sign-in handoff is invalid or expired")
+    return LoginResponse(
+        token=create_token(user),
+        role=user.role,
+        display_name=user.display_name,
+        expires_at=datetime.datetime.now(datetime.UTC)
+        + datetime.timedelta(hours=JWT_EXPIRY_HOURS),
+    )
