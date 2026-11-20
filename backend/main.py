@@ -8,6 +8,9 @@ from backend.database import init_db, SessionLocal
 from backend.routers import projects, tasks, agents, dashboard, auth, alerts, templates, packs, plane, plane_webhook, admin
 from backend.auth import any_role, bootstrap_admin, check_auth_config, enforce_auth_config
 from backend.rate_limit import limiter
+
+# Bumped whenever the API surface changes: the health endpoint is how a deploy is proved to have landed.
+APP_VERSION = "0.2.0"
 from slowapi import _rate_limit_exceeded_handler
 from slowapi.errors import RateLimitExceeded
 
@@ -28,7 +31,7 @@ def _check_env():
 
 app = FastAPI(
     title="Agentic PMO",
-    version="0.1.0",
+    version=APP_VERSION,
     description="AI-agent-driven project management and orchestration platform.",
 )
 
@@ -77,7 +80,7 @@ def health():
             {"id": j.id, "next_run": j.next_run_time.isoformat() if j.next_run_time else None}
             for j in scheduler.get_jobs()
         ]
-    return {"status": "ok", "version": "0.1.0", "scheduler_running": bool(jobs), "jobs": jobs}
+    return {"status": "ok", "version": APP_VERSION, "scheduler_running": bool(jobs), "jobs": jobs}
 
 
 # Serve frontend static files

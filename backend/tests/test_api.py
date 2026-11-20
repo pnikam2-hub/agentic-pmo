@@ -11,7 +11,7 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy.pool import StaticPool
 
 from backend.database import Base, get_db
-from backend.main import app
+from backend.main import APP_VERSION, app
 from backend.auth import current_user, require_auth
 from backend.models import User
 
@@ -75,7 +75,7 @@ class TestHealth:
         assert resp.status_code == 200
         data = resp.json()
         assert data["status"] == "ok"
-        assert data["version"] == "0.1.0"
+        assert data["version"] == APP_VERSION
 
 
 # ══════════════════════════════════════════════════════════════════════════
