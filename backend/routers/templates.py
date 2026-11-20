@@ -3,7 +3,7 @@ from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
 from backend.database import get_db
-from backend.auth import require_auth
+from backend.auth import pmo_lead_up, require_auth
 from backend.templates import GREEN_FUEL_TEMPLATES
 
 router = APIRouter(prefix="/api/templates", tags=["templates"])
@@ -44,7 +44,7 @@ class ApplyTemplateRequest(BaseModel):
     project_id: int
 
 
-@router.post("/{template_id}/apply")
+@router.post("/{template_id}/apply", dependencies=[Depends(pmo_lead_up)])
 def apply_template(template_id: str, body: ApplyTemplateRequest,
                    db: Session = Depends(get_db),
                    auth_user: str = Depends(require_auth)):

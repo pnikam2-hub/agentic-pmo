@@ -248,3 +248,15 @@ def require_role(*roles: str):
         return user
 
     return guard
+
+
+# ── Shared guard instances ──────────────────────────────────────────────
+# One instance per role boundary, defined here so every router imports the
+# same callable. FastAPI caches a dependency per callable per request, so a
+# shared guard means a router-level gate and a handler-level `actor`
+# parameter resolve the same User instead of decoding the token twice — and
+# a test that overrides current_user covers every router identically.
+any_role = require_role("viewer", "contributor", "pmo_lead", "admin")
+contributor_up = require_role("contributor", "pmo_lead", "admin")
+pmo_lead_up = require_role("pmo_lead", "admin")
+admin_only = require_role("admin")

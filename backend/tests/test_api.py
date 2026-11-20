@@ -12,14 +12,29 @@ from sqlalchemy.pool import StaticPool
 
 from backend.database import Base, get_db
 from backend.main import app
-from backend.auth import require_auth
+from backend.auth import current_user, require_auth
+from backend.models import User
+
+
+def _admin_stand_in():
+    """A detached admin User for the guards to resolve. Handlers only read
+    .username/.role from it; nothing persists it. Admin because every role
+    boundary is open to admin — the boundaries themselves are test_rbac.py's
+    job (round 3), not this suite's."""
+    return User(username="test-user", display_name="Test User", role="admin")
+
 
 # Auto-authenticate business-logic tests (TestAuth clears this for its own tests)
 @pytest.fixture(scope="session", autouse=True)
 def auto_auth():
     app.dependency_overrides[require_auth] = lambda: "test-user"
+    # The role guards resolve through current_user, not require_auth, so both
+    # must be overridden or every gated route would 401 through the real
+    # token check.
+    app.dependency_overrides[current_user] = _admin_stand_in
     yield
     app.dependency_overrides.pop(require_auth, None)
+    app.dependency_overrides.pop(current_user, None)
 
 
 # ── In-memory test database ──────────────────────────────────────────────
@@ -375,10 +390,14 @@ class TestAuth:
 
     @pytest.fixture(autouse=True)
     def _real_auth(self):
-        """Remove the auto-auth override so we test the real auth flow."""
+        """Remove the auto-auth overrides so we test the real auth flow —
+        both of them, or the 'unauthenticated' tests below would stay
+        authenticated through current_user."""
         app.dependency_overrides.pop(require_auth, None)
+        app.dependency_overrides.pop(current_user, None)
         yield
         app.dependency_overrides[require_auth] = lambda: "test-user"
+        app.dependency_overrides[current_user] = _admin_stand_in
 
     def test_login_success(self):
         """Default credentials: admin / admin"""

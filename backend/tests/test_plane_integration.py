@@ -216,6 +216,15 @@ def test_estimate_not_confused_by_other_numbers(db):
 
 
 # ── boundary: Plane owns a mirrored task ─────────────────────────────────────
+def _admin_actor():
+    """Direct handler calls bypass dependency injection, so the role guards'
+    actor arrives by hand. Admin because the guards require at least
+    contributor, and the editable-task test also sends a field a contributor
+    may not send."""
+    from backend.models import User
+    return User(username="test-user", display_name="Test User", role="admin")
+
+
 def _mirrored(db):
     project, link = make_link(db)
     pull(db, link, StubClient(items=[item("w1", "Charter")], states=STATES))
@@ -230,7 +239,8 @@ def test_mirrored_task_cannot_be_edited(db):
 
     project, task = _mirrored(db)
     with pytest.raises(HTTPException) as exc:
-        update_task(project.id, task.id, TaskUpdate(status="done"), db=db)
+        update_task(project.id, task.id, TaskUpdate(status="done"), db=db,
+                    actor=_admin_actor())
     assert exc.value.status_code == 409
     assert "owned by Plane" in exc.value.detail
     assert "next sync" in exc.value.detail
@@ -246,7 +256,7 @@ def test_mirrored_task_cannot_be_deleted(db):
 
     project, task = _mirrored(db)
     with pytest.raises(HTTPException) as exc:
-        delete_task(project.id, task.id, db=db)
+        delete_task(project.id, task.id, db=db, actor=_admin_actor())
     assert exc.value.status_code == 409
     assert db.query(Task).filter(Task.id == task.id).count() == 1
 
@@ -261,6 +271,7 @@ def test_unmirrored_task_is_still_editable(db):
     db.add(local)
     db.commit()
 
-    updated = update_task(project.id, local.id, TaskUpdate(status="done", assignee="prashant"), db=db)
+    updated = update_task(project.id, local.id, TaskUpdate(status="done", assignee="prashant"), db=db,
+                          actor=_admin_actor())
     assert updated.status == "done"
     assert updated.assignee == "prashant"

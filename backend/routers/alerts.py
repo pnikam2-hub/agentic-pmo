@@ -4,7 +4,7 @@ from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
 from backend.database import get_db
-from backend.auth import require_auth
+from backend.auth import pmo_lead_up, require_auth
 from backend.models import WebhookSubscription
 from backend.services.alert_channels import (
     dispatch_alert, email_configured, webhook_configured,
@@ -29,7 +29,7 @@ def alert_status():
     }
 
 
-@router.post("/test")
+@router.post("/test", dependencies=[Depends(pmo_lead_up)])
 async def test_alert(body: TestAlertRequest, auth_user: str = Depends(require_auth)):
     """Send a test alert to all configured channels."""
     results = await dispatch_alert(
@@ -57,9 +57,11 @@ def list_webhooks(db: Session = Depends(get_db), auth_user: str = Depends(requir
     ]
 
 
-@router.post("/webhooks")
+@router.post("/webhooks", dependencies=[Depends(pmo_lead_up)])
 def register_webhook(body: WebhookCreate, db: Session = Depends(get_db),
                       auth_user: str = Depends(require_auth)):
+    """Lead-level, not viewer-level: an outbound webhook receives alert
+    payloads off-site, so registering one is a data-flow change."""
     hook = WebhookSubscription(name=body.name, url=body.url, events=body.events)
     db.add(hook)
     db.commit()
@@ -67,7 +69,7 @@ def register_webhook(body: WebhookCreate, db: Session = Depends(get_db),
     return {"id": hook.id, "name": hook.name, "url": hook.url, "events": hook.events}
 
 
-@router.delete("/webhooks/{webhook_id}")
+@router.delete("/webhooks/{webhook_id}", dependencies=[Depends(pmo_lead_up)])
 def delete_webhook(webhook_id: int, db: Session = Depends(get_db),
                    auth_user: str = Depends(require_auth)):
     hook = db.query(WebhookSubscription).filter(WebhookSubscription.id == webhook_id).first()

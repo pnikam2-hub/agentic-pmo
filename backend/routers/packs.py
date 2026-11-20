@@ -4,7 +4,7 @@ from pydantic import BaseModel
 from sqlalchemy.orm import Session
 
 from backend.database import get_db
-from backend.auth import require_auth
+from backend.auth import pmo_lead_up, require_auth
 from backend.models import Project, Task, ProjectPack
 from backend import packs as packlib
 
@@ -45,7 +45,7 @@ class ApplyPackRequest(BaseModel):
     replace_tasks: bool = False
 
 
-@router.post("/packs/{pack_id}/apply")
+@router.post("/packs/{pack_id}/apply", dependencies=[Depends(pmo_lead_up)])
 def apply_pack(pack_id: str, body: ApplyPackRequest,
                db: Session = Depends(get_db),
                auth_user: str = Depends(require_auth)):
@@ -144,7 +144,7 @@ def project_pack(project_id: int, db: Session = Depends(get_db)):
     }
 
 
-@router.delete("/projects/{project_id}/pack")
+@router.delete("/projects/{project_id}/pack", dependencies=[Depends(pmo_lead_up)])
 def detach_pack(project_id: int, db: Session = Depends(get_db),
                 auth_user: str = Depends(require_auth)):
     row = db.query(ProjectPack).filter(ProjectPack.project_id == project_id).first()

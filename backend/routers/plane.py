@@ -5,12 +5,14 @@ from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
 
+from backend.audit import audit
+from backend.auth import pmo_lead_up
 from backend.database import get_db
 from backend.integrations.plane import config as plane_config
 from backend.integrations.plane.client import PlaneError
 from backend.integrations.plane.sync import make_client, sync_project
 from backend.models import (PlaneLink, PlaneProjectLink, PlanePushRun, PlaneWebhookEvent,
-                            Project, Task)
+                            Project, Task, User)
 
 router = APIRouter(prefix="/api/integrations/plane", tags=["plane"])
 
@@ -51,7 +53,8 @@ def list_plane_projects():
 
 
 @router.post("/link")
-def link_project(body: LinkRequest, db: Session = Depends(get_db)):
+def link_project(body: LinkRequest, db: Session = Depends(get_db),
+                 actor: User = Depends(pmo_lead_up)):
     project = db.query(Project).filter(Project.id == body.project_id).first()
     if project is None:
         raise HTTPException(404, "PMO project not found")
@@ -79,6 +82,9 @@ def link_project(body: LinkRequest, db: Session = Depends(get_db)):
     existing.plane_project_id = match["id"]
     existing.plane_project_name = match.get("name", "")
     existing.plane_identifier = match.get("identifier", "")
+    audit(db, actor=actor.username, actor_role=actor.role, action="plane_linked",
+          target_type="project", target_id=project.id,
+          detail={"plane_project_id": existing.plane_project_id})
     db.commit()
     db.refresh(existing)
     return {
@@ -110,7 +116,7 @@ def get_link(project_id: int, db: Session = Depends(get_db)):
 
 @router.delete("/link/{project_id}")
 def unlink_project(project_id: int, delete_mirrored_tasks: bool = False,
-                   db: Session = Depends(get_db)):
+                   db: Session = Depends(get_db), actor: User = Depends(pmo_lead_up)):
     link = db.query(PlaneProjectLink).filter(PlaneProjectLink.project_id == project_id).first()
     if link is None:
         raise HTTPException(404, "No Plane link for this project")
@@ -122,15 +128,23 @@ def unlink_project(project_id: int, delete_mirrored_tasks: bool = False,
                 db.delete(task)
                 removed += 1
     db.delete(link)
+    # Same action name as a link: one action per link lifecycle, direction in detail.
+    audit(db, actor=actor.username, actor_role=actor.role, action="plane_linked",
+          target_type="project", target_id=project_id, detail={"unlinked": True})
     db.commit()
     return {"ok": True, "unlinked": project_id, "tasks_deleted": removed}
 
 
 @router.post("/reconcile/{project_id}")
-def reconcile(project_id: int, db: Session = Depends(get_db)):
+def reconcile(project_id: int, db: Session = Depends(get_db),
+              actor: User = Depends(pmo_lead_up)):
     """Full pull with relations — the nightly safety net under the webhook stream."""
     from backend.integrations.plane.sync import reconcile_for_project
 
+    # Queued before the pull so its internal commit carries the audit row; a
+    # failed reconcile raises here and the row rolls back with everything else.
+    audit(db, actor=actor.username, actor_role=actor.role, action="plane_sync",
+          target_type="project", target_id=project_id, detail={"kind": "reconcile"})
     try:
         return reconcile_for_project(db, project_id)
     except ValueError as exc:
@@ -162,7 +176,7 @@ def recent_events(limit: int = 25, db: Session = Depends(get_db)):
 
 @router.post("/push/{project_id}")
 def push(project_id: int, background: BackgroundTasks, dry_run: bool = True,
-         db: Session = Depends(get_db)):
+         db: Session = Depends(get_db), actor: User = Depends(pmo_lead_up)):
     """Send PMO tasks that Plane has never seen. Defaults to a dry run; writes nothing unless asked."""
     from backend.integrations.plane import push as plane_push
 
@@ -175,6 +189,11 @@ def push(project_id: int, background: BackgroundTasks, dry_run: bool = True,
         raise HTTPException(404, "project is not linked to a Plane project")
 
     if dry_run:
+        # A dry run is the audit row's own transaction: it is the only write
+        # this path makes, so one commit here persists exactly that row.
+        audit(db, actor=actor.username, actor_role=actor.role, action="plane_push",
+              target_type="project", target_id=project_id, detail={"dry_run": True})
+        db.commit()
         return plane_push.plan_push(db, link)
 
     cutoff = datetime.datetime.utcnow() - datetime.timedelta(minutes=30)
@@ -188,6 +207,8 @@ def push(project_id: int, background: BackgroundTasks, dry_run: bool = True,
 
     run = PlanePushRun(project_id=project_id, status="running")
     db.add(run)
+    audit(db, actor=actor.username, actor_role=actor.role, action="plane_push",
+          target_type="project", target_id=project_id, detail={"dry_run": False})
     db.commit()
     background.add_task(plane_push.run_push_job, run.id)
     plan = plane_push.plan_push(db, link)
@@ -219,8 +240,12 @@ def push_runs(project_id: int, limit: int = 10, db: Session = Depends(get_db)):
 
 
 @router.post("/sync/{project_id}")
-def sync(project_id: int, include_relations: bool = False, db: Session = Depends(get_db)):
+def sync(project_id: int, include_relations: bool = False, db: Session = Depends(get_db),
+         actor: User = Depends(pmo_lead_up)):
     """Pull Plane work items into this PMO project. Read-only on the Plane side."""
+    # Same placement rule as reconcile: the pull's commit carries the row.
+    audit(db, actor=actor.username, actor_role=actor.role, action="plane_sync",
+          target_type="project", target_id=project_id, detail={"kind": "sync"})
     try:
         stats = sync_project(db, project_id, include_relations=include_relations)
     except ValueError as exc:

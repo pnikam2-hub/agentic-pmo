@@ -6,14 +6,9 @@ from pydantic import BaseModel, Field
 from sqlalchemy.orm import Session
 
 from backend.audit import audit
-from backend.auth import hash_password, require_role, validate_role
+from backend.auth import admin_only, hash_password, validate_role
 from backend.database import get_db
 from backend.models import AuditLog, User
-
-# One shared guard instance: FastAPI caches dependencies per callable per
-# request, so the router gate and the handler-level `actor` parameter resolve
-# the same User instead of decoding the token twice.
-admin_only = require_role("admin")
 
 router = APIRouter(prefix="/api/admin", tags=["admin"], dependencies=[Depends(admin_only)])
 

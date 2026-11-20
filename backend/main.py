@@ -6,7 +6,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from backend.database import init_db, SessionLocal
 from backend.routers import projects, tasks, agents, dashboard, auth, alerts, templates, packs, plane, plane_webhook, admin
-from backend.auth import bootstrap_admin, require_auth, check_auth_config, enforce_auth_config
+from backend.auth import any_role, bootstrap_admin, check_auth_config, enforce_auth_config
 from backend.rate_limit import limiter
 from slowapi import _rate_limit_exceeded_handler
 from slowapi.errors import RateLimitExceeded
@@ -48,15 +48,17 @@ app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 # API routers — public
 app.include_router(auth.router)
 
-# API routers — protected (require JWT)
-app.include_router(projects.router, dependencies=[Depends(require_auth)])
-app.include_router(tasks.router, dependencies=[Depends(require_auth)])
-app.include_router(agents.router, dependencies=[Depends(require_auth)])
-app.include_router(dashboard.router, dependencies=[Depends(require_auth)])
-app.include_router(alerts.router, dependencies=[Depends(require_auth)])
-app.include_router(templates.router, dependencies=[Depends(require_auth)])
-app.include_router(packs.router, dependencies=[Depends(require_auth)])
-app.include_router(plane.router, dependencies=[Depends(require_auth)])
+# API routers — protected. The router-level gate is the read boundary (any of
+# the four roles, per plan §A5); write routes carry their own stricter guard,
+# because every router here mixes reads with writes.
+app.include_router(projects.router, dependencies=[Depends(any_role)])
+app.include_router(tasks.router, dependencies=[Depends(any_role)])
+app.include_router(agents.router, dependencies=[Depends(any_role)])
+app.include_router(dashboard.router, dependencies=[Depends(any_role)])
+app.include_router(alerts.router, dependencies=[Depends(any_role)])
+app.include_router(templates.router, dependencies=[Depends(any_role)])
+app.include_router(packs.router, dependencies=[Depends(any_role)])
+app.include_router(plane.router, dependencies=[Depends(any_role)])
 # Plane's webhook receiver authenticates with an HMAC signature, not a JWT — no auth dependency.
 app.include_router(plane_webhook.router)
 
