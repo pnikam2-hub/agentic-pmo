@@ -5,6 +5,7 @@ from fastapi import FastAPI, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from backend.database import init_db, SessionLocal
+from backend.audit_chain import append_anchor
 from backend.routers import projects, tasks, agents, dashboard, auth, alerts, templates, packs, plane, plane_webhook, admin
 from backend.auth import any_role, bootstrap_admin, check_auth_config, enforce_auth_config
 from backend.integrations import oidc
@@ -118,9 +119,12 @@ async def on_startup():
     init_db()
     # After init_db: the users table must exist before anything can be put in it.
     # The .env admin is only ever created against an empty table, so a restart
-    # neither duplicates nor overwrites it.
+    # neither duplicates nor overwrites it. The anchor is written in the same
+    # session, before any new rows, so each process start records the chain head
+    # it inherited — the one thing a later suffix deletion would otherwise erase.
     db = SessionLocal()
     try:
+        append_anchor(db)
         bootstrap_admin(db)
     finally:
         db.close()

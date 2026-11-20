@@ -5,7 +5,8 @@ a password, a password hash, or a token. Those are secrets, not facts.
 """
 from sqlalchemy.orm import Session
 
-from backend.models import AuditLog
+from backend.audit_chain import canonical_payload, hash_link, head
+from backend.models import AuditChain, AuditLog
 
 # Every action name the codebase may write. audit() refuses anything outside
 # this tuple, so a typo in an action string fails loudly at build time instead
@@ -45,8 +46,19 @@ def audit(
     actor_role: str = None,
     ip: str = None,
 ):
-    """Append one audit row. Adds to the session but does not commit — the
-    caller's request owns the transaction and decides when it is durable."""
+    """Append one audit row and its hash-chain link, in the caller's transaction.
+
+    Adds to the session but does not commit — the caller's request owns the
+    transaction and decides when it is durable, so the audit row and its link
+    land together or not at all.
+
+    The link is what makes the trail tamper-evident: its ``hash`` commits to the
+    audit row's contents and to the previous link's hash, so a later edit, an
+    insertion, or a gap *within* the chain breaks it. What the chain cannot
+    prove is the deletion of a *suffix* — the last N rows truncate to a shorter,
+    still-clean chain — which is why backend.audit_chain.append_anchor records
+    the head outside the database.
+    """
     if action not in ACTIONS:
         raise ValueError(
             f"Unknown audit action '{action}'. Known actions: {', '.join(ACTIONS)}"
@@ -61,4 +73,12 @@ def audit(
         ip=ip,
     )
     db.add(row)
+    db.flush()   # assign the audit id (and its at timestamp) before the link references them
+    seq, prev_hash = head(db)
+    db.add(AuditChain(
+        seq=seq + 1,
+        audit_id=row.id,
+        prev_hash=prev_hash,
+        hash=hash_link(prev_hash, canonical_payload(row)),
+    ))
     return row

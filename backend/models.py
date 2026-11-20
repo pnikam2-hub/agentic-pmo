@@ -275,3 +275,26 @@ class AuditLog(Base):
     detail = Column(JSON, default=dict)
     ip = Column(String(64), nullable=True)
 
+
+# ── Audit chain (tamper-evidence for the audit trail) ────────────────────────
+class AuditChain(Base):
+    """One hash-chained link per audit row.
+
+    ``audit_logs`` is an ordinary mutable table, so nothing in it can prove a
+    row was not edited or deleted after the fact. This table records, for each
+    audit row, a link whose ``hash`` commits to that row's contents and to the
+    previous link's hash, so an edit, an insertion or a gap *within* the chain
+    is detectable by recomputing the hashes.
+
+    Deliberately no foreign key to ``audit_logs``: like the audit row itself the
+    chain must outlive the deletion of what it describes, and a FK would either
+    cascade (destroying the evidence) or block the deletion it must survive.
+    """
+    __tablename__ = "audit_chain"
+    id = Column(Integer, primary_key=True, index=True)
+    seq = Column(Integer, unique=True, nullable=False)   # 1-based position; unique so two links can never collide
+    audit_id = Column(Integer, nullable=False)           # the audit_logs.id this link commits to
+    prev_hash = Column(String(64), nullable=False)       # hash of the previous link, or 64 zeroes for genesis
+    hash = Column(String(64), nullable=False)            # sha256(prev_hash || canonical payload)
+    at = Column(DateTime, default=datetime.datetime.utcnow)
+

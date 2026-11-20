@@ -6,6 +6,7 @@ from pydantic import BaseModel, Field
 from sqlalchemy.orm import Session
 
 from backend.audit import audit
+from backend import audit_chain
 from backend.auth import (
     admin_only, hash_password, other_active_admins, validate_password, validate_role,
 )
@@ -262,3 +263,26 @@ def list_audit(
     if action:
         q = q.filter(AuditLog.action == action)
     return q.order_by(AuditLog.id.desc()).limit(limit).all()
+
+
+@router.get("/audit/verify")
+def verify_audit(db: Session = Depends(get_db)):
+    """Recompute the chain and compare the head against the anchor.
+
+    Returns the verify dict merged with the anchor comparison. An empty or
+    pre-chain database returns ok=True — there is nothing to have tampered with
+    yet — so this can never 500 on a fresh trail. On a clean check the head is
+    re-anchored, which is what lets the next suffix truncation be detected.
+    """
+    result = audit_chain.verify(db)
+    result.update(audit_chain.check_anchor(db))
+    if result["ok"] and result.get("match", True):
+        audit_chain.append_anchor(db)
+    return result
+
+
+@router.get("/audit/head")
+def audit_head(db: Session = Depends(get_db)):
+    """The current chain head, plus whether an anchor is configured."""
+    seq, hash_ = audit_chain.head(db)
+    return {"seq": seq, "hash": hash_, "anchor_configured": bool(audit_chain.anchor_path())}
