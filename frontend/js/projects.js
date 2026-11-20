@@ -85,7 +85,8 @@ const ProjectsView = {
               <span class="badge ${statusClass(project.status)}">${project.status}</span>
               <span>${project.task_count} tasks · ${pct}% done</span>
               ${project.priority ? `<span class="badge badge-info">${project.priority}</span>` : ''}
-              ${project.tags?.length ? project.tags.map(t => `<span class="tag">${esc(t)}</span>`).join('') : ''}
+              ${(project.tags || []).filter(t => !String(t).startsWith('domain-pack'))
+                  .map(t => `<span class="tag">${esc(t)}</span>`).join('')}
             </div>
           </div>
           <div class="action-row">

@@ -742,10 +742,17 @@ body {
 
 .detail-meta {
   display: flex;
-  gap: 12px;
+  flex-wrap: wrap;          /* a long tag list must wrap as whole items, not squeeze the counts */
+  gap: 8px 12px;
   align-items: center;
   font-size: 13px;
   color: var(--text-muted);
+}
+
+.detail-meta > span,
+.detail-meta .tag,
+.detail-meta .badge {
+  white-space: nowrap;      /* "104 tasks · 18% done" is one fact and must not break across lines */
 }
 
 /* Action buttons row */
