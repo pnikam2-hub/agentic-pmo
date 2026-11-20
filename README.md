@@ -98,6 +98,28 @@ deployment that cannot sign anyone in is worse than one with two front doors.
 
 ---
 
+## Security
+
+The full access-control matrix — who may do what, and where each rule is enforced in code — is in
+[docs/rbac-matrix.md](docs/rbac-matrix.md). The SSO/RBAC design and build are in
+[docs/sso-rbac-phaseA-report.md](docs/sso-rbac-phaseA-report.md) and
+[docs/sso-rbac-phaseB-report.md](docs/sso-rbac-phaseB-report.md).
+
+| Measure | Enforced where |
+|---|---|
+| Four roles on every route | A router-level guard plus a per-route guard, all resolving through one `current_user` dependency; the role is re-read from the database on every request, never trusted from the JWT claim |
+| Hash-chained audit with an anchor | Every security event writes a row; each row is hash-chained to its predecessor and an optional external anchor records the head, so an edit, insertion or suffix deletion is detectable via `GET /api/admin/audit/verify` |
+| Per-identifier login lockout | Counted on the audit trail; `LOGIN_FAILURE_LIMIT` failures for one identifier within a window return 429 with `Retry-After` |
+| Password policy | 12-character floor, 72-byte ceiling, and a zxcvbn strength score ≥ 3, with zxcvbn's own words as the rejection message |
+| Response headers | One middleware sets `X-Content-Type-Options`, `X-Frame-Options`, `Referrer-Policy`, `Permissions-Policy`, `Cross-Origin-Opener-Policy`, `Cache-Control: no-store` on `/api/`, and HSTS when HTTPS is in play |
+| SSO with local fallback | OIDC sign-in verifies the id token against the provider JWKS; password login stays on by default so an identity-provider outage cannot lock the owner out (`LOCAL_LOGIN_ENABLED=0` for SSO-only) |
+| Deliberate exclusions | Per-project ACLs, SCIM provisioning, our own MFA, and SAML are out of scope for v1 — each is listed with its consequence in `docs/rbac-matrix.md` §6 |
+
+No password, hash or token is ever stored in the audit trail, so the CSV export
+(`GET /api/admin/audit/export.csv`) is safe to hand to an auditor.
+
+---
+
 ## API Endpoints
 
 ### Authentication
@@ -121,6 +143,8 @@ deployment that cannot sign anyone in is worse than one with two front doors.
 | PATCH/DELETE | `/api/admin/users/:id` | Change role or status / deactivate |
 | POST | `/api/admin/users/:id/password` | Reset a password |
 | GET | `/api/admin/audit` | Audit trail, newest first (`?limit=&actor=&action=`) |
+| GET | `/api/admin/audit/verify` | Recompute the hash chain and compare the head against the anchor |
+| GET | `/api/admin/audit/export.csv` | Export the audit trail as CSV, newest first (`?limit=&since=`) |
 
 ### Projects, tasks and agents
 

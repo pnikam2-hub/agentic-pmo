@@ -1,8 +1,11 @@
 """Admin router — user management and the audit trail. Admin role only."""
 import datetime
+import json
 from typing import Optional
 from fastapi import APIRouter, Depends, HTTPException, Query
+from fastapi.responses import StreamingResponse
 from pydantic import BaseModel, Field
+from sqlalchemy import func
 from sqlalchemy.orm import Session
 
 from backend.audit import audit
@@ -11,7 +14,7 @@ from backend.auth import (
     admin_only, hash_password, other_active_admins, validate_password, validate_role,
 )
 from backend.database import get_db
-from backend.models import AuditLog, User
+from backend.models import AuditChain, AuditLog, User
 
 router = APIRouter(prefix="/api/admin", tags=["admin"], dependencies=[Depends(admin_only)])
 
@@ -286,3 +289,143 @@ def audit_head(db: Session = Depends(get_db)):
     """The current chain head, plus whether an anchor is configured."""
     seq, hash_ = audit_chain.head(db)
     return {"seq": seq, "hash": hash_, "anchor_configured": bool(audit_chain.anchor_path())}
+
+
+# ── Audit export (CSV) ─────────────────────────────────────────────────────
+# The column order is the contract this endpoint publishes; the header row below
+# is generated from the same tuple so the two can never drift apart.
+CSV_COLUMNS = (
+    "at", "id", "seq", "actor", "actor_role", "action",
+    "target_type", "target_id", "ip", "hash", "prev_hash", "detail",
+)
+
+
+def _csv_field(value: str) -> str:
+    """RFC 4180-encode one cell.
+
+    A field is quoted when it contains a comma, a double quote, a newline, or
+    leading/trailing whitespace; inside a quoted field a double quote is
+    doubled. The quoting is written here rather than delegated to the stdlib
+    csv.writer, because csv.writer's minimal quoting does not quote a bare
+    leading/trailing space — and the export is the artefact most likely to be
+    emailed around, so it must survive every spreadsheet's parser exactly.
+    """
+    if value == "":
+        return value
+    if (
+        "," in value
+        or '"' in value
+        or "\n" in value
+        or "\r" in value
+        or value != value.strip()
+    ):
+        return '"' + value.replace('"', '""') + '"'
+    return value
+
+
+def _csv_row(values) -> str:
+    return ",".join(_csv_field(v) for v in values) + "\r\n"
+
+
+def _cell(value) -> str:
+    """A CSV cell from a possibly-None value — None exports as empty."""
+    return "" if value is None else str(value)
+
+
+def _detail_json(detail) -> str:
+    """The audit detail as compact JSON — no newlines — so it stays one cell."""
+    return json.dumps(detail or {}, separators=(",", ":"), default=str)
+
+
+def _parse_since(value: str) -> datetime.datetime:
+    """Parse an ISO date/datetime, normalised to naive UTC.
+
+    ``AuditLog.at`` is stored naive-UTC (``datetime.utcnow``), so a ``since``
+    carrying a timezone offset must be folded to naive UTC before comparison or
+    the filter would silently miss everything.
+    """
+    try:
+        parsed = datetime.datetime.fromisoformat(value.strip().replace("Z", "+00:00"))
+    except ValueError:
+        raise HTTPException(
+            422, f"Invalid 'since' value '{value}' — expected an ISO date or datetime"
+        )
+    if parsed.tzinfo is not None:
+        parsed = parsed.astimezone(datetime.timezone.utc).replace(tzinfo=None)
+    return parsed
+
+
+def _audit_export_rows(db: Session, head_id: int, since, limit: int):
+    """Yield the CSV lines for the export, newest first.
+
+    The work is bounded by ``limit`` (the row cap) and ``head_id`` (the head
+    read before the export row was written), so a very large trail is streamed
+    rather than materialised as one list. ``seq``/``hash``/``prev_hash`` are
+    taken from the chain link and left empty for pre-chain rows, where there is
+    no link to read them from — never invented.
+    """
+    yield _csv_row(CSV_COLUMNS)
+    q = (
+        db.query(AuditLog, AuditChain)
+        .outerjoin(AuditChain, AuditChain.audit_id == AuditLog.id)
+        .filter(AuditLog.id <= head_id)
+    )
+    if since is not None:
+        q = q.filter(AuditLog.at >= since)
+    q = q.order_by(AuditLog.id.desc()).limit(limit)
+    for audit_row, link in q:
+        yield _csv_row((
+            audit_row.at.isoformat() if audit_row.at is not None else "",
+            _cell(audit_row.id),
+            _cell(getattr(link, "seq", None)),
+            _cell(audit_row.actor),
+            _cell(audit_row.actor_role),
+            _cell(audit_row.action),
+            _cell(audit_row.target_type),
+            _cell(audit_row.target_id),
+            _cell(audit_row.ip),
+            _cell(getattr(link, "hash", None)),
+            _cell(getattr(link, "prev_hash", None)),
+            _detail_json(audit_row.detail),
+        ))
+
+
+@router.get("/audit/export.csv")
+def export_audit_csv(
+    limit: int = Query(5000, ge=1, le=50000),
+    since: Optional[str] = Query(None),
+    db: Session = Depends(get_db),
+    actor: User = Depends(admin_only),
+):
+    """Export the audit trail as RFC 4180 CSV, newest first. Admin only.
+
+    Exporting the trail is itself a security event, so the trail must not be
+    the one thing that does not know about it: an ``audit_exported`` row is
+    written *before* streaming. To make sure that row never appears in the file
+    it describes, the head (newest audit id) is read first, the export row is
+    written, and the stream then stops at the head read — the export row, and
+    any row written after the head read, carries a higher id and is excluded.
+    """
+    since_dt = _parse_since(since) if since is not None else None
+
+    # Read the head before the export row exists; it is the boundary the stream
+    # will stop at, so the export cannot contain the row that describes it.
+    head_id = db.query(func.max(AuditLog.id)).scalar() or 0
+
+    # Count what the stream will contain — same filters, same cap — so the
+    # audit_exported row reports the true row count rather than an estimate.
+    count_q = db.query(func.count(AuditLog.id)).filter(AuditLog.id <= head_id)
+    if since_dt is not None:
+        count_q = count_q.filter(AuditLog.at >= since_dt)
+    exported = min(count_q.scalar() or 0, limit)
+
+    audit(db, actor=actor.username, actor_role=actor.role, action="audit_exported",
+          detail={"count": exported, "limit": limit, "since": since})
+    db.commit()
+
+    filename = f"audit-{datetime.datetime.utcnow().strftime('%Y%m%dT%H%M%SZ')}.csv"
+    return StreamingResponse(
+        _audit_export_rows(db, head_id, since_dt, limit),
+        media_type="text/csv; charset=utf-8",
+        headers={"Content-Disposition": f'attachment; filename="{filename}"'},
+    )

@@ -34,6 +34,7 @@ ACTIONS = (
     "sso_user_provisioned",
     "sso_user_linked",
     "sso_role_updated",
+    "audit_exported",        # an admin downloaded the trail; exporting is itself a security event
 )
 
 
