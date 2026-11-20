@@ -1,9 +1,9 @@
 """Tasks router — CRUD with kanban-friendly ordering."""
 import datetime
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Request
 from sqlalchemy.orm import Session
 from backend.audit import audit
-from backend.auth import contributor_up, pmo_lead_up
+from backend.auth import client_ip, contributor_up, pmo_lead_up
 from backend.database import get_db
 from backend.integrations.plane.guard import plane_ownership
 from backend.models import Task, User
@@ -59,7 +59,7 @@ def get_task(project_id: int, task_id: int, db: Session = Depends(get_db)):
 
 @router.patch("/{task_id}", response_model=TaskOut)
 def update_task(project_id: int, task_id: int, body: TaskUpdate, db: Session = Depends(get_db),
-                actor: User = Depends(contributor_up)):
+                actor: User = Depends(contributor_up), request: Request = None):
     t = db.query(Task).filter(Task.id == task_id, Task.project_id == project_id).first()
     if not t:
         raise HTTPException(404, "Task not found")
@@ -71,6 +71,24 @@ def update_task(project_id: int, task_id: int, body: TaskUpdate, db: Session = D
         # refusal is never masked by a business-rule conflict.
         refused = sorted(k for k in update_data if k not in ("status", "actual_hours"))
         if refused:
+            # A 403 that leaves no trace is the first thing a security review
+            # asks about. This manual refusal runs after the contributor guard
+            # has passed, so write the same access_denied row the guard would,
+            # naming the fields that were refused.
+            audit(
+                db,
+                actor=actor.username,
+                actor_role=actor.role,
+                action="access_denied",
+                detail={
+                    "method": request.method if request else "PATCH",
+                    "path": request.url.path if request else f"/api/projects/{project_id}/tasks/{task_id}",
+                    "required_roles": ["pmo_lead", "admin"],
+                    "refused_fields": refused,
+                },
+                ip=client_ip(request) if request else None,
+            )
+            db.commit()
             raise HTTPException(
                 403,
                 "This action requires role pmo_lead, admin, but your role is "

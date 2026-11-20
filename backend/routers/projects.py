@@ -68,8 +68,9 @@ def create_project(body: ProjectCreate, db: Session = Depends(get_db),
     return out
 
 
-@router.patch("/{project_id}", response_model=ProjectOut, dependencies=[Depends(pmo_lead_up)])
-def update_project(project_id: int, body: ProjectUpdate, db: Session = Depends(get_db)):
+@router.patch("/{project_id}", response_model=ProjectOut)
+def update_project(project_id: int, body: ProjectUpdate, db: Session = Depends(get_db),
+                   actor: User = Depends(pmo_lead_up)):
     p = db.query(Project).filter(Project.id == project_id).first()
     if not p:
         raise HTTPException(404, "Project not found")
@@ -77,6 +78,12 @@ def update_project(project_id: int, body: ProjectUpdate, db: Session = Depends(g
     for key, val in update_data.items():
         setattr(p, key, val)
     p.updated_at = datetime.datetime.utcnow()
+    if update_data:
+        # Record which fields changed, never their values — a goal or brief can
+        # be long prose and does not belong in the audit trail.
+        audit(db, actor=actor.username, actor_role=actor.role, action="project_updated",
+              target_type="project", target_id=p.id,
+              detail={"fields": sorted(update_data.keys())})
     db.commit()
     db.refresh(p)
     task_count = db.query(func.count(Task.id)).filter(Task.project_id == p.id).scalar() or 0

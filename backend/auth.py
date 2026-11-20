@@ -1,6 +1,7 @@
 """Agentic PMO — Authentication: JWT, password hashing, dependency injection."""
 import os
 import datetime
+import ipaddress
 import bcrypt
 from typing import Optional
 from fastapi import Depends, HTTPException, Request, status
@@ -69,6 +70,17 @@ def enforce_auth_config():
 
 
 # ── Password hashing (bcrypt — salted, adaptive, constant-time verify) ──
+def validate_password(value: str) -> None:
+    """Shared password policy: the 12-character floor and bcrypt's 72-byte
+    ceiling. Both are enforced here so every entry point fails with the same
+    clear 422 instead of some returning 422 and others a 500 from
+    hash_password's own ValueError."""
+    if len(value) < 12:
+        raise ValueError("Password must be at least 12 characters")
+    if len(value.encode("utf-8")) > 72:
+        raise ValueError("Password must be at most 72 bytes")
+
+
 def hash_password(password: str) -> str:
     pw = password.encode("utf-8")
     if len(pw) > 72:
@@ -82,6 +94,15 @@ def verify_password(password: str, hashed: str) -> bool:
     except ValueError:
         # Malformed hash or password over bcrypt's 72-byte limit
         return False
+
+
+# A bcrypt hash of a fixed constant, computed once at import. authenticate()
+# verifies every failed login against it so "no such account", "inactive
+# account" and "wrong password" all pay the same bcrypt cost — the 401 text is
+# already identical, and this closes the timing channel that would otherwise
+# let a caller enumerate identifiers by latency.
+_DUMMY_PASSWORD = "dummy-timing-normalisation-password-not-a-secret"
+_DUMMY_HASH = hash_password(_DUMMY_PASSWORD)
 
 
 # ── User lookup and bootstrap ───────────────────────────────────────────
@@ -139,8 +160,17 @@ def authenticate(identifier: str, password: str, db: Session) -> Optional[User]:
         bootstrap_admin(db)
         user = _find_user(identifier, db)
     if user is None or not user.is_active:
+        # Burn one bcrypt comparison even when there is nothing to compare
+        # against, so the response time does not reveal whether the identifier
+        # exists or is active (see _DUMMY_HASH).
+        verify_password(password, _DUMMY_HASH)
         return None
-    if not user.password_hash or not verify_password(password, user.password_hash):
+    if not user.password_hash:
+        # oidc users carry no local password; still pay the same comparison so
+        # this path is not distinguishable from a wrong password.
+        verify_password(password, _DUMMY_HASH)
+        return None
+    if not verify_password(password, user.password_hash):
         return None
     user.last_login_at = datetime.datetime.utcnow()
     db.commit()
@@ -179,8 +209,12 @@ def verify_token(token: str, db: Session) -> Optional[User]:
     """
     import jwt as pyjwt
     try:
-        payload = pyjwt.decode(token, JWT_SECRET, algorithms=[JWT_ALGORITHM])
-        user_id = int(payload.get("sub", ""))
+        payload = pyjwt.decode(token, JWT_SECRET, algorithms=[JWT_ALGORITHM],
+                               issuer="agentic-pmo")
+        sub = payload.get("sub")
+        if not isinstance(sub, str) or not sub.isdigit():
+            return None
+        user_id = int(sub)
     except Exception:
         return None
     user = db.query(User).filter(User.id == user_id).first()
@@ -192,6 +226,29 @@ def verify_token(token: str, db: Session) -> Optional[User]:
 
 
 # ── Auth scheme and dependencies ────────────────────────────────────────
+def client_ip(request: Request) -> Optional[str]:
+    """Best-effort caller IP for audit rows.
+
+    request.client.host is the direct peer. Behind the documented single
+    reverse proxy that peer is the proxy itself, so honour X-Forwarded-For —
+    but only when the direct peer is loopback or a private address, because any
+    caller can set the header otherwise and would be able to forge the "from
+    where" in the audit trail. The trusted-proxy assumption is: we are either
+    reached directly, or through a proxy on the same trusted network, and the
+    first hop of the header is the original client.
+    """
+    host = request.client.host if request.client else None
+    forwarded = request.headers.get("X-Forwarded-For")
+    if host and forwarded:
+        try:
+            addr = ipaddress.ip_address(host)
+        except ValueError:
+            addr = None
+        if addr is not None and (addr.is_loopback or addr.is_private):
+            return forwarded.split(",")[0].strip()
+    return host
+
+
 security = HTTPBearer(auto_error=False)
 
 
@@ -258,7 +315,7 @@ def require_role(*roles: str):
                     "path": request.url.path,
                     "required_roles": list(allowed),
                 },
-                ip=request.client.host if request.client else None,
+                ip=client_ip(request),
             )
             db.commit()
             raise HTTPException(

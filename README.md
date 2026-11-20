@@ -68,7 +68,46 @@ open http://localhost:8000
 
 ---
 
+## Roles and permissions
+
+Four cumulative roles. Every rule below is enforced by the server on every request; the interface only
+hides what a role cannot use.
+
+| Capability | viewer | contributor | pmo_lead | admin |
+|---|---|---|---|---|
+| Read projects, tasks, dashboard, packs, templates, Plane status | yes | yes | yes | yes |
+| Move a task between statuses, log actual hours | no | yes | yes | yes |
+| Create/edit projects and tasks, run agents, apply templates and packs, link and sync Plane | no | no | yes | yes |
+| Delete a project | no | no | no | yes |
+| Manage users and roles, read the audit trail | no | no | no | yes |
+
+Sign in with a username or an email. A password change, a role change or a deactivation invalidates that
+user's outstanding tokens immediately. Every refusal (401 or 403) is recorded in the audit log, and the
+audit log never stores a password, a hash or a token.
+
+---
+
 ## API Endpoints
+
+### Authentication
+
+| Method | Path | Description |
+|--------|------|-------------|
+| POST | `/api/auth/login` | Sign in with `identifier` (username or email) and `password` |
+| GET | `/api/auth/me` | Current user, role and permissions |
+| GET | `/api/auth/verify` | Token check |
+| POST | `/api/auth/password` | Change your own password (bumps the token version) |
+
+### Administration (admin role only)
+
+| Method | Path | Description |
+|--------|------|-------------|
+| GET/POST | `/api/admin/users` | List / create users |
+| PATCH/DELETE | `/api/admin/users/:id` | Change role or status / deactivate |
+| POST | `/api/admin/users/:id/password` | Reset a password |
+| GET | `/api/admin/audit` | Audit trail, newest first (`?limit=&actor=&action=`) |
+
+### Projects, tasks and agents
 
 | Method | Path | Description |
 |--------|------|-------------|
@@ -175,7 +214,11 @@ See `.env.example` for all options. Key variables:
 | `LLM_MODEL` | No | `gpt-4o` | Model name |
 | `LLM_BASE_URL` | No | — | Custom API endpoint |
 | `DATABASE_URL` | No | `sqlite:///./agentic_pmo.db` | Database connection |
-| `JWT_SECRET` | No | auto-generated | Secret for auth tokens (Phase 2) |
+| `ADMIN_USERNAME` | No | `admin` | Bootstrap admin, created on first start against an empty users table |
+| `ADMIN_PASSWORD` | **Yes** | — | Bootstrap admin password; startup refuses the default |
+| `JWT_SECRET` | **Yes** | — | 32+ byte secret for session tokens (`openssl rand -hex 32`) |
+| `JWT_EXPIRY_HOURS` | No | `8` | Session lifetime |
+| `PLANE_WEBHOOK_SECRET` | No | — | HMAC secret for inbound Plane deliveries |
 
 **Without an LLM key**, the Plan Agent falls back to a template plan so
 you can still use the PMO as a task manager. Add a key when you want

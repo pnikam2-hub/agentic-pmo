@@ -8,13 +8,19 @@ const VIEW_PERMISSIONS = {
 const App = {
   dragData: null,
 
-  init() {
+  async init() {
     window.addEventListener('hashchange', () => this.route());
     // Show login if no token, otherwise route normally
     if (!isLoggedIn() && window.location.hash !== '#login') {
       window.location.hash = 'login';
     }
     this._watchRoleVisibility();
+    // Refresh the cached role and name from /me before the first route
+    // renders, so a role changed behind a live session is reflected
+    // immediately rather than after the first 403.
+    if (isLoggedIn()) {
+      await refreshSession();
+    }
     applyRoleVisibility();
     applySessionIdentity();
     this.route();

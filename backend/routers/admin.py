@@ -6,7 +6,7 @@ from pydantic import BaseModel, Field
 from sqlalchemy.orm import Session
 
 from backend.audit import audit
-from backend.auth import admin_only, hash_password, validate_role
+from backend.auth import admin_only, hash_password, validate_password, validate_role
 from backend.database import get_db
 from backend.models import AuditLog, User
 
@@ -36,7 +36,7 @@ class UserOut(BaseModel):
 
 class UserCreate(BaseModel):
     username: str = Field(..., min_length=1, max_length=100)
-    email: str = Field(..., max_length=255)
+    email: str = Field(..., min_length=3, max_length=255)
     display_name: str = ""
     role: str = "viewer"
     password: str
@@ -96,11 +96,15 @@ def create_user(
         validate_role(body.role)
     except ValueError as exc:
         raise HTTPException(422, str(exc))
-    if len(body.password) < 12:
-        raise HTTPException(422, "Password must be at least 12 characters")
+    try:
+        validate_password(body.password)
+    except ValueError as exc:
+        raise HTTPException(422, str(exc))
 
     username = body.username.lower()
-    email = body.email.lower()
+    email = body.email.strip().lower()
+    if not email:
+        raise HTTPException(422, "Email must not be empty")
     if db.query(User).filter(User.username == username).first():
         raise HTTPException(409, f"Username '{username}' already exists")
     if db.query(User).filter(User.email == email).first():
@@ -140,8 +144,8 @@ def update_user(
 
     demoting = body.role is not None and body.role != "admin"
     deactivating = body.is_active is False
-    if (target.role == "admin" and target.is_active == 1 and (demoting or deactivating)
-            and _other_active_admins(db, target) == 0):
+    removing_admin = target.role == "admin" and target.is_active == 1 and (demoting or deactivating)
+    if removing_admin and _other_active_admins(db, target) == 0:
         raise HTTPException(400, LAST_ADMIN_MESSAGE)
 
     changes = {}
@@ -163,6 +167,22 @@ def update_user(
     if "role" in changes or changes.get("is_active", {}).get("to") is False:
         target.token_version += 1
 
+    if removing_admin:
+        # The pre-check above can read a stale count: two concurrent requests
+        # may each see the other admin before either commits. Re-verify the
+        # invariant here, after the mutation and before commit, so a stale read
+        # cannot remove the final admin. Correctness relies on SQLite's
+        # serialised writer — the second writer blocks until the first commits,
+        # so this post-write count sees the committed state. A move to Postgres
+        # needs `SELECT … FOR UPDATE` on the admin rows instead, since its
+        # writers do not serialise reads the same way.
+        remaining_admins = db.query(User).filter(
+            User.role == "admin", User.is_active == 1, User.id != target.id
+        ).count()
+        if remaining_admins == 0:
+            db.rollback()
+            raise HTTPException(400, LAST_ADMIN_MESSAGE)
+
     action = "user_deactivated" if changes.get("is_active", {}).get("to") is False else "user_updated"
     audit(db, actor=actor.username, actor_role=actor.role, action=action,
           target_type="user", target_id=target.id, detail={"changes": changes})
@@ -181,8 +201,10 @@ def reset_password(
     """Admin reset — no old password needed. The new value is never logged or
     audited; only the fact that a reset happened."""
     target = _get_user(db, user_id)
-    if len(body.new_password) < 12:
-        raise HTTPException(422, "Password must be at least 12 characters")
+    try:
+        validate_password(body.new_password)
+    except ValueError as exc:
+        raise HTTPException(422, str(exc))
     target.password_hash = hash_password(body.new_password)
     target.token_version += 1   # the user's old tokens die with their old password
     audit(db, actor=actor.username, actor_role=actor.role, action="user_password_reset",
@@ -202,10 +224,21 @@ def delete_user(
     target = _get_user(db, user_id)
     if target.is_active != 1:
         return {"ok": True}   # already inactive; deleting twice changes nothing
-    if target.role == "admin" and _other_active_admins(db, target) == 0:
+    removing_admin = target.role == "admin"
+    if removing_admin and _other_active_admins(db, target) == 0:
         raise HTTPException(400, LAST_ADMIN_MESSAGE)
     target.is_active = 0
     target.token_version += 1
+    if removing_admin:
+        # Same stale-read re-check as update_user: re-count after the mutation
+        # and before commit, so a concurrent request that passed the pre-check
+        # against a stale count cannot leave the tenant with no admin.
+        remaining_admins = db.query(User).filter(
+            User.role == "admin", User.is_active == 1, User.id != target.id
+        ).count()
+        if remaining_admins == 0:
+            db.rollback()
+            raise HTTPException(400, LAST_ADMIN_MESSAGE)
     audit(db, actor=actor.username, actor_role=actor.role, action="user_deactivated",
           target_type="user", target_id=target.id, detail={"username": target.username})
     db.commit()

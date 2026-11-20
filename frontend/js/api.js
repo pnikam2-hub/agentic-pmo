@@ -27,6 +27,23 @@ function clearSession() {
   localStorage.removeItem(NAME_KEY);
 }
 
+// Re-read role and display name from /me and rewrite the cached copies, so the
+// SPA never keeps showing buttons for a role the user no longer holds. Called
+// once on boot and again after any 403; returns false when the token is gone
+// or the call fails, leaving the existing cache untouched.
+async function refreshSession() {
+  const token = getToken();
+  if (!token) return false;
+  try {
+    const me = await api.me();
+    localStorage.setItem(ROLE_KEY, me.role || '');
+    localStorage.setItem(NAME_KEY, me.display_name || '');
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+
 // What each role may do, for presentation only. The server's copy in
 // backend/routers/auth.py (PERMISSIONS) is the authority and enforces every
 // rule at the router boundary; this table exists solely so the SPA does not
@@ -95,6 +112,14 @@ async function apiRequest(method, path, body = null) {
     clearSession();
     window.location.hash = 'login';
     throw new Error('Session expired. Please login again.');
+  }
+
+  if (res.status === 403 && path !== '/auth/me') {
+    // A role may have changed behind this session (an admin demoted the user);
+    // refresh the cached role from /me once so the UI stops offering actions
+    // the server now refuses, then still surface the 403 to the caller.
+    await refreshSession();
+    if (typeof applyRoleVisibility === 'function') applyRoleVisibility();
   }
 
   if (!res.ok) {

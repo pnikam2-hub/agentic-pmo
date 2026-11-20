@@ -20,6 +20,7 @@ ACTIONS = (
     "user_password_reset",   # admin reset, no old password needed
     "user_deactivated",
     "project_created",
+    "project_updated",
     "project_deleted",
     "task_deleted",
     "agent_run",

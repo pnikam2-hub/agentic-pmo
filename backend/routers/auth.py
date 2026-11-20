@@ -1,5 +1,6 @@
 """Auth router — login, token verification, own-account endpoints."""
 import datetime
+from hashlib import sha256
 from typing import Optional
 from fastapi import APIRouter, Depends, HTTPException, Request
 from pydantic import BaseModel
@@ -7,8 +8,8 @@ from sqlalchemy.orm import Session
 
 from backend.audit import audit
 from backend.auth import (
-    JWT_EXPIRY_HOURS, authenticate, create_token, current_user,
-    hash_password, require_auth, verify_password,
+    JWT_EXPIRY_HOURS, authenticate, client_ip, create_token, current_user,
+    hash_password, require_auth, validate_password, verify_password,
 )
 from backend.database import get_db
 from backend.models import User
@@ -74,14 +75,20 @@ def login_endpoint(request: Request, body: LoginRequest, db: Session = Depends(g
         raise HTTPException(422, "Provide 'identifier' (username or email) or 'username'")
     user = authenticate(identifier, body.password, db)
     if user is None:
-        # The identifier is not a secret; recording it is what makes a
-        # brute-force attempt visible in the audit trail.
+        # Never record the raw typed identifier: a password pasted into the
+        # username box must not end up plaintext in the audit trail. A salted
+        # digest still lets a defender correlate repeated attempts, and the
+        # length survives, without storing a possible secret.
         audit(db, actor="anonymous", action="login_failed",
-              detail={"identifier": identifier})
+              detail={
+                  "identifier_sha256": sha256(identifier.lower().encode("utf-8")).hexdigest()[:16],
+                  "identifier_len": len(identifier),
+              },
+              ip=client_ip(request))
         db.commit()
         raise HTTPException(401, "Invalid username or password")
     audit(db, actor=user.username, actor_role=user.role, action="login_success",
-          detail={"identifier": identifier})
+          detail={"identifier": identifier}, ip=client_ip(request))
     db.commit()
     return LoginResponse(
         token=create_token(user),
@@ -122,8 +129,10 @@ def change_password(
     every live token — including this one — dies with the old password."""
     if not user.password_hash or not verify_password(body.old_password, user.password_hash):
         raise HTTPException(401, "Current password is incorrect")
-    if len(body.new_password) < 12:
-        raise HTTPException(422, "New password must be at least 12 characters")
+    try:
+        validate_password(body.new_password)
+    except ValueError as exc:
+        raise HTTPException(422, str(exc))
     user.password_hash = hash_password(body.new_password)
     user.token_version += 1
     # Neither password may appear in the audit detail.

@@ -13,16 +13,19 @@ the stand-ins (and restores them afterwards) rather than overriding anything.
 """
 import json
 
+import jwt as pyjwt
 import pytest
 from fastapi.testclient import TestClient
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.pool import StaticPool
 
+from backend import auth as auth_module
 from backend.auth import bootstrap_admin, current_user, require_auth
 from backend.database import Base, get_db
 from backend.main import app
 from backend.models import User
+from backend.routers import admin as admin_router
 from backend.tests.test_plane_webhook import post as webhook_post
 
 ENGINE = create_engine(
@@ -327,3 +330,226 @@ def test_plane_webhook_accepts_signed_delivery_without_jwt(monkeypatch):
 
     assert_status(webhook_post(client, payload), 200)
     assert_status(webhook_post(client, payload, signature="deadbeef"), 401)
+
+
+# ── F1 — login timing normalisation ────────────────────────────────────────
+def test_authenticate_runs_dummy_comparison(monkeypatch):
+    """authenticate() runs one bcrypt comparison even for a missing or inactive
+    identifier, so the response time does not reveal whether the account
+    exists. Deterministic: counts the verify_password calls, not the clock."""
+    calls = []
+    real_verify = auth_module.verify_password
+
+    def spy(password, hashed):
+        calls.append(hashed)
+        return real_verify(password, hashed)
+
+    monkeypatch.setattr(auth_module, "verify_password", spy)
+
+    with SessionLocal() as s:
+        bootstrap_admin(s)
+
+    with SessionLocal() as s:
+        assert auth_module.authenticate("no-such-user", "x", s) is None
+    assert len(calls) == 1
+
+    with SessionLocal() as s:
+        s.add(User(username="ghost", display_name="Ghost", role="viewer",
+                   password_hash=auth_module.hash_password("ghost-password"),
+                   is_active=0, source="local"))
+        s.commit()
+
+    with SessionLocal() as s:
+        assert auth_module.authenticate("ghost", "ghost-password", s) is None
+    assert len(calls) == 2
+
+
+# ── F2 — last-admin guard survives a stale read ─────────────────────────────
+def _stale_admins(monkeypatch):
+    """Simulate the TOCTOU: the pre-check count is stale and always returns 1,
+    so only the post-write re-check can stop the demotion/deactivation."""
+    monkeypatch.setattr(admin_router, "_other_active_admins", lambda db, user: 1)
+
+
+def test_stale_read_cannot_demote_last_admin(roles, monkeypatch):
+    _stale_admins(monkeypatch)
+    admin_id = roles["admin"]["id"]
+    admin_headers = roles["admin"]["headers"]
+
+    assert_status(client.patch(f"/api/admin/users/{admin_id}", json={"role": "viewer"},
+                               headers=admin_headers), 400)
+    with SessionLocal() as s:
+        admin = s.query(User).filter(User.id == admin_id).one()
+        assert admin.role == "admin"
+        assert admin.is_active == 1
+
+
+def test_stale_read_cannot_deactivate_last_admin(roles, monkeypatch):
+    _stale_admins(monkeypatch)
+    admin_id = roles["admin"]["id"]
+    admin_headers = roles["admin"]["headers"]
+
+    assert_status(client.patch(f"/api/admin/users/{admin_id}", json={"is_active": False},
+                               headers=admin_headers), 400)
+    with SessionLocal() as s:
+        admin = s.query(User).filter(User.id == admin_id).one()
+        assert admin.role == "admin"
+        assert admin.is_active == 1
+
+
+def test_stale_read_cannot_soft_delete_last_admin(roles, monkeypatch):
+    _stale_admins(monkeypatch)
+    admin_id = roles["admin"]["id"]
+    admin_headers = roles["admin"]["headers"]
+
+    assert_status(client.delete(f"/api/admin/users/{admin_id}", headers=admin_headers), 400)
+    with SessionLocal() as s:
+        admin = s.query(User).filter(User.id == admin_id).one()
+        assert admin.role == "admin"
+        assert admin.is_active == 1
+
+
+# ── F3 — contributor modal payload ──────────────────────────────────────────
+def test_contributor_modal_payload_saves_without_assignee(roles):
+    """The SPA now sends only changed fields, so a contributor's save carries
+    status and actual_hours and no assignee; the old over-sending payload
+    (assignee included) is still refused, keeping the contract explicit."""
+    project = client.post("/api/projects", json={"name": "Modal"},
+                          headers=roles["pmo_lead"]["headers"])
+    assert_status(project, 200)
+    pid = project.json()["id"]
+    task = client.post(f"/api/projects/{pid}/tasks", json={"title": "Hours"},
+                       headers=roles["pmo_lead"]["headers"])
+    assert_status(task, 200)
+    tid = task.json()["id"]
+
+    # The exact payload the modal now sends for a contributor.
+    assert_status(client.patch(f"/api/projects/{pid}/tasks/{tid}",
+                               json={"status": "in_progress", "actual_hours": 2.5},
+                               headers=roles["contributor"]["headers"]), 200)
+    after = client.get(f"/api/projects/{pid}/tasks/{tid}",
+                       headers=roles["viewer"]["headers"]).json()
+    assert after["status"] == "in_progress"
+    assert after["actual_hours"] == 2.5
+
+    # The old payload that always included assignee is still refused.
+    assert_status(client.patch(f"/api/projects/{pid}/tasks/{tid}",
+                               json={"status": "done", "actual_hours": 3.0,
+                                     "assignee": "bob"},
+                               headers=roles["contributor"]["headers"]), 403)
+
+
+# ── F4 — field refusal leaves an access_denied trace ────────────────────────
+def test_field_refusal_writes_access_denied(roles):
+    """A contributor's field refusal is a manual 403, not a guard 403, so it
+    must still write the same access_denied row naming the refused fields."""
+    project = client.post("/api/projects", json={"name": "Refusal"},
+                          headers=roles["pmo_lead"]["headers"])
+    assert_status(project, 200)
+    pid = project.json()["id"]
+    task = client.post(f"/api/projects/{pid}/tasks", json={"title": "T"},
+                       headers=roles["pmo_lead"]["headers"])
+    assert_status(task, 200)
+    tid = task.json()["id"]
+
+    before = sum(1 for r in client.get("/api/admin/audit?limit=500",
+                                       headers=roles["admin"]["headers"]).json()
+                 if r["action"] == "access_denied")
+
+    assert_status(client.patch(f"/api/projects/{pid}/tasks/{tid}",
+                               json={"title": "renamed"},
+                               headers=roles["contributor"]["headers"]), 403)
+
+    rows = client.get("/api/admin/audit?limit=500", headers=roles["admin"]["headers"]).json()
+    denied = [r for r in rows if r["action"] == "access_denied"]
+    assert len(denied) == before + 1
+    assert denied[0]["detail"]["refused_fields"] == ["title"]
+    assert denied[0]["detail"]["required_roles"] == ["pmo_lead", "admin"]
+
+
+# ── F6 — long passwords are a 422, not a 500 ────────────────────────────────
+def test_long_password_is_422_not_500(roles):
+    """A password over bcrypt's 72-byte ceiling is a 422 on create and reset,
+    not an unhandled 500, and no user is created."""
+    admin_headers = roles["admin"]["headers"]
+    long_password = "x" * 80
+
+    assert_status(client.post("/api/admin/users", json={
+        "username": "longpass", "email": "longpass@example.com",
+        "role": "viewer", "password": long_password,
+    }, headers=admin_headers), 422)
+    with SessionLocal() as s:
+        assert s.query(User).filter(User.username == "longpass").count() == 0
+
+    assert_status(client.post(f"/api/admin/users/{roles['viewer']['id']}/password",
+                              json={"new_password": long_password},
+                              headers=admin_headers), 422)
+
+
+# ── F7 — login rows record an IP ────────────────────────────────────────────
+def test_login_failed_row_records_ip(roles):
+    assert_status(login("nobody", "whatever"), 401)
+    rows = client.get("/api/admin/audit?limit=500&action=login_failed",
+                      headers=roles["admin"]["headers"]).json()
+    assert rows
+    assert rows[0]["ip"] is not None
+
+
+# ── F8 — token issuer and subject are validated ─────────────────────────────
+def test_token_issuer_and_subject_are_validated(roles):
+    """A token signed with the same secret but a different issuer is refused,
+    and a non-numeric subject is refused too."""
+    with SessionLocal() as s:
+        viewer = s.query(User).filter(User.username == "viewer").one()
+        viewer_id = viewer.id
+        version = viewer.token_version
+
+    wrong_iss = pyjwt.encode(
+        {"sub": str(viewer_id), "ver": version, "iss": "other-issuer"},
+        auth_module.JWT_SECRET, algorithm=auth_module.JWT_ALGORITHM,
+    )
+    assert_status(client.get("/api/projects", headers=auth(wrong_iss)), 401)
+
+    bad_sub = pyjwt.encode(
+        {"sub": "not-a-number", "ver": version, "iss": "agentic-pmo"},
+        auth_module.JWT_SECRET, algorithm=auth_module.JWT_ALGORITHM,
+    )
+    assert_status(client.get("/api/projects", headers=auth(bad_sub)), 401)
+
+
+# ── F9 — empty and whitespace emails are rejected ───────────────────────────
+def test_empty_email_is_rejected(roles):
+    admin_headers = roles["admin"]["headers"]
+    assert_status(client.post("/api/admin/users", json={
+        "username": "emptyemail", "email": "", "role": "viewer",
+        "password": "long-enough-password",
+    }, headers=admin_headers), 422)
+    assert_status(client.post("/api/admin/users", json={
+        "username": "spaceemail", "email": "   ", "role": "viewer",
+        "password": "long-enough-password",
+    }, headers=admin_headers), 422)
+    with SessionLocal() as s:
+        assert s.query(User).filter(User.username.in_(["emptyemail", "spaceemail"])).count() == 0
+
+
+# ── project update is audited ───────────────────────────────────────────────
+def test_project_update_is_audited(roles):
+    """A project PATCH writes a project_updated row naming the fields changed,
+    never their values (a goal or brief can be long prose)."""
+    project = client.post("/api/projects", json={"name": "Audit Me", "goal": "before"},
+                          headers=roles["pmo_lead"]["headers"])
+    assert_status(project, 200)
+    pid = project.json()["id"]
+
+    assert_status(client.patch(f"/api/projects/{pid}",
+                               json={"goal": "a much longer goal value",
+                                     "priority": "critical"},
+                               headers=roles["pmo_lead"]["headers"]), 200)
+
+    rows = client.get("/api/admin/audit?limit=500", headers=roles["admin"]["headers"]).json()
+    updated = [r for r in rows if r["action"] == "project_updated"]
+    assert updated
+    assert updated[0]["detail"]["fields"] == ["goal", "priority"]
+    detail = json.dumps(updated[0]["detail"])
+    assert "a much longer goal value" not in detail
+    assert "critical" not in detail

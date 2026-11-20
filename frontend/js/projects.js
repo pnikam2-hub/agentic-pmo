@@ -353,6 +353,10 @@ const ProjectsView = {
     const tasks = await api.listTasks(projectId);
     const task = tasks.find(t => t.id === taskId);
     if (!task) return;
+    // Keep the loaded task so _saveTask can send only the fields that changed.
+    // A contributor may only send status and actual_hours, so sending the
+    // assignee untouched would always trip the server's field rule.
+    this._editingTask = task;
 
     openModal(`Edit: ${esc(task.title)}`, `
       <div class="form-group">
@@ -365,10 +369,12 @@ const ProjectsView = {
           <option value="blocked" ${task.status === 'blocked' ? 'selected' : ''}>Blocked</option>
         </select>
       </div>
-      <div class="form-group">
-        <label class="form-label">Assignee</label>
-        <input class="form-input" id="modal-task-assignee" value="${esc(task.assignee)}" placeholder="Person or AI agent" />
-      </div>
+      ${can('manage_projects') ? `
+        <div class="form-group">
+          <label class="form-label">Assignee</label>
+          <input class="form-input" id="modal-task-assignee" value="${esc(task.assignee)}" placeholder="Person or AI agent" />
+        </div>
+      ` : ''}
       <div class="form-group">
         <label class="form-label">Actual Hours</label>
         <input class="form-input" id="modal-task-hours" type="number" step="0.5" value="${task.actual_hours || ''}" placeholder="${task.estimated_hours}h estimated" />
@@ -379,11 +385,20 @@ const ProjectsView = {
   },
 
   async _saveTask(projectId, taskId) {
-    const data = {
-      status: document.getElementById('modal-task-status').value,
-      assignee: document.getElementById('modal-task-assignee').value.trim(),
-      actual_hours: parseFloat(document.getElementById('modal-task-hours').value) || 0,
-    };
+    const task = this._editingTask || {};
+    const status = document.getElementById('modal-task-status').value;
+    const hours = parseFloat(document.getElementById('modal-task-hours').value) || 0;
+    // Send only fields that differ from the loaded task. A contributor's save
+    // therefore omits assignee entirely (unless they may change it), and a
+    // no-op save sends an empty body rather than re-asserting every field.
+    const data = {};
+    if (status !== (task.status || '')) data.status = status;
+    if (hours !== (task.actual_hours || 0)) data.actual_hours = hours;
+    const assigneeEl = document.getElementById('modal-task-assignee');
+    if (assigneeEl) {
+      const assignee = assigneeEl.value.trim();
+      if (assignee !== (task.assignee || '')) data.assignee = assignee;
+    }
     try {
       await api.updateTask(projectId, taskId, data);
       closeModal();
