@@ -6,7 +6,9 @@ from pydantic import BaseModel, Field
 from sqlalchemy.orm import Session
 
 from backend.audit import audit
-from backend.auth import admin_only, hash_password, validate_password, validate_role
+from backend.auth import (
+    admin_only, hash_password, other_active_admins, validate_password, validate_role,
+)
 from backend.database import get_db
 from backend.models import AuditLog, User
 
@@ -74,9 +76,13 @@ def _get_user(db: Session, user_id: int) -> User:
 
 
 def _other_active_admins(db: Session, user: User) -> int:
-    return db.query(User).filter(
-        User.role == "admin", User.is_active == 1, User.id != user.id
-    ).count()
+    """Thin wrapper over backend.auth.other_active_admins.
+
+    The real definition lives in backend.auth so the admin router and the SSO
+    callback share one notion of "last admin"; this wrapper exists so the
+    stale-read simulation in test_rbac.py can monkeypatch only the pre-check.
+    """
+    return other_active_admins(db, user)
 
 
 @router.get("/users", response_model=list[UserOut])
@@ -176,9 +182,7 @@ def update_user(
         # so this post-write count sees the committed state. A move to Postgres
         # needs `SELECT … FOR UPDATE` on the admin rows instead, since its
         # writers do not serialise reads the same way.
-        remaining_admins = db.query(User).filter(
-            User.role == "admin", User.is_active == 1, User.id != target.id
-        ).count()
+        remaining_admins = other_active_admins(db, target)
         if remaining_admins == 0:
             db.rollback()
             raise HTTPException(400, LAST_ADMIN_MESSAGE)
@@ -233,9 +237,7 @@ def delete_user(
         # Same stale-read re-check as update_user: re-count after the mutation
         # and before commit, so a concurrent request that passed the pre-check
         # against a stale count cannot leave the tenant with no admin.
-        remaining_admins = db.query(User).filter(
-            User.role == "admin", User.is_active == 1, User.id != target.id
-        ).count()
+        remaining_admins = other_active_admins(db, target)
         if remaining_admins == 0:
             db.rollback()
             raise HTTPException(400, LAST_ADMIN_MESSAGE)

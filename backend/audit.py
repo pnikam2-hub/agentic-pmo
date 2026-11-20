@@ -27,6 +27,11 @@ ACTIONS = (
     "plane_push",
     "plane_sync",
     "plane_linked",
+    "sso_login",
+    "sso_login_failed",
+    "sso_user_provisioned",
+    "sso_user_linked",
+    "sso_role_updated",
 )
 
 

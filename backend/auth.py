@@ -132,6 +132,18 @@ def bootstrap_admin(db: Session) -> Optional[User]:
     return admin
 
 
+def other_active_admins(db: Session, user: User) -> int:
+    """Count active admins other than ``user``.
+
+    The single definition of "is this the last active admin", shared by the
+    admin router and the SSO callback so the two paths can never drift apart on
+    the invariant that a deployment always keeps at least one administrator.
+    """
+    return db.query(User).filter(
+        User.role == "admin", User.is_active == 1, User.id != user.id
+    ).count()
+
+
 def _find_user(identifier: str, db: Session) -> Optional[User]:
     """Look up by lower-cased username first, then lower-cased email."""
     identifier = identifier.lower()
