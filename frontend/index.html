@@ -35,13 +35,19 @@
         <a class="nav-item" data-view="agents" href="#agents">
           <span class="nav-icon">🤖</span> Agent Log
         </a>
+        <a class="nav-item" data-view="admin" data-requires="manage_users" href="#admin">
+          <span class="nav-icon">◇</span> Users & Audit
+        </a>
       </nav>
       <div class="sidebar-footer">
         <div class="sidebar-status" id="sidebar-status">
           <span class="status-dot"></span> API connected
         </div>
-        <div style="display:flex;justify-content:space-between;align-items:center">
-          <div class="sidebar-hint">Powered by AI agents</div>
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:8px">
+          <div class="sidebar-hint" id="sidebar-user">
+            <div id="sidebar-display-name"></div>
+            <div id="sidebar-role" class="sidebar-role"></div>
+          </div>
           <button class="btn btn-ghost btn-sm" onclick="App.logout()" style="font-size:11px;color:var(--text-muted)">Logout</button>
         </div>
       </div>
@@ -73,6 +79,7 @@
   <script src="/js/packs.js"></script>
   <script src="/js/kanban.js"></script>
   <script src="/js/agents.js"></script>
+  <script src="/js/admin.js"></script>
   <script src="/js/app.js"></script>
 </body>
 </html>

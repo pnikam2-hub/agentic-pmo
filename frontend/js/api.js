@@ -1,9 +1,51 @@
 /* Agentic PMO — API Client with JWT auth */
 const API_BASE = '/api';
 
-function getToken() { return localStorage.getItem('agentic_pmo_token'); }
-function setToken(t) { localStorage.setItem('agentic_pmo_token', t); }
-function clearToken() { localStorage.removeItem('agentic_pmo_token'); }
+// Session keys. The token alone was the pre-RBAC session; role and name ride
+// alongside it so the SPA can render (and hide) controls without a second call.
+const TOKEN_KEY = 'agentic_pmo_token';
+const ROLE_KEY = 'agentic_pmo_role';
+const NAME_KEY = 'agentic_pmo_name';
+
+function getToken() { return localStorage.getItem(TOKEN_KEY); }
+function setToken(t) { localStorage.setItem(TOKEN_KEY, t); }
+function clearToken() { localStorage.removeItem(TOKEN_KEY); }
+
+// The full session, written once on login. Role and display name are
+// presentation aids only — the server is the authority and re-validates every
+// token on every request.
+function setSession({ token, role, display_name }) {
+  setToken(token);
+  localStorage.setItem(ROLE_KEY, role || '');
+  localStorage.setItem(NAME_KEY, display_name || '');
+}
+function getRole() { return localStorage.getItem(ROLE_KEY) || ''; }
+function getDisplayName() { return localStorage.getItem(NAME_KEY) || ''; }
+function clearSession() {
+  localStorage.removeItem(TOKEN_KEY);
+  localStorage.removeItem(ROLE_KEY);
+  localStorage.removeItem(NAME_KEY);
+}
+
+// What each role may do, for presentation only. The server's copy in
+// backend/routers/auth.py (PERMISSIONS) is the authority and enforces every
+// rule at the router boundary; this table exists solely so the SPA does not
+// render buttons that would only ever produce a 403.
+const ROLE_PERMISSIONS = {
+  viewer:      ['read'],
+  contributor: ['read', 'update_tasks'],
+  pmo_lead:    ['read', 'update_tasks', 'manage_projects', 'run_agents', 'manage_plane', 'apply_packs'],
+  admin:       ['read', 'update_tasks', 'manage_projects', 'run_agents', 'manage_plane', 'apply_packs',
+                'manage_users'],
+};
+
+// Presentation-only permission check. Hiding a button is convenience, never
+// security — the server refuses the underlying call regardless of what the UI
+// shows, so this can never decide anything.
+function can(permission) {
+  const role = getRole();
+  return !!role && (ROLE_PERMISSIONS[role] || []).includes(permission);
+}
 
 // A stored token is only a session if it has not expired. Without this check the
 // SPA renders the dashboard shell for any leftover string and only bounces to the
@@ -24,7 +66,13 @@ function tokenIsExpired(token) {
 function isLoggedIn() {
   const t = getToken();
   if (!t || tokenIsExpired(t)) {
-    if (t) clearToken();
+    if (t) clearSession();
+    return false;
+  }
+  // A token without a role is a session from before roles existed. Rendering a
+  // UI from it would lie about what the user may do, so force a fresh login.
+  if (!getRole()) {
+    clearSession();
     return false;
   }
   return true;
@@ -43,8 +91,8 @@ async function apiRequest(method, path, body = null) {
   const res = await fetch(`${API_BASE}${path}`, opts);
 
   if (res.status === 401 && path !== '/auth/login') {
-    // Session expired — redirect to login
-    clearToken();
+    // Session expired or revoked — redirect to login
+    clearSession();
     window.location.hash = 'login';
     throw new Error('Session expired. Please login again.');
   }
@@ -129,4 +177,28 @@ const api = {
   applyPack(id, payload) { return apiRequest('POST', `/packs/${id}/apply`, payload); },
   getProjectPack(pid) { return apiRequest('GET', `/projects/${pid}/pack`); },
   detachPack(pid) { return apiRequest('DELETE', `/projects/${pid}/pack`); },
+
+  // Identity
+  me() { return apiRequest('GET', '/auth/me'); },
+  changeOwnPassword(oldPassword, newPassword) {
+    return apiRequest('POST', '/auth/password', { old_password: oldPassword, new_password: newPassword });
+  },
+
+  // Admin — user management and the audit trail. The admin router is admin-only
+  // on the server; the SPA merely hides these for everyone else.
+  listUsers() { return apiRequest('GET', '/admin/users'); },
+  createUser(d) { return apiRequest('POST', '/admin/users', d); },
+  updateUser(id, d) { return apiRequest('PATCH', `/admin/users/${id}`, d); },
+  resetUserPassword(id, password) {
+    return apiRequest('POST', `/admin/users/${id}/password`, { new_password: password });
+  },
+  deactivateUser(id) { return apiRequest('DELETE', `/admin/users/${id}`); },
+  listAudit({ limit, actor, action } = {}) {
+    const params = new URLSearchParams();
+    if (limit) params.set('limit', String(limit));
+    if (actor) params.set('actor', actor);
+    if (action) params.set('action', action);
+    const qs = params.toString();
+    return apiRequest('GET', `/admin/audit${qs ? `?${qs}` : ''}`);
+  },
 };

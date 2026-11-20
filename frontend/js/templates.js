@@ -48,7 +48,7 @@ const TemplatesView = {
         </div>
         ${x.tags?.length ? `<div style="display:flex;flex-wrap:wrap;gap:6px">${x.tags.map(tag => `<span class="tag">${esc(tag)}</span>`).join('')}</div>` : ''}
         <div style="display:flex;gap:8px;margin-top:auto;padding-top:8px">
-          <button class="btn btn-primary btn-sm" onclick="TemplatesView.use('${esc(x.id)}')">Create project</button>
+          <button class="btn btn-primary btn-sm" data-requires="manage_projects" onclick="TemplatesView.use('${esc(x.id)}')">Create project</button>
           <button class="btn btn-secondary btn-sm" onclick="TemplatesView.preview('${esc(x.id)}')">Preview</button>
         </div>
       </div>
@@ -73,7 +73,7 @@ const TemplatesView = {
           </div>
         `).join('')}
         <div style="display:flex;gap:8px;margin-top:16px">
-          <button class="btn btn-primary" onclick="closeModal(); TemplatesView.use('${esc(t.id)}')">Create project from this template</button>
+          <button class="btn btn-primary" data-requires="manage_projects" onclick="closeModal(); TemplatesView.use('${esc(t.id)}')">Create project from this template</button>
           <button class="btn btn-secondary" onclick="closeModal()">Close</button>
         </div>
       `);

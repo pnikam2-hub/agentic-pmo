@@ -148,6 +148,13 @@ body {
   color: var(--text-muted);
 }
 
+.sidebar-role {
+  font-size: 10px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
 /* Main Content Area */
 #main-content {
   flex: 1;
@@ -426,6 +433,14 @@ body {
 .kanban-card:hover {
   border-color: var(--accent);
   transform: translateY(-1px);
+}
+
+/* A card the caller may not drag (status writes need update_tasks) reads as
+   static: no grab cursor, no lift on hover. */
+.kanban-card-static { cursor: default; }
+.kanban-card-static:hover {
+  border-color: var(--border);
+  transform: none;
 }
 
 .kanban-card-title {
@@ -796,4 +811,39 @@ body {
 .btn-group {
   display: flex;
   gap: 6px;
+}
+
+/* Admin tables (users, audit) — no dedicated table style existed, so one is
+   added here reusing the existing tokens rather than inventing new colours. */
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.admin-table th {
+  text-align: left;
+  padding: 10px 14px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+
+.admin-table td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-secondary);
+  vertical-align: middle;
+}
+
+.admin-table tbody tr:last-child td { border-bottom: none; }
+.admin-table tbody tr:hover { background: var(--bg-hover); }
+
+.admin-role-select {
+  width: auto;
+  padding: 5px 8px;
+  font-size: 12px;
 }

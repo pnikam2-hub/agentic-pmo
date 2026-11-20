@@ -1,4 +1,10 @@
 /* Agentic PMO — Main App: router, navigation, modal, toast, login */
+// Views that require a permission beyond the read-all baseline. Only the admin
+// screen is role-gated today; every other view is readable by all four roles.
+const VIEW_PERMISSIONS = {
+  admin: 'manage_users',
+};
+
 const App = {
   dragData: null,
 
@@ -8,8 +14,26 @@ const App = {
     if (!isLoggedIn() && window.location.hash !== '#login') {
       window.location.hash = 'login';
     }
+    this._watchRoleVisibility();
+    applyRoleVisibility();
+    applySessionIdentity();
     this.route();
     this._checkHealth();
+  },
+
+  // Views render asynchronously (each render() awaits the API), so a one-shot
+  // applyRoleVisibility() after route() would run before the gated buttons
+  // exist. Watch for DOM changes and re-apply the rule whenever content lands.
+  _watchRoleVisibility() {
+    let frame = null;
+    const observer = new MutationObserver(() => {
+      if (frame) return;
+      frame = requestAnimationFrame(() => {
+        frame = null;
+        applyRoleVisibility();
+      });
+    });
+    observer.observe(document.body, { childList: true, subtree: true });
   },
 
   async _checkHealth() {
@@ -47,6 +71,16 @@ const App = {
     document.getElementById('sidebar').style.display = 'flex';
     this._activateNav(view);
 
+    // Refuse to render a view the caller lacks permission for — redirect to the
+    // dashboard with a toast rather than painting a locked page. This mirrors
+    // the server's refusal but is only a convenience; the server still decides.
+    const required = VIEW_PERMISSIONS[view];
+    if (required && !can(required)) {
+      showToast('You do not have permission to view that page.', 'error');
+      window.location.hash = 'dashboard';
+      return;
+    }
+
     switch (view) {
       case 'dashboard': DashboardView.render(); break;
       case 'projects': ProjectsView.render(parts[1] ? params : {}); break;
@@ -54,8 +88,11 @@ const App = {
       case 'packs': PacksView.render(); break;
       case 'project-detail': ProjectsView.render({ id: parseInt(parts[1]) }); break;
       case 'agents': AgentsView.render(); break;
+      case 'admin': AdminView.render(); break;
       default: DashboardView.render();
     }
+
+    applyRoleVisibility();
   },
 
   navigate(view, params = {}) {
@@ -116,7 +153,9 @@ const App = {
 
     try {
       const data = await loginRequest(username, password);
-      setToken(data.token);
+      setSession(data);
+      applyRoleVisibility();
+      applySessionIdentity();
       document.getElementById('sidebar').style.display = 'flex';
       window.location.hash = 'dashboard';
     } catch (err) {
@@ -126,12 +165,33 @@ const App = {
   },
 
   logout() {
-    clearToken();
+    clearSession();
+    applyRoleVisibility();
+    applySessionIdentity();
     window.location.hash = 'login';
   },
 };
 
 // Global helpers
+// Presentation-only visibility rule. Every permission-gated element carries a
+// data-requires attribute; this walks them and hides the ones the caller's
+// role cannot use. This is convenience, not security — the server refuses the
+// underlying call regardless, so a hidden button can never decide anything.
+function applyRoleVisibility() {
+  document.querySelectorAll('[data-requires]').forEach(el => {
+    el.style.display = can(el.dataset.requires) ? '' : 'none';
+  });
+}
+
+// Fill the sidebar footer with the signed-in identity and a muted role label.
+function applySessionIdentity() {
+  const nameEl = document.getElementById('sidebar-display-name');
+  const roleEl = document.getElementById('sidebar-role');
+  const name = getDisplayName();
+  if (nameEl) nameEl.textContent = name ? `Signed in as ${name}` : '';
+  if (roleEl) roleEl.textContent = getRole();
+}
+
 function showToast(message, type = 'info') {
   const container = document.getElementById('toast-container');
   const toast = document.createElement('div');

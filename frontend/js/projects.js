@@ -34,8 +34,8 @@ const ProjectsView = {
           <h1 class="page-title">Projects</h1>
           <p class="page-subtitle">${projects.length} project${projects.length !== 1 ? 's' : ''}</p>
         </div>
-        <button class="btn btn-primary" onclick="App.navigate('projects', {action:'new'})">+ New Project</button>
-        <button class="btn btn-secondary" onclick="App.navigate('templates')">📦 From template</button>
+        <button class="btn btn-primary" data-requires="manage_projects" onclick="App.navigate('projects', {action:'new'})">+ New Project</button>
+        <button class="btn btn-secondary" data-requires="manage_projects" onclick="App.navigate('templates')">📦 From template</button>
       </div>
       ${projects.length === 0
         ? '<div class="empty-state"><div class="empty-state-icon">📁</div><div class="empty-state-title">No projects</div><div class="empty-state-text">Create your first project.</div></div>'
@@ -89,10 +89,10 @@ const ProjectsView = {
             </div>
           </div>
           <div class="action-row">
-            <button class="btn btn-secondary btn-sm" onclick="App.navigate('projects', {id: ${project.id}, action:'edit'})">✏ Edit</button>
-            <button class="btn btn-primary btn-sm" onclick="ProjectsView.runPlan(${project.id})">🤖 Run Plan Agent</button>
-            <button class="btn btn-secondary btn-sm" onclick="ProjectsView.runMonitor(${project.id})">📊 Monitor</button>
-            <button class="btn btn-secondary btn-sm" onclick="ProjectsView.runAlert(${project.id})">🚨 Alert</button>
+            <button class="btn btn-secondary btn-sm" data-requires="manage_projects" onclick="App.navigate('projects', {id: ${project.id}, action:'edit'})">✏ Edit</button>
+            <button class="btn btn-primary btn-sm" data-requires="run_agents" onclick="ProjectsView.runPlan(${project.id})">🤖 Run Plan Agent</button>
+            <button class="btn btn-secondary btn-sm" data-requires="run_agents" onclick="ProjectsView.runMonitor(${project.id})">📊 Monitor</button>
+            <button class="btn btn-secondary btn-sm" data-requires="run_agents" onclick="ProjectsView.runAlert(${project.id})">🚨 Alert</button>
           </div>
         </div>
 
@@ -122,8 +122,11 @@ const ProjectsView = {
         ` : `
           <div class="card" style="margin-bottom:20px;font-size:13px;color:var(--text-secondary)">
             No domain pack attached.
-            <a href="#packs" style="color:var(--accent)">Attach one</a> so the plan, monitor and alert
-            agents work with this domain's risk register, KPIs and monitoring rules.
+            ${can('apply_packs')
+              ? `<a href="#packs" style="color:var(--accent)">Attach one</a> so the plan, monitor and alert
+                 agents work with this domain's risk register, KPIs and monitoring rules.`
+              : `The plan, monitor and alert agents will run without this domain's risk register, KPIs and
+                 monitoring rules. Attaching one is a lead-level change.`}
           </div>
         `}
 
@@ -182,10 +185,16 @@ const ProjectsView = {
 
   _kanbanCard(task) {
     const prioClass = `priority-${task.priority || 'medium'}`;
+    // Dragging moves a task between statuses, which is a write (update_tasks).
+    // A viewer keeps a card they can read but not drag, rather than dropping
+    // it and hitting a 403 the server would be right to refuse.
+    const canDrag = can('update_tasks');
+    const dragAttrs = canDrag
+      ? `draggable="true" ondragstart="App.dragData={taskId:${task.id},projectId:${task.project_id}}"`
+      : 'draggable="false"';
     return `
-      <div class="kanban-card" draggable="true"
-           onclick="ProjectsView.editTask(${task.project_id}, ${task.id})"
-           ondragstart="App.dragData={taskId:${task.id},projectId:${task.project_id}}">
+      <div class="kanban-card${canDrag ? '' : ' kanban-card-static'}" ${dragAttrs}
+           onclick="ProjectsView.editTask(${task.project_id}, ${task.id})">
         <div class="kanban-card-title">${esc(task.title)}</div>
         <div class="kanban-card-meta">
           <span class="kanban-card-priority ${prioClass}"></span>
@@ -209,7 +218,7 @@ const ProjectsView = {
             <span>${action.agent_type} · ${action.action_type}</span>
             <span class="activity-severity ${sevClass}">${action.severity}</span>
             <span>${this._timeAgo(action.created_at)}</span>
-            ${!action.resolved ? `<span class="badge badge-warning" style="cursor:pointer" onclick="ProjectsView.resolveAction(${action.project_id}, ${action.id})">Resolve</span>` : ''}
+            ${!action.resolved ? `<span class="badge badge-warning" style="cursor:pointer" data-requires="update_tasks" onclick="ProjectsView.resolveAction(${action.project_id}, ${action.id})">Resolve</span>` : ''}
           </div>
         </div>
       </div>
@@ -364,8 +373,8 @@ const ProjectsView = {
         <label class="form-label">Actual Hours</label>
         <input class="form-input" id="modal-task-hours" type="number" step="0.5" value="${task.actual_hours || ''}" placeholder="${task.estimated_hours}h estimated" />
       </div>
-      <button class="btn btn-primary" onclick="ProjectsView._saveTask(${projectId}, ${taskId})">Save</button>
-      <button class="btn btn-danger" style="float:right" onclick="ProjectsView._deleteTask(${projectId}, ${taskId})">🗑 Delete</button>
+      <button class="btn btn-primary" data-requires="update_tasks" onclick="ProjectsView._saveTask(${projectId}, ${taskId})">Save</button>
+      <button class="btn btn-danger" style="float:right" data-requires="manage_projects" onclick="ProjectsView._deleteTask(${projectId}, ${taskId})">🗑 Delete</button>
     `);
   },
 

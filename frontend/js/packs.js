@@ -40,7 +40,7 @@ const PacksView = {
           <span class="badge badge-muted">${x.total_tasks} WBS tasks</span>
         </div>
         <div style="display:flex;gap:8px;margin-top:auto;padding-top:8px">
-          <button class="btn btn-primary btn-sm" onclick="PacksView.attach('${esc(x.id)}')">Attach to project</button>
+          <button class="btn btn-primary btn-sm" data-requires="apply_packs" onclick="PacksView.attach('${esc(x.id)}')">Attach to project</button>
           <button class="btn btn-secondary btn-sm" onclick="PacksView.inspect('${esc(x.id)}')">Inspect</button>
         </div>
       </div>
@@ -78,7 +78,7 @@ const PacksView = {
         ${rules.map(r => `<div style="font-size:12px;color:var(--text-secondary);padding:2px 0">• ${esc(r.trigger_condition)}</div>`).join('')}
 
         <div style="display:flex;gap:8px;margin-top:18px">
-          <button class="btn btn-primary" onclick="closeModal(); PacksView.attach('${esc(p.id)}')">Attach to a project</button>
+          <button class="btn btn-primary" data-requires="apply_packs" onclick="closeModal(); PacksView.attach('${esc(p.id)}')">Attach to a project</button>
           <button class="btn btn-secondary" onclick="closeModal()">Close</button>
         </div>
       `);

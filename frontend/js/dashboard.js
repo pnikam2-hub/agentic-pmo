@@ -20,7 +20,7 @@ const DashboardView = {
           <h1 class="page-title">Dashboard</h1>
           <p class="page-subtitle">AI-powered project oversight at a glance</p>
         </div>
-        <button class="btn btn-primary" onclick="App.navigate('projects', {action:'new'})">+ New Project</button>
+        <button class="btn btn-primary" data-requires="manage_projects" onclick="App.navigate('projects', {action:'new'})">+ New Project</button>
       </div>
 
       <div class="stats-grid">
@@ -59,7 +59,7 @@ const DashboardView = {
         <div class="empty-state-icon">📋</div>
         <div class="empty-state-title">No projects yet</div>
         <div class="empty-state-text">Create your first project and let the AI Plan Agent build your execution plan.</div>
-        <button class="btn btn-primary" onclick="App.navigate('projects', {action:'new'})">Create Project</button>
+        <button class="btn btn-primary" data-requires="manage_projects" onclick="App.navigate('projects', {action:'new'})">Create Project</button>
       </div>
     `;
   },
