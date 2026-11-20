@@ -15,3 +15,5 @@ os.environ.setdefault("ALLOW_INSECURE_DEFAULTS", "1")
 os.environ.setdefault("LOGIN_RATE_LIMIT", "1000/minute")
 # No real LLM key in tests — agents use deterministic fallbacks.
 os.environ.setdefault("LLM_API_KEY", "")
+# test_plane_webhook.py runs startup via TestClient(app) as a context manager, so bootstrap_admin() executes against DATABASE_URL — pin it to a scratch file or the suite writes a users row with the test password into the demo DB and, since bootstrap never overwrites, locks the real .env admin out.
+os.environ.setdefault("DATABASE_URL", "sqlite:///./.pytest-scratch.db")

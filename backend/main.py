@@ -4,9 +4,9 @@ from pathlib import Path
 from fastapi import FastAPI, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
-from backend.database import init_db
-from backend.routers import projects, tasks, agents, dashboard, auth, alerts, templates, packs, plane, plane_webhook
-from backend.auth import require_auth, check_auth_config, enforce_auth_config
+from backend.database import init_db, SessionLocal
+from backend.routers import projects, tasks, agents, dashboard, auth, alerts, templates, packs, plane, plane_webhook, admin
+from backend.auth import bootstrap_admin, require_auth, check_auth_config, enforce_auth_config
 from backend.rate_limit import limiter
 from slowapi import _rate_limit_exceeded_handler
 from slowapi.errors import RateLimitExceeded
@@ -60,6 +60,9 @@ app.include_router(plane.router, dependencies=[Depends(require_auth)])
 # Plane's webhook receiver authenticates with an HMAC signature, not a JWT — no auth dependency.
 app.include_router(plane_webhook.router)
 
+# Admin surface carries its own require_role("admin") gate on the router.
+app.include_router(admin.router)
+
 # Health check
 @app.get("/api/health")
 def health():
@@ -88,5 +91,13 @@ async def on_startup():
     _check_env()
     enforce_auth_config()  # fail closed on default admin password / JWT secret
     init_db()
+    # After init_db: the users table must exist before anything can be put in it.
+    # The .env admin is only ever created against an empty table, so a restart
+    # neither duplicates nor overwrites it.
+    db = SessionLocal()
+    try:
+        bootstrap_admin(db)
+    finally:
+        db.close()
     from backend.scheduler import start_scheduler
     start_scheduler()

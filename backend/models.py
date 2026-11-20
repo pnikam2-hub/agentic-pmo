@@ -230,3 +230,48 @@ class PlanePushRun(Base):
     started_at = Column(DateTime, default=datetime.datetime.utcnow)
     finished_at = Column(DateTime, nullable=True)
 
+
+# ── User (local accounts and roles — SSO/RBAC Phase A) ───────────────────────
+class User(Base):
+    """A person who can log in. `source` says how: "local" is a username/email
+    plus a bcrypt password stored here; "oidc" is provisioned on first SSO login
+    and has no password. SQLite has no citext, so username and email are stored
+    lower-cased and must be queried lower-cased — the uniqueness indexes below
+    then behave case-insensitively.
+    """
+    __tablename__ = "users"
+    id = Column(Integer, primary_key=True, index=True)
+    username = Column(String(100), nullable=False, unique=True, index=True)
+    email = Column(String(255), nullable=True, unique=True)   # NULLs are distinct in SQLite
+    display_name = Column(String(200), default="")
+    password_hash = Column(String(128), nullable=True)        # None for oidc users
+    # Plain String, not SAEnum: adding a role later must not need a table rewrite.
+    # Values are validated against backend.auth.ROLES on every write.
+    role = Column(String(20), nullable=False, default="viewer")
+    is_active = Column(Integer, default=1)                    # 1 = active, 0 = soft-deleted
+    source = Column(String(20), nullable=False, default="local")
+    external_id = Column(String(255), nullable=True, unique=True)   # oidc subject, Phase B
+    token_version = Column(Integer, nullable=False, default=0)
+    created_at = Column(DateTime, default=datetime.datetime.utcnow)
+    last_login_at = Column(DateTime, nullable=True)
+
+
+# ── Audit log (who did what to which object) ──────────────────────────────────
+class AuditLog(Base):
+    """Security-relevant actions: logins, role changes, destructive writes.
+
+    Deliberately no foreign keys — the audit must survive the deletion of the
+    project or user it describes. `detail` is JSON context, never a password,
+    hash, or token.
+    """
+    __tablename__ = "audit_logs"
+    id = Column(Integer, primary_key=True, index=True)
+    at = Column(DateTime, default=datetime.datetime.utcnow)
+    actor = Column(String(100), nullable=False, index=True)   # username, or "anonymous"
+    actor_role = Column(String(20), nullable=True)            # the actor's role at the time
+    action = Column(String(40), nullable=False, index=True)
+    target_type = Column(String(30), nullable=True)
+    target_id = Column(String(100), nullable=True)
+    detail = Column(JSON, default=dict)
+    ip = Column(String(64), nullable=True)
+
