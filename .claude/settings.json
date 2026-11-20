@@ -10,12 +10,37 @@
       "Bash(git status:*)",
       "Bash(git diff:*)",
       "Bash(git log:*)",
+      "Bash(git show:*)",
       "Bash(.venv/bin/python -m pytest:*)",
       "Bash(.venv/bin/python:*)",
+      "Bash(.venv/bin/uvicorn:*)",
+      "Bash(python3:*)",
       "Bash(ls:*)",
       "Bash(cat:*)",
-      "Bash(wc:*)"
+      "Bash(wc:*)",
+      "Bash(head:*)",
+      "Bash(tail:*)",
+      "Bash(grep:*)",
+      "Bash(rg:*)",
+      "Bash(find:*)",
+      "Bash(diff:*)",
+      "Bash(sort:*)",
+      "Bash(uniq:*)",
+      "Bash(awk:*)",
+      "Bash(sqlite3:*)",
+      "Bash(curl:*)",
+      "Bash(openssl rand:*)",
+      "Bash(date:*)",
+      "Bash(sleep:*)",
+      "Bash(node:*)",
+      "Bash(kill:*)",
+      "Bash(pkill:*)"
     ],
-    "deny": []
+    "deny": [
+      "Bash(git push:*)",
+      "Bash(git commit:*)",
+      "Bash(rm:*)",
+      "Bash(sudo:*)"
+    ]
   }
 }

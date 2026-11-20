@@ -3,10 +3,11 @@ import os
 import datetime
 import bcrypt
 from typing import Optional
-from fastapi import Depends, HTTPException, status
+from fastapi import Depends, HTTPException, Request, status
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from sqlalchemy.orm import Session
 
+from backend.audit import audit
 from backend.database import get_db
 from backend.models import User
 
@@ -236,8 +237,30 @@ def require_role(*roles: str):
     """
     allowed = tuple(roles)
 
-    def guard(user: User = Depends(current_user)) -> User:
+    def guard(
+        request: Request,
+        user: User = Depends(current_user),
+        db: Session = Depends(get_db),
+    ) -> User:
         if user.role not in allowed:
+            # A 403 that leaves no trace is the first thing a security review
+            # asks about — "who tried, and from where". Record the refusal
+            # before raising, so the audit trail names the actor, the path and
+            # the roles they lacked. Kept here, in one place, so no route can
+            # forget to write it.
+            audit(
+                db,
+                actor=user.username,
+                actor_role=user.role,
+                action="access_denied",
+                detail={
+                    "method": request.method,
+                    "path": request.url.path,
+                    "required_roles": list(allowed),
+                },
+                ip=request.client.host if request.client else None,
+            )
+            db.commit()
             raise HTTPException(
                 status_code=status.HTTP_403_FORBIDDEN,
                 detail=(

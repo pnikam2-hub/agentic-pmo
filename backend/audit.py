@@ -13,6 +13,7 @@ from backend.models import AuditLog
 ACTIONS = (
     "login_success",
     "login_failed",
+    "access_denied",         # a role guard refused an authenticated request
     "password_changed",      # a user changed their own password
     "user_created",
     "user_updated",          # role / display_name / is_active change via admin
