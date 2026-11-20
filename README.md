@@ -85,6 +85,17 @@ Sign in with a username or an email. A password change, a role change or a deact
 user's outstanding tokens immediately. Every refusal (401 or 403) is recorded in the audit log, and the
 audit log never stores a password, a hash or a token.
 
+
+### Single sign-on (OIDC)
+
+Set `OIDC_ISSUER`, `OIDC_CLIENT_ID`, `OIDC_CLIENT_SECRET` and `OIDC_REDIRECT_URI` and the app accepts
+sign-ins from any standard OIDC provider — Entra ID, Google Workspace, Okta — with no code change. Users are
+provisioned on first login and their role comes from `OIDC_ROLE_MAP`; an account that already exists with
+that verified email is linked and **keeps its existing role**, so SSO never silently promotes or demotes a
+local user. Password sign-in stays available by default: an identity-provider outage must not lock you out.
+Set `LOCAL_LOGIN_ENABLED=0` for SSO-only — the app refuses to start unless SSO is fully configured, because a
+deployment that cannot sign anyone in is worse than one with two front doors.
+
 ---
 
 ## API Endpoints
@@ -97,6 +108,10 @@ audit log never stores a password, a hash or a token.
 | GET | `/api/auth/me` | Current user, role and permissions |
 | GET | `/api/auth/verify` | Token check |
 | POST | `/api/auth/password` | Change your own password (bumps the token version) |
+| GET | `/api/auth/sso/enabled` | Whether SSO is configured (503 when it is not) |
+| GET | `/api/auth/sso/start` | Begin OIDC sign-in — redirects to the identity provider |
+| GET | `/api/auth/sso/callback` | Provider callback; verifies the id token and issues a handoff |
+| POST | `/api/auth/sso/exchange` | Exchange the single-use handoff for a session token |
 
 ### Administration (admin role only)
 
@@ -219,6 +234,12 @@ See `.env.example` for all options. Key variables:
 | `JWT_SECRET` | **Yes** | — | 32+ byte secret for session tokens (`openssl rand -hex 32`) |
 | `JWT_EXPIRY_HOURS` | No | `8` | Session lifetime |
 | `PLANE_WEBHOOK_SECRET` | No | — | HMAC secret for inbound Plane deliveries |
+| `OIDC_ISSUER` | No | — | SSO provider; SSO is off unless this and the next three are set |
+| `OIDC_CLIENT_ID` | No | — | Client registered at the provider |
+| `OIDC_CLIENT_SECRET` | No | — | Client secret for the token exchange |
+| `OIDC_REDIRECT_URI` | No | — | Must match the provider registration |
+| `OIDC_ROLE_MAP` | No | `{}` | JSON group→role map, e.g. `{"pmo-admins":"admin","*":"viewer"}` |
+| `LOCAL_LOGIN_ENABLED` | No | `true` | `0` for SSO-only (the app then refuses to start without a full OIDC config) |
 
 **Without an LLM key**, the Plan Agent falls back to a template plan so
 you can still use the PMO as a task manager. Add a key when you want
