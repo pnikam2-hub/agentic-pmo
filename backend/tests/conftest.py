@@ -17,6 +17,10 @@ os.environ.setdefault("ALLOW_INSECURE_DEFAULTS", "1")
 # builds its own app and limiter to cover the 429 path, so nothing loses
 # coverage by raising this well out of reach.
 os.environ.setdefault("LOGIN_RATE_LIMIT", "100000/minute")
+# Pin the per-identifier throttle so the suite's repeated logins never trip it,
+# and so the hardening tests can assert the exact default (5 failures / 15 min).
+os.environ.setdefault("LOGIN_FAILURE_LIMIT", "5")
+os.environ.setdefault("LOGIN_FAILURE_WINDOW_MINUTES", "15")
 # No real LLM key in tests — agents use deterministic fallbacks.
 os.environ.setdefault("LLM_API_KEY", "")
 # test_plane_webhook.py runs startup via TestClient(app) as a context manager, so bootstrap_admin() executes against DATABASE_URL — pin it to a scratch file or the suite writes a users row with the test password into the demo DB and, since bootstrap never overwrites, locks the real .env admin out.

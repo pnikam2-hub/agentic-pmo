@@ -2,7 +2,9 @@
 import os
 import datetime
 import ipaddress
+from hashlib import sha256
 import bcrypt
+import zxcvbn
 from typing import Optional
 from fastapi import Depends, HTTPException, Request, status
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
@@ -10,7 +12,7 @@ from sqlalchemy.orm import Session
 
 from backend.audit import audit
 from backend.database import get_db
-from backend.models import User
+from backend.models import AuditLog, User
 
 # ── Config from environment ─────────────────────────────────────────────
 ADMIN_USERNAME = os.getenv("ADMIN_USERNAME", "admin")
@@ -19,6 +21,22 @@ JWT_SECRET = os.getenv("JWT_SECRET", "change-me-in-production-agentic-pmo-2026")
 JWT_ALGORITHM = "HS256"
 JWT_EXPIRY_HOURS = int(os.getenv("JWT_EXPIRY_HOURS", "8"))
 ALLOW_INSECURE_DEFAULTS = os.getenv("ALLOW_INSECURE_DEFAULTS", "") == "1"
+
+# Per-identifier login throttling. Counted on the audit trail (login_failed
+# rows), so the lock survives a restart and needs no shared store. The window
+# is deliberately short: a failure count keyed on the identifier digest means
+# an attacker who knows a username can lock that account out by feeding it
+# bad passwords, which is why the per-IP slowapi limit stays in place too —
+# the two limits together make a distributed lockout expensive while still
+# stopping a targeted brute force.
+LOGIN_FAILURE_LIMIT = int(os.getenv("LOGIN_FAILURE_LIMIT", "5"))
+LOGIN_FAILURE_WINDOW_MINUTES = int(os.getenv("LOGIN_FAILURE_WINDOW_MINUTES", "15"))
+
+# Minimum zxcvbn score a password must reach. 3 means "safely unguessable:
+# moderate protection from online throttled attacks" — a passphrase, not a
+# tweaked dictionary word. Enforced in addition to the 12-character floor and
+# bcrypt's 72-byte ceiling, never instead of them.
+ZXCVBN_MIN_SCORE = 3
 
 # Roles are cumulative in tuple order: viewer < contributor < pmo_lead < admin.
 # Compare via membership in ROLES slices, never via string comparison.
@@ -71,14 +89,41 @@ def enforce_auth_config():
 
 # ── Password hashing (bcrypt — salted, adaptive, constant-time verify) ──
 def validate_password(value: str) -> None:
-    """Shared password policy: the 12-character floor and bcrypt's 72-byte
-    ceiling. Both are enforced here so every entry point fails with the same
-    clear 422 instead of some returning 422 and others a 500 from
-    hash_password's own ValueError."""
+    """Shared password policy: a 12-character floor, bcrypt's 72-byte ceiling,
+    and a zxcvbn strength floor (score >= ZXCVBN_MIN_SCORE).
+
+    The strength check is *additional*, not a replacement: the length and byte
+    checks stay so every entry point fails with the same clear 422, and zxcvbn
+    catches the long-but-predictable passwords ("Password1!") that a length
+    rule alone lets through. The rejection message is zxcvbn's own feedback so
+    the user is told *why*, not just "too weak".
+    """
     if len(value) < 12:
         raise ValueError("Password must be at least 12 characters")
     if len(value.encode("utf-8")) > 72:
         raise ValueError("Password must be at most 72 bytes")
+    result = zxcvbn.zxcvbn(value)
+    if result.get("score", 0) < ZXCVBN_MIN_SCORE:
+        raise ValueError(_zxcvbn_feedback(result))
+
+
+def _zxcvbn_feedback(result: dict) -> str:
+    """zxcvbn's own words for why a password is weak.
+
+    The warning is the short, human sentence ("This is a top-10 common
+    password"); the suggestions are the more specific fixes. Prefer the warning,
+    fall back to the first suggestion, and only then to a bare score — the
+    message is the point of having the policy. Never includes the password
+    itself: zxcvbn's feedback text is fixed vocabulary, not the input.
+    """
+    feedback = result.get("feedback") or {}
+    warning = (feedback.get("warning") or "").strip()
+    suggestions = [s for s in (feedback.get("suggestions") or []) if s]
+    if warning:
+        return warning
+    if suggestions:
+        return suggestions[0]
+    return f"Password is too weak (zxcvbn score {result.get('score', 0)} of 4)"
 
 
 def hash_password(password: str) -> str:
@@ -103,6 +148,70 @@ def verify_password(password: str, hashed: str) -> bool:
 # let a caller enumerate identifiers by latency.
 _DUMMY_PASSWORD = "dummy-timing-normalisation-password-not-a-secret"
 _DUMMY_HASH = hash_password(_DUMMY_PASSWORD)
+
+
+def identifier_digest(identifier: str) -> str:
+    """A short digest of the normalised identifier, for the audit trail and the
+    login-failure counter.
+
+    The full sha256 is truncated to 16 hex characters — enough to correlate
+    repeated attempts against one account without storing the identifier (or a
+    password pasted into the username box) in plaintext. Matching the login
+    endpoint's login_failed row exactly, so the throttle counter and the audit
+    trail can never disagree on what an identifier is.
+    """
+    return sha256(identifier.lower().encode("utf-8")).hexdigest()[:16]
+
+
+def login_failures_in_window(db: Session, digest: str) -> list:
+    """The ``at`` timestamps of recent login_failed rows for one digest, oldest
+    first, bounded by the configured window.
+
+    Querying strategy, chosen deliberately: ``AuditLog.at`` is *not* indexed,
+    and adding an index on ``(action, at)`` would be a new index on a live
+    table that ``create_all()`` never creates for an existing database. So
+    instead of relying on an index that may not exist, this filters by
+    ``action == "login_failed"`` — which *is* indexed — and applies the window
+    in SQL to pull only recent rows, then matches the digest in Python (the
+    digest lives inside the JSON ``detail``, which SQLite cannot index on
+    meaningfully anyway). The scan is therefore bounded by the action index
+    rather than a full table scan.
+    """
+    cutoff = datetime.datetime.utcnow() - datetime.timedelta(
+        minutes=LOGIN_FAILURE_WINDOW_MINUTES
+    )
+    rows = (
+        db.query(AuditLog)
+        .filter(AuditLog.action == "login_failed", AuditLog.at >= cutoff)
+        .order_by(AuditLog.at.asc())
+        .all()
+    )
+    return [
+        row.at
+        for row in rows
+        if row.at is not None and (row.detail or {}).get("identifier_sha256") == digest
+    ]
+
+
+def login_throttled(db: Session, digest: str):
+    """Whether the identifier is currently locked out, and for how long.
+
+    Returns ``(locked, retry_after_seconds)``. Locked means there have been at
+    least ``LOGIN_FAILURE_LIMIT`` failures for this digest within the window.
+    ``retry_after`` is the seconds until the lock releases — the moment the
+    ``LIMIT``-th most recent failure ages out of the window — so the caller can
+    hand it straight to a ``Retry-After`` header. A successful login clears the
+    count by construction: only failures are counted and the window is
+    time-bounded, so nothing here needs an explicit reset.
+    """
+    failures = login_failures_in_window(db, digest)
+    if len(failures) < LOGIN_FAILURE_LIMIT:
+        return False, 0
+    # The failure that, once it ages out, drops the count below the limit.
+    release_failure_at = failures[len(failures) - LOGIN_FAILURE_LIMIT]
+    window = datetime.timedelta(minutes=LOGIN_FAILURE_WINDOW_MINUTES)
+    remaining = (release_failure_at + window) - datetime.datetime.utcnow()
+    return True, max(1, int(remaining.total_seconds()) + 1)
 
 
 # ── User lookup and bootstrap ───────────────────────────────────────────

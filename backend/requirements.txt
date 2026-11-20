@@ -12,3 +12,4 @@ cryptography>=42
 apscheduler>=3.10.0
 bcrypt>=4.1.0
 slowapi>=0.1.9
+zxcvbn>=4.4.28

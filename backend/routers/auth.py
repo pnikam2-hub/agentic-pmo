@@ -14,8 +14,8 @@ from sqlalchemy.orm import Session
 from backend.audit import audit
 from backend.auth import (
     JWT_EXPIRY_HOURS, authenticate, client_ip, create_token, current_user,
-    hash_password, is_https, other_active_admins, require_auth, validate_password,
-    verify_password,
+    hash_password, identifier_digest, is_https, login_throttled,
+    other_active_admins, require_auth, validate_password, verify_password,
 )
 from backend.database import get_db
 from backend.integrations import oidc
@@ -84,6 +84,23 @@ def login_endpoint(request: Request, body: LoginRequest, db: Session = Depends(g
     identifier = body.identifier or body.username
     if not identifier:
         raise HTTPException(422, "Provide 'identifier' (username or email) or 'username'")
+
+    # Per-identifier throttle, checked before the password is verified so a
+    # locked identifier costs no bcrypt. The digest never carries the
+    # identifier itself; a lockout writes its own audit row so a defender can
+    # see *that* an account was under attack, without learning the name.
+    digest = identifier_digest(identifier)
+    locked, retry_after = login_throttled(db, digest)
+    if locked:
+        audit(db, actor="anonymous", action="login_throttled",
+              detail={"identifier_sha256": digest}, ip=client_ip(request))
+        db.commit()
+        raise HTTPException(
+            status_code=429,
+            detail="Too many failed login attempts for this account — try again later",
+            headers={"Retry-After": str(retry_after)},
+        )
+
     user = authenticate(identifier, body.password, db)
     if user is None:
         # Never record the raw typed identifier: a password pasted into the
@@ -92,7 +109,7 @@ def login_endpoint(request: Request, body: LoginRequest, db: Session = Depends(g
         # length survives, without storing a possible secret.
         audit(db, actor="anonymous", action="login_failed",
               detail={
-                  "identifier_sha256": sha256(identifier.lower().encode("utf-8")).hexdigest()[:16],
+                  "identifier_sha256": digest,
                   "identifier_len": len(identifier),
               },
               ip=client_ip(request))

@@ -14,6 +14,7 @@ from backend.models import AuditChain, AuditLog
 ACTIONS = (
     "login_success",
     "login_failed",
+    "login_throttled",       # per-identifier lockout refused a login before password check
     "access_denied",         # a role guard refused an authenticated request
     "password_changed",      # a user changed their own password
     "user_created",

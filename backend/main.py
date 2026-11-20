@@ -7,7 +7,7 @@ from fastapi.staticfiles import StaticFiles
 from backend.database import init_db, SessionLocal
 from backend.audit_chain import append_anchor
 from backend.routers import projects, tasks, agents, dashboard, auth, alerts, templates, packs, plane, plane_webhook, admin
-from backend.auth import any_role, bootstrap_admin, check_auth_config, enforce_auth_config
+from backend.auth import any_role, bootstrap_admin, check_auth_config, enforce_auth_config, is_https
 from backend.integrations import oidc
 from backend.rate_limit import limiter
 
@@ -63,6 +63,33 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+
+@app.middleware("http")
+async def security_headers(request, call_next):
+    """Set response security headers on every response.
+
+    No Content-Security-Policy on purpose: the SPA uses inline event handlers
+    throughout, and a policy worth having would refuse them all — so shipping
+    one now would mean rewriting the frontend first. That is a decision, not an
+    omission.
+    """
+    response = await call_next(request)
+    response.headers["X-Content-Type-Options"] = "nosniff"
+    response.headers["X-Frame-Options"] = "DENY"
+    response.headers["Referrer-Policy"] = "strict-origin-when-cross-origin"
+    response.headers["Permissions-Policy"] = "camera=(), microphone=(), geolocation=()"
+    response.headers["Cross-Origin-Opener-Policy"] = "same-origin"
+    # API responses carry session data and must never be cached; static assets
+    # (the SPA bundle) are cacheable and are deliberately left alone.
+    if request.url.path.startswith("/api/"):
+        response.headers["Cache-Control"] = "no-store"
+    # HSTS only when the connection is actually HTTPS, including behind the
+    # trusted reverse proxy. Reuse is_https rather than request.url.scheme,
+    # which reads "http" behind the documented TLS-terminating proxy.
+    if is_https(request):
+        response.headers["Strict-Transport-Security"] = "max-age=31536000; includeSubDomains"
+    return response
 
 # Rate limiting (slowapi) — handler + shared limiter instance
 app.state.limiter = limiter
